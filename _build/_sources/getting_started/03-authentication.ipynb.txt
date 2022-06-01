@@ -1,0 +1,277 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "1def8e24",
+   "metadata": {},
+   "source": [
+    "# Authentication"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d2c074f2",
+   "metadata": {},
+   "source": [
+    "## 1. Levels of Authentication\n",
+    "\n",
+    "All software systems implemented in the GEO Analytics Demonstration Platform require users to be authenticated before access is given. The GEOAnalytics platform uses LDAP (Lightweight Directory Access Protocol) to store user information and allow users to authenticate and log into the platform. Hatfield has also implemented a single sign-on (SSO) system based on the industry-standard OAuth 2 protocol, where you, the user, only needs to login to the platform once to gain access of all platform functions. Using this SSO system, an API token is given when you first login and is validated by platform services when accessed by you. \n",
+    "\n",
+    "\n",
+    "All users need to login through the single-sign-on system with their **username** and **password** to access platform systems and data.\n",
+    "<img src=\"../images/getting_started_images/03_login.png\">\n",
+    "\n",
+    "Once you have logged in, you will be led to the GEOAnalytics Platform's main dashboard.\n",
+    "\n",
+    "<img src=\"../images/getting_started_images/03_platform.png\">\n",
+    "\n",
+    "From the image above, take note of the **\"API Access Token\"** in the top right corner and the bottom of the dashboard. This API token is another authentication method to access parts of the GEOAnalytics API. The token is primarily used by pasting the token into certain scripts for access to the platform's tools."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e4036680",
+   "metadata": {},
+   "source": [
+    "## 2. Systems Accessible with Username and Password\n",
+    "With your user and password stored in the browser for the single sign-on system, you have access to most of the system, instantly. \n",
+    "\n",
+    "* **EO Browser** is a web portal with collections of Earth Observation data which can be usable for all GEOAnalytic users.\n",
+    "* **Ground Truth** system implements powerful APIs that allow ground truth data to be integrated into other platform services, such as the EO data pre-processing and Jupyter-Lab analytic environments.\n",
+    "* **JupyterLab** allows interactive data analytics to be executed without worrying about computational resources or installing software.\n",
+    "* **Desktop App** is a personal Ubuntu Desktop environment available in a web browser.\n",
+    "* **Kubeflow** is a platform for large scale batch processing and machine learning tasks.\n",
+    "* **Gitlab** is your private Git repository for managing and controlling scripts, programs, and docker images of your GEOAnalytics projects. It contains a container registry for Docker images.\n",
+    "* **FileBrowser** contains the catelogue of data on the platform, ready to use/download. \n",
+    "\n",
+    "However, *Kubeflow* and *Gitlab* require you to enter in your username and password for access. \n",
+    "\n",
+    "\n",
+    "***For Example:*** to access Kubeflow through your JupyterLab environment, importing `GeoAnalyticsKubflowClient` and providing the username and password will give direct access. **(This library to access Kubeflow will soon be available!)**\n",
+    "\n",
+    "``` python\n",
+    "from GEOAnalyticsKubeflowClient import GEOAnalyticsKubeflowClient\n",
+    "provider = DexProvider(\"http://kubeflow.geoanalytics.ca\")\n",
+    "kubeflow_client = GEOAnalyticsKubeflowClient(input(\"Username: \"), getpass.getpass(), provider)\n",
+    "```"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "07f92791",
+   "metadata": {},
+   "source": [
+    "## 3. Systems Accessible with API Token\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f1b33b9f",
+   "metadata": {},
+   "source": [
+    "The API Token grants access to GEOAnalytics API which cannot be accessed with just your username and password. \n",
+    "\n",
+    "An example of how to use this API token is down below. Here, Python sends a request to GEOAnalytics' STAC Server, using the API token to directly access the STAC Browser and output the Server's request header. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 58,
+   "id": "7345b354",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import requests\n",
+    "import json\n",
+    "import sys"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 54,
+   "id": "4e4d6bc9",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Please copy and paste your API Access Token here:   _oauth2_proxy=eyJBY2Nlc3NUb2tlbiI6IjR3dEJEdksxVE45R2VRUGM3YzdYdkNLeGsxeGhqSGFGdVA4VUtTOWhSak52bzVIRUJSeHM5VjI1K3cxQ2w1YXFXa1VQUzhmdUtucWJqdnBpaVo2SzlldC9nNVN4Q0hqNjBPZW9taXJrKzdxWlE1dWNyZXY2K2VtSUcxZjh2c3BqR0RBd2lnQlVlY2N0dHB3SkFOQlg0ckpwQytGMTlwL2xiMWVkaCtzeGhneWpKRGVucjhmMjZleXFKMThTcUZkUXVqdml4VzYyMlJNY3c0dnc2aUcrNVUyck9UbHp0bklWY3ExREtFQXFJTjJqaFdyaTQrVE5XUUZiVVpKVE93bnp1bjU3aFlIWUZZSHRUZ2lzY1g3UlBGcDZWekowTHY0R0Rtd3BISVlHVlZZc1lyWGVabStHUkxvb1gzaXU5bFhCTzNOeEU1NG1sa2pUcmZXM04xZ203MklxTjBXN0J2eDFhRGVzY0FZZ2gwNG9vbU1wWHduM0JKb3E4MDNCZHE1dHdNLzJTWXpHa0F2V0hYazMrd1kxalU3UnlOUldFSzZheWthMjZBbE5mTXZ1aGNhK1BqSkJtdGNpVno4M3lVWkpXMklCbVVJaExiS2FKL01qTUk1Z1VFWkVTWmxxUnNTbldHUUFKNVdXUDRWcjc5Wk9kYmllaE8ycXdwbXk3Vk9aN1d3dWNzRkVRUkdDbEpjUE9KRmJwMVpkNlBkRUNPeUNOQzVtREZQTmIzRFVvS3BXODFNY3VJNjByQzZWejVWaENBaHNHbTRTN1MrUmNPL1F2NjRQUFBuVGI0Y0FxcDIvYUJnRlp2aG9vbDdyZDRJYVdjUStZNE5QcS9TTzlldlhBUlpQS01ZVkYxNmZJRGh3RkoyODRoWXN5V2UxN2RCMWoxdVc2eXc1L2xTVktMVEZ1Y0djcElUbDBYSktmVFM5SEFGU0hzbzlDaWYwMUJSOGJ5MmRXaHNwQ01tM01CRldadTNIK203UU8wTHg2RFRiamQzTzZ3T0VWM0xOWG5CZGVueFJ3STFEZlplcEJRelA4QXo3WlZaaE11QlBxUXp3TEdQMCs0NndSTFFEc096eVNLZjIrYmd1WmEvMk1XRFlkWDZreUFQMjNydXVSNjErT3lxSTRaWmpRY1pJcHlCSUZSTmZIUS9YTDg0WlNNWUh4QnBYRHp0am5tcHN5MDNWVmRiZE02eWM0dE43bThyVmxId2F1T21IK0QwZWVYcVJVMmpJM1B6OVo1eU9rWVFsQkFodHp0U3RJcEhNRlE3QmNPVi9nMkhZWlFVSExhVlZaaFA4Q21USkptOEFScVphZTQrRXg0SVYrdHNJUWRQTnFQeDZrTFEzcFdnaGhFTHRDejJZTXVOczgyT0tTbHhZd0xZZC9oNkVpRmxuYzVNTzU0b0FkQlBPczlCZjJRcVNUK3RYQWJ4aU5oZC91Ri9OcHMyekNNWEY1QTVXVHJjTzEvT1VaUT09IiwiSURUb2tlbiI6IlVxdTFxZ0I0VnpxQWJ3N2pNZGZiNVhFK2p0UktMZVd0dm5ldFFlV2pnRkd4bFRXZ09qOUJZU1ZDTnZTYXgzcGVKY2FaRGorVWRCTCtqUlZUMEJGYnI4VEJodFBHS3U1aUw0RmN1UEM3biszWEVYNnh0MUEyRXpvMDhVUGc0SldSSmxSeElpaE1nQTV1eS84cW16SGRReU9zMENNV2VDMDE1THNlQUgvZ2x0MkFxbHFYRy9kODhzdWQyMHl0U3U0Lzl5bW8va0NzZURwQ2lKVHdZQm5DdEt1V1A1a2JLU0JvcUpBTEpzL1dxNDRlbk5EamVFN3BWS1lBRWYyV0lZblNnRENidWtHQzFTUDBJcUtQa1RaSThqdWdhSVdtMWNEKzV4YzVrRDBOTHdFSDVoU2QwaU9xWlBGK2dOMVRuMm9UN1JtR25NdkNpRXdTYXRCdjJhWFplSnBMbnlCcmY5RXpHVjZSdCtiOU0yYm8yN1JlQms4eUdLZ2hyT1BzN0hpUWtseWRrS294WHo5R040bzJHR0JtQ252VUV0UzlSOG1FK2RiY0NaWFlzNldvZDdWKzE5STdiZ2hmSnF3czVLRUFSWDJjbGdOVk9CZnJmS1FzeWNEZTQyTzRNVTliazhBc2JrL3krR2tEd0RjRHhBa2E3cFpUTHFBTEFVY0hKaTNlbVZ2c3NlVGdEbWpaSllnbnN1SlUwdUdqd3hwOG93SWc1RWprYTUzNmMrNWxtNFFWZEdObU9yVCtIbWZsZEdMNVJEYmIyNS80WHNId1dhdE9Ra3JlRml4MEc1SU8rREtKWmdhbXFXRExMb05XYWJsWjZxZmttd2x2cERCcGRaTWliQ2dnenFjUmtQd0Z1d1RWakpodWlmWXVYc0RSdmJzaEN4NDZmSllJYXY4RDFBN3FFMC8wUXpDM09ndU9TbzhyMW5obWdoY2l3MnRwYU1zdktla3E0YWpYL3ZxTG9SVW5JeVZ1cm9YdDRmdzNBdDdtUEZxV1J5ODhOc00zS1MvU3dCYkdDOVhCS1dIVjh3eGpIeXNjSVJmS09JK2VHYnFaNklnbms3ZUF6dlMzam5yQzdiZ2dhekwyZlowL3dGdEF2aW8xOVlOK1ptQzVTWlZQVVhqRSt3TXZWTmpENUd2ZmpPMDVFQnhrbzVkVmZzUnFhazFGU1dkdHdNejZLMHBMWHhZMktEcjFaU3JBaGZ0S1pFU3dERFo3ZGhQOU1KSkFjaHJGUXNHOGRobktIclJQUjQ0TDkrOHJQMUJmbUpIdmFkYmc0c2dIcVluMDZPdDBacWMwMjFXa3liSFVIcjVTU29ZaDhPR1RBS3F2NW9uN0RaQjFmOTB0UTJ1dkJsd3JPTTkrUnFKRFlYUmgrVS8wU2cyVEp2UzdTRjEyVm9zNGtKSUQ5QjVVMlk2ZFRHUkNYM1JjU09yR3ZZVXFlcHlYUk9nUlFxMTU3MXB0TGFVeGJnN1BQdz09IiwiRW1haWwiOiJFWWVIL2RyalZ4bjlidEdUOVFUVUpUMEZMa2hMczdFZFRUQU1iMW1lNlc3d25WUjBGbVE9IiwiVXNlciI6IkRTMlBRVmJxaGV4MjNrL3loVTFyZlczeGdtRFlXSjdrOTBGQ0FrT2tZZlR2ODdvPSIsIkNyZWF0ZWRBdCI6IjIwMjEtMDYtMDlUMTY6MDQ6MjQuOTk1MjA2NDI0WiIsIkV4cGlyZXNPbiI6IjIwMjEtMDYtMTBUMTY6MDQ6MjRaIn0=|1623254664|8PqxNU-UN4eYzfujsDNJR_1z4sQ=\n"
+     ]
+    }
+   ],
+   "source": [
+    "API_TOKEN = input(\"Please copy and paste your API Access Token here: \").strip()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "id": "3b0dfcc9",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "STAC_BASE_URL = \"https://stac.geoanalytics.ca\"  \n",
+    "requests_headers = {'cookie': API_TOKEN}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "id": "443c6b70",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def test_STAC_server_request():\n",
+    "    test_STAC_request = requests.get(\"https://stac.geoanalytics.ca\", headers=requests_headers)\n",
+    "    try:\n",
+    "        res = test_STAC_request.json()\n",
+    "        return res\n",
+    "    except ValueError as ex:\n",
+    "        print(\"STAC server did not return json. This is likely an issue with your access token. Please re-run cells from beginning and re-enter your token.\")\n",
+    "        API_TOKEN = None"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 57,
+   "id": "b6bfade0",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'description': 'Arturo raster datastore',\n",
+       " 'title': 'Arturo STAC API',\n",
+       " 'links': [{'href': 'http://stac.geoanalytics.ca/',\n",
+       "   'rel': 'self',\n",
+       "   'type': 'application/json'},\n",
+       "  {'href': 'http://stac.geoanalytics.ca/docs',\n",
+       "   'rel': 'docs',\n",
+       "   'type': 'text/html',\n",
+       "   'title': 'OpenAPI docs'},\n",
+       "  {'href': 'http://stac.geoanalytics.ca/conformance',\n",
+       "   'rel': 'conformance',\n",
+       "   'type': 'application/json',\n",
+       "   'title': 'STAC/WFS3 conformance classes implemented by this server'},\n",
+       "  {'href': 'http://stac.geoanalytics.ca/search',\n",
+       "   'rel': 'search',\n",
+       "   'type': 'application/geo+json',\n",
+       "   'title': 'STAC search'},\n",
+       "  {'href': 'http://stac.geoanalytics.ca/collections/landsat-8-l1_EXAMPLE',\n",
+       "   'rel': 'child',\n",
+       "   'type': 'application/json',\n",
+       "   'title': 'Landsat 8 L1'}]}"
+      ]
+     },
+     "execution_count": 57,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "test_STAC_server_request()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "adbb031f",
+   "metadata": {},
+   "source": [
+    "If the above cell returns a dictionary with the STAC server's header requests, then congratulations! You are authenticated! Otherwise, make sure you are assigning the correct authentication token to the *API_TOKEN* variable. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2a99a5c2",
+   "metadata": {},
+   "source": [
+    "## 4. Logging in to Docker Registry"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "bc9a9439",
+   "metadata": {},
+   "source": [
+    "Docker is an open platform tool designed for developing, deploying, and running applications using containers. Containers are used to combine the libraries, dependencies, and other parts of an application and deliver it as one package. Docker allows for efficient management of your infrastructure. GEOAnalytics Gitlab repositories each have a container registry associated with it.\n",
+    "\n",
+    "**Docker must be installed on your computer to access the container registry.**\n",
+    "\n",
+    "Visit https://docs.docker.com/ and install the application based on your Operating System. \n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "10e99c22",
+   "metadata": {},
+   "source": [
+    "\n",
+    "### 4.2 Default Login Method\n",
+    "Currently, accessing your Docker registry is not possible through GEOAnalytics' Jupyter environment. To access and manage your docker images, login to the registry through your desktop's Command Prompt (Terminal) with the following steps:\n",
+    "\n",
+    "1. Type this command into terminal: `docker login registry.geoanalytics.ca`\n",
+    "2. This will prompt you to enter your *Username*, followed by your *password*. (Password is not visible for security purposes)\n",
+    "\n",
+    "If you get a \"Success!\" message, then you have gained access!\n",
+    "\n",
+    "However, if you receive the error: \"Error response from daemon: Get https://registry.geoanalytics.ca/v2/: unauthorized: HTTP Basic: Access denied,\" then we have a few more steps to get you connected! \n",
+    "\n",
+    "<img src='../images/getting_started_images/03_docker-error.png' width=900>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d4c722dc",
+   "metadata": {},
+   "source": [
+    "### 4.3 Alternate Login Method\n",
+    "Some accounts run into errors while attempting to connect to their docker registry, you have the same error as shown above, these are the steps to get access:\n",
+    "\n",
+    "**First we must create a personal access token (PAT) on gitlab. Navigate to https://git.geoanalytics.ca**\n",
+    "\n",
+    "1. Select \"Settings\" from the drop down menu in the top right corner.\n",
+    "<img src='../images/getting_started_images/03_git-settings.gif'>\n",
+    "\n",
+    "2. In the left sidebar, click on \"Access Tokens\".\n",
+    "<img src='../images/getting_started_images/03_git-access-tokens.gif'>\n",
+    "\n",
+    "3. Now, assign a **name** and an **expiry date** (can be set to any date in the future when you want the token to expire), and check on **\"api\"**.\n",
+    " <img src='../images/getting_started_images/03_creating_token.gif'>\n",
+    "\n",
+    "4. Once created, this personal access token is **only available once, when it is created**. \n",
+    "***NOTE: Store this PAT in a secure location because you will not be able to access the same code again!***\n",
+    " <img src='../images/getting_started_images/03_copy_token.gif'>\n",
+    "\n",
+    "\n",
+    "\n",
+    "**Next, with this personal access token created, run the following command in terminal, inputting in your username and the PAT in place.**\n",
+    "\n",
+    "`docker login -u <username> -p <personal access token> registry.geoanalytics.ca`\n",
+    "\n",
+    "Now you should get a \"Login Succeeded\" message!\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [conda env:notebook] *",
+   "language": "python",
+   "name": "conda-env-notebook-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

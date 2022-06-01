@@ -1,0 +1,804 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="File Browser" href="05-file-browser.html" /><link rel="prev" title="Authentication" href="03-authentication.html" />
+
+    <meta name="generator" content="sphinx-4.1.2, furo 2021.11.16"/>
+        <title>Desktop VM’s - GEOAnalytics Canada</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=916d6ed8f59335acffa15474ff504849343d4c76" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=0af69da206d614734f649b27d4cdc2dd6c31f41d" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  body[data-theme="dark"] {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+</style></head>
+  <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">GEOAnalytics Canada</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/geoanalytics-icon.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">GEOAnalytics Canada</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-python-intro.html"><strong>Introduction to Python</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-authentication.html"><strong>Authentication</strong></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>Desktop VM’s</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-file-browser.html"><strong>File Browser</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-gitlab.html"><strong>GitLab</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="08-pipelines.html"><strong>Pipelines</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/01-accessing-data.html"><strong>Accessing and Downloading Data</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/02-ndvi-with-dask.html"><strong>NDVI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html"><strong>NDSI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/04-ndwi-with-dask.html"><strong>NDWI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/05-change-detection.html"><strong>Change Detection</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/01-flnro-esque-pipeline.html"><strong>FLNRO-esque Kubeflow Pipeline for Daily NDSI Averages</strong></a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="Desktop-VM’s">
+<h1><strong>Desktop VM’s</strong><a class="headerlink" href="#Desktop-VM’s" title="Permalink to this headline">¶</a></h1>
+<p>The GEOAnalytics platform provides space to create your own personal Ubuntu desktop environments and makes these desktops available through a web browser. The ‘desktops in a browser’ means users can use Ubuntu desktop applications to explore platform data, develop applications and conduct analytics without needing to download data to a local PC. The Ubuntu desktops are customizable but pre-configured with applications such as the Sentinel Application Toolbox (SNAP), and Quantum GIS for
+geospatial data viewing and analysis.</p>
+<section id="1.-Starting-a-Remote-Desktop-Session">
+<h2>1. Starting a Remote Desktop Session<a class="headerlink" href="#1.-Starting-a-Remote-Desktop-Session" title="Permalink to this headline">¶</a></h2>
+<section id="1.1-Desktop-Options">
+<h3>1.1 Desktop Options<a class="headerlink" href="#1.1-Desktop-Options" title="Permalink to this headline">¶</a></h3>
+<p>The Desktop VM available on our Platform contains the Ubuntu operating system, with multiple options for the machine type and quantity of GPUs to choose from.</p>
+<ul class="simple">
+<li><p>Here’s a table displaying the preset options for the <strong>machine type</strong>:</p></li>
+</ul>
+<div class="table-wrapper"><table class="docutils align-default">
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 67%"/>
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>CPUs</p></th>
+<th class="head"><p>RAM Size</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>3.75 GB</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>7.5 GB</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>15 GB</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>30 GB</p></td>
+</tr>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>60 GB</p></td>
+</tr>
+<tr class="row-odd"><td><p>32</p></td>
+<td><p>120 GB</p></td>
+</tr>
+</tbody>
+</table></div>
+<ul class="simple">
+<li><p>There are 4 options for the <strong>Number of GPUs: 0, 1, 2, or 4.</strong></p></li>
+<li><p>You can also select the <strong>desktop image</strong> if you have an existing image from a previous session saved. (Otherwise, there will only be one option available)</p></li>
+</ul>
+<p>Now, let’s access the Remote Desktop VM by selecting the “Desktop Apps” tab from the main platform dashboard, which will lead to <a class="reference external" href="https://app.geoanalytics.ca/apps">https://app.geoanalytics.ca/apps</a>. From here, you get the options as mentioned above to customize your virtual machine. Select the presets depending on your own preference and click on the button <strong>“START MY DESKTOP”</strong>. This will send a request to Google for access to that Desktop.</p>
+<p><img alt="4045e21b830f4eea9b904afcd96d8b31" src="../_images/04_creating-vm.gif"/></p>
+<p>Note the three labels at the bottom: The <strong>Pod Name</strong> indicating the name of the virtual machine you are assigned, the <strong>Pod Status</strong> indicating whether the virtual machine is running or not, and the <strong>External IP address</strong> where the virtual machine is running. Before starting up your first desktop session, all these three will be empty.</p>
+<p><em>There are two ways to start up your Remote Desktop session, let’s take a look at both these methods.</em></p>
+</section>
+<section id="1.2-Login-to-Remote-Desktop-VM-through-Browser">
+<h3>1.2 Login to Remote Desktop VM through Browser<a class="headerlink" href="#1.2-Login-to-Remote-Desktop-VM-through-Browser" title="Permalink to this headline">¶</a></h3>
+<p>The first way is to log in through the Brower by clicking on the <strong>“TAKE ME TO MY DESKTOP”</strong> button once the desktop server is running. This will open a new tab to Apache Guacamole which is a clientless remote desktop gateway. Enter in your GEOAnalytics Canada username and password to open the Desktop VM in a new browser.</p>
+<p><img alt="064e63309acc45f79f42972aade297f4" src="../_images/04_login-apache.gif"/></p>
+</section>
+<section id="1.3-Login-To-Remote-Desktop-VM-through-SSH">
+<h3>1.3 Login To Remote Desktop VM through SSH<a class="headerlink" href="#1.3-Login-To-Remote-Desktop-VM-through-SSH" title="Permalink to this headline">¶</a></h3>
+<p>Another way to login is by the Secure Shell Protocol (SSH). You can SSH into the remote desktop directly from the terminal. SSH is useful because it does not load the entire Virtual machine interface, which is great for just executing codes and terminal commands and when it is not neccesary to launch applications.</p>
+<p>Any GEOAnalytics user can SSH into their remote server directly from the terminal window.</p>
+<p>Run the command <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">&lt;username&gt;@&lt;host&gt;</span></code> in your terminal, where the username represents your GEOAnalytics Canada username and the host refers to the computer you want to access which in our case is the External IP Address. After running the command, you will be required to input your GEOAnalytics Canada password. Below is an image capturing the connection to the remote desktop.</p>
+<p><img alt="2cf559613dc643f2a4e7008d8cacd6a0" src="../_images/04_ssh.png"/></p>
+<p>If you notice in the image above, a few commands are used to check which directory ssh connects us to and to change directory into the same path as the Browser version.</p>
+<p>The terminal opened in the Browser Desktop VM, the initial file path is <code class="docutils literal notranslate"><span class="pre">/home/abc</span></code>, so the path in the ssh connection was adjusted to the same path.</p>
+<p><img alt="7fb942ecfc254ed6afea69148a12fa52" src="../_images/04_vm-path.png"/></p>
+<p><strong>Note: SSH and Browser both have access to root privileges.</strong></p>
+</section>
+<section id="1.4-Connect-to-Remote-Desktop-through-Clients">
+<h3>1.4 Connect to Remote Desktop through Clients<a class="headerlink" href="#1.4-Connect-to-Remote-Desktop-through-Clients" title="Permalink to this headline">¶</a></h3>
+<p>Rather than using the Remote Desktop web browser, you can connect to a client for easy usability. Using Remote Desktop Clients is much smoother and allows the same accessibility.</p>
+<p>Here are the links to a few RDP Clients you can use:</p>
+<ul class="simple">
+<li><p>Remmina: <a class="reference external" href="https://remmina.org">https://remmina.org</a></p></li>
+<li><p>X2Go: <a class="reference external" href="https://wiki.x2go.org/doku.php">https://wiki.x2go.org/doku.php</a></p></li>
+</ul>
+</section>
+</section>
+<section id="2.-The-Remote-Desktop-Environment">
+<h2>2. The Remote Desktop Environment<a class="headerlink" href="#2.-The-Remote-Desktop-Environment" title="Permalink to this headline">¶</a></h2>
+<section id="2.1-Data-Structure-in-the-Desktop-VM">
+<h3>2.1 Data Structure in the Desktop VM<a class="headerlink" href="#2.1-Data-Structure-in-the-Desktop-VM" title="Permalink to this headline">¶</a></h3>
+<p>To allow for easy access to EO datasets available on the platform, EO data stores have been mounted into each user’s desktop environment. The pre-configured data access and storage mount points are the same folders mentioned in previous tutorials.</p>
+<ul class="simple">
+<li><p><strong>gcp-public-data-landsat</strong> - Landsat data as provided by Google’s public data program. (Read-only)</p></li>
+<li><p><strong>gcp-public-data-sentinel-2</strong> - Sentinel-2 data as provided by Google’s public data program. (Read-only)</p></li>
+<li><p><strong>geoanalytics_data</strong> - EO data collections available to all users of GEOAnalytics. T(Read-only)</p></li>
+<li><p><strong>geoanalytics_user_shared_data</strong> - All platform EO data collections including raw datasets and pre-processed datasets. (Read and write for all GEOAnalytics Canada users)</p></li>
+<li><p><strong>geoanalytics_{username}</strong> - A user’s personal network file system where only the logged in user can read or write to their own personal storage directory.</p></li>
+</ul>
+<p>In the desktop environment, the first 4 folders can be accessed from the <em>File System</em> devices tab, while the user’s private folder can be found in the <strong>‘/home/abc’</strong> directory.</p>
+<p><img alt="510e1f5abc5a4af7aafc1e0c120dc627" src="../_images/04_folders-vm.gif"/></p>
+</section>
+<section id="2.2-Showing-information-about-GPUs">
+<h3>2.2 Showing information about GPUs<a class="headerlink" href="#2.2-Showing-information-about-GPUs" title="Permalink to this headline">¶</a></h3>
+<p>To understand the GPUs (Graphic Processing Unit) being used in the Desktop server, <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> command line tools can be used because the GPUs used in the Desktop VMs are <strong>“NVIDIA Tesla P4.”</strong> It is the NVIDIA System Interface which helps manage and monitor the NVIDIA GPU devices.</p>
+<p>To execute the “nvidia-smi” commands, we must first export the paths into the directory’s <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file. Run the two commands below in the Desktop’s terminal to enable the nvidia-smi command:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PATH=$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64</span></code></p></li>
+</ul>
+<p>Now, you can run the nvidia-smi commands to get information and manage the GPU devices. Here are a few below:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code>: To display basic information of all the GPUs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nvidia-smi</span> <span class="pre">-L</span></code>: To list all available NVIDIA devices.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nvidia-smi</span> <span class="pre">-i</span> <span class="pre">0</span> <span class="pre">-q</span></code>: To list all available data on a particular GPU, specify the ID of the card with -i (ID is 0).</p></li>
+</ul>
+<p><img alt="46049025a22d4d43a812c0621a62af93" src="../_images/04_gpu-info.png"/></p>
+<p>One thing to note is that the “export PATH” commands only enables the <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> commands temporarily, for the current terminal session. This means that once you close the terminal window and open a new terminal, you will need to run those commands again. To avoid this tedious task for everytime you open a new terminal session, we can append the two commands to the Bash Shell Script, <strong>.bashrc</strong> file by executing the two commands below in terminal and enable the <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> commands for
+the entire Desktop session:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">'export</span> <span class="pre">PATH=$PATH:/usr/local/nvidia/bin:/usr/local/cuda/bin'</span> <span class="pre">&gt;&gt;</span> <span class="pre">~/.bashrc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">'export</span> <span class="pre">LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64'</span> <span class="pre">&gt;&gt;</span> <span class="pre">~/.bashrc</span></code></p></li>
+</ul>
+<p>For more queries and commands to manage the system’s GPU devices, take a look at these websites below:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.microway.com/hpc-tech-tips/nvidia-smi_control-your-gpus/">https://www.microway.com/hpc-tech-tips/nvidia-smi_control-your-gpus/</a></p></li>
+<li><p><a class="reference external" href="https://developer.download.nvidia.com/compute/DCGM/docs/nvidia-smi-367.38.pdf">https://developer.download.nvidia.com/compute/DCGM/docs/nvidia-smi-367.38.pdf</a></p></li>
+<li><p><a class="reference external" href="https://nvidia.custhelp.com/app/answers/detail/a_id/3751/~/useful-nvidia-smi-queries">https://nvidia.custhelp.com/app/answers/detail/a_id/3751/~/useful-nvidia-smi-queries</a></p></li>
+</ul>
+</section>
+</section>
+<section id="3.-Working-in-the-Desktop-VM">
+<h2>3. Working in the Desktop VM<a class="headerlink" href="#3.-Working-in-the-Desktop-VM" title="Permalink to this headline">¶</a></h2>
+<section id="3.1-Installing-Software-using-APT-GET">
+<h3>3.1 Installing Software using APT-GET<a class="headerlink" href="#3.1-Installing-Software-using-APT-GET" title="Permalink to this headline">¶</a></h3>
+<p>Within the Desktop environment, you can install any software or application you require for your projects. Let’s install the Syder IDE (Integrate Development Environment, an open-source Python IDE that’s optimized for data science workflows and well-equipped with Python data science libraries like SciPy, NumPy, and Matplotlib.</p>
+<p>We will be using <strong>apt-get</strong> which is the command-line tool for handling packages and provides functions such as installing, removing, and updating packages on Linux systems.</p>
+<ul class="simple">
+<li><p>First we must execute the <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">update</span></code> command which is used to download package information from all configured sources.</p></li>
+<li><p>The, run the command <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">spyder</span></code> in terminal to install Spyder on your Desktop Server.</p></li>
+<li><p>Then type the command <code class="docutils literal notranslate"><span class="pre">spyder</span></code> to open and run the application.</p></li>
+</ul>
+</section>
+<section id="3.2-Installing-Miniconda">
+<h3>3.2 Installing Miniconda<a class="headerlink" href="#3.2-Installing-Miniconda" title="Permalink to this headline">¶</a></h3>
+<p>Miniconda is an mini-installer, a smaller version of Anaconda containing only conda, its dependencies, and Python. Check by running <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">--version</span></code> to see if Miniconda is already available in your virtual machine. If it returns a conda version, then you don’t need to install it!</p>
+<p>Now since we are working with a Linux Operating System, use the Installation Guide for Linux provided by the Conda Documentation to properly install the environment manager. <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html">https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html</a></p>
+<p>Here is a quick screenshot capturing the steps to install within the Desktop server. <img alt="d045cf28b1364bd6a529c9b32cc84ef2" src="../_images/04_miniconda-install.png"/></p>
+</section>
+<section id="3.3-Setting-up-the-Python-Environment">
+<h3>3.3 Setting up the Python Environment<a class="headerlink" href="#3.3-Setting-up-the-Python-Environment" title="Permalink to this headline">¶</a></h3>
+<p>The Desktop Virtual Machine does not have the notebook environment set-up already as it is in JupyterHub, so to be able to use all the packages configured as in JupyterHub, you can recreate the environment with the following steps:</p>
+<ol class="arabic simple">
+<li><p>Get the <strong>Jupyterhub API token</strong> by opening a terminal on <em>lab.geoanalytics.ca</em> and run the following command: <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$JUPYTERHUB_API_TOKEN</span></code>. This will return a token to be used for the next step.</p></li>
+<li><p>Within the remote desktop system, run the following command in the terminal. <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">JUPYTERHUB_API_TOKEN=result</span> <span class="pre">from</span> <span class="pre">previous</span> <span class="pre">command</span></code></p></li>
+<li><p>Create the JupyterHub environment by copying the <strong>“environment.yml”</strong> file into <code class="docutils literal notranslate"><span class="pre">/home/abc/</span></code> folder of the Desktop VM, then running the following commands to create and activate the environment.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">environment.yml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">pangeo</span></code></p></li>
+</ol>
+</li>
+</ol>
+<p>Congratulations! You now have pangeo environment running in your Desktop server.</p>
+</section>
+<section id="3.4-Launching-Dask-Clusters">
+<h3>3.4 Launching Dask Clusters<a class="headerlink" href="#3.4-Launching-Dask-Clusters" title="Permalink to this headline">¶</a></h3>
+<p>Once you’re in the Conda environment created above, you can work on your projects on the Desktop with access to all the same packages as Jupyter. Let’s perform a small task of creating a Dask cluster within the environment, similar to the exercises from the Jupyter Notebook.</p>
+<p>First execute the command <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code> within terminal to launch a Python notebook where you can run you Dask clusters from. Now open the <code class="docutils literal notranslate"><span class="pre">04_1-dask-clusters.ipynb</span></code> jupyter notebook which contains code for creating a Dask cluster. Follow along with the notebook until the exercise points back to this section.</p>
+<p><img alt="a9f10c17bce24769a38bf55690ffd526" src="../_images/04_dask-vm.png"/></p>
+<p>For the next step, we will see if we can connect to the Dask cluster, created in the Desktop VM, in this notebook. First import the Dask Gateway.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">dask_gateway</span> <span class="kn">import</span> <span class="n">Gateway</span>
+<span class="n">gateway</span> <span class="o">=</span> <span class="n">Gateway</span><span class="p">(</span><span class="s2">"http://traefik-dask-gateway.geoanalytics.ca/services/dask-gateway/"</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="s2">"jupyterhub"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Next, we will connect to the cluster according to its name. If you are unsure of the active clusters’ names, you can list them using the built-in <code class="docutils literal notranslate"><span class="pre">gateway.list_clusters()</span> <span class="pre">function.</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">clusters</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">list_clusters</span><span class="p">()</span>
+<span class="n">clusters</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[ClusterReport&lt;name=pangeo.298fa41b3c6a48bca9ca45fff3671685, status=RUNNING&gt;]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">cluster</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clusters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="c1">#connecting by the 'name' key</span>
+<span class="n">cluster</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "2957ce5214be4cd6aab50552f99f612d", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">client</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">get_client</span><span class="p">()</span>
+<span class="n">client</span>
+</pre></div>
+</div>
+</div>
+<p>If you were able to run through the cells above, then you successfully connected to an existing Dask cluster! <strong>Make sure to shut down the cluster when you’re done working with it!</strong></p>
+</section>
+<section id="3.2-Using-Applications">
+<h3>3.2 Using Applications<a class="headerlink" href="#3.2-Using-Applications" title="Permalink to this headline">¶</a></h3>
+<p>Applications can be opened and used for geospatial data analysis. As an exercise, launch the Quantum GIS (QGIS) application, initialize a new project, and load files from one of the folders we have previously explored.</p>
+<p><img alt="46d40246f5b84e1ca2dd07cd90e172b2" src="../_images/04_qgis-vm.gif"/></p>
+</section>
+</section>
+<section id="4.-Closing-the-Remote-Desktop-Session">
+<h2>4. Closing the Remote Desktop Session<a class="headerlink" href="#4.-Closing-the-Remote-Desktop-Session" title="Permalink to this headline">¶</a></h2>
+<p>At the end of your session, <strong>always make sure to terminate the desktop server to save resources.</strong></p>
+<p>There are two options when terminating, whether you would like to save the current session or disconnect without saving any work.</p>
+<p><strong>By saving your session, the following actions will occur:</strong></p>
+<ul class="simple">
+<li><p>A new image will be created for future use with the remote desktop.</p></li>
+<li><p>Everything in the remote desktop will be saved except for any docker images/containers.</p></li>
+<li><p>Saving your remote desktop session can take up to 20 minutes.</p></li>
+<li><p>Your desktop will be terminated.</p></li>
+</ul>
+<p><strong>By not saving your session, the following actions will occur:</strong></p>
+<ul class="simple">
+<li><p>Anything done during your current remote desktop session will not be saved, except for data written to your personal storage directory (/home/abc/geoanalytics_{username}) or to certain mount points (mounted object stores). Any applications installed will not be saved.</p></li>
+<li><p>Your desktop will be terminated.</p></li>
+</ul>
+<p><img alt="60fe864810894404b70158471036417d" src="../_images/04_shutdown-vm.gif"/></p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="05-file-browser.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><strong>File Browser</strong></div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="03-authentication.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><strong>Authentication</strong></div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, Hatfield Consultants |
+          Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+          <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            | <a class="muted-link" href="../_sources/1_getting_started/04-desktop-vm.ipynb.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><strong>Desktop VM’s</strong></a><ul>
+<li><a class="reference internal" href="#1.-Starting-a-Remote-Desktop-Session">1. Starting a Remote Desktop Session</a><ul>
+<li><a class="reference internal" href="#1.1-Desktop-Options">1.1 Desktop Options</a></li>
+<li><a class="reference internal" href="#1.2-Login-to-Remote-Desktop-VM-through-Browser">1.2 Login to Remote Desktop VM through Browser</a></li>
+<li><a class="reference internal" href="#1.3-Login-To-Remote-Desktop-VM-through-SSH">1.3 Login To Remote Desktop VM through SSH</a></li>
+<li><a class="reference internal" href="#1.4-Connect-to-Remote-Desktop-through-Clients">1.4 Connect to Remote Desktop through Clients</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#2.-The-Remote-Desktop-Environment">2. The Remote Desktop Environment</a><ul>
+<li><a class="reference internal" href="#2.1-Data-Structure-in-the-Desktop-VM">2.1 Data Structure in the Desktop VM</a></li>
+<li><a class="reference internal" href="#2.2-Showing-information-about-GPUs">2.2 Showing information about GPUs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#3.-Working-in-the-Desktop-VM">3. Working in the Desktop VM</a><ul>
+<li><a class="reference internal" href="#3.1-Installing-Software-using-APT-GET">3.1 Installing Software using APT-GET</a></li>
+<li><a class="reference internal" href="#3.2-Installing-Miniconda">3.2 Installing Miniconda</a></li>
+<li><a class="reference internal" href="#3.3-Setting-up-the-Python-Environment">3.3 Setting up the Python Environment</a></li>
+<li><a class="reference internal" href="#3.4-Launching-Dask-Clusters">3.4 Launching Dask Clusters</a></li>
+<li><a class="reference internal" href="#3.2-Using-Applications">3.2 Using Applications</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#4.-Closing-the-Remote-Desktop-Session">4. Closing the Remote Desktop Session</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    </body>
+</html>

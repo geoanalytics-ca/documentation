@@ -1,0 +1,48 @@
+.. Sphinx_proj documentation master file, created by
+   sphinx-quickstart on Thu Sep  9 11:34:15 2021.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to GEOAnalytics Canada Documentation!
+=============================================
+
+.. image:: images/geoanalytics-long.png
+   :align: center
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+   
+   1_getting_started/*
+   2_real_world_examples/*
+   3_scientific_workflows/*
+   
+Motivation
+-----------
+To demonstrate how cloud computing systems can overcome issues with traditional approaches to satellite EO data analytics, Hatfield Consultants have created the GEO Analytics Canada Platform. This provides data, tools, and compute resources in the same environment and enables users to gain experience and understand the benefits of working in the cloud. 
+
+
+Table of Contents
+==================
+Getting Started
+----------------
+#. `Introduction to Python <1_getting_started/01-python-intro.ipynb>`_
+#. `Jupyter Notebooks <1_getting_started/02-jupyter-notebooks.ipynb>`_
+#. `Authentication <1_getting_started/03-authentication.ipynb>`_
+#. `Desktop Virtual Machines <1_getting_started/04-desktop-vm.ipynb>`_
+#. `File Browser <1_getting_started/05-file-browser.ipynb>`_
+#. `Spatial Temporal Asset Catalog Introduction <1_getting_started/06-stac.ipynb>`_
+#. `Gitlab <1_getting_started/07-gitlab.ipynb>`_
+#. `Kubeflow Pipelines <1_getting_started/08-pipelines.ipynb>`_
+
+Real World Examples
+------------------
+#. `Accessing Data <2_real_world_examples/01-accessing-data.ipynb>`_
+#. `NDVI with Dask <2_real_world_examples/02-ndvi-with-dask.ipynb>`_
+#. `NDSI with Dask <2_real_world_examples/03-ndsi-with-dask.ipynb>`_
+#. `NDWI with Dask <2_real_world_examples/04-ndwi-with-dask.ipynb>`_
+#. `Change Detection <2_real_world_examples/05-change-detection.ipynb>`_
+
+Scientific Workflows
+------------------
+#. `FLNRO-esque NDSI Average Pipeline <3_scientific_workflows/01-flnro-esque-pipeline.ipynb>`_
