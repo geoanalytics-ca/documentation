@@ -16,29 +16,29 @@ jobs:
     # Standard drop-in approach that should work for most people.
     - uses: ammaraskar/sphinx-action@master
       with:
-        docs-folder: ""
+        docs-folder: "docs/"
     # Example of using a custom build-command.
     - uses: ammaraskar/sphinx-action@master
       with:
         build-command: "sphinx-build -w /tmp/sphinx-log -b html . _build"
-        docs-folder: ""
+        docs-folder: "docs/"
     # Grabbing custom dependencies and building as a pdf.
     - uses: ammaraskar/sphinx-action@master
       with:
         pre-build-command: "apt-get update -y && apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended"
         build-command: "make latexpdf"
-        docs-folder: "_build"
+        docs-folder: "/docs"
     # Great extra actions to compose with:
     # Create an artifact of the html output.
     - uses: actions/upload-artifact@v1
       with:
         name: DocumentationHTML
-        path: _build/html/
+        path: docs/html/
     # Create an artifact out of the previously built pdf.
     - uses: actions/upload-artifact@v1
       with:
         name: Documentation
-        path: _build/latex/pdfexample.pdf
+        path: docs/latex/pdfexample.pdf
     # Publish built docs to gh-pages branch.
     # ===============================
     - name: Commit documentation changes
