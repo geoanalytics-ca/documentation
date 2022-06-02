@@ -29,7 +29,7 @@ PAPER         =
 BUILDDIR      = _build
 
 LATEX-BW      = $(BUILDDIR)/latex-bw
-LATEX-NAME = music-for-geeks-and-nerds
+LATEX-NAME = GeoAnalyticsTutorials
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -42,7 +42,7 @@ PAPEROPTS = -D latex_elements.pointsize=11pt -D latex_elements.preamble=\\usepac
 SCREENOPTS = -D latex_elements.pointsize=12pt -D latex_elements.classoptions=,openany,oneside -D latex_elements.preamble=\\usepackage{mfgan} -D pygments_style=my_pygment_style.BookStyle -D code_example_wrap=67
 
 MOBIOPTS = -D pygments_style=none
-MOBI_NAME = MusicforGeeksandNerds.mobi
+MOBI_NAME = GeoAnalyticsTutorials.mobi
 
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
@@ -51,7 +51,7 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 default: html
 
-all: html epub mobi pdf pdf-bw sample
+all: html # epub mobi pdf pdf-bw sample
 
 view:
 	open _build/html/index.html
