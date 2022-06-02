@@ -24,7 +24,7 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS    +=
-SPHINXBUILD   = sphinx-build -E
+SPHINXBUILD   = sphinx-build -E -w /tmp/sphinx-log
 PAPER         =
 BUILDDIR      = _build
 
