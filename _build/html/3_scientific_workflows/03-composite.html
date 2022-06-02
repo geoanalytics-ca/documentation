@@ -1,0 +1,939 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+        <title>Compositing Rasters with Dask - GEOAnalytics Canada</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">GEOAnalytics Canada</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/geoanalytics-icon.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">GEOAnalytics Canada</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_getting_started/index.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/04-authentication.html"><strong>Authentication</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/06-file-browser.html"><strong>File Browser</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/08-gitlab.html"><strong>GitLab</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/09-pipelines.html"><strong>Pipelines</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/01-accessing-data.html"><strong>Accessing and Downloading Data</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/02-ndvi-with-dask.html"><strong>NDVI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html">1. Initialize your Dask Gateway Clusters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html#2.-Getting-the-MODIS-Data">2. Getting the MODIS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html#3.-Calculating-the-NDSI">3. Calculating the NDSI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html#4.-Visualizing-the-Results">4. Visualizing the Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/04-ndwi-with-dask.html"><strong>NDWI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/05-change-detection.html"><strong>Change Detection</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="01-flnro-esque-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<section id="Compositing-Rasters-with-Dask">
+<h1>Compositing Rasters with Dask<a class="headerlink" href="#Compositing-Rasters-with-Dask" title="Permalink to this headline">#</a></h1>
+<p>An integral part of a geospatial developers workflow will occassionally require composite rasters to represent specific temporal ranges as a single image. This approach is often performed to visualize cloud-free imagery over an AOI.</p>
+<p>In the following example, we will create a cloud-free median composite. Using “median” as the compositing method is, one, simple, and two, provides adequate resiliency against cloud shadow/edges that are not necessarily caputured by the cloud-mask.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># We will be using Sentinel-2 L2A imagery from Microsoft Planetary Computer STAC server:
+!pip install planetary_computer
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+import rasterio
+import rioxarray
+import pystac
+import stackstac
+import datetime
+import planetary_computer
+import dask
+import json
+import gcsfs
+
+import dask.array as da
+import numpy as np
+import xarray as xr
+import rioxarray as rxr
+import matplotlib.pyplot as plt
+import geopandas as gpd
+
+from dask_gateway import Gateway
+# from shapely.geometry import Point
+from pystac_client import Client
+from dask.distributed import performance_report
+from typing import List
+from rio_cogeo.cogeo import cog_translate
+from rio_cogeo.profiles import cog_profiles
+from IPython.display import clear_output
+</pre></div>
+</div>
+</div>
+<p>Set up the Dask Cluser and GCSFS Client</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def register_gcsfs_client(username:str):
+    # set up the gcsfs system with credentials
+    print('registering gcsfs')
+    tok = os.path.join(os.environ['HOME'], f'geoanalytics_{username}', 'geo.json') # Change this to your own cred file
+    tok_dict = json.load(open(tok)) # cloudpickle will just send the path to tok, which the processing nodes can't see. Send json instead
+    gcs = gcsfs.GCSFileSystem(token=tok_dict, access='read_write')
+    return gcs
+
+def register_dask_client(imgname:str=None):
+    ''' Make the gcsfs filesystem available with credentials and start client '''
+    # we want to set up a cluster
+    client = None
+    cluster = None
+    print('registering cluster')
+    gateway = Gateway()
+    options = gateway.cluster_options()
+    if not imgname is None:
+        options.image = imgname
+    cluster = gateway.new_cluster(options)
+    print(cluster.name)
+    client = cluster.get_client()
+    client.restart() # flush nodes
+    return client, cluster, options
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>username = input('Username: ')
+gcs = register_gcsfs_client(username=username)
+client, cluster, options = register_dask_client(imgname='pangeo/pangeo-notebook:2022.04.15')
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># View Dask cluster details
+cluster
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scale Dask cluster to 30 workers
+cluster.scale(30)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>client.restart()
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Function to write from the dask cluster to the remote bucket
+@dask.delayed
+def write_ras(gcs, epsg, ras, b, pth):
+    import rioxarray
+    try:
+        ds = xr.Dataset()
+        ras = ras.rio.write_crs(epsg)
+        ras.rio.to_raster('ras.tif')
+        # Turn the raster into a COG
+        dst_profile = cog_profiles.get("deflate")
+            cog_translate(
+                'ras.tif',
+                'ras_cog.tif',
+                dst_profile,
+                in_memory=True,
+                quiet=False,
+            )
+        # Use GCSFS Client to put COG into remote bucket
+        gcs.put('ras_cog.tif', pth)
+        # Clean up rasters on Dask Worker
+        os.remove('ras.tif')
+        os.remove('ras_cog.tif')
+        return 'success'
+    except Exception as e:
+        # Return error and associated band
+        return f'{b}: {e}'
+</pre></div>
+</div>
+</div>
+<section id="AOI">
+<h2>AOI<a class="headerlink" href="#AOI" title="Permalink to this headline">#</a></h2>
+<p>This AOI was generated from: <a class="reference external" href="https://www.keene.edu/campus/maps/tool/">https://www.keene.edu/campus/maps/tool/</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> # Rough Polygon around Vancouver in EPSG4326
+poly = {
+  "coordinates": [
+    [
+      [
+        -122.1185303,
+        49.3304921
+      ],
+      [
+        -123.3078003,
+        49.3644891
+      ],
+      [
+        -123.2528687,
+        48.7742927
+      ],
+      [
+        -122.1817017,
+        48.7579995
+      ],
+      [
+        -122.1185303,
+        49.3304921
+      ]
+    ]
+  ],
+  "type": "Polygon"
+}
+poly
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># We'll write this to a file, so geopanadas can open it
+poly_file_pth = '/tmp/geo.geojson'
+with open(poly_file_pth, 'w') as f:
+   json.dump(poly, f)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Get AOI from local filesystem
+f = gpd.read_file(poly_file_pth)
+f
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># The FOOTPRINT needs to be enveloped for pystac_client to query with
+# More complex shapes can be be clipped with at later stages of the workflow
+FOOTPRINT = f.to_crs('epsg:4326').geometry[0].envelope
+FOOTPRINT
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>FOOTPRINT.bounds
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Set-Up-STAC-Client">
+<h2>Set Up STAC Client<a class="headerlink" href="#Set-Up-STAC-Client" title="Permalink to this headline">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Set up STAC client
+api = Client.open('https://planetarycomputer.microsoft.com/api/stac/v1')
+api
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Configuration">
+<h2>Configuration<a class="headerlink" href="#Configuration" title="Permalink to this headline">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># CONFIG
+# -------------
+BASE_PTH = 'gs://geoanalytics-user-shared-data'
+OUTPUT_DIR = 'tutorial_test'
+TGT_BANDS =  ['B01', 'B02', 'B03', 'B04', 'B05', 'B06', 'B07', 'B08', 'B09', 'B11', 'B12', 'B8A']
+YEARS = ['2020']
+BEGIN_MONTH = '06'
+END_MONTH = '09'
+MAX_CLOUD = 20.0
+READ_IN_CHUNK = 4096
+RESOLUTION = 10
+TEMPORAL_CHUNK = {'time': -1, 'band': 1, 'x': 128, 'y': 128}
+SYNCHRONOUS = False # Write bands out one at a time - use if resources can't handle all bands at once for AOI
+# -------------
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="Main-Loop">
+<h1>Main Loop<a class="headerlink" href="#Main-Loop" title="Permalink to this headline">#</a></h1>
+<p>In the main loop we iterate over the number of target years, creating a composite of each for each of the composite bands.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%time
+# Main pipeline to iterate over years
+write_futs = []
+for year in YEARS:
+    OUT_PTH = f'{BASE_PTH}/{OUTPUT_DIR}/{year}'
+    date_range = f'{year}-{BEGIN_MONTH}-01/{year}-{END_MONTH}-30'
+
+    # Query the Planetary Computer STAC server with pystac_client
+    print(f'[Querying] {year}')
+    items = api.search(
+        collections = ['sentinel-2-l2a'],
+        intersects = FOOTPRINT,
+        query={"eo:cloud_cover": {"lt": MAX_CLOUD}},
+        datetime = date_range,
+    ).get_all_items()
+
+    print(f'\tFound {len(items)} items')
+    # planetarycomputer requires signed URLs to access Asset HREFs.
+    print('\t[Signing data links]')
+    signed_items = [planetary_computer.sign(item).to_dict() for item in items]
+
+    # Pull out SCL DataArray before bands are looped through
+    # since this will not change per band.
+    scl_stk = (
+        stackstac.stack(
+            signed_items,
+            assets=['SCL'],
+            chunksize=READ_IN_CHUNK, # Set chunksize
+            resolution=RESOLUTION, # Set all bands res to this
+            bounds_latlon=FOOTPRINT.bounds, # clip to AOI bounds
+        )
+    )
+    # Create binary mask [np.nan, 1]
+    # https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm
+    scl_stk.data = da.where(
+            ((scl_stk.data==0)| # nodata
+             (scl_stk.data==1)| # Saturated or Defective
+             (scl_stk.data==8)| # cloud: medium probability
+             (scl_stk.data==9)| # cloud: high probability
+             (scl_stk.data==10)| # cloud: thin cirrus
+             (scl_stk.data==11) # snow
+            ), np.nan, 1)
+
+    # Iterate over bands and build composite DAG
+    for band in TGT_BANDS:
+        clear_output(wait=True) # clear Jupyter Cell output
+        print(f'[Processing {band}]')
+
+        # Convert STAC query into a xarray.DataArray
+        # with stackstac
+        print('\t[Converting STAC query to DataArray]')
+        data = (
+            stackstac.stack(
+                signed_items,
+                assets=[band],
+                chunksize=READ_IN_CHUNK, # Set chunksize
+                resolution=RESOLUTION, # Set all bands res to this
+                bounds_latlon=FOOTPRINT.bounds, # clip to AOI bounds
+            ).where(lambda x: x &gt; 0, other=np.nan) # Convert nodata zero to np.nan
+        )
+
+        # Mask the bands with the accompanying SCL band per time
+        print('\t[Masking data with SCL]')
+        masked = data.copy()
+        masked.data = data.data * scl_stk.data # np.nan will mask unwated pixels
+
+        # Create median composite
+        print('\t[Creating Median composite]')
+        # skip np.nan in temporal stack with skipna=True
+        median = masked.median(dim='time', skipna=True, keep_attrs=True)
+        median = median.chunk({'band': 1, 'y': 'auto', 'x': 'auto'})
+        median = median.transpose('band', 'y', 'x')
+
+        # Cast the xarray.DataArray to int16
+        median = median.astype(np.uint16)
+
+        # Get EPSG from median metadata
+        epsg = median.coords['epsg'].values.tolist()
+
+
+        if SYNCHRONOUS:
+            # Issues with large AOI's - limited resources - so compute each composite
+            # individually to relieve the Dask Cluster
+            print(dask.compute(write_ras(gcs, epsg, median, band, f'{OUT_PTH}/{band}.tif')))
+        else:
+            # Write out each band to a file asynchronously
+            print(f'\t[Processing and Writing {band}]')
+            median.name = band
+            median.attrs['long_name'] = band
+            write_futs.append(write_ras(gcs, epsg, median, band, f'{OUT_PTH}/{band}.tif'))
+
+if not SYNCHRONOUS:
+    clear_output(wait=True)
+    write_futs.visualize()
+    with performance_report('dask_report.html'):
+        print(dask.compute(write_futs)[0])
+</pre></div>
+</div>
+</div>
+<section id="Shut-Dask-Cluster-Down">
+<h2>Shut Dask Cluster Down<a class="headerlink" href="#Shut-Dask-Cluster-Down" title="Permalink to this headline">#</a></h2>
+<p>Make sure to shut down the Dask Cluster as not to incur costs</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>cluster.shutdown()
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Remove-Intermediate-Files">
+<h2>Remove Intermediate Files<a class="headerlink" href="#Remove-Intermediate-Files" title="Permalink to this headline">#</a></h2>
+<p>The files in /tmp will be deleted at shutdown of your session, however, if you plan on continuing to work, then cleaning up old and no-longer-needed files is helpful housekeeping</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>os.remove(poly_file_pth)
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, Hatfield Consultants
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Compositing Rasters with Dask</a><ul>
+<li><a class="reference internal" href="#AOI">AOI</a></li>
+<li><a class="reference internal" href="#Set-Up-STAC-Client">Set Up STAC Client</a></li>
+<li><a class="reference internal" href="#Configuration">Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Main-Loop">Main Loop</a><ul>
+<li><a class="reference internal" href="#Shut-Dask-Cluster-Down">Shut Dask Cluster Down</a></li>
+<li><a class="reference internal" href="#Remove-Intermediate-Files">Remove Intermediate Files</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>
