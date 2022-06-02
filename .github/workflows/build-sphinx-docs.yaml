@@ -16,12 +16,12 @@ jobs:
     # Standard drop-in approach that should work for most people.
     - uses: ammaraskar/sphinx-action@master
       with:
-        docs-folder: "_build/"
+        docs-folder: ""
     # Example of using a custom build-command.
     - uses: ammaraskar/sphinx-action@master
       with:
         build-command: "sphinx-build -w /tmp/sphinx-log -b html . _build"
-        docs-folder: "_build/"
+        docs-folder: ""
     # Grabbing custom dependencies and building as a pdf.
     - uses: ammaraskar/sphinx-action@master
       with:
