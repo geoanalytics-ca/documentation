@@ -51,7 +51,7 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 default: html
 
-all: html # epub mobi pdf pdf-bw sample
+all: html epub mobi pdf pdf-bw sample
 
 view:
 	open _build/html/index.html
