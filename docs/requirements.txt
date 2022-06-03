@@ -4,3 +4,4 @@ sphinx-design
 myst-parser
 # sphinxcontrib-spelling
 furo
+MarkupSafe
