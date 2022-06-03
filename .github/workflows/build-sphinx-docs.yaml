@@ -11,6 +11,7 @@ jobs:
     name: Push Sphinx Pages
     runs-on: ubuntu-latest
     steps:
-    - with:
+    - uses: ubuntu:latest
+      with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
       run: sphinx-build -b html . _build
