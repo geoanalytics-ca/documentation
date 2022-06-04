@@ -486,7 +486,7 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>Using these core packages, especially Xarray and Dask, scalable big data analytics can be executed on satellite EO data. Our JupyterLab is configured to allow direct access to scalable processing power and all EO and ground-truth datasets.</p>
 <p>To get started with your project, select the <strong>Jupyter</strong> tool from the main page on your GEOAnalytics Canada platform. This will lead you to your JupyterHub interface.</p>
-<p><img alt="4bb18c7534f5488888aea47775d78b9e" src="../_images/02_launching-jupyterlab.gif" /></p>
+<p><img alt="1f85d65146a843628b212c96a8c32580" src="../_images/02_launching-jupyterlab.gif" /></p>
 <p><strong>The main workspace consists of:</strong></p>
 <ul class="simple">
 <li><p>the launcher tab at start-up where you can work with Jupyter notebooks, Jupyter consoles, terminal, and text or markdown files</p></li>
@@ -503,19 +503,19 @@ div.rendered_html tbody tr:hover {
 <li><p>the tabs list</p></li>
 <li><p>the extension manager.</p></li>
 </ul>
-<p><img alt="648f603577c342a3b0c4e037c88cf311" src="../_images/02_jupyter-platform.png" /></p>
+<p><img alt="d4e70c4a368b4cd9ac75abc9eb627ba0" src="../_images/02_jupyter-platform.png" /></p>
 <section id="1.1-Launching-New-Notebooks">
 <h3>1.1 Launching New Notebooks<a class="headerlink" href="#1.1-Launching-New-Notebooks" title="Permalink to this headline">#</a></h3>
 <p>Within the Launcher tab, there are two environments to choose from. The <em>Python 3</em> environment and the <em>Python [conda env:notebook]</em> are both the same environments. These environments are created specifically for EO analysis, with essential packages already installed.</p>
 <p>Let’s create a notebook with either the <em>conda notebook environment</em> and begin writing some code!</p>
-<p><img alt="ec9101bdd48b4ef591fa19b2008b7f31" src="../_images/02_launching-notebook.gif" /></p>
+<p><img alt="6522cedb7bf840a689225c22b11b879a" src="../_images/02_launching-notebook.gif" /></p>
 </section>
 <section id="1.2-Launching-Terminal">
 <h3>1.2 Launching Terminal<a class="headerlink" href="#1.2-Launching-Terminal" title="Permalink to this headline">#</a></h3>
 <p>To start a new terminal session, click the terminal in the Launcher tab. Terminal provides full support for all system shells on Mac, Linux, and Windows. Just like the shell on your local system, anything can be run with this server terminal.</p>
-<p><img alt="65c885dea6f54d71b4b1500c846b10ec" src="../_images/02_terminal.png" /></p>
+<p><img alt="cbaf3bed8be04ebda354dec6ae0e823f" src="../_images/02_terminal.png" /></p>
 <p>Closing a running terminal will not shut down the terminal, rather it will continue running in the background. In the “Running Terminals and Kernels” tab, you can reopen a closed terminal, or completely shut the terminal down.</p>
-<p><img alt="b1ef985c00b44a2c82cebf4f69c99aca" src="../_images/02_exiting-terminal.gif" /></p>
+<p><img alt="cdea0f3dcf0f423e954ff9818de0a15f" src="../_images/02_exiting-terminal.gif" /></p>
 <p><strong>NOTE: Sudo / Root access is not available from the Jupyterlab environment’s terminal.</strong></p>
 </section>
 </section>
@@ -548,7 +548,7 @@ div.rendered_html tbody tr:hover {
 <p><strong>Why should we scale?</strong> Computations are much faster when data can be held in local memory. Most computers do not have massive memory storages to store big data, those that do are extremely expensive. An easier and cost effective method is to use the pool of memory from a collections of systems to store large datasets.</p>
 <p><strong>Dask Gateway</strong> The GEOAnalytics Platform uses Dask Gateway to provide our users a secure, multi-tenant server for managing Dask clusters. Our administrators manage the backend configuration of the clusters, so user’s can connect to the Dask Gateway without hastle.</p>
 <p>Here’s a diagram representing the Dask architecture, which consists of the Dask Clusters, a proxy for connecting the user’s client with the scheduler, and the main Gateway for authentication and cluster management.</p>
-<p><img alt="9c8e6a26e97a4e0aafce2dcadfe8da00" src="../_images/02_dask-architecture.png" /></p>
+<p><img alt="45b8e2854f1b457e814929a23b52a40f" src="../_images/02_dask-architecture.png" /></p>
 <section id="3.1-Connecting-to-Dask-gateway">
 <h3>3.1 Connecting to Dask-gateway<a class="headerlink" href="#3.1-Connecting-to-Dask-gateway" title="Permalink to this headline">#</a></h3>
 <p>To connect to the Dask gateway server through Jupyterhub, a session must be activated by creating a Gateway client.</p>
