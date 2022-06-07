@@ -166,8 +166,8 @@
 <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1_getting_started/index.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/04-authentication.html"><strong>Authentication</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/06-file-browser.html"><strong>File Browser</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
@@ -187,7 +187,14 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/01-flnro-esque-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html">KNN Land Classification with Dask [40 hours]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#1.-Initialize-Dask-Cluster">1. Initialize Dask Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#Query-using-the-SentinelSat-API">Query using the SentinelSat API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#2.-Functions">2. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#2.-Loading,-Masking,-and-Creating-Mosaics">2. Loading, Masking, and Creating Mosaics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html">Compositing Rasters with Dask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html#Main-Loop">Main Loop</a></li>
 </ul>
 </li>
 </ul>
@@ -787,7 +794,7 @@ LANCEMODIS:1318961142
 <h3>4.1 Working with Existing Data<a class="headerlink" href="#4.1-Working-with-Existing-Data" title="Permalink to this headline">#</a></h3>
 <p>Let’s start by exploring existing ground truth data. Navigate to the Ground Truth Collection and click on any features “Action:” button and selecting “Details”. The links to the API end points are provided by clicking on “Links”. API endpoints provided by the Ground Truth system implement the Open Geospatial Consortium’s (OGC) API-Features specification allowing for standards compliant libraries and applications to easily access all Ground Truth data.</p>
 <p>The GIF below shows how to access the GeoJSON for the polygons in the <strong>SE_AGR</strong> dataset.</p>
-<p><img alt="c0126cee926b482cb963f10ba762cb8c" src="../_images/01_ground_truth_access.gif" /></p>
+<p><img alt="18739cdc60954070af28461060df3832" src="../_images/01_ground_truth_access.gif" /></p>
 <p>Since we have the URL path to this geoJSON, let’s plot the polygons within this Jupyter Notebook. First import the neccessary modules and enter your GEOAnalytics Authentication Token.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -1041,7 +1048,7 @@ fig.show()
 <section id="4.2-Uploading-New-Data">
 <h3>4.2 Uploading New Data<a class="headerlink" href="#4.2-Uploading-New-Data" title="Permalink to this headline">#</a></h3>
 <p>New shape files can be uploaded to the system by clicking ‘Add Collection’. Then navigate to the Zip file containing the shapefile and upload to the collection.</p>
-<p><img alt="b30b8d8c29b4459faef523c6b57202df" src="../_images/01_ground-truth-upload.gif" /></p>
+<p><img alt="5032632415a44341aed1a083044fb723" src="../_images/01_ground-truth-upload.gif" /></p>
 <p>Now, we will repeat the previous steps, but with our newly uploaded Canada shapefile.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[156]:

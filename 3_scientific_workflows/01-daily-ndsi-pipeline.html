@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="Scientific Workflows" href="index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="KNN Land Classification with Dask [40 hours]" href="02-knn.html" /><link rel="prev" title="Scientific Workflows" href="index.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.06.04.1"/>
         <title>Daily NDSI Average Pipeline - GEOAnalytics Canada</title>
@@ -166,8 +166,8 @@
 <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1_getting_started/index.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/04-authentication.html"><strong>Authentication</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/06-file-browser.html"><strong>File Browser</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
@@ -188,6 +188,13 @@
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Scientific Workflows</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-knn.html">KNN Land Classification with Dask [40 hours]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-knn.html#1.-Initialize-Dask-Cluster">1. Initialize Dask Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-knn.html#Query-using-the-SentinelSat-API">Query using the SentinelSat API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-knn.html#2.-Functions">2. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-knn.html#2.-Loading,-Masking,-and-Creating-Mosaics">2. Loading, Masking, and Creating Mosaics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-composite.html">Compositing Rasters with Dask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-composite.html#Main-Loop">Main Loop</a></li>
 </ul>
 </li>
 </ul>
@@ -481,7 +488,6 @@ div.rendered_html tbody tr:hover {
 </style>
 <section id="Daily-NDSI-Average-Pipeline">
 <h1><strong>Daily NDSI Average Pipeline</strong><a class="headerlink" href="#Daily-NDSI-Average-Pipeline" title="Permalink to this headline">#</a></h1>
-<p>FLNRO-esque demonstrates the workflow for gathering data products that are specific to an application and how to leverage those into an informative product that can affect real-world decisions, making use of powerful tools such as Kubeflow.</p>
 <p>In this tutorial notebook, we will build a Kubeflow Pipeline which will process the Modis Snow Product over the previous 5 to 8 days (depending on user input) and return the visualization of the NDSI Average in British Columbia, Canada.</p>
 <p>The main steps for creating the Daily NDSI Average Pipeline:</p>
 <ol class="arabic simple">
@@ -1190,9 +1196,9 @@ count += 1
 <section id="4.-The-Results">
 <h2>4. The Results<a class="headerlink" href="#4.-The-Results" title="Permalink to this headline">#</a></h2>
 <p>Head over to the Kubeflow Pipeline UI and take a look at the Run you created. Once finished, the pipeline graph should look like this image below.</p>
-<p><img alt="f4a2526c838348118c6609676995e62c" src="../_images/01_pipeline-graph.png" /></p>
+<p><img alt="f308d79816c343aead715d273151e2cd" src="../_images/01_pipeline-graph.png" /></p>
 <p>To see the final plot of the Averaged NDSI over the past few days, click on the <code class="docutils literal notranslate"><span class="pre">plot_ndsi</span></code> operation and under the <strong>“Input/Output”</strong>, click on the link in the Output Artifacts section. This is open a new tab with the final plot shown, which should look similar to this:</p>
-<p><img alt="ee018f79fc5a4298b66504a0bf7a4824" src="../_images/01_pipeline-result.png" /></p>
+<p><img alt="3d78f60ecc4944759c4b471a0e9a1eb0" src="../_images/01_pipeline-result.png" /></p>
 <p><strong>Note: This NDSI was processed on September 2nd, 2021.</strong></p>
 </section>
 <section id="5.-Additional-Sources">
@@ -1213,7 +1219,15 @@ count += 1
       <footer>
         
         <div class="related-pages">
-          
+          <a class="next-page" href="02-knn.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">KNN Land Classification with Dask [40 hours]</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
           <a class="prev-page" href="index.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">

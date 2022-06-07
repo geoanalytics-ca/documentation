@@ -166,8 +166,8 @@
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="1_getting_started/index.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="1_getting_started/02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="1_getting_started/04-authentication.html"><strong>Authentication</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="1_getting_started/05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="1_getting_started/06-file-browser.html"><strong>File Browser</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="1_getting_started/07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
@@ -187,7 +187,14 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/01-flnro-esque-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/02-knn.html">KNN Land Classification with Dask [40 hours]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/02-knn.html#1.-Initialize-Dask-Cluster">1. Initialize Dask Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/02-knn.html#Query-using-the-SentinelSat-API">Query using the SentinelSat API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/02-knn.html#2.-Functions">2. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/02-knn.html#2.-Loading,-Masking,-and-Creating-Mosaics">2. Loading, Masking, and Creating Mosaics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/03-composite.html">Compositing Rasters with Dask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/03-composite.html#Main-Loop">Main Loop</a></li>
 </ul>
 </li>
 </ul>
@@ -234,12 +241,17 @@
 </div>
 <section id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
-<p>To demonstrate how cloud computing systems can overcome issues with traditional approaches to satellite EO data analytics, Hatfield Consultants have created the GEO Analytics Canada Platform. This provides data, tools, and compute resources in the same environment and enables users to gain experience and understand the benefits of working in the cloud.</p>
+<p>Research on climate-change, ecosystem modeling, and environmental and natural resources monitoring is based on the collection, management, analysis, and dissemination of geospatial data.</p>
+<p>Satellite Earth Observation (EO) has been transformed by the massive increase in availability of open EO data, which began in 2008 with the opening of the Landsat data archive by the United States. It was given further impetus by the European Commission in making data from the Copernicus series of radar and optical satellites fully free and open since 2014.</p>
+<p>On one hand, the increased availability of EO data makes it easier for scientists, businesses, and government decision makers to obtain insights from long, dense time series of multiple EO datasets. However, users cannot find, access, and use this wealth of EO data to its potential by following traditional approaches to download data and analyze it in a local computing environment.</p>
+<p>As the volume of satellite EO data continues to grow, new analytical possibilities arise requiring new approaches to data management and processing.</p>
+<p><strong>*The solution is to bring the user to the data.*</strong></p>
+<p>To demonstrate how cloud computing systems can overcome issues with traditional approaches to satellite EO data analytics, <a class="reference external" href="https://www.hatfieldgroup.com">Hatfield</a> created the GEOAnalytics Canada Platform. This provides data, tools, and compute resources in the same environment and enables users to gain experience and understand the benefits of working in the cloud.</p>
 </section>
 </section>
 <section id="overview-of-our-documentation">
 <h1>Overview of our Documentation<a class="headerlink" href="#overview-of-our-documentation" title="Permalink to this headline">#</a></h1>
-<p>The GEOAnalytics Canada documentation is organized into sections consisting of all tutorials and guides, fron getting started with the platform, to step-by-step workflow examples. Click the card below that’s most relevant to your needs!</p>
+<p>The GEOAnalytics Canada documentation is organized into sections consisting of all tutorials and guides, from getting started with the platform, to step-by-step workflow examples. Click the card below that’s most relevant to your needs!</p>
 <div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils" id="cards-clickable">
 <div class="sd-row sd-row-cols-3 sd-row-cols-xs-3 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 docutils">
 <div class="sd-col sd-d-flex-row docutils">
@@ -302,6 +314,17 @@ on the left sidebar.</p>
 <li class="toctree-l3"><a class="reference internal" href="1_getting_started/02-geospatial-python.html#3.-Additional-Documentations">3. Additional Documentations</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="1_getting_started/04-authentication.html"><strong>Authentication</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="1_getting_started/04-authentication.html#1.-Levels-of-Authentication">1. Levels of Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1_getting_started/04-authentication.html#2.-Systems-Accessible-with-Username-and-Password">2. Systems Accessible with Username and Password</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1_getting_started/04-authentication.html#3.-Systems-Accessible-with-API-Token">3. Systems Accessible with API Token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1_getting_started/04-authentication.html#4.-Logging-in-to-Docker-Registry">4. Logging in to Docker Registry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="1_getting_started/04-authentication.html#4.2-Default-Login-Method">4.2 Default Login Method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="1_getting_started/04-authentication.html#4.3-Alternate-Login-Method">4.3 Alternate Login Method</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="1_getting_started/03-jupyter-notebooks.html#1.-Navigating-through-GeoAnalytics-Canada-JupyterHub">1. Navigating through GeoAnalytics Canada JupyterHub</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="1_getting_started/03-jupyter-notebooks.html#1.1-Launching-New-Notebooks">1.1 Launching New Notebooks</a></li>
@@ -329,17 +352,6 @@ on the left sidebar.</p>
 <li class="toctree-l3"><a class="reference internal" href="1_getting_started/03-jupyter-notebooks.html#5.-Benefits-and-Caveats">5. Benefits and Caveats</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="1_getting_started/03-jupyter-notebooks.html#Benefits:">Benefits:</a></li>
 <li class="toctree-l4"><a class="reference internal" href="1_getting_started/03-jupyter-notebooks.html#Caveats:">Caveats:</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="1_getting_started/04-authentication.html"><strong>Authentication</strong></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="1_getting_started/04-authentication.html#1.-Levels-of-Authentication">1. Levels of Authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1_getting_started/04-authentication.html#2.-Systems-Accessible-with-Username-and-Password">2. Systems Accessible with Username and Password</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1_getting_started/04-authentication.html#3.-Systems-Accessible-with-API-Token">3. Systems Accessible with API Token</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1_getting_started/04-authentication.html#4.-Logging-in-to-Docker-Registry">4. Logging in to Docker Registry</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="1_getting_started/04-authentication.html#4.2-Default-Login-Method">4.2 Default Login Method</a></li>
-<li class="toctree-l4"><a class="reference internal" href="1_getting_started/04-authentication.html#4.3-Alternate-Login-Method">4.3 Alternate Login Method</a></li>
 </ul>
 </li>
 </ul>
@@ -513,19 +525,38 @@ on the left sidebar.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="3_scientific_workflows/index.html">Scientific Workflows</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/01-flnro-esque-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/01-flnro-esque-pipeline.html#1.-Connect-to-Kubeflow-Client">1. Connect to Kubeflow Client</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/01-flnro-esque-pipeline.html#2.-Implementing-the-Python-Functions">2. Implementing the Python Functions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="3_scientific_workflows/01-flnro-esque-pipeline.html#2.1-Querying-Data-Function">2.1 Querying Data Function</a></li>
-<li class="toctree-l4"><a class="reference internal" href="3_scientific_workflows/01-flnro-esque-pipeline.html#2.2-Thresholding-and-Creating-Mosaic-Function">2.2 Thresholding and Creating Mosaic Function</a></li>
-<li class="toctree-l4"><a class="reference internal" href="3_scientific_workflows/01-flnro-esque-pipeline.html#2.3-Computing-Average-NDSI-Function">2.3 Computing Average NDSI Function</a></li>
-<li class="toctree-l4"><a class="reference internal" href="3_scientific_workflows/01-flnro-esque-pipeline.html#2.4-Plotting-the-Final-NDSI-Function">2.4 Plotting the Final NDSI Function</a></li>
-<li class="toctree-l4"><a class="reference internal" href="3_scientific_workflows/01-flnro-esque-pipeline.html#2.5-Delete-Files-Function">2.5 Delete Files Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/01-daily-ndsi-pipeline.html#1.-Connect-to-Kubeflow-Client">1. Connect to Kubeflow Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/01-daily-ndsi-pipeline.html#2.-Implementing-the-Python-Functions">2. Implementing the Python Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="3_scientific_workflows/01-daily-ndsi-pipeline.html#2.1-Querying-Data-Function">2.1 Querying Data Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="3_scientific_workflows/01-daily-ndsi-pipeline.html#2.2-Thresholding-and-Creating-Mosaic-Function">2.2 Thresholding and Creating Mosaic Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="3_scientific_workflows/01-daily-ndsi-pipeline.html#2.3-Computing-Average-NDSI-Function">2.3 Computing Average NDSI Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="3_scientific_workflows/01-daily-ndsi-pipeline.html#2.4-Plotting-the-Final-NDSI-Function">2.4 Plotting the Final NDSI Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="3_scientific_workflows/01-daily-ndsi-pipeline.html#2.5-Delete-Files-Function">2.5 Delete Files Function</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/01-flnro-esque-pipeline.html#3.-Assembling-the-Pipeline">3. Assembling the Pipeline</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/01-flnro-esque-pipeline.html#4.-The-Results">4. The Results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/01-flnro-esque-pipeline.html#5.-Additional-Sources">5. Additional Sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/01-daily-ndsi-pipeline.html#3.-Assembling-the-Pipeline">3. Assembling the Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/01-daily-ndsi-pipeline.html#4.-The-Results">4. The Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/01-daily-ndsi-pipeline.html#5.-Additional-Sources">5. Additional Sources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/02-knn.html">KNN Land Classification with Dask [40 hours]</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/02-knn.html#K-Means-Land-Classification-with-Dask-(WIP!!)">K-Means Land Classification with Dask (WIP!!)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/02-knn.html#1.-Initialize-Dask-Cluster">1. Initialize Dask Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/02-knn.html#Query-using-the-SentinelSat-API">Query using the SentinelSat API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/02-knn.html#2.-Functions">2. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/02-knn.html#2.-Loading,-Masking,-and-Creating-Mosaics">2. Loading, Masking, and Creating Mosaics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/03-composite.html">Compositing Rasters with Dask</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/03-composite.html#AOI">AOI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/03-composite.html#Set-Up-STAC-Client">Set Up STAC Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/03-composite.html#Configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="3_scientific_workflows/03-composite.html#Main-Loop">Main Loop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/03-composite.html#Shut-Dask-Cluster-Down">Shut Dask Cluster Down</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_scientific_workflows/03-composite.html#Remove-Intermediate-Files">Remove Intermediate Files</a></li>
 </ul>
 </li>
 </ul>

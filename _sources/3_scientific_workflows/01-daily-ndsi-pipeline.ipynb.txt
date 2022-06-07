@@ -5,8 +5,6 @@
    "metadata": {},
    "source": [
     "# **Daily NDSI Average Pipeline**\n",
-    "FLNRO-esque demonstrates the workflow for gathering data products that are specific to an application and how to leverage those into an informative product that can affect real-world decisions, making use of powerful tools such as Kubeflow.\n",
-    "\n",
     "In this tutorial notebook, we will build a Kubeflow Pipeline which will process the Modis Snow Product over the previous 5 to 8 days (depending on user input) and return the visualization of the NDSI Average in British Columbia, Canada. \n",
     "\n",
     "The main steps for creating the Daily NDSI Average Pipeline:\n",

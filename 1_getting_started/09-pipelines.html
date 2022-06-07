@@ -166,8 +166,8 @@
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-authentication.html"><strong>Authentication</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-file-browser.html"><strong>File Browser</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
@@ -187,7 +187,14 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/01-flnro-esque-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html">KNN Land Classification with Dask [40 hours]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#1.-Initialize-Dask-Cluster">1. Initialize Dask Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#Query-using-the-SentinelSat-API">Query using the SentinelSat API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#2.-Functions">2. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#2.-Loading,-Masking,-and-Creating-Mosaics">2. Loading, Masking, and Creating Mosaics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html">Compositing Rasters with Dask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html#Main-Loop">Main Loop</a></li>
 </ul>
 </li>
 </ul>
@@ -930,7 +937,7 @@ run_result = kubeflow_client.client.run_pipeline(experiment.id, run_name, pipeli
 <h2>3. Exploring the GEOAnalytics Kubeflow UI<a class="headerlink" href="#3.-Exploring-the-GEOAnalytics-Kubeflow-UI" title="Permalink to this headline">#</a></h2>
 <section id="3.1-Kubeflow-Pipelines-and-Experiments">
 <h3>3.1 Kubeflow Pipelines and Experiments<a class="headerlink" href="#3.1-Kubeflow-Pipelines-and-Experiments" title="Permalink to this headline">#</a></h3>
-<p>The central Kubeflow Dashboard can be accessed from the main GEOAnalytics Canada page by clicking on Kubeflow to launch. <img alt="8ef179335e6f4f579aeb9ff6205a97ba" src="../_images/08_launching-kubeflow.gif" /></p>
+<p>The central Kubeflow Dashboard can be accessed from the main GEOAnalytics Canada page by clicking on Kubeflow to launch. <img alt="69a22835fea2429399da500e02d80b98" src="../_images/08_launching-kubeflow.gif" /></p>
 <p>Now you will have access to the Kubeflow User Interface (UI).</p>
 <p>On the left sidebar, click on the <strong>Pipelines</strong> tab which will lead to the main workspace for Kubeflow Pipelines UI. On the left panel in this section, there are multiple tabs, but for this tutorial we will focus on only the Pipelines and Experiments tab. The <em>Pipelines</em> tab leads you to all the existing pipelines you have access to and the option to upload a new pipeline. And the <em>Experiments</em> tab displays all the experients and the runs of each experiment. You can create runs, compare existing
 runs, or even clone the runs.</p>
@@ -940,7 +947,7 @@ runs, or even clone the runs.</p>
 <h3>3.2 Analyzing the Hello World Pipeline<a class="headerlink" href="#3.2-Analyzing-the-Hello-World-Pipeline" title="Permalink to this headline">#</a></h3>
 <p>Under the Pipelines tab, you should see the newly built “Hello World Example Pipeline” at the top of the list of pipelines. There are other Tutorial and Demo pipelines preconfigured by Kubeflow for you to experiment with.</p>
 <p>To invoke a specific pipeline, simply click it which will bring up Pipeline’s view as shown in the GIF below.</p>
-<p><img alt="c0abd72fd48b4edebfefb45522892877" src="../_images/08_kubeflow-pipelines.gif" /></p>
+<p><img alt="ff31c7d6f4e04d2e989712970683cde0" src="../_images/08_kubeflow-pipelines.gif" /></p>
 <p>Within this pipeline there is a graph representing the runtime execution of the pipeline, with edges indicating parent/child relationships between the steps (nodes). Clicking on a node will give information about that step, such as the input parameter, the output result, arguments, internal commands to execute that step, and the volume mounts.</p>
 <p><strong>Notebook and the pipeline run independently, so in case the notebook crashes, the experiment will continue running once executed.</strong></p>
 </section>
@@ -961,18 +968,18 @@ runs, or even clone the runs.</p>
 <li><p>There are two different types of Runs, we will discuss these in the next part. For now, select <strong>“One-off”</strong> which executes the pipeline only once.</p></li>
 <li><p>Now since we specified <em>Parameters</em> in our pipeline function, enter any two words in place of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p></li>
 </ul>
-<p><img alt="fb64549c811a44e492445c3c6733e06a" src="../_images/08_start-run.png" /></p>
+<p><img alt="95e025c751ae4aceadea58358e82178b" src="../_images/08_start-run.png" /></p>
 <p>After these sections have been filled in, select the <strong>“Start”</strong> to execute the run which will take a few seconds (or minutes depending on the pipeline). When the Status updates to a green checkmark it indicates the run was successfully executed. Click on the run to explore the details of the run.</p>
-<p><img alt="9c87e6453b00425ca97a2c88ea5eb3b2" src="../_images/08_run-created.gif" /></p>
+<p><img alt="93cc70449b8c46858cc6555bba2933f0" src="../_images/08_run-created.gif" /></p>
 </section>
 <section id="3.5-Running-Pipelines-on-Schedule">
 <h3>3.5 Running Pipelines on Schedule<a class="headerlink" href="#3.5-Running-Pipelines-on-Schedule" title="Permalink to this headline">#</a></h3>
 <p>All our previous runs have been done manually, which is not ideal for some scenarios. Recurring runs are repeatable runs of a pipeline, very helpful if the pipeline is expected to run for a long period of time and is triggered to run frequently.</p>
 <p>Let’s create a Recurring run on our “Echo Image Pipeline.” Fill in the details as shown in the screenshot below. Now you can create a periodic run by selecting a run type of <strong>“Recurring”</strong>, then choosing <strong>“Periodic”</strong> as the trigger type. Period runs specify <strong>how often</strong> to run a pipeline. In this example we are setting a pipeline to run every second day. Once you start the run, it is executed immediately and then executed with the defined frequency (of 2 days).</p>
-<p><img alt="6c1532ef5ec84696a0ab099eda52123a" src="../_images/08_create-recurring-run.png" /></p>
+<p><img alt="182f7073ae014c8f9eb973fe64aac1a8" src="../_images/08_create-recurring-run.png" /></p>
 <p>From the “echo-image” experiment, you will see recurring run active, with the option to <code class="docutils literal notranslate"><span class="pre">enable</span></code> or <code class="docutils literal notranslate"><span class="pre">disable</span></code> the schedule.</p>
 <p><strong>If you enable a recurring run for this example notebook, make sure to disable the run.</strong></p>
-<p><img alt="145bc023c68e4be982c6a9d57f7da6a9" src="../_images/08_recurring-run.gif" /></p>
+<p><img alt="e7381dd1166c4b5382713fb92a7c1650" src="../_images/08_recurring-run.gif" /></p>
 </section>
 <section id="3.6-Terminating-Runs">
 <h3>3.6 Terminating Runs<a class="headerlink" href="#3.6-Terminating-Runs" title="Permalink to this headline">#</a></h3>

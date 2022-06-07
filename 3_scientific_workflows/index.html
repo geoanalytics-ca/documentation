@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Daily NDSI Average Pipeline" href="01-flnro-esque-pipeline.html" /><link rel="prev" title="&lt;no title&gt;" href="../2_real_world_examples/06-add-to-stac.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Daily NDSI Average Pipeline" href="01-daily-ndsi-pipeline.html" /><link rel="prev" title="&lt;no title&gt;" href="../2_real_world_examples/06-add-to-stac.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.06.04.1"/>
         <title>Scientific Workflows - GEOAnalytics Canada</title>
@@ -166,8 +166,8 @@
 <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1_getting_started/index.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/04-authentication.html"><strong>Authentication</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/06-file-browser.html"><strong>File Browser</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
@@ -187,7 +187,14 @@
 </ul>
 </li>
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Scientific Workflows</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="01-flnro-esque-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-knn.html">KNN Land Classification with Dask [40 hours]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-knn.html#1.-Initialize-Dask-Cluster">1. Initialize Dask Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-knn.html#Query-using-the-SentinelSat-API">Query using the SentinelSat API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-knn.html#2.-Functions">2. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-knn.html#2.-Loading,-Masking,-and-Creating-Mosaics">2. Loading, Masking, and Creating Mosaics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-composite.html">Compositing Rasters with Dask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-composite.html#Main-Loop">Main Loop</a></li>
 </ul>
 </li>
 </ul>
@@ -225,22 +232,41 @@
         <article role="main">
           <section id="scientific-workflows">
 <span id="scientific-workflows-index"></span><h1>Scientific Workflows<a class="headerlink" href="#scientific-workflows" title="Permalink to this headline">#</a></h1>
-<p>Example workflows from start to finish that you would typically see in a real-world situation.</p>
+<p>This section includes start-to-finish workflows that you would typically see in real-world situations when using GEOAnalytics Canada.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="01-flnro-esque-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="01-flnro-esque-pipeline.html#1.-Connect-to-Kubeflow-Client">1. Connect to Kubeflow Client</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01-flnro-esque-pipeline.html#2.-Implementing-the-Python-Functions">2. Implementing the Python Functions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="01-flnro-esque-pipeline.html#2.1-Querying-Data-Function">2.1 Querying Data Function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="01-flnro-esque-pipeline.html#2.2-Thresholding-and-Creating-Mosaic-Function">2.2 Thresholding and Creating Mosaic Function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="01-flnro-esque-pipeline.html#2.3-Computing-Average-NDSI-Function">2.3 Computing Average NDSI Function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="01-flnro-esque-pipeline.html#2.4-Plotting-the-Final-NDSI-Function">2.4 Plotting the Final NDSI Function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="01-flnro-esque-pipeline.html#2.5-Delete-Files-Function">2.5 Delete Files Function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html#1.-Connect-to-Kubeflow-Client">1. Connect to Kubeflow Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html#2.-Implementing-the-Python-Functions">2. Implementing the Python Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="01-daily-ndsi-pipeline.html#2.1-Querying-Data-Function">2.1 Querying Data Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01-daily-ndsi-pipeline.html#2.2-Thresholding-and-Creating-Mosaic-Function">2.2 Thresholding and Creating Mosaic Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01-daily-ndsi-pipeline.html#2.3-Computing-Average-NDSI-Function">2.3 Computing Average NDSI Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01-daily-ndsi-pipeline.html#2.4-Plotting-the-Final-NDSI-Function">2.4 Plotting the Final NDSI Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01-daily-ndsi-pipeline.html#2.5-Delete-Files-Function">2.5 Delete Files Function</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="01-flnro-esque-pipeline.html#3.-Assembling-the-Pipeline">3. Assembling the Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01-flnro-esque-pipeline.html#4.-The-Results">4. The Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01-flnro-esque-pipeline.html#5.-Additional-Sources">5. Additional Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html#3.-Assembling-the-Pipeline">3. Assembling the Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html#4.-The-Results">4. The Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html#5.-Additional-Sources">5. Additional Sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02-knn.html">KNN Land Classification with Dask [40 hours]</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="02-knn.html#K-Means-Land-Classification-with-Dask-(WIP!!)">K-Means Land Classification with Dask (WIP!!)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02-knn.html#1.-Initialize-Dask-Cluster">1. Initialize Dask Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-knn.html#Query-using-the-SentinelSat-API">Query using the SentinelSat API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-knn.html#2.-Functions">2. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-knn.html#2.-Loading,-Masking,-and-Creating-Mosaics">2. Loading, Masking, and Creating Mosaics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-composite.html">Compositing Rasters with Dask</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03-composite.html#AOI">AOI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-composite.html#Set-Up-STAC-Client">Set Up STAC Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-composite.html#Configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03-composite.html#Main-Loop">Main Loop</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03-composite.html#Shut-Dask-Cluster-Down">Shut Dask Cluster Down</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-composite.html#Remove-Intermediate-Files">Remove Intermediate Files</a></li>
 </ul>
 </li>
 </ul>
@@ -252,7 +278,7 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="01-flnro-esque-pipeline.html">
+          <a class="next-page" href="01-daily-ndsi-pipeline.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
