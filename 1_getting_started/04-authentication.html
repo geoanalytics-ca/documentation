@@ -492,9 +492,9 @@ div.rendered_html tbody tr:hover {
 <h2>1. Levels of Authentication<a class="headerlink" href="#1.-Levels-of-Authentication" title="Permalink to this headline">#</a></h2>
 <p>All software systems implemented in the GEOAnalytics Canada Platform require users to be authenticated before access is given. The GEOAnalytics platform uses LDAP (Lightweight Directory Access Protocol) to store user information and allow users to authenticate and log into the platform. Hatfield has also implemented a single sign-on (SSO) system based on the industry-standard OAuth 2 protocol, where you, the user, only needs to login to the platform once to gain access of all platform functions.
 Using this SSO system, an API token is given when you first login and is validated by platform services when accessed by you.</p>
-<p>All users need to login through the single-sign-on system with their <strong>username</strong> and <strong>password</strong> to access platform systems and data. <img alt="10bff39b662c4dfd8f93399ff397daa9" src="../_images/03_login.png" /></p>
+<p>All users need to login through the single-sign-on system with their <strong>username</strong> and <strong>password</strong> to access platform systems and data. <img alt="19752a69d8e744d5a3e4c11a5aedf246" src="../_images/03_login.png" /></p>
 <p>Once you have logged in, you will be led to the GEOAnalytics Platform’s main dashboard.</p>
-<p><img alt="bd6ff864632b476fa2360e9252b957fe" src="../_images/03_platform.png" /></p>
+<p><img alt="d1a2e5b1e59b402c86fde2472d82ce80" src="../_images/03_platform.png" /></p>
 <p>From the image above, take note of the <strong>“API Access Token”</strong> in the top right corner and the bottom of the dashboard. This API token is another authentication method to access parts of the GEOAnalytics API. The token is primarily used by pasting the token into certain scripts for access to the platform’s tools.</p>
 </section>
 <section id="2.-Systems-Accessible-with-Username-and-Password">
@@ -616,17 +616,17 @@ requests_headers = {&#39;cookie&#39;: API_TOKEN}
 </ol>
 <p>If you get a “Success!” message, then you have gained access!</p>
 <p>However, if you receive the error: “Error response from daemon: Get <a class="reference external" href="https://registry.geoanalytics.ca/v2/">https://registry.geoanalytics.ca/v2/</a>: unauthorized: HTTP Basic: Access denied,” then we have a few more steps to get you connected!</p>
-<p><img alt="b4543c7752894ef6a5e9ed892bf5e371" class="no-scaled-link" src="../_images/03_docker-error.png" style="width: 900px;" /></p>
+<p><img alt="2f2c4221f424418d95fedc8dd5dd6c95" class="no-scaled-link" src="../_images/03_docker-error.png" style="width: 900px;" /></p>
 </section>
 <section id="4.3-Alternate-Login-Method">
 <h3>4.3 Alternate Login Method<a class="headerlink" href="#4.3-Alternate-Login-Method" title="Permalink to this headline">#</a></h3>
 <p>Some accounts run into errors while attempting to connect to their docker registry, you have the same error as shown above, these are the steps to get access:</p>
 <p><strong>First we must create a personal access token (PAT) on gitlab. Navigate to https://git.geoanalytics.ca</strong></p>
 <ol class="arabic simple">
-<li><p>Select “Settings” from the drop down menu in the top right corner. <img alt="68ee838e4b704065a650b05786f94453" src="../_images/03_git-settings.gif" /></p></li>
-<li><p>In the left sidebar, click on “Access Tokens”. <img alt="73e6639bd4b34baeae91c7740b68cde9" src="../_images/03_git-access-tokens.gif" /></p></li>
-<li><p>Now, assign a <strong>name</strong> and an <strong>expiry date</strong> (can be set to any date in the future when you want the token to expire), and check on <strong>“api”</strong>. <img alt="4ed01fdabb744c3da57360c371a0e521" src="../_images/03_creating_token.gif" /></p></li>
-<li><p>Once created, this personal access token is <strong>only available once, when it is created</strong>. <strong>NOTE: Store this PAT in a secure location because you will not be able to access the same code again!</strong> <img alt="04c4657ad2f84cd8801ba7576a6aa1e4" src="../_images/03_copy_token.gif" /></p></li>
+<li><p>Select “Settings” from the drop down menu in the top right corner. <img alt="b908890635d0469284f68f0484471dc1" src="../_images/03_git-settings.gif" /></p></li>
+<li><p>In the left sidebar, click on “Access Tokens”. <img alt="c5211d0103624dc488f606d6ca72e77c" src="../_images/03_git-access-tokens.gif" /></p></li>
+<li><p>Now, assign a <strong>name</strong> and an <strong>expiry date</strong> (can be set to any date in the future when you want the token to expire), and check on <strong>“api”</strong>. <img alt="51611e95681842a2b9ed6e61ba44bfc2" src="../_images/03_creating_token.gif" /></p></li>
+<li><p>Once created, this personal access token is <strong>only available once, when it is created</strong>. <strong>NOTE: Store this PAT in a secure location because you will not be able to access the same code again!</strong> <img alt="7537b57f0a204681a9d1fb575b5182e8" src="../_images/03_copy_token.gif" /></p></li>
 </ol>
 <p><strong>Next, with this personal access token created, run the following command in terminal, inputting in your username and the PAT in place.</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">-u</span> <span class="pre">&lt;username&gt;</span> <span class="pre">-p</span> <span class="pre">&lt;personal</span> <span class="pre">access</span> <span class="pre">token&gt;</span> <span class="pre">registry.geoanalytics.ca</span></code></p>
