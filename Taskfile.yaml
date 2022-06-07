@@ -1,0 +1,17 @@
+version: '3'
+
+output: prefixed
+
+tasks:
+  default:
+    prefix: "📕 >"
+    desc: "default task"
+    cmds:
+      - echo "HelloWorld" 
+
+  build:
+    prefix: "📕 > build"
+    dir: docs
+    desc: Build the Sphinx documentation
+    cmds:
+      - sphinx-build . ../_build
