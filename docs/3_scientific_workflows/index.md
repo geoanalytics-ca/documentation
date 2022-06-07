@@ -1,6 +1,6 @@
 (scientific_workflows_index)=
 # Scientific Workflows
-Here we present workflows from start to finish that you would typically see in a real-world situations when using GEOAnalytics Canada.  
+This section includes start-to-finish workflows that you would typically see in a real-world situations when using GEOAnalytics Canada.  
 
 
 ```{toctree}

@@ -21,7 +21,7 @@ Motivation
 -----------
 Research on climate-change, ecosystem modeling, and environmental and natural resources monitoring is based on the collection, management, analysis, and dissemination of geospatial data.
 
-Satellite Earth observation (EO) has been transformed by the massive increase in availability of open EO data, which began in 2008 with the opening of the Landsat data archive by the United States. It was given further impetus by the European Commission in making data from the Copernicus series of radar and optical satellites fully free and open since 2014.
+Satellite Earth Observation (EO) has been transformed by the massive increase in availability of open EO data, which began in 2008 with the opening of the Landsat data archive by the United States. It was given further impetus by the European Commission in making data from the Copernicus series of radar and optical satellites fully free and open since 2014.
 
 On one hand, the increased availability of EO data makes it easier for scientists, businesses, and government decision makers to obtain insights from long, dense time series of multiple EO datasets. However, users cannot find, access, and use this wealth of EO data to its potential by following traditional approaches to download data and analyze it in a local computing environment.
 
@@ -29,12 +29,12 @@ As the volume of satellite EO data continues to grow, new analytical possibiliti
 
 ***The solution is to bring the user to the data.***
 
-To demonstrate how cloud computing systems can overcome issues with traditional approaches to satellite EO data analytics, `Hatfield <https://www.hatfieldgroup.com>`_ created the GEO Analytics Canada Platform. This provides data, tools, and compute resources in the same environment and enables users to gain experience and understand the benefits of working in the cloud.
+To demonstrate how cloud computing systems can overcome issues with traditional approaches to satellite EO data analytics, `Hatfield <https://www.hatfieldgroup.com>`_ created the GEOAnalytics Canada Platform. This provides data, tools, and compute resources in the same environment and enables users to gain experience and understand the benefits of working in the cloud.
 
 
 Overview of our Documentation
 ===============================
-The GEOAnalytics Canada documentation is organized into sections consisting of all tutorials and guides, from getting started with the platform, to step-by-step workflow examples. Click the card below that's most relevant to your needs! 
+The GEOAnalytics Canada documentation is organized into sections consisting of all tutorials and guides, from getting started with the platform, to step-by-step workflow examples. Click the card below that's most relevant to your needs!
 
 .. _cards-clickable:
 
