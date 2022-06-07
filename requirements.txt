@@ -2,6 +2,6 @@ nbsphinx
 sphinx-inline-tabs
 sphinx-design
 myst-parser
-# sphinxcontrib-spelling
+sphinxcontrib-spelling
 furo
 MarkupSafe

@@ -35,7 +35,7 @@ needs_sphinx = '3.0'
 extensions = [
     "nbsphinx",
     "sphinx_inline_tabs",
-    # "sphinxcontrib.spelling",
+    "sphinxcontrib.spelling",
     "sphinx_design",
     "myst_parser",
 ]
