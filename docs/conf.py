@@ -40,6 +40,13 @@ extensions = [
     "myst_parser",
 ]
 
+exclude_patterns = ['_build', '**.ipynb_checkpoints']
+
+nbsphinx_execute_arguments = [
+    "--InlineBackend.figure_formats={'svg', 'pdf'}",
+    "--InlineBackend.rc={'figure.dpi': 96}",
+]
+
 myst_enable_extensions = ["colon_fence"]
 
 # Add any paths that contain templates here, relative to this directory.

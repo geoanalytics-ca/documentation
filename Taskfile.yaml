@@ -19,8 +19,7 @@ tasks:
 
   build:
     prefix: "📕 > build"
-    dir: docs
     desc: Build the Sphinx documentation
     cmds:
-      - rm -rf ../_build
-      - sphinx-build . ../_build
+      - rm -rf _build
+      - sphinx-build docs _build
