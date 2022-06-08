@@ -10,6 +10,7 @@ It's an index page for all the introduction notebooks.
 03-jupyter-notebooks
 04-authentication
 05-desktop-vm
+05a-ssh-keys
 05b-remote-connect-vscode
 06-file-browser
 07-stac
