@@ -4,9 +4,4 @@
 
 2. To build, run the following command in terminal: `python -m sphinx . _build/`
 
-
-
-*Theme based on Material for Sphinx: https://bashtage.github.io/sphinx-material/#*
-
-
-***Copyright 2021, Hatfield Consultants.***
+***Copyright 2022, Hatfield Consultants.***
