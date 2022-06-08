@@ -5,6 +5,6 @@ This section includes start-to-finish workflows that you would typically see in 
 
 ```{toctree}
 01-daily-ndsi-pipeline
-02-knn
+02-kmeans-dask
 03-composite
 ```
