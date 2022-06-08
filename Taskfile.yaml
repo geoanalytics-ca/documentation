@@ -9,6 +9,14 @@ tasks:
     cmds:
       - echo "HelloWorld" 
 
+  setup-env:
+    prefix: 🐍 > setup-env
+    desc: Set up Conda Environment and install dependencies
+    cmds:
+      - conda create -y -n sphinx -f environment.yaml python=3.9
+      - conda activate sphinx
+      - pip3 install -r requirements.txt
+
   build:
     prefix: "📕 > build"
     dir: docs
