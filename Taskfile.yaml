@@ -22,4 +22,5 @@ tasks:
     dir: docs
     desc: Build the Sphinx documentation
     cmds:
+      - rm -rf ../_build
       - sphinx-build . ../_build
