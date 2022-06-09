@@ -30,7 +30,7 @@ release = '2022'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-needs_sphinx = '3.0'
+needs_sphinx = '4.0'
 
 extensions = [
     "nbsphinx",
@@ -38,6 +38,14 @@ extensions = [
     "sphinxcontrib.spelling",
     "sphinx_design",
     "myst_parser",
+    'IPython.sphinxext.ipython_console_highlighting'
+]
+
+exclude_patterns = ['_build', '**.ipynb_checkpoints']
+
+nbsphinx_execute_arguments = [
+    "--InlineBackend.figure_formats={'svg', 'pdf'}",
+    "--InlineBackend.rc={'figure.dpi': 96}",
 ]
 
 myst_enable_extensions = ["colon_fence"]
