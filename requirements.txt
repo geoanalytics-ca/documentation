@@ -1,8 +1,8 @@
-nbsphinx
-sphinx-inline-tabs
-sphinx-design
-myst-parser
-sphinxcontrib-spelling
-furo
-MarkupSafe
-ipython
+nbsphinx==0.8.0
+sphinx-inline-tabs==2022.1.2b11
+sphinx-design==0.1.0
+myst-parser==0.17.2
+sphinxcontrib-spelling==7.5.0
+furo==2022.4.7
+MarkupSafe==2.0.1
+ipython==8.4.0
