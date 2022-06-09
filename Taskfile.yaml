@@ -9,6 +9,18 @@ tasks:
     cmds:
       - echo "HelloWorld" 
 
+  pandoc-mac:
+    prefix: 🐼 > pandoc
+    desc: Install pandoc on MacOS
+    cmds:
+      - brew install pandoc
+
+  pandoc-win:
+    prefix: 🐼 > pandoc
+    desc: Install Pandoc on Windows
+    cmds:
+      - choco install pandoc
+
   setup-env:
     prefix: 🐍 > setup-env
     desc: Set up Conda Environment and install dependencies
@@ -22,4 +34,10 @@ tasks:
     desc: Build the Sphinx documentation
     cmds:
       - rm -rf _build
+      - sphinx-build docs _build
+
+  build-win:
+    prefix: "📕 > build"
+    desc: Build the Sphinx documentation
+    cmds:
       - sphinx-build docs _build
