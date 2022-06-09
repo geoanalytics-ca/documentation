@@ -2,7 +2,7 @@
    sphinx-quickstart on Thu Sep  9 11:34:15 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
-.. _welcome:
+.. _home:
 
 Welcome to GEOAnalytics Canada Documentation!
 =============================================
@@ -73,14 +73,11 @@ Navigate directly to any of our pages using the Table of Contents or the Search 
 on the left sidebar.
 
 .. toctree::
-   :hidden:
-
-   Welcome <self>
-
-.. toctree::
-   :maxdepth: 5
    :caption: Contents:
+   :hidden:
+   :maxdepth: 0
 
+   Introduction <self>
    1_getting_started/index
    2_real_world_examples/index
    3_scientific_workflows/index
