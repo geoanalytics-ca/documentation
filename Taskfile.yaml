@@ -42,3 +42,9 @@ tasks:
     desc: Build the Sphinx documentation
     cmds:
       - sphinx-build docs _build
+
+  test-pep:
+    prefix: 🧐 > flake8-nb
+    desc: Run flake8-nb over all the notebooks
+    cmds:
+      - flake8-nb docs
