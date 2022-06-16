@@ -16,7 +16,7 @@ jobs:
     #   uses: dawidd6/action-delete-branch@v3
     #   with:
     #     github_token: ${{github.token}}
-        branches: gh-pages-dev
+        # branches: gh-pages-dev
     - uses: actions/setup-python@v2
     - uses: actions/checkout@v2
       with:
