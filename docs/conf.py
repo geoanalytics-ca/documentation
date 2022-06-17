@@ -73,7 +73,7 @@ html_theme = 'furo'
 
 html_logo = "images/geoanalytics-icon.png"
 
-html_title = "GEOAnalytics Canada"
+html_title = "GeoAnalytics Canada"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
