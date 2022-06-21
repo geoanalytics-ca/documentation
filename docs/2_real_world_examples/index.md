@@ -9,5 +9,4 @@ This page will go through the single use-case examples. These examples will be u
 03-ndsi-with-dask
 04-ndmi-with-dask
 05-change-detection
-06-add-to-stac
 ```
