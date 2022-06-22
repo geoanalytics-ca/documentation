@@ -1,10 +1,11 @@
-(scientific_workflows_index)=
-# Scientific Workflows
+Scientific Workflows
+====================
+
 This section includes start-to-finish workflows that you would typically see in real-world situations when using GEOAnalytics Canada.  
 
+.. toctree::
+    :maxdepth: 1
 
-```{toctree}
-01-daily-ndsi-pipeline
-02-kmeans-dask
-03-composite
-```
+    01-daily-ndsi-pipeline
+    02-kmeans-dask
+    03-composite

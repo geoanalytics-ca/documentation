@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Daily NDSI Average Pipeline" href="01-daily-ndsi-pipeline.html" /><link rel="prev" title="&lt;no title&gt;" href="../2_real_world_examples/06-add-to-stac.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
         <title>Scientific Workflows - GeoAnalytics Canada</title>
@@ -159,37 +159,7 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../1_getting_started/index.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/01-python-intro.html"><strong>Introduction to Python</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/04-authentication.html"><strong>Authentication</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05a-ssh-keys.html">Set Up SSH Keys</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/06-file-browser.html"><strong>File Browser</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/08-gitlab.html"><strong>GitLab</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/09-pipelines.html"><strong>Pipelines</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/10-dask.html"><strong>Dask</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/01-accessing-data.html"><strong>Accessing and Downloading Data</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/02-ndvi-with-dask.html"><strong>NDVI With Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html"><strong>NDSI With Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/04-ndmi-with-dask.html"><strong>NDMI With Dask</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Scientific Workflows</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-composite.html">Compositing Rasters with Dask</a></li>
-</ul>
-</li>
-</ul>
-
+  
 </div>
 </div>
 
@@ -221,34 +191,13 @@
         </div>
         <article role="main">
           <section id="scientific-workflows">
-<span id="scientific-workflows-index"></span><h1>Scientific Workflows<a class="headerlink" href="#scientific-workflows" title="Permalink to this headline">#</a></h1>
+<h1>Scientific Workflows<a class="headerlink" href="#scientific-workflows" title="Permalink to this headline">#</a></h1>
 <p>This section includes start-to-finish workflows that you would typically see in real-world situations when using GEOAnalytics Canada.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html#1.-Connect-to-Kubeflow-Client">1. Connect to Kubeflow Client</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html#2.-Implementing-the-Python-Functions">2. Implementing the Python Functions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="01-daily-ndsi-pipeline.html#2.1-Querying-Data-Function">2.1 Querying Data Function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="01-daily-ndsi-pipeline.html#2.2-Thresholding-and-Creating-Mosaic-Function">2.2 Thresholding and Creating Mosaic Function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="01-daily-ndsi-pipeline.html#2.3-Computing-Average-NDSI-Function">2.3 Computing Average NDSI Function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="01-daily-ndsi-pipeline.html#2.4-Plotting-the-Final-NDSI-Function">2.4 Plotting the Final NDSI Function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="01-daily-ndsi-pipeline.html#2.5-Delete-Files-Function">2.5 Delete Files Function</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html#3.-Assembling-the-Pipeline">3. Assembling the Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html#4.-The-Results">4. The Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html#5.-Additional-Sources">5. Additional Sources</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="03-composite.html">Compositing Rasters with Dask</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="03-composite.html#AOI">AOI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-composite.html#Set-Up-STAC-Client">Set Up STAC Client</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-composite.html#Configuration">Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-composite.html#Main-Loop">Main Loop</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-composite.html#Shut-Dask-Cluster-Down">Shut Dask Cluster Down</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-composite.html#Remove-Intermediate-Files">Remove Intermediate Files</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-kmeans-dask.html">K-Means Land Classification with Dask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-composite.html">Compositing Rasters with Dask</a></li>
 </ul>
 </div>
 </section>
@@ -258,26 +207,8 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="01-daily-ndsi-pipeline.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title"><strong>Daily NDSI Average Pipeline</strong></div>
-              </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="../2_real_world_examples/06-add-to-stac.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">&lt;no title&gt;</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
