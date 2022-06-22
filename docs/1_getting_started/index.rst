@@ -6,8 +6,12 @@ This page we'll go through the first steps of orienting you to the key parts of 
 
 .. toctree::
     :maxdepth: 1
+<<<<<<< HEAD
     
     00-how-to-use-this-documentation
+=======
+        
+>>>>>>> dev
     01-python-intro
     02-geospatial-python
     04-authentication
