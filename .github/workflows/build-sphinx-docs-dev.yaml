@@ -1,0 +1,36 @@
+name: Pages-Dev
+on: 
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches: 
+      - dev
+    types: 
+      - closed
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    # - name: Delete branch
+    #   uses: dawidd6/action-delete-branch@v3
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }} #${{github.token}}
+    #     branches: gh-pages-dev
+    - uses: actions/setup-python@v2
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    - name: Install dependencies
+      run: |
+        sudo apt install pandoc
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Build and Commit
+      uses: sphinx-notes/pages@v2
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
+        branch: gh-pages-dev

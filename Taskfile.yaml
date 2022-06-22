@@ -1,0 +1,50 @@
+version: '3'
+
+output: prefixed
+
+tasks:
+  default:
+    prefix: "📕 >"
+    desc: "default task"
+    cmds:
+      - echo "HelloWorld" 
+
+  pandoc-mac:
+    prefix: 🐼 > pandoc
+    desc: Install pandoc on MacOS
+    cmds:
+      - brew install pandoc
+
+  pandoc-win:
+    prefix: 🐼 > pandoc
+    desc: Install Pandoc on Windows
+    cmds:
+      - choco install pandoc
+
+  setup-env:
+    prefix: 🐍 > setup-env
+    desc: Set up Conda Environment and install dependencies
+    cmds:
+      - conda create -y -n sphinx python=3.9
+      - conda activate sphinx
+      - conda install --file conda-requirements.txt
+      - pip3 install -r requirements.txt
+
+  build:
+    prefix: "📕 > build"
+    desc: Build the Sphinx documentation
+    cmds:
+      - rm -rf _build
+      - sphinx-build docs _build
+
+  build-win:
+    prefix: "📕 > build"
+    desc: Build the Sphinx documentation
+    cmds:
+      - sphinx-build docs _build
+
+  test-pep:
+    prefix: 🧐 > flake8-nb
+    desc: Run flake8-nb over all the notebooks
+    cmds:
+      - flake8-nb docs
