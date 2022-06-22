@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Working with Earth Observation data in Python" href="02-geospatial-python.html" /><link rel="prev" title="Getting Started" href="index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Working with Earth Observation data in Python" href="02-geospatial-python.html" /><link rel="prev" title="How to use this documentation" href="00-how-to-use-this-documentation.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
         <title>Introduction to Python - GeoAnalytics Canada</title>
@@ -163,6 +163,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00-how-to-use-this-documentation.html">How to use this documentation</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>Introduction to Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-authentication.html"><strong>Authentication</strong></a></li>
@@ -171,6 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="05a-ssh-keys.html">Set Up SSH Keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-file-browser.html"><strong>File Browser</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="08-gitlab.html"><strong>GitLab</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="09-pipelines.html"><strong>Pipelines</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
@@ -1176,7 +1178,7 @@ Here are the temperatures in Celsuis:
 <p>A generator function contains: - one or more <code class="docutils literal notranslate"><span class="pre">yield</span></code> statements (similar to <code class="docutils literal notranslate"><span class="pre">return</span></code> statement, but it pauses the function instead of completely terminating it.) - Returns an iterator but doesn’t start executing immediately at call. - ‘StopIteration’ occurs automatically when the function terminates on future calls.</p>
 <p>Generators are easy to implement, very efficient for memory, and great for representing infinite data streams.</p>
 <p>Here’s a diagram depicting the difference between Normal Python functions, and Generator function.</p>
-<p><img alt="eed4247bec19453281e6093cd96ecdb9" src="../_images/01_normal-vs-generator.png"/></p>
+<p><img alt="0e5f22c3d4a24f5db7d8e0ddf9a4e917" src="../_images/01_normal-vs-generator.png"/></p>
 <p>(Source: <a class="reference external" href="https://codeburst.io/understanding-generators-in-es6-javascript-with-examples-6728834016d5">https://codeburst.io/understanding-generators-in-es6-javascript-with-examples-6728834016d5</a>)</p>
 <p>Let’s create a generator function to calculate the squares of numbers from a list, and iterate through the items by using <code class="docutils literal notranslate"><span class="pre">next()</span></code>.</p>
 <div class="nbinput nblast docutils container">
@@ -2568,14 +2570,14 @@ dtype: object
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="index.html">
+          <a class="prev-page" href="00-how-to-use-this-documentation.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Getting Started</div>
+                <div class="title">How to use this documentation</div>
                 
               </div>
             </a>

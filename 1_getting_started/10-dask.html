@@ -163,6 +163,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00-how-to-use-this-documentation.html">How to use this documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-python-intro.html"><strong>Introduction to Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-authentication.html"><strong>Authentication</strong></a></li>
@@ -171,6 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="05a-ssh-keys.html">Set Up SSH Keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-file-browser.html"><strong>File Browser</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="08-gitlab.html"><strong>GitLab</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="09-pipelines.html"><strong>Pipelines</strong></a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>Dask</strong></a></li>
@@ -476,7 +478,7 @@ div.rendered_html tbody tr:hover {
 <p><strong>Why should we scale?</strong> Computations are much faster when data can be held in local memory. Most computers do not have massive memory storages to store big data, those that do are extremely expensive. An easier and cost effective method is to use the pool of memory from a collections of systems to store large datasets.</p>
 <p><strong>Dask Gateway</strong> The GeoAnalytics Canada Platform uses Dask Gateway to provide our users a secure multi-tenant server for managing Dask clusters. Our administrators manage the backend configuration of the clusters, so user’s can connect to the Dask Gateway without hassle.</p>
 <p>Here’s a diagram representing the Dask architecture, which consists of the Dask Clusters, a proxy for connecting the user’s client with the scheduler, and the main Gateway for authentication and cluster management.</p>
-<p><img alt="10c1bb6c974d4ad38a7ae29aaaa4d70a" src="../_images/02_dask-architecture.png"/></p>
+<p><img alt="0294c4897c3d4515b3445f68ec5f7c55" src="../_images/02_dask-architecture.png"/></p>
 <section id="1.0-Connecting-to-Dask-Gateway">
 <h2>1.0 Connecting to Dask-Gateway<a class="headerlink" href="#1.0-Connecting-to-Dask-Gateway" title="Permalink to this headline">#</a></h2>
 <p>To connect to the Dask Gateway server through Jupyterhub, a session must be activated by creating a Gateway client.</p>

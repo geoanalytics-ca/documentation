@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Pipelines" href="09-pipelines.html" /><link rel="prev" title="&lt;no title&gt;" href="07-stac.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Pipelines" href="09-pipelines.html" /><link rel="prev" title="SpatioTemporal Asset Catalog (STAC)" href="07-stac.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
         <title>GitLab - GeoAnalytics Canada</title>
@@ -163,6 +163,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00-how-to-use-this-documentation.html">How to use this documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-python-intro.html"><strong>Introduction to Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-authentication.html"><strong>Authentication</strong></a></li>
@@ -171,6 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="05a-ssh-keys.html">Set Up SSH Keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-file-browser.html"><strong>File Browser</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>GitLab</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="09-pipelines.html"><strong>Pipelines</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
@@ -236,7 +238,7 @@
 <li><p>Finally, click the “Create project”.</p></li>
 </ol>
 <p>Below is a visualization of these steps.</p>
-<p><img alt="431e4ecfd5964534bf5d4ad9f6cf7d44" src="../_images/07_create-project.gif"/></p>
+<p><img alt="527bbce3aa31411190ac0690f72b44c8" src="../_images/07_create-project.gif"/></p>
 </section>
 <section id="2.-Set-up-the-Project-using-Git-Commands">
 <h2>2. Set up the Project using Git Commands<a class="headerlink" href="#2.-Set-up-the-Project-using-Git-Commands" title="Permalink to this headline">#</a></h2>
@@ -259,9 +261,9 @@ local machine. Replace the <code class="docutils literal notranslate"><span clas
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">master</span></code> : Send changes to the master branch of your remote repository.</p></li>
 </ol>
 <p>Here is a screenshot showing all the steps done within the Jupyterhub terminal.</p>
-<p><img alt="13057cc41f0046e9a1da1b9e20ad65aa" src="../_images/07_git-cmd.png"/></p>
+<p><img alt="2f2817e52e5f48f3a66c2553ded90a48" src="../_images/07_git-cmd.png"/></p>
 <p>Head back to your Repository on GitLab and refresh the page. You should see the README.md added within your project repository!</p>
-<p><img alt="11e3218aee374391bc598415230d3fd0" src="../_images/07_readme-added.png"/></p>
+<p><img alt="4a32e455a5f7411390a4ecdb03a112e3" src="../_images/07_readme-added.png"/></p>
 <p>This was only to set up a new project, if you have an existing folder you would like to link to your GitLab repository, then it can be done by:</p>
 <ul class="simple">
 <li><p>Changing into the existing folder: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">&lt;existing_folder&gt;</span></code></p></li>
@@ -283,7 +285,7 @@ local machine. Replace the <code class="docutils literal notranslate"><span clas
 <ol class="arabic simple" start="2">
 <li><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">hello-world</span></code></p></li>
 </ol>
-<p><img alt="be2d369bc7e74becac8b05c1a279402a" src="../_images/07_docker-gitlab1.png"/></p>
+<p><img alt="3603ad12e72f406f9dea2be72b700de4" src="../_images/07_docker-gitlab1.png"/></p>
 <p>Now, we want to add the “hello-world” image to the container registry. To achieve that, we must rename the image from “hello-world” to the location of our container registry, using the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">tag</span> <span class="pre">&lt;source-img-name&gt;</span> <span class="pre">&lt;target-img-name&gt;</span></code> command. The target image name is the registry location because we want to push the image to a private registry and not the central Docker registry.</p>
 <ol class="arabic simple" start="3">
 <li><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">tag</span> <span class="pre">hello-world</span> <span class="pre">registry.geoanalytics.ca/&lt;username&gt;/test-docker</span></code> : Replace <code class="docutils literal notranslate"><span class="pre">&lt;username&gt;</span></code> with your GEOAnalytics GitLab username.</p></li>
@@ -292,13 +294,13 @@ local machine. Replace the <code class="docutils literal notranslate"><span clas
 <ol class="arabic simple" start="4">
 <li><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">registry.geoanalytics.ca/&lt;username&gt;/test-docker</span></code></p></li>
 </ol>
-<p>Here is a snapshot of the two commands being executed in terminal: <img alt="dc5481b007e945079b3915fa2c8a0034" src="../_images/07_docker-gitlab2.png"/></p>
+<p>Here is a snapshot of the two commands being executed in terminal: <img alt="08115d4fac554bacb43e86abe30ff42e" src="../_images/07_docker-gitlab2.png"/></p>
 <p>The final step is to <strong>push</strong> the local Docker image to our test-docker repository. This is done by executing the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">push</span> <span class="pre">&lt;img-name&gt;</span></code> below:</p>
 <ol class="arabic simple" start="5">
 <li><p><strong>``docker push registry.geoanalytics.ca/&lt;username&gt;/test-docker``</strong> (Remember to use <em>your</em> username.)</p></li>
 </ol>
 <p>Now head over to your Gitlab page and click on <code class="docutils literal notranslate"><span class="pre">Packages</span> <span class="pre">&gt;</span> <span class="pre">Container</span> <span class="pre">Registry</span></code> from the left sidebar. You will see the Docker image you just pushed added to the repository’s container registry!</p>
-<p><img alt="f47278c087a144c4a6a7ee1607c8d556" src="../_images/07_container-registry.gif"/></p>
+<p><img alt="b9cf8da84cba46f19b5933e5088c71f6" src="../_images/07_container-registry.gif"/></p>
 <p>These were a just a few Docker commands we explored, to learn all the docker commands available, take a look at the Docker documentation and a sample Docker workflow:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.docker.com/engine/reference/run/">https://docs.docker.com/engine/reference/run/</a></p></li>
@@ -329,7 +331,7 @@ local machine. Replace the <code class="docutils literal notranslate"><span clas
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">&lt;no title&gt;</div>
+                <div class="title"><strong>SpatioTemporal Asset Catalog (STAC)</strong></div>
                 
               </div>
             </a>

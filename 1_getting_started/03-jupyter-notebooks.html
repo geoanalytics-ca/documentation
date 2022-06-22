@@ -163,6 +163,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00-how-to-use-this-documentation.html">How to use this documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01-python-intro.html"><strong>Introduction to Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-authentication.html"><strong>Authentication</strong></a></li>
@@ -171,6 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="05a-ssh-keys.html">Set Up SSH Keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-file-browser.html"><strong>File Browser</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="08-gitlab.html"><strong>GitLab</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="09-pipelines.html"><strong>Pipelines</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
@@ -485,7 +487,7 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>Using these core packages, especially Xarray and Dask, scalable big data analytics can be executed on satellite EO data. Our JupyterLab is configured to allow direct access to scalable processing power and all EO and ground-truth datasets.</p>
 <p>To get started with your project, select the <strong>Jupyter</strong> tool from the main page on your GEOAnalytics Canada platform. This will lead you to your JupyterHub interface.</p>
-<p><img alt="1ead1604015341688e30f807735d08c4" src="../_images/02_launching-jupyterlab.gif"/></p>
+<p><img alt="c7b3eb91a13d440292556bd4fe2748aa" src="../_images/02_launching-jupyterlab.gif"/></p>
 <p><strong>The main workspace consists of:</strong></p>
 <ul class="simple">
 <li><p>the launcher tab at start-up where you can work with Jupyter notebooks, Jupyter consoles, terminal, and text or markdown files</p></li>
@@ -502,19 +504,19 @@ div.rendered_html tbody tr:hover {
 <li><p>the tabs list</p></li>
 <li><p>the extension manager.</p></li>
 </ul>
-<p><img alt="2c11a261176d4d05b785bf4a929e10df" src="../_images/02_jupyter-platform.png"/></p>
+<p><img alt="673c9eee23e24774bfc4f9b787fe7858" src="../_images/02_jupyter-platform.png"/></p>
 <section id="1.1-Launching-New-Notebooks">
 <h3>1.1 Launching New Notebooks<a class="headerlink" href="#1.1-Launching-New-Notebooks" title="Permalink to this headline">#</a></h3>
 <p>Within the Launcher tab, there are two environments to choose from. The <em>Python 3</em> environment and the <em>Python [conda env:notebook]</em> are both the same environments. These environments are created specifically for EO analysis, with essential packages already installed.</p>
 <p>Let’s create a notebook with either the <em>conda notebook environment</em> and begin writing some code!</p>
-<p><img alt="93a1101b4e6c4e049365988c4a9f8c16" src="../_images/02_launching-notebook.gif"/></p>
+<p><img alt="c06728bd9f334969841040b4df14f8b7" src="../_images/02_launching-notebook.gif"/></p>
 </section>
 <section id="1.2-Launching-Terminal">
 <h3>1.2 Launching Terminal<a class="headerlink" href="#1.2-Launching-Terminal" title="Permalink to this headline">#</a></h3>
 <p>To start a new terminal session, click the terminal in the Launcher tab. Terminal provides full support for all system shells on Mac, Linux, and Windows. Just like the shell on your local system, anything can be run with this server terminal.</p>
-<p><img alt="aa1d2047be92480db64024ccf74c0bf3" src="../_images/02_terminal.png"/></p>
+<p><img alt="4fc3ac3814c04d588f03825b36ec259e" src="../_images/02_terminal.png"/></p>
 <p>Closing a running terminal will not shut down the terminal, rather it will continue running in the background. In the “Running Terminals and Kernels” tab, you can reopen a closed terminal, or completely shut the terminal down.</p>
-<p><img alt="e83212339a9f4e02bbdbac47506c48fe" src="../_images/02_exiting-terminal.gif"/></p>
+<p><img alt="e312234765d14d6ea0e6bc03089d1df9" src="../_images/02_exiting-terminal.gif"/></p>
 <p><strong>NOTE: Sudo / Root access is not available from the Jupyterlab environment’s terminal.</strong></p>
 </section>
 </section>
