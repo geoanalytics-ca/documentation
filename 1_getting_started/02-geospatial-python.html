@@ -3,12 +3,12 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Authentication" href="04-authentication.html" /><link rel="prev" title="Getting Started" href="index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Authentication" href="04-authentication.html" /><link rel="prev" title="Introduction to Python" href="01-python-intro.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.06.04.1"/>
-        <title>Working with Earth Observation data in Python - GEOAnalytics Canada</title>
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+        <title>Working with Earth Observation data in Python - GeoAnalytics Canada</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">GEOAnalytics Canada</div></a>
+      <a href="../index.html"><div class="brand">GeoAnalytics Canada</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -151,7 +151,7 @@
     <img class="sidebar-logo" src="../_static/geoanalytics-icon.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GEOAnalytics Canada</span>
+  <span class="sidebar-brand-text">GeoAnalytics Canada</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -159,42 +159,33 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-python-intro.html"><strong>Introduction to Python</strong></a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>Working with Earth Observation data in Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-authentication.html"><strong>Authentication</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="05a-ssh-keys.html">Set Up SSH Keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-file-browser.html"><strong>File Browser</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="08-gitlab.html"><strong>GitLab</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="09-pipelines.html"><strong>Pipelines</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/01-accessing-data.html"><strong>Accessing and Downloading Data</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/02-ndvi-with-dask.html"><strong>NDVI With Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html">1. Initialize your Dask Gateway Clusters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html#2.-Getting-the-MODIS-Data">2. Getting the MODIS Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html#3.-Calculating-the-NDSI">3. Calculating the NDSI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html#4.-Visualizing-the-Results">4. Visualizing the Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/04-ndwi-with-dask.html"><strong>NDWI With Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/05-change-detection.html"><strong>Change Detection</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html"><strong>NDSI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/04-ndmi-with-dask.html"><strong>NDMI With Dask</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html">KNN Land Classification with Dask [40 hours]</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#1.-Initialize-Dask-Cluster">1. Initialize Dask Cluster</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#Query-using-the-SentinelSat-API">Query using the SentinelSat API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#2.-Functions">2. Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#2.-Loading,-Masking,-and-Creating-Mosaics">2. Loading, Masking, and Creating Mosaics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html">Compositing Rasters with Dask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html#Main-Loop">Main Loop</a></li>
 </ul>
 </li>
 </ul>
@@ -215,8 +206,7 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -440,12 +430,11 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt .copybtn {
+.prompt a.copybtn {
     display: none;
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
-.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -454,14 +443,10 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
-.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
-.jp-RenderedHTMLCommon tr,
-.jp-RenderedHTMLCommon th,
-.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -473,15 +458,12 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
-.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
-.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
-.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -499,17 +481,19 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># import the rasterio module, and the &quot;show&quot; function for plotting the maps
-import rasterio
-from rasterio.plot import show
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># import the rasterio module, and the "show" function for plotting the maps</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="kn">from</span> <span class="nn">rasterio.plot</span> <span class="kn">import</span> <span class="n">show</span>
 
-# Let&#39;s import all the bands we will be using for this section.
-band1 = &#39;https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/038/038/LC08_L1TP_038038_20200831_20200906_01_T1/LC08_L1TP_038038_20200831_20200906_01_T1_B1.TIF&#39;
+<span class="c1"># Let's import all the bands we will be using for this section.</span>
+<span class="n">band1</span> <span class="o">=</span> <span class="s1">'https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/038/038/LC08_L1TP_038038_20200831_20200906_01_T1/LC08_L1TP_038038_20200831_20200906_01_T1_B1.TIF'</span>
 
-band2 = &#39;https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/038/038/LC08_L1TP_038038_20200831_20200906_01_T1/LC08_L1TP_038038_20200831_20200906_01_T1_B2.TIF&#39;
-band3 = &#39;https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/038/038/LC08_L1TP_038038_20200831_20200906_01_T1/LC08_L1TP_038038_20200831_20200906_01_T1_B3.TIF&#39;
-band4 = &#39;https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/038/038/LC08_L1TP_038038_20200831_20200906_01_T1/LC08_L1TP_038038_20200831_20200906_01_T1_B4.TIF&#39;
-<br/></pre></div>
+<span class="n">band2</span> <span class="o">=</span> <span class="s1">'https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/038/038/LC08_L1TP_038038_20200831_20200906_01_T1/LC08_L1TP_038038_20200831_20200906_01_T1_B2.TIF'</span>
+<span class="n">band3</span> <span class="o">=</span> <span class="s1">'https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/038/038/LC08_L1TP_038038_20200831_20200906_01_T1/LC08_L1TP_038038_20200831_20200906_01_T1_B3.TIF'</span>
+<span class="n">band4</span> <span class="o">=</span> <span class="s1">'https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/038/038/LC08_L1TP_038038_20200831_20200906_01_T1/LC08_L1TP_038038_20200831_20200906_01_T1_B4.TIF'</span>
+
+</pre></div>
 </div>
 </div>
 <p><strong>What does the url mean? Let’s break it down:</strong> - <code class="docutils literal notranslate"><span class="pre">https://storage.googleapis.com/</span></code> means the image is collected from Google’s cloud storage. - <code class="docutils literal notranslate"><span class="pre">gcp-public-data-landsat/</span></code> is the public folder containing sub-folders with all Landsat satellites. - <code class="docutils literal notranslate"><span class="pre">LC08/01/</span></code> is the folder for the Landsat 8 Collection 1. - <code class="docutils literal notranslate"><span class="pre">038/038/</span></code> means the images that cover the Landsat swath at path 38 and row 38, respectively. - <code class="docutils literal notranslate"><span class="pre">LC08_L1TP_038038_20200831_20200906_01_T1/</span></code> is the folder containing all the bands for
@@ -522,20 +506,21 @@ the image taken on August 31st, 2020.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with rasterio.open(band2) as src: # src is the dataset reader
-    ## Let&#39;s try and understand the image better.
-    print(f&#39;The raster is stored in a: {type(src.read(1))}&#39;)
-    print(f&#39;The data types: {src.read(1).dtype}&#39;)
-    print(f&#39;Image size is: {src.shape[0]} rows x {src.shape[1]} columns&#39;)
-    print(f&#39;The number of bands in the image: {src.count}&#39;)
-    print(f&#39;The projection: {src.crs}&#39;)
-    print(f&#39;The driver format: {src.driver}&#39;)
-    print(f&#39;The geographic transform of the image: \n{src.transform}\n&#39;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">band2</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span> <span class="c1"># src is the dataset reader</span>
+    <span class="c1">## Let's try and understand the image better.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'The raster is stored in a: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'The data types: </span><span class="si">{</span><span class="n">src</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Image size is: </span><span class="si">{</span><span class="n">src</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> rows x </span><span class="si">{</span><span class="n">src</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> columns'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'The number of bands in the image: </span><span class="si">{</span><span class="n">src</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'The projection: </span><span class="si">{</span><span class="n">src</span><span class="o">.</span><span class="n">crs</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'The driver format: </span><span class="si">{</span><span class="n">src</span><span class="o">.</span><span class="n">driver</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'The geographic transform of the image: </span><span class="se">\n</span><span class="si">{</span><span class="n">src</span><span class="o">.</span><span class="n">transform</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
 
-    # We can most of this data directly from the image&#39;s metadata.
-    print(&quot;Image metadata:&quot;)
-    metadata = src.meta
-    print(metadata) # shares the attributes of the image (the metadata)
+    <span class="c1"># We can most of this data directly from the image's metadata.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Image metadata:"</span><span class="p">)</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">meta</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span> <span class="c1"># shares the attributes of the image (the metadata)</span>
 </pre></div>
 </div>
 </div>
@@ -544,7 +529,7 @@ the image taken on August 31st, 2020.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-The raster is stored in a: &lt;class &#39;numpy.ndarray&#39;&gt;
+The raster is stored in a: &lt;class 'numpy.ndarray'&gt;
 The data types: uint16
 Image size is: 7701 rows x 7551 columns
 The number of bands in the image: 1
@@ -556,7 +541,7 @@ The geographic transform of the image:
 | 0.00, 0.00, 1.00|
 
 Image metadata:
-{&#39;driver&#39;: &#39;GTiff&#39;, &#39;dtype&#39;: &#39;uint16&#39;, &#39;nodata&#39;: None, &#39;width&#39;: 7551, &#39;height&#39;: 7701, &#39;count&#39;: 1, &#39;crs&#39;: CRS.from_epsg(32611), &#39;transform&#39;: Affine(30.0, 0.0, 628185.0,
+{'driver': 'GTiff', 'dtype': 'uint16', 'nodata': None, 'width': 7551, 'height': 7701, 'count': 1, 'crs': CRS.from_epsg(32611), 'transform': Affine(30.0, 0.0, 628185.0,
        0.0, -30.0, 3629715.0)}
 </pre></div></div>
 </div>
@@ -568,7 +553,8 @@ long-term datasets.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>src.read(1) # this is meant to return an error
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">src</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># this is meant to return an error</span>
 </pre></div>
 </div>
 </div>
@@ -604,8 +590,9 @@ long-term datasets.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>b2 = rasterio.open(band2)
-b2.close()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">b2</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">band2</span><span class="p">)</span>
+<span class="n">b2</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -619,8 +606,9 @@ proving another reason for why Cloud-optimized GeoTIFFs are an optimal format.</
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># NIR Spectral Band
-band5 = &#39;https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/047/026/LC08_L1TP_047026_20200510_20200526_01_T1/LC08_L1TP_047026_20200510_20200526_01_T1_B5.TIF&#39;
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># NIR Spectral Band</span>
+<span class="n">band5</span> <span class="o">=</span> <span class="s1">'https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/047/026/LC08_L1TP_047026_20200510_20200526_01_T1/LC08_L1TP_047026_20200510_20200526_01_T1_B5.TIF'</span>
 </pre></div>
 </div>
 </div>
@@ -628,15 +616,16 @@ band5 = &#39;https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/047/
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def get_clipped_img(url):
-    with rasterio.open(url) as src:
-        row_offset, col_offset = src.index(474013,5458927) # coordinate collected using QGIS software.
-                                                              # width, height
-        window = rasterio.windows.Window(col_offset, row_offset, 4000, 2000)
-        # read only the section specified by the window
-        clipped = src.read(1, window=window)
-        show(clipped, cmap=&#39;terrain&#39;) # using the &#39;terrain&#39; colormap
-    return clipped
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">get_clipped_img</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+        <span class="n">row_offset</span><span class="p">,</span> <span class="n">col_offset</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">474013</span><span class="p">,</span><span class="mi">5458927</span><span class="p">)</span> <span class="c1"># coordinate collected using QGIS software.</span>
+                                                              <span class="c1"># width, height</span>
+        <span class="n">window</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span><span class="n">col_offset</span><span class="p">,</span> <span class="n">row_offset</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+        <span class="c1"># read only the section specified by the window</span>
+        <span class="n">clipped</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+        <span class="n">show</span><span class="p">(</span><span class="n">clipped</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'terrain'</span><span class="p">)</span> <span class="c1"># using the 'terrain' colormap</span>
+    <span class="k">return</span> <span class="n">clipped</span>
 </pre></div>
 </div>
 </div>
@@ -644,7 +633,8 @@ band5 = &#39;https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/047/
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>clipped_b5 = get_clipped_img(band5)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">clipped_b5</span> <span class="o">=</span> <span class="n">get_clipped_img</span><span class="p">(</span><span class="n">band5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -652,7 +642,7 @@ band5 = &#39;https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/047/
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/1_getting_started_02-geospatial-python_15_0.png" src="../_images/1_getting_started_02-geospatial-python_15_0.png" />
+<img alt="../_images/1_getting_started_02-geospatial-python_15_0.png" src="../_images/1_getting_started_02-geospatial-python_15_0.png"/>
 </div>
 </div>
 </section>
@@ -664,23 +654,24 @@ band5 = &#39;https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/047/
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with rasterio.open(band2) as b2, rasterio.open(band3) as b3, rasterio.open(band4) as b4:
-    # Read in the 3 bands
-    blue = b2.read(1)
-    green = b3.read(1)
-    red = b4.read(1)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">band2</span><span class="p">)</span> <span class="k">as</span> <span class="n">b2</span><span class="p">,</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">band3</span><span class="p">)</span> <span class="k">as</span> <span class="n">b3</span><span class="p">,</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">band4</span><span class="p">)</span> <span class="k">as</span> <span class="n">b4</span><span class="p">:</span>
+    <span class="c1"># Read in the 3 bands</span>
+    <span class="n">blue</span> <span class="o">=</span> <span class="n">b2</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">green</span> <span class="o">=</span> <span class="n">b3</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">red</span> <span class="o">=</span> <span class="n">b4</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-    # Normalize the numpy arrays
-    redN = red/red.max()
-    greenN = green/green.max()
-    blueN = blue/blue.max()
+    <span class="c1"># Normalize the numpy arrays</span>
+    <span class="n">redN</span> <span class="o">=</span> <span class="n">red</span><span class="o">/</span><span class="n">red</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">greenN</span> <span class="o">=</span> <span class="n">green</span><span class="o">/</span><span class="n">green</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">blueN</span> <span class="o">=</span> <span class="n">blue</span><span class="o">/</span><span class="n">blue</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 
-    # Stack the 3 bands together (order matters)
-    rgb = np.dstack((redN, greenN, blueN))
+    <span class="c1"># Stack the 3 bands together (order matters)</span>
+    <span class="n">rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="n">redN</span><span class="p">,</span> <span class="n">greenN</span><span class="p">,</span> <span class="n">blueN</span><span class="p">))</span>
 
-    # Using matplotlib, let&#39;s see how the True colour image looks
-    plt.imshow(rgb)
-    plt.show()
+    <span class="c1"># Using matplotlib, let's see how the True colour image looks</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -688,7 +679,7 @@ band5 = &#39;https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/047/
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/1_getting_started_02-geospatial-python_18_0.png" src="../_images/1_getting_started_02-geospatial-python_18_0.png" />
+<img alt="../_images/1_getting_started_02-geospatial-python_18_0.png" src="../_images/1_getting_started_02-geospatial-python_18_0.png"/>
 </div>
 </div>
 <p>Great! After normalizing our data and stacking them together we now have an image of the Northern region in the Gulf of California looking like a picture taken from a satellite.</p>
@@ -716,8 +707,9 @@ dimensional labels.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import xarray as xr
-import numpy as np
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -725,11 +717,12 @@ import numpy as np
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with xr.open_rasterio(band2) as src:
-    blue = src.data
-    blue_da = xr.DataArray(blue, name=&#39;blue&#39;)
-    print(blue_da)
-    blue_da.plot()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="n">band2</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="n">blue</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">blue_da</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">blue</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">blue_da</span><span class="p">)</span>
+    <span class="n">blue_da</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -738,7 +731,7 @@ import numpy as np
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;xarray.DataArray &#39;blue&#39; (dim_0: 1, dim_1: 7701, dim_2: 7551)&gt;
+&lt;xarray.DataArray 'blue' (dim_0: 1, dim_1: 7701, dim_2: 7551)&gt;
 array([[[0, 0, 0, ..., 0, 0, 0],
         [0, 0, 0, ..., 0, 0, 0],
         [0, 0, 0, ..., 0, 0, 0],
@@ -753,7 +746,7 @@ Dimensions without coordinates: dim_0, dim_1, dim_2
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/1_getting_started_02-geospatial-python_24_1.png" src="../_images/1_getting_started_02-geospatial-python_24_1.png" />
+<img alt="../_images/1_getting_started_02-geospatial-python_24_1.png" src="../_images/1_getting_started_02-geospatial-python_24_1.png"/>
 </div>
 </div>
 </section>
@@ -765,22 +758,23 @@ Dimensions without coordinates: dim_0, dim_1, dim_2
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[72]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xr_ds = xr.Dataset()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">xr_ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">()</span>
 
-with xr.open_rasterio(band2) as src:
-    blue = src.data
-    blueN = blue/blue.max()
-    xr_ds = xr_ds.merge(xr.DataArray(blueN, name=&#39;b2&#39;))
+<span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="n">band2</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="n">blue</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">blueN</span> <span class="o">=</span> <span class="n">blue</span><span class="o">/</span><span class="n">blue</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">xr_ds</span> <span class="o">=</span> <span class="n">xr_ds</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">blueN</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'b2'</span><span class="p">))</span>
 
-with xr.open_rasterio(band3) as src:
-    green = src.data
-    greenN = green/green.max()
-    xr_ds = xr_ds.merge(xr.DataArray(greenN, name=&#39;b3&#39;))
+<span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="n">band3</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="n">green</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">greenN</span> <span class="o">=</span> <span class="n">green</span><span class="o">/</span><span class="n">green</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">xr_ds</span> <span class="o">=</span> <span class="n">xr_ds</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">greenN</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'b3'</span><span class="p">))</span>
 
-with xr.open_rasterio(band4) as src:
-    red = src.data
-    redN = red/red.max()
-    xr_ds = xr_ds.merge(xr.DataArray(redN, name=&#39;b4&#39;))
+<span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="n">band4</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="n">red</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">redN</span> <span class="o">=</span> <span class="n">red</span><span class="o">/</span><span class="n">red</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">xr_ds</span> <span class="o">=</span> <span class="n">xr_ds</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">redN</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'b4'</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -789,8 +783,9 @@ with xr.open_rasterio(band4) as src:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xr_ds[&#39;rgb&#39;] = ((&quot;dim0&quot;, &quot;dim1&quot;, &quot;dim2&quot;), np.vstack([xr_ds.b4.data,xr_ds.b3.data,xr_ds.b2.data]))
-xr_ds
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">xr_ds</span><span class="p">[</span><span class="s1">'rgb'</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="s2">"dim0"</span><span class="p">,</span> <span class="s2">"dim1"</span><span class="p">,</span> <span class="s2">"dim2"</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">xr_ds</span><span class="o">.</span><span class="n">b4</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">xr_ds</span><span class="o">.</span><span class="n">b3</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">xr_ds</span><span class="o">.</span><span class="n">b2</span><span class="o">.</span><span class="n">data</span><span class="p">]))</span>
+<span class="n">xr_ds</span>
 </pre></div>
 </div>
 </div>
@@ -801,12 +796,12 @@ xr_ds
 <div class="output_area rendered_html docutils container">
 <div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
 <defs>
-<symbol id="icon-database" viewBox="0 0 32 32">
+<symbol id="icon-database" viewbox="0 0 32 32">
 <path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
 <path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
 <path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
 </symbol>
-<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
 <path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
 <path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
 <path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
@@ -1149,40 +1144,32 @@ dl.xr-attrs {
   stroke: currentColor;
   fill: currentColor;
 }
-</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+</style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt;
 Dimensions:  (dim0: 3, dim1: 7701, dim2: 7551, dim_0: 1, dim_1: 7701, dim_2: 7551)
 Dimensions without coordinates: dim0, dim1, dim2, dim_0, dim_1, dim_2
 Data variables:
     b2       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
     b3       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
     b4       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
-    rgb      (dim0, dim1, dim2) float64 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-859c65a7-7b6a-47e5-ab86-0d5a6227a5a4' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-859c65a7-7b6a-47e5-ab86-0d5a6227a5a4' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span>dim0</span>: 3</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li><li><span>dim_0</span>: 1</li><li><span>dim_1</span>: 7701</li><li><span>dim_2</span>: 7551</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-0696e768-8c79-4263-af7b-a522fbced258' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0696e768-8c79-4263-af7b-a522fbced258' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-a39d1c8a-e10b-4c05-90cb-4079ad01e1c7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a39d1c8a-e10b-4c05-90cb-4079ad01e1c7' class='xr-section-summary' >Data variables: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>b2</span></div><div class='xr-var-dims'>(dim_0, dim_1, dim_2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-9b6fb6c7-419c-4137-8305-8f589b9af629' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9b6fb6c7-419c-4137-8305-8f589b9af629' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1ec0cac8-0811-432e-94a6-13a7df43a65b' class='xr-var-data-in' type='checkbox'><label for='data-1ec0cac8-0811-432e-94a6-13a7df43a65b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+    rgb      (dim0, dim1, dim2) float64 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</pre><div class="xr-wrap" hidden=""><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-859c65a7-7b6a-47e5-ab86-0d5a6227a5a4" type="checkbox"/><label class="xr-section-summary" for="section-859c65a7-7b6a-47e5-ab86-0d5a6227a5a4" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span>dim0</span>: 3</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li><li><span>dim_0</span>: 1</li><li><span>dim_1</span>: 7701</li><li><span>dim_2</span>: 7551</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-0696e768-8c79-4263-af7b-a522fbced258" type="checkbox"/><label class="xr-section-summary" for="section-0696e768-8c79-4263-af7b-a522fbced258" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-a39d1c8a-e10b-4c05-90cb-4079ad01e1c7" type="checkbox"/><label class="xr-section-summary" for="section-a39d1c8a-e10b-4c05-90cb-4079ad01e1c7">Data variables: <span>(4)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>b2</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-9b6fb6c7-419c-4137-8305-8f589b9af629" type="checkbox"/><label for="attrs-9b6fb6c7-419c-4137-8305-8f589b9af629" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-1ec0cac8-0811-432e-94a6-13a7df43a65b" type="checkbox"/><label for="data-1ec0cac8-0811-432e-94a6-13a7df43a65b" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>b3</span></div><div class='xr-var-dims'>(dim_0, dim_1, dim_2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-322cc31d-3f31-4182-b9f2-3aec162f98b9' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-322cc31d-3f31-4182-b9f2-3aec162f98b9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-432e3fef-6803-4eb1-9323-7f10f4387599' class='xr-var-data-in' type='checkbox'><label for='data-432e3fef-6803-4eb1-9323-7f10f4387599' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b3</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-322cc31d-3f31-4182-b9f2-3aec162f98b9" type="checkbox"/><label for="attrs-322cc31d-3f31-4182-b9f2-3aec162f98b9" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-432e3fef-6803-4eb1-9323-7f10f4387599" type="checkbox"/><label for="data-432e3fef-6803-4eb1-9323-7f10f4387599" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>b4</span></div><div class='xr-var-dims'>(dim_0, dim_1, dim_2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-096753d8-8079-4eea-8b72-3c4c957613cd' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-096753d8-8079-4eea-8b72-3c4c957613cd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-59d54434-7466-4039-a770-4e37a65ef26b' class='xr-var-data-in' type='checkbox'><label for='data-59d54434-7466-4039-a770-4e37a65ef26b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b4</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-096753d8-8079-4eea-8b72-3c4c957613cd" type="checkbox"/><label for="attrs-096753d8-8079-4eea-8b72-3c4c957613cd" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-59d54434-7466-4039-a770-4e37a65ef26b" type="checkbox"/><label for="data-59d54434-7466-4039-a770-4e37a65ef26b" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rgb</span></div><div class='xr-var-dims'>(dim0, dim1, dim2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-6c16c63c-d575-42d2-bd27-18ddb2ec29e8' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-6c16c63c-d575-42d2-bd27-18ddb2ec29e8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a08c30ad-5b75-48e9-a1c6-0e0f198474f1' class='xr-var-data-in' type='checkbox'><label for='data-a08c30ad-5b75-48e9-a1c6-0e0f198474f1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        ...,
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]],
-
-       [[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>rgb</span></div><div class="xr-var-dims">(dim0, dim1, dim2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-6c16c63c-d575-42d2-bd27-18ddb2ec29e8" type="checkbox"/><label for="attrs-6c16c63c-d575-42d2-bd27-18ddb2ec29e8" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-a08c30ad-5b75-48e9-a1c6-0e0f198474f1" type="checkbox"/><label for="data-a08c30ad-5b75-48e9-a1c6-0e0f198474f1" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
@@ -1196,14 +1183,23 @@ Data variables:
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-b8cb832f-07c6-43ca-995f-197fd67846a1' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b8cb832f-07c6-43ca-995f-197fd67846a1' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-b8cb832f-07c6-43ca-995f-197fd67846a1" type="checkbox"/><label class="xr-section-summary" for="section-b8cb832f-07c6-43ca-995f-197fd67846a1" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
 </div>
 <p>Now, we can plot the multi-band image using the “rgb” variable.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xr_ds.rgb.plot.imshow()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">xr_ds</span><span class="o">.</span><span class="n">rgb</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1220,7 +1216,7 @@ Data variables:
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/1_getting_started_02-geospatial-python_30_1.png" src="../_images/1_getting_started_02-geospatial-python_30_1.png" />
+<img alt="../_images/1_getting_started_02-geospatial-python_30_1.png" src="../_images/1_getting_started_02-geospatial-python_30_1.png"/>
 </div>
 </div>
 <p>As we can see from the xarray displayed above, this dataset has six dimensions, three shared by the variables ‘b2’, ‘b3’, ‘b4’ (dim_0, dim_1, dim_2), and three for the combination of the bands for variable ‘rgb’ (dim0, dim1, dim2).</p>
@@ -1234,8 +1230,9 @@ Data variables:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Let&#39;s get the Dataset for one band from the layered RGB using dim0 to isolate 1 band.
-xr_ds.sel(dim0=0)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Let's get the Dataset for one band from the layered RGB using dim0 to isolate 1 band.</span>
+<span class="n">xr_ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">dim0</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1246,12 +1243,12 @@ xr_ds.sel(dim0=0)
 <div class="output_area rendered_html docutils container">
 <div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
 <defs>
-<symbol id="icon-database" viewBox="0 0 32 32">
+<symbol id="icon-database" viewbox="0 0 32 32">
 <path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
 <path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
 <path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
 </symbol>
-<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
 <path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
 <path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
 <path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
@@ -1594,38 +1591,38 @@ dl.xr-attrs {
   stroke: currentColor;
   fill: currentColor;
 }
-</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+</style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt;
 Dimensions:  (dim1: 7701, dim2: 7551, dim_0: 1, dim_1: 7701, dim_2: 7551)
 Dimensions without coordinates: dim1, dim2, dim_0, dim_1, dim_2
 Data variables:
     b2       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
     b3       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
     b4       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
-    rgb      (dim1, dim2) float64 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0 0.0</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-24abbaa7-c341-4695-bba5-a2bd7cfd5910' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-24abbaa7-c341-4695-bba5-a2bd7cfd5910' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li><li><span>dim_0</span>: 1</li><li><span>dim_1</span>: 7701</li><li><span>dim_2</span>: 7551</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-e18da26e-d05c-4fc3-8f8f-1cc46f74dc72' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e18da26e-d05c-4fc3-8f8f-1cc46f74dc72' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-9aa8201a-7598-4f42-938a-ac4f0c5ee1fe' class='xr-section-summary-in' type='checkbox'  checked><label for='section-9aa8201a-7598-4f42-938a-ac4f0c5ee1fe' class='xr-section-summary' >Data variables: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>b2</span></div><div class='xr-var-dims'>(dim_0, dim_1, dim_2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-e5d1c024-d8a7-46c0-8448-9dd27b9201fc' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e5d1c024-d8a7-46c0-8448-9dd27b9201fc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6fb303ec-5c82-45d5-b9b9-8374bb5eaade' class='xr-var-data-in' type='checkbox'><label for='data-6fb303ec-5c82-45d5-b9b9-8374bb5eaade' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+    rgb      (dim1, dim2) float64 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0 0.0</pre><div class="xr-wrap" hidden=""><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-24abbaa7-c341-4695-bba5-a2bd7cfd5910" type="checkbox"/><label class="xr-section-summary" for="section-24abbaa7-c341-4695-bba5-a2bd7cfd5910" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li><li><span>dim_0</span>: 1</li><li><span>dim_1</span>: 7701</li><li><span>dim_2</span>: 7551</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-e18da26e-d05c-4fc3-8f8f-1cc46f74dc72" type="checkbox"/><label class="xr-section-summary" for="section-e18da26e-d05c-4fc3-8f8f-1cc46f74dc72" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-9aa8201a-7598-4f42-938a-ac4f0c5ee1fe" type="checkbox"/><label class="xr-section-summary" for="section-9aa8201a-7598-4f42-938a-ac4f0c5ee1fe">Data variables: <span>(4)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>b2</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-e5d1c024-d8a7-46c0-8448-9dd27b9201fc" type="checkbox"/><label for="attrs-e5d1c024-d8a7-46c0-8448-9dd27b9201fc" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-6fb303ec-5c82-45d5-b9b9-8374bb5eaade" type="checkbox"/><label for="data-6fb303ec-5c82-45d5-b9b9-8374bb5eaade" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>b3</span></div><div class='xr-var-dims'>(dim_0, dim_1, dim_2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-39f67f84-a762-47a6-b8df-a3a13162f43e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-39f67f84-a762-47a6-b8df-a3a13162f43e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-35ed15b1-50d9-419e-9165-e98920302b78' class='xr-var-data-in' type='checkbox'><label for='data-35ed15b1-50d9-419e-9165-e98920302b78' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b3</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-39f67f84-a762-47a6-b8df-a3a13162f43e" type="checkbox"/><label for="attrs-39f67f84-a762-47a6-b8df-a3a13162f43e" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-35ed15b1-50d9-419e-9165-e98920302b78" type="checkbox"/><label for="data-35ed15b1-50d9-419e-9165-e98920302b78" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>b4</span></div><div class='xr-var-dims'>(dim_0, dim_1, dim_2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-7e3455b8-bb86-4e80-9dd1-f67e678e3116' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7e3455b8-bb86-4e80-9dd1-f67e678e3116' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8133deea-44df-4d66-9fbc-30e0ac832f5d' class='xr-var-data-in' type='checkbox'><label for='data-8133deea-44df-4d66-9fbc-30e0ac832f5d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b4</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-7e3455b8-bb86-4e80-9dd1-f67e678e3116" type="checkbox"/><label for="attrs-7e3455b8-bb86-4e80-9dd1-f67e678e3116" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-8133deea-44df-4d66-9fbc-30e0ac832f5d" type="checkbox"/><label for="data-8133deea-44df-4d66-9fbc-30e0ac832f5d" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rgb</span></div><div class='xr-var-dims'>(dim1, dim2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-3f1afb0c-6278-498a-885a-55cba8b068f3' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3f1afb0c-6278-498a-885a-55cba8b068f3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8c919f9c-e2cd-4df2-af98-3bdf5b4b30bf' class='xr-var-data-in' type='checkbox'><label for='data-8c919f9c-e2cd-4df2-af98-3bdf5b4b30bf' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>rgb</span></div><div class="xr-var-dims">(dim1, dim2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-3f1afb0c-6278-498a-885a-55cba8b068f3" type="checkbox"/><label for="attrs-3f1afb0c-6278-498a-885a-55cba8b068f3" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-8c919f9c-e2cd-4df2-af98-3bdf5b4b30bf" type="checkbox"/><label for="data-8c919f9c-e2cd-4df2-af98-3bdf5b4b30bf" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[0., 0., 0., ..., 0., 0., 0.],
        [0., 0., 0., ..., 0., 0., 0.],
        [0., 0., 0., ..., 0., 0., 0.],
        ...,
        [0., 0., 0., ..., 0., 0., 0.],
        [0., 0., 0., ..., 0., 0., 0.],
-       [0., 0., 0., ..., 0., 0., 0.]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d8396662-39f1-4770-a077-6d059694284a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-d8396662-39f1-4770-a077-6d059694284a' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
+       [0., 0., 0., ..., 0., 0., 0.]])</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-d8396662-39f1-4770-a077-6d059694284a" type="checkbox"/><label class="xr-section-summary" for="section-d8396662-39f1-4770-a077-6d059694284a" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
 </div>
 <p><strong>Position-based indexing</strong></p>
 <p>Position-based index takes after the method of NumPy array indexing, with the power of labelled dimensions.</p>
@@ -1633,7 +1630,8 @@ Data variables:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xr_ds.isel(dim_1=2, dim_2=5)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">xr_ds</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">dim_1</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim_2</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1644,12 +1642,12 @@ Data variables:
 <div class="output_area rendered_html docutils container">
 <div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
 <defs>
-<symbol id="icon-database" viewBox="0 0 32 32">
+<symbol id="icon-database" viewbox="0 0 32 32">
 <path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
 <path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
 <path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
 </symbol>
-<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
 <path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
 <path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
 <path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
@@ -1992,14 +1990,14 @@ dl.xr-attrs {
   stroke: currentColor;
   fill: currentColor;
 }
-</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+</style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt;
 Dimensions:  (dim0: 3, dim1: 7701, dim2: 7551, dim_0: 1)
 Dimensions without coordinates: dim0, dim1, dim2, dim_0
 Data variables:
     b2       (dim_0) float64 0.0
     b3       (dim_0) float64 0.0
     b4       (dim_0) float64 0.0
-    rgb      (dim0, dim1, dim2) float64 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-ee531570-cd6d-4741-af37-0648fec9f1df' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ee531570-cd6d-4741-af37-0648fec9f1df' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span>dim0</span>: 3</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li><li><span>dim_0</span>: 1</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-0c41f2ab-07ec-4edd-a8d9-d108b68df59c' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0c41f2ab-07ec-4edd-a8d9-d108b68df59c' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-8f24fe64-8c47-4c79-ab7a-e07a2dab53ce' class='xr-section-summary-in' type='checkbox'  checked><label for='section-8f24fe64-8c47-4c79-ab7a-e07a2dab53ce' class='xr-section-summary' >Data variables: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>b2</span></div><div class='xr-var-dims'>(dim_0)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0</div><input id='attrs-5cfeadcf-eac6-470a-9905-f26642ef1ca0' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5cfeadcf-eac6-470a-9905-f26642ef1ca0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cef1dcd6-b797-4b1b-835d-6041dc312f73' class='xr-var-data-in' type='checkbox'><label for='data-cef1dcd6-b797-4b1b-835d-6041dc312f73' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>b3</span></div><div class='xr-var-dims'>(dim_0)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0</div><input id='attrs-f3cb42dd-175e-4d5a-bd24-b9b24371680e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f3cb42dd-175e-4d5a-bd24-b9b24371680e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e5fc4fc7-5b46-4345-9aac-363cfd37b969' class='xr-var-data-in' type='checkbox'><label for='data-e5fc4fc7-5b46-4345-9aac-363cfd37b969' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>b4</span></div><div class='xr-var-dims'>(dim_0)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0</div><input id='attrs-279adf6c-3bbd-45ec-bcab-d784aab7dbef' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-279adf6c-3bbd-45ec-bcab-d784aab7dbef' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6dba2440-f58f-4308-8fc1-79200a2c6057' class='xr-var-data-in' type='checkbox'><label for='data-6dba2440-f58f-4308-8fc1-79200a2c6057' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rgb</span></div><div class='xr-var-dims'>(dim0, dim1, dim2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-ac4a7c26-ab7e-4b3e-a357-032e85ed8390' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ac4a7c26-ab7e-4b3e-a357-032e85ed8390' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-67165c37-f4f9-4e1a-b25e-d1a7ff4d1043' class='xr-var-data-in' type='checkbox'><label for='data-67165c37-f4f9-4e1a-b25e-d1a7ff4d1043' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+    rgb      (dim0, dim1, dim2) float64 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</pre><div class="xr-wrap" hidden=""><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-ee531570-cd6d-4741-af37-0648fec9f1df" type="checkbox"/><label class="xr-section-summary" for="section-ee531570-cd6d-4741-af37-0648fec9f1df" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span>dim0</span>: 3</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li><li><span>dim_0</span>: 1</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-0c41f2ab-07ec-4edd-a8d9-d108b68df59c" type="checkbox"/><label class="xr-section-summary" for="section-0c41f2ab-07ec-4edd-a8d9-d108b68df59c" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-8f24fe64-8c47-4c79-ab7a-e07a2dab53ce" type="checkbox"/><label class="xr-section-summary" for="section-8f24fe64-8c47-4c79-ab7a-e07a2dab53ce">Data variables: <span>(4)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>b2</span></div><div class="xr-var-dims">(dim_0)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-5cfeadcf-eac6-470a-9905-f26642ef1ca0" type="checkbox"/><label for="attrs-5cfeadcf-eac6-470a-9905-f26642ef1ca0" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-cef1dcd6-b797-4b1b-835d-6041dc312f73" type="checkbox"/><label for="data-cef1dcd6-b797-4b1b-835d-6041dc312f73" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([0.])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b3</span></div><div class="xr-var-dims">(dim_0)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-f3cb42dd-175e-4d5a-bd24-b9b24371680e" type="checkbox"/><label for="attrs-f3cb42dd-175e-4d5a-bd24-b9b24371680e" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-e5fc4fc7-5b46-4345-9aac-363cfd37b969" type="checkbox"/><label for="data-e5fc4fc7-5b46-4345-9aac-363cfd37b969" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([0.])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b4</span></div><div class="xr-var-dims">(dim_0)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-279adf6c-3bbd-45ec-bcab-d784aab7dbef" type="checkbox"/><label for="attrs-279adf6c-3bbd-45ec-bcab-d784aab7dbef" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-6dba2440-f58f-4308-8fc1-79200a2c6057" type="checkbox"/><label for="data-6dba2440-f58f-4308-8fc1-79200a2c6057" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([0.])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>rgb</span></div><div class="xr-var-dims">(dim0, dim1, dim2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-ac4a7c26-ab7e-4b3e-a357-032e85ed8390" type="checkbox"/><label for="attrs-ac4a7c26-ab7e-4b3e-a357-032e85ed8390" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-67165c37-f4f9-4e1a-b25e-d1a7ff4d1043" type="checkbox"/><label for="data-67165c37-f4f9-4e1a-b25e-d1a7ff4d1043" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
@@ -2021,7 +2019,7 @@ Data variables:
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-16d19ba5-dced-4fef-81ee-ee1211e2d614' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-16d19ba5-dced-4fef-81ee-ee1211e2d614' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-16d19ba5-dced-4fef-81ee-ee1211e2d614" type="checkbox"/><label class="xr-section-summary" for="section-16d19ba5-dced-4fef-81ee-ee1211e2d614" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
 </div>
 </section>
 <section id="2.4-Overlaying-a-Clipped-Raster-Image">
@@ -2031,12 +2029,13 @@ Data variables:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[77]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with xr.open_rasterio(band1) as src:
-    zero = np.zeros(src.data.shape)
-    zero[:] = np.nan
-    zero[:,3000:5000,2000:5000] = src.data[:,3000:5000,2000:5000]
-    xr_ds = xr_ds.merge(xr.DataArray(zero, name=&#39;b1&#39;))
-xr_ds
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="n">band1</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+    <span class="n">zero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">zero</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">zero</span><span class="p">[:,</span><span class="mi">3000</span><span class="p">:</span><span class="mi">5000</span><span class="p">,</span><span class="mi">2000</span><span class="p">:</span><span class="mi">5000</span><span class="p">]</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span><span class="mi">3000</span><span class="p">:</span><span class="mi">5000</span><span class="p">,</span><span class="mi">2000</span><span class="p">:</span><span class="mi">5000</span><span class="p">]</span>
+    <span class="n">xr_ds</span> <span class="o">=</span> <span class="n">xr_ds</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">zero</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'b1'</span><span class="p">))</span>
+<span class="n">xr_ds</span>
 </pre></div>
 </div>
 </div>
@@ -2047,12 +2046,12 @@ xr_ds
 <div class="output_area rendered_html docutils container">
 <div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
 <defs>
-<symbol id="icon-database" viewBox="0 0 32 32">
+<symbol id="icon-database" viewbox="0 0 32 32">
 <path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
 <path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
 <path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
 </symbol>
-<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
 <path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
 <path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
 <path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
@@ -2395,7 +2394,7 @@ dl.xr-attrs {
   stroke: currentColor;
   fill: currentColor;
 }
-</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+</style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt;
 Dimensions:  (dim0: 3, dim1: 7701, dim2: 7551, dim_0: 1, dim_1: 7701, dim_2: 7551)
 Dimensions without coordinates: dim0, dim1, dim2, dim_0, dim_1, dim_2
 Data variables:
@@ -2403,33 +2402,25 @@ Data variables:
     b3       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
     b4       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
     rgb      (dim0, dim1, dim2) float64 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
-    b1       (dim_0, dim_1, dim_2) float64 nan nan nan nan ... nan nan nan nan</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-bd4ca416-1ba2-44f4-abb3-f8888c3bd0c4' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-bd4ca416-1ba2-44f4-abb3-f8888c3bd0c4' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span>dim0</span>: 3</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li><li><span>dim_0</span>: 1</li><li><span>dim_1</span>: 7701</li><li><span>dim_2</span>: 7551</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-ee4ff28c-38b5-4d3f-a4b1-3fc0cb056a3c' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ee4ff28c-38b5-4d3f-a4b1-3fc0cb056a3c' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-55739b30-db25-4c60-bd35-56c03ab09e38' class='xr-section-summary-in' type='checkbox'  checked><label for='section-55739b30-db25-4c60-bd35-56c03ab09e38' class='xr-section-summary' >Data variables: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>b2</span></div><div class='xr-var-dims'>(dim_0, dim_1, dim_2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-f7ebdd45-005c-4c92-be72-55cb239a2ad7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f7ebdd45-005c-4c92-be72-55cb239a2ad7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7e2e1fbb-d6eb-44f7-b43a-f490bec190df' class='xr-var-data-in' type='checkbox'><label for='data-7e2e1fbb-d6eb-44f7-b43a-f490bec190df' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+    b1       (dim_0, dim_1, dim_2) float64 nan nan nan nan ... nan nan nan nan</pre><div class="xr-wrap" hidden=""><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-bd4ca416-1ba2-44f4-abb3-f8888c3bd0c4" type="checkbox"/><label class="xr-section-summary" for="section-bd4ca416-1ba2-44f4-abb3-f8888c3bd0c4" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span>dim0</span>: 3</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li><li><span>dim_0</span>: 1</li><li><span>dim_1</span>: 7701</li><li><span>dim_2</span>: 7551</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-ee4ff28c-38b5-4d3f-a4b1-3fc0cb056a3c" type="checkbox"/><label class="xr-section-summary" for="section-ee4ff28c-38b5-4d3f-a4b1-3fc0cb056a3c" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-55739b30-db25-4c60-bd35-56c03ab09e38" type="checkbox"/><label class="xr-section-summary" for="section-55739b30-db25-4c60-bd35-56c03ab09e38">Data variables: <span>(5)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>b2</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-f7ebdd45-005c-4c92-be72-55cb239a2ad7" type="checkbox"/><label for="attrs-f7ebdd45-005c-4c92-be72-55cb239a2ad7" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-7e2e1fbb-d6eb-44f7-b43a-f490bec190df" type="checkbox"/><label for="data-7e2e1fbb-d6eb-44f7-b43a-f490bec190df" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>b3</span></div><div class='xr-var-dims'>(dim_0, dim_1, dim_2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-1d0b7347-23d6-44b3-945f-5e7460f68653' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-1d0b7347-23d6-44b3-945f-5e7460f68653' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6971837a-1f22-470e-8dad-83e840eb3224' class='xr-var-data-in' type='checkbox'><label for='data-6971837a-1f22-470e-8dad-83e840eb3224' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b3</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-1d0b7347-23d6-44b3-945f-5e7460f68653" type="checkbox"/><label for="attrs-1d0b7347-23d6-44b3-945f-5e7460f68653" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-6971837a-1f22-470e-8dad-83e840eb3224" type="checkbox"/><label for="data-6971837a-1f22-470e-8dad-83e840eb3224" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>b4</span></div><div class='xr-var-dims'>(dim_0, dim_1, dim_2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-10a131ba-5554-4f1b-940f-3f1c5f889ddc' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-10a131ba-5554-4f1b-940f-3f1c5f889ddc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-fe5a4f1b-7a4a-4e60-b841-aeb127e2d45b' class='xr-var-data-in' type='checkbox'><label for='data-fe5a4f1b-7a4a-4e60-b841-aeb127e2d45b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b4</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-10a131ba-5554-4f1b-940f-3f1c5f889ddc" type="checkbox"/><label for="attrs-10a131ba-5554-4f1b-940f-3f1c5f889ddc" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-fe5a4f1b-7a4a-4e60-b841-aeb127e2d45b" type="checkbox"/><label for="data-fe5a4f1b-7a4a-4e60-b841-aeb127e2d45b" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>rgb</span></div><div class='xr-var-dims'>(dim0, dim1, dim2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-c975bcbe-6a09-4ce2-b450-35047b9b00aa' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c975bcbe-6a09-4ce2-b450-35047b9b00aa' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-23888d0c-097f-4b69-a961-15f9052e2e65' class='xr-var-data-in' type='checkbox'><label for='data-23888d0c-097f-4b69-a961-15f9052e2e65' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        ...,
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]],
-
-       [[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>rgb</span></div><div class="xr-var-dims">(dim0, dim1, dim2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-c975bcbe-6a09-4ce2-b450-35047b9b00aa" type="checkbox"/><label for="attrs-c975bcbe-6a09-4ce2-b450-35047b9b00aa" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-23888d0c-097f-4b69-a961-15f9052e2e65" type="checkbox"/><label for="data-23888d0c-097f-4b69-a961-15f9052e2e65" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
@@ -2443,19 +2434,28 @@ Data variables:
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>b1</span></div><div class='xr-var-dims'>(dim_0, dim_1, dim_2)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>nan nan nan nan ... nan nan nan nan</div><input id='attrs-3095cdff-580a-4be3-a49c-c88306f96b03' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3095cdff-580a-4be3-a49c-c88306f96b03' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-145104d6-b466-4ee4-8d99-287dac8d6b94' class='xr-var-data-in' type='checkbox'><label for='data-145104d6-b466-4ee4-8d99-287dac8d6b94' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[nan, nan, nan, ..., nan, nan, nan],
+        [0., 0., 0., ..., 0., 0., 0.]],
+
+       [[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        ...,
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b1</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">nan nan nan nan ... nan nan nan nan</div><input class="xr-var-attrs-in" disabled="" id="attrs-3095cdff-580a-4be3-a49c-c88306f96b03" type="checkbox"/><label for="attrs-3095cdff-580a-4be3-a49c-c88306f96b03" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-145104d6-b466-4ee4-8d99-287dac8d6b94" type="checkbox"/><label for="data-145104d6-b466-4ee4-8d99-287dac8d6b94" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[nan, nan, nan, ..., nan, nan, nan],
         [nan, nan, nan, ..., nan, nan, nan],
         [nan, nan, nan, ..., nan, nan, nan],
         ...,
         [nan, nan, nan, ..., nan, nan, nan],
         [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan]]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f1392e1a-11ab-4a79-8fa9-612cc15e035a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f1392e1a-11ab-4a79-8fa9-612cc15e035a' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
+        [nan, nan, nan, ..., nan, nan, nan]]])</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-f1392e1a-11ab-4a79-8fa9-612cc15e035a" type="checkbox"/><label class="xr-section-summary" for="section-f1392e1a-11ab-4a79-8fa9-612cc15e035a" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[78]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xr_ds.b1[0].plot.imshow()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">xr_ds</span><span class="o">.</span><span class="n">b1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2472,7 +2472,7 @@ Data variables:
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/1_getting_started_02-geospatial-python_38_1.png" src="../_images/1_getting_started_02-geospatial-python_38_1.png" />
+<img alt="../_images/1_getting_started_02-geospatial-python_38_1.png" src="../_images/1_getting_started_02-geospatial-python_38_1.png"/>
 </div>
 </div>
 <p>Now that we know how the clipped image and the full RGB image look in different plots, let’s combine them together in one image.</p>
@@ -2480,9 +2480,10 @@ Data variables:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[79]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots(1,1, figsize=(15,15))
-xr_ds.rgb.plot.imshow(ax=ax)
-xr_ds.b1[0].plot.imshow(ax=ax, alpha=0.8)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">xr_ds</span><span class="o">.</span><span class="n">rgb</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">xr_ds</span><span class="o">.</span><span class="n">b1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2499,7 +2500,7 @@ xr_ds.b1[0].plot.imshow(ax=ax, alpha=0.8)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/1_getting_started_02-geospatial-python_40_1.png" src="../_images/1_getting_started_02-geospatial-python_40_1.png" />
+<img alt="../_images/1_getting_started_02-geospatial-python_40_1.png" src="../_images/1_getting_started_02-geospatial-python_40_1.png"/>
 </div>
 </div>
 <p>The final merged dataset contains all four bands which plotted together look as the result above.</p>
@@ -2534,14 +2535,14 @@ xr_ds.b1[0].plot.imshow(ax=ax, alpha=0.8)
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="index.html">
+          <a class="prev-page" href="01-python-intro.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Getting Started</div>
+                <div class="title"><strong>Introduction to Python</strong></div>
                 
               </div>
             </a>
@@ -2611,7 +2612,5 @@ xr_ds.b1[0].plot.imshow(ax=ax, alpha=0.8)
     <script src="../_static/tabs.js"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

@@ -3,12 +3,12 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="KNN Land Classification with Dask [40 hours]" href="02-knn.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="&lt;no title&gt;" href="02-kmeans-dask.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.06.04.1"/>
-        <title>Compositing Rasters with Dask - GEOAnalytics Canada</title>
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+        <title>Compositing Rasters with Dask - GeoAnalytics Canada</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">GEOAnalytics Canada</div></a>
+      <a href="../index.html"><div class="brand">GeoAnalytics Canada</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -151,7 +151,7 @@
     <img class="sidebar-logo" src="../_static/geoanalytics-icon.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GEOAnalytics Canada</span>
+  <span class="sidebar-brand-text">GeoAnalytics Canada</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -159,42 +159,33 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1_getting_started/index.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/01-python-intro.html"><strong>Introduction to Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/04-authentication.html"><strong>Authentication</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05a-ssh-keys.html">Set Up SSH Keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/06-file-browser.html"><strong>File Browser</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/08-gitlab.html"><strong>GitLab</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/09-pipelines.html"><strong>Pipelines</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/10-dask.html"><strong>Dask</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/01-accessing-data.html"><strong>Accessing and Downloading Data</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/02-ndvi-with-dask.html"><strong>NDVI With Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html">1. Initialize your Dask Gateway Clusters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html#2.-Getting-the-MODIS-Data">2. Getting the MODIS Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html#3.-Calculating-the-NDSI">3. Calculating the NDSI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html#4.-Visualizing-the-Results">4. Visualizing the Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/04-ndwi-with-dask.html"><strong>NDWI With Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/05-change-detection.html"><strong>Change Detection</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html"><strong>NDSI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/04-ndmi-with-dask.html"><strong>NDMI With Dask</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Scientific Workflows</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-knn.html">KNN Land Classification with Dask [40 hours]</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-knn.html#1.-Initialize-Dask-Cluster">1. Initialize Dask Cluster</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-knn.html#Query-using-the-SentinelSat-API">Query using the SentinelSat API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-knn.html#2.-Functions">2. Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-knn.html#2.-Loading,-Masking,-and-Creating-Mosaics">2. Loading, Masking, and Creating Mosaics</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Compositing Rasters with Dask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Main-Loop">Main Loop</a></li>
 </ul>
 </li>
 </ul>
@@ -215,8 +206,7 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -440,12 +430,11 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt .copybtn {
+.prompt a.copybtn {
     display: none;
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
-.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -454,14 +443,10 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
-.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
-.jp-RenderedHTMLCommon tr,
-.jp-RenderedHTMLCommon th,
-.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -473,15 +458,12 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
-.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
-.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
-.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -494,8 +476,9 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># We will be using Sentinel-2 L2A imagery from Microsoft Planetary Computer STAC server:
-!pip install planetary_computer
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># We will be using Sentinel-2 L2A imagery from Microsoft Planetary Computer STAC server:</span>
+<span class="o">!</span>pip install planetary_computer
 </pre></div>
 </div>
 </div>
@@ -503,32 +486,33 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
-import rasterio
-import rioxarray
-import pystac
-import stackstac
-import datetime
-import planetary_computer
-import dask
-import json
-import gcsfs
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="kn">import</span> <span class="nn">rioxarray</span>
+<span class="kn">import</span> <span class="nn">pystac</span>
+<span class="kn">import</span> <span class="nn">stackstac</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">planetary_computer</span>
+<span class="kn">import</span> <span class="nn">dask</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">gcsfs</span>
 
-import dask.array as da
-import numpy as np
-import xarray as xr
-import rioxarray as rxr
-import matplotlib.pyplot as plt
-import geopandas as gpd
+<span class="kn">import</span> <span class="nn">dask.array</span> <span class="k">as</span> <span class="nn">da</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">rioxarray</span> <span class="k">as</span> <span class="nn">rxr</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
-from dask_gateway import Gateway
-# from shapely.geometry import Point
-from pystac_client import Client
-from dask.distributed import performance_report
-from typing import List
-from rio_cogeo.cogeo import cog_translate
-from rio_cogeo.profiles import cog_profiles
-from IPython.display import clear_output
+<span class="kn">from</span> <span class="nn">dask_gateway</span> <span class="kn">import</span> <span class="n">Gateway</span>
+<span class="c1"># from shapely.geometry import Point</span>
+<span class="kn">from</span> <span class="nn">pystac_client</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">performance_report</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">rio_cogeo.cogeo</span> <span class="kn">import</span> <span class="n">cog_translate</span>
+<span class="kn">from</span> <span class="nn">rio_cogeo.profiles</span> <span class="kn">import</span> <span class="n">cog_profiles</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">clear_output</span>
 </pre></div>
 </div>
 </div>
@@ -537,29 +521,30 @@ from IPython.display import clear_output
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def register_gcsfs_client(username:str):
-    # set up the gcsfs system with credentials
-    print(&#39;registering gcsfs&#39;)
-    tok = os.path.join(os.environ[&#39;HOME&#39;], f&#39;geoanalytics_{username}&#39;, &#39;geo.json&#39;) # Change this to your own cred file
-    tok_dict = json.load(open(tok)) # cloudpickle will just send the path to tok, which the processing nodes can&#39;t see. Send json instead
-    gcs = gcsfs.GCSFileSystem(token=tok_dict, access=&#39;read_write&#39;)
-    return gcs
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">register_gcsfs_client</span><span class="p">(</span><span class="n">username</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+    <span class="c1"># set up the gcsfs system with credentials</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'registering gcsfs'</span><span class="p">)</span>
+    <span class="n">tok</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'HOME'</span><span class="p">],</span> <span class="sa">f</span><span class="s1">'geoanalytics_</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'geo.json'</span><span class="p">)</span> <span class="c1"># Change this to your own cred file</span>
+    <span class="n">tok_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">tok</span><span class="p">))</span> <span class="c1"># cloudpickle will just send the path to tok, which the processing nodes can't see. Send json instead</span>
+    <span class="n">gcs</span> <span class="o">=</span> <span class="n">gcsfs</span><span class="o">.</span><span class="n">GCSFileSystem</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="n">tok_dict</span><span class="p">,</span> <span class="n">access</span><span class="o">=</span><span class="s1">'read_write'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">gcs</span>
 
-def register_dask_client(imgname:str=None):
-    &#39;&#39;&#39; Make the gcsfs filesystem available with credentials and start client &#39;&#39;&#39;
-    # we want to set up a cluster
-    client = None
-    cluster = None
-    print(&#39;registering cluster&#39;)
-    gateway = Gateway()
-    options = gateway.cluster_options()
-    if not imgname is None:
-        options.image = imgname
-    cluster = gateway.new_cluster(options)
-    print(cluster.name)
-    client = cluster.get_client()
-    client.restart() # flush nodes
-    return client, cluster, options
+<span class="k">def</span> <span class="nf">register_dask_client</span><span class="p">(</span><span class="n">imgname</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">''' Make the gcsfs filesystem available with credentials and start client '''</span>
+    <span class="c1"># we want to set up a cluster</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">cluster</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'registering cluster'</span><span class="p">)</span>
+    <span class="n">gateway</span> <span class="o">=</span> <span class="n">Gateway</span><span class="p">()</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">cluster_options</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">imgname</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">imgname</span>
+    <span class="n">cluster</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">new_cluster</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cluster</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">get_client</span><span class="p">()</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">restart</span><span class="p">()</span> <span class="c1"># flush nodes</span>
+    <span class="k">return</span> <span class="n">client</span><span class="p">,</span> <span class="n">cluster</span><span class="p">,</span> <span class="n">options</span>
 </pre></div>
 </div>
 </div>
@@ -567,9 +552,10 @@ def register_dask_client(imgname:str=None):
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>username = input(&#39;Username: &#39;)
-gcs = register_gcsfs_client(username=username)
-client, cluster, options = register_dask_client(imgname=&#39;pangeo/pangeo-notebook:2022.04.15&#39;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Username: '</span><span class="p">)</span>
+<span class="n">gcs</span> <span class="o">=</span> <span class="n">register_gcsfs_client</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">)</span>
+<span class="n">client</span><span class="p">,</span> <span class="n">cluster</span><span class="p">,</span> <span class="n">options</span> <span class="o">=</span> <span class="n">register_dask_client</span><span class="p">(</span><span class="n">imgname</span><span class="o">=</span><span class="s1">'pangeo/pangeo-notebook:2022.04.15'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -577,8 +563,9 @@ client, cluster, options = register_dask_client(imgname=&#39;pangeo/pangeo-noteb
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># View Dask cluster details
-cluster
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># View Dask cluster details</span>
+<span class="n">cluster</span>
 </pre></div>
 </div>
 </div>
@@ -586,8 +573,9 @@ cluster
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Scale Dask cluster to 30 workers
-cluster.scale(30)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Scale Dask cluster to 30 workers</span>
+<span class="n">cluster</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -595,7 +583,8 @@ cluster.scale(30)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>client.restart()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">client</span><span class="o">.</span><span class="n">restart</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -603,32 +592,33 @@ cluster.scale(30)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Function to write from the dask cluster to the remote bucket
-@dask.delayed
-def write_ras(gcs, epsg, ras, b, pth):
-    import rioxarray
-    try:
-        ds = xr.Dataset()
-        ras = ras.rio.write_crs(epsg)
-        ras.rio.to_raster(&#39;ras.tif&#39;)
-        # Turn the raster into a COG
-        dst_profile = cog_profiles.get(&quot;deflate&quot;)
-            cog_translate(
-                &#39;ras.tif&#39;,
-                &#39;ras_cog.tif&#39;,
-                dst_profile,
-                in_memory=True,
-                quiet=False,
-            )
-        # Use GCSFS Client to put COG into remote bucket
-        gcs.put(&#39;ras_cog.tif&#39;, pth)
-        # Clean up rasters on Dask Worker
-        os.remove(&#39;ras.tif&#39;)
-        os.remove(&#39;ras_cog.tif&#39;)
-        return &#39;success&#39;
-    except Exception as e:
-        # Return error and associated band
-        return f&#39;{b}: {e}&#39;
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Function to write from the dask cluster to the remote bucket</span>
+<span class="nd">@dask</span><span class="o">.</span><span class="n">delayed</span>
+<span class="k">def</span> <span class="nf">write_ras</span><span class="p">(</span><span class="n">gcs</span><span class="p">,</span> <span class="n">epsg</span><span class="p">,</span> <span class="n">ras</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">pth</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">rioxarray</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">()</span>
+        <span class="n">ras</span> <span class="o">=</span> <span class="n">ras</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">write_crs</span><span class="p">(</span><span class="n">epsg</span><span class="p">)</span>
+        <span class="n">ras</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">to_raster</span><span class="p">(</span><span class="s1">'ras.tif'</span><span class="p">)</span>
+        <span class="c1"># Turn the raster into a COG</span>
+        <span class="n">dst_profile</span> <span class="o">=</span> <span class="n">cog_profiles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"deflate"</span><span class="p">)</span>
+            <span class="n">cog_translate</span><span class="p">(</span>
+                <span class="s1">'ras.tif'</span><span class="p">,</span>
+                <span class="s1">'ras_cog.tif'</span><span class="p">,</span>
+                <span class="n">dst_profile</span><span class="p">,</span>
+                <span class="n">in_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="c1"># Use GCSFS Client to put COG into remote bucket</span>
+        <span class="n">gcs</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">'ras_cog.tif'</span><span class="p">,</span> <span class="n">pth</span><span class="p">)</span>
+        <span class="c1"># Clean up rasters on Dask Worker</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'ras.tif'</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'ras_cog.tif'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">'success'</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># Return error and associated band</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">'</span>
 </pre></div>
 </div>
 </div>
@@ -639,35 +629,36 @@ def write_ras(gcs, epsg, ras, b, pth):
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> # Rough Polygon around Vancouver in EPSG4326
-poly = {
-  &quot;coordinates&quot;: [
-    [
-      [
-        -122.1185303,
-        49.3304921
-      ],
-      [
-        -123.3078003,
-        49.3644891
-      ],
-      [
-        -123.2528687,
-        48.7742927
-      ],
-      [
-        -122.1817017,
-        48.7579995
-      ],
-      [
-        -122.1185303,
-        49.3304921
-      ]
-    ]
-  ],
-  &quot;type&quot;: &quot;Polygon&quot;
-}
-poly
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span> <span class="c1"># Rough Polygon around Vancouver in EPSG4326</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"coordinates"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span>
+      <span class="p">[</span>
+        <span class="o">-</span><span class="mf">122.1185303</span><span class="p">,</span>
+        <span class="mf">49.3304921</span>
+      <span class="p">],</span>
+      <span class="p">[</span>
+        <span class="o">-</span><span class="mf">123.3078003</span><span class="p">,</span>
+        <span class="mf">49.3644891</span>
+      <span class="p">],</span>
+      <span class="p">[</span>
+        <span class="o">-</span><span class="mf">123.2528687</span><span class="p">,</span>
+        <span class="mf">48.7742927</span>
+      <span class="p">],</span>
+      <span class="p">[</span>
+        <span class="o">-</span><span class="mf">122.1817017</span><span class="p">,</span>
+        <span class="mf">48.7579995</span>
+      <span class="p">],</span>
+      <span class="p">[</span>
+        <span class="o">-</span><span class="mf">122.1185303</span><span class="p">,</span>
+        <span class="mf">49.3304921</span>
+      <span class="p">]</span>
+    <span class="p">]</span>
+  <span class="p">],</span>
+  <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Polygon"</span>
+<span class="p">}</span>
+<span class="n">poly</span>
 </pre></div>
 </div>
 </div>
@@ -675,10 +666,11 @@ poly
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># We&#39;ll write this to a file, so geopanadas can open it
-poly_file_pth = &#39;/tmp/geo.geojson&#39;
-with open(poly_file_pth, &#39;w&#39;) as f:
-   json.dump(poly, f)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># We'll write this to a file, so geopanadas can open it</span>
+<span class="n">poly_file_pth</span> <span class="o">=</span> <span class="s1">'/tmp/geo.geojson'</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">poly_file_pth</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -686,9 +678,10 @@ with open(poly_file_pth, &#39;w&#39;) as f:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Get AOI from local filesystem
-f = gpd.read_file(poly_file_pth)
-f
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Get AOI from local filesystem</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">poly_file_pth</span><span class="p">)</span>
+<span class="n">f</span>
 </pre></div>
 </div>
 </div>
@@ -696,10 +689,11 @@ f
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># The FOOTPRINT needs to be enveloped for pystac_client to query with
-# More complex shapes can be be clipped with at later stages of the workflow
-FOOTPRINT = f.to_crs(&#39;epsg:4326&#39;).geometry[0].envelope
-FOOTPRINT
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># The FOOTPRINT needs to be enveloped for pystac_client to query with</span>
+<span class="c1"># More complex shapes can be be clipped with at later stages of the workflow</span>
+<span class="n">FOOTPRINT</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s1">'epsg:4326'</span><span class="p">)</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">envelope</span>
+<span class="n">FOOTPRINT</span>
 </pre></div>
 </div>
 </div>
@@ -707,7 +701,8 @@ FOOTPRINT
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>FOOTPRINT.bounds
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">FOOTPRINT</span><span class="o">.</span><span class="n">bounds</span>
 </pre></div>
 </div>
 </div>
@@ -718,9 +713,10 @@ FOOTPRINT
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Set up STAC client
-api = Client.open(&#39;https://planetarycomputer.microsoft.com/api/stac/v1&#39;)
-api
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Set up STAC client</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">Client</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'https://planetarycomputer.microsoft.com/api/stac/v1'</span><span class="p">)</span>
+<span class="n">api</span>
 </pre></div>
 </div>
 </div>
@@ -731,131 +727,133 @@ api
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># CONFIG
-# -------------
-BASE_PTH = &#39;gs://geoanalytics-user-shared-data&#39;
-OUTPUT_DIR = &#39;tutorial_test&#39;
-TGT_BANDS =  [&#39;B01&#39;, &#39;B02&#39;, &#39;B03&#39;, &#39;B04&#39;, &#39;B05&#39;, &#39;B06&#39;, &#39;B07&#39;, &#39;B08&#39;, &#39;B09&#39;, &#39;B11&#39;, &#39;B12&#39;, &#39;B8A&#39;]
-YEARS = [&#39;2020&#39;]
-BEGIN_MONTH = &#39;06&#39;
-END_MONTH = &#39;09&#39;
-MAX_CLOUD = 20.0
-READ_IN_CHUNK = 4096
-RESOLUTION = 10
-TEMPORAL_CHUNK = {&#39;time&#39;: -1, &#39;band&#39;: 1, &#39;x&#39;: 128, &#39;y&#39;: 128}
-SYNCHRONOUS = False # Write bands out one at a time - use if resources can&#39;t handle all bands at once for AOI
-# -------------
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># CONFIG</span>
+<span class="c1"># -------------</span>
+<span class="n">BASE_PTH</span> <span class="o">=</span> <span class="s1">'gs://geoanalytics-user-shared-data'</span>
+<span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="s1">'tutorial_test'</span>
+<span class="n">TGT_BANDS</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">'B01'</span><span class="p">,</span> <span class="s1">'B02'</span><span class="p">,</span> <span class="s1">'B03'</span><span class="p">,</span> <span class="s1">'B04'</span><span class="p">,</span> <span class="s1">'B05'</span><span class="p">,</span> <span class="s1">'B06'</span><span class="p">,</span> <span class="s1">'B07'</span><span class="p">,</span> <span class="s1">'B08'</span><span class="p">,</span> <span class="s1">'B09'</span><span class="p">,</span> <span class="s1">'B11'</span><span class="p">,</span> <span class="s1">'B12'</span><span class="p">,</span> <span class="s1">'B8A'</span><span class="p">]</span>
+<span class="n">YEARS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'2020'</span><span class="p">]</span>
+<span class="n">BEGIN_MONTH</span> <span class="o">=</span> <span class="s1">'06'</span>
+<span class="n">END_MONTH</span> <span class="o">=</span> <span class="s1">'09'</span>
+<span class="n">MAX_CLOUD</span> <span class="o">=</span> <span class="mf">20.0</span>
+<span class="n">READ_IN_CHUNK</span> <span class="o">=</span> <span class="mi">4096</span>
+<span class="n">RESOLUTION</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">TEMPORAL_CHUNK</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'time'</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'band'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">128</span><span class="p">}</span>
+<span class="n">SYNCHRONOUS</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Write bands out one at a time - use if resources can't handle all bands at once for AOI</span>
+<span class="c1"># -------------</span>
 </pre></div>
 </div>
 </div>
 </section>
-</section>
 <section id="Main-Loop">
-<h1>Main Loop<a class="headerlink" href="#Main-Loop" title="Permalink to this headline">#</a></h1>
+<h2>Main Loop<a class="headerlink" href="#Main-Loop" title="Permalink to this headline">#</a></h2>
 <p>In the main loop we iterate over the number of target years, creating a composite of each for each of the composite bands.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%time
-# Main pipeline to iterate over years
-write_futs = []
-for year in YEARS:
-    OUT_PTH = f&#39;{BASE_PTH}/{OUTPUT_DIR}/{year}&#39;
-    date_range = f&#39;{year}-{BEGIN_MONTH}-01/{year}-{END_MONTH}-30&#39;
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
+<span class="c1"># Main pipeline to iterate over years</span>
+<span class="n">write_futs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">YEARS</span><span class="p">:</span>
+    <span class="n">OUT_PTH</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">BASE_PTH</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">OUTPUT_DIR</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">'</span>
+    <span class="n">date_range</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">BEGIN_MONTH</span><span class="si">}</span><span class="s1">-01/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">END_MONTH</span><span class="si">}</span><span class="s1">-30'</span>
 
-    # Query the Planetary Computer STAC server with pystac_client
-    print(f&#39;[Querying] {year}&#39;)
-    items = api.search(
-        collections = [&#39;sentinel-2-l2a&#39;],
-        intersects = FOOTPRINT,
-        query={&quot;eo:cloud_cover&quot;: {&quot;lt&quot;: MAX_CLOUD}},
-        datetime = date_range,
-    ).get_all_items()
+    <span class="c1"># Query the Planetary Computer STAC server with pystac_client</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'[Querying] </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+        <span class="n">collections</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'sentinel-2-l2a'</span><span class="p">],</span>
+        <span class="n">intersects</span> <span class="o">=</span> <span class="n">FOOTPRINT</span><span class="p">,</span>
+        <span class="n">query</span><span class="o">=</span><span class="p">{</span><span class="s2">"eo:cloud_cover"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"lt"</span><span class="p">:</span> <span class="n">MAX_CLOUD</span><span class="p">}},</span>
+        <span class="n">datetime</span> <span class="o">=</span> <span class="n">date_range</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">get_all_items</span><span class="p">()</span>
 
-    print(f&#39;\tFound {len(items)} items&#39;)
-    # planetarycomputer requires signed URLs to access Asset HREFs.
-    print(&#39;\t[Signing data links]&#39;)
-    signed_items = [planetary_computer.sign(item).to_dict() for item in items]
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="se">\t</span><span class="s1">Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="si">}</span><span class="s1"> items'</span><span class="p">)</span>
+    <span class="c1"># planetarycomputer requires signed URLs to access Asset HREFs.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">[Signing data links]'</span><span class="p">)</span>
+    <span class="n">signed_items</span> <span class="o">=</span> <span class="p">[</span><span class="n">planetary_computer</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">]</span>
 
-    # Pull out SCL DataArray before bands are looped through
-    # since this will not change per band.
-    scl_stk = (
-        stackstac.stack(
-            signed_items,
-            assets=[&#39;SCL&#39;],
-            chunksize=READ_IN_CHUNK, # Set chunksize
-            resolution=RESOLUTION, # Set all bands res to this
-            bounds_latlon=FOOTPRINT.bounds, # clip to AOI bounds
-        )
-    )
-    # Create binary mask [np.nan, 1]
-    # https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm
-    scl_stk.data = da.where(
-            ((scl_stk.data==0)| # nodata
-             (scl_stk.data==1)| # Saturated or Defective
-             (scl_stk.data==8)| # cloud: medium probability
-             (scl_stk.data==9)| # cloud: high probability
-             (scl_stk.data==10)| # cloud: thin cirrus
-             (scl_stk.data==11) # snow
-            ), np.nan, 1)
+    <span class="c1"># Pull out SCL DataArray before bands are looped through</span>
+    <span class="c1"># since this will not change per band.</span>
+    <span class="n">scl_stk</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">stackstac</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span>
+            <span class="n">signed_items</span><span class="p">,</span>
+            <span class="n">assets</span><span class="o">=</span><span class="p">[</span><span class="s1">'SCL'</span><span class="p">],</span>
+            <span class="n">chunksize</span><span class="o">=</span><span class="n">READ_IN_CHUNK</span><span class="p">,</span> <span class="c1"># Set chunksize</span>
+            <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span> <span class="c1"># Set all bands res to this</span>
+            <span class="n">bounds_latlon</span><span class="o">=</span><span class="n">FOOTPRINT</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span> <span class="c1"># clip to AOI bounds</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="c1"># Create binary mask [np.nan, 1]</span>
+    <span class="c1"># https://sentinels.copernicus.eu/web/sentinel/technical-guides/sentinel-2-msi/level-2a/algorithm</span>
+    <span class="n">scl_stk</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="p">((</span><span class="n">scl_stk</span><span class="o">.</span><span class="n">data</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="o">|</span> <span class="c1"># nodata</span>
+             <span class="p">(</span><span class="n">scl_stk</span><span class="o">.</span><span class="n">data</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">|</span> <span class="c1"># Saturated or Defective</span>
+             <span class="p">(</span><span class="n">scl_stk</span><span class="o">.</span><span class="n">data</span><span class="o">==</span><span class="mi">8</span><span class="p">)</span><span class="o">|</span> <span class="c1"># cloud: medium probability</span>
+             <span class="p">(</span><span class="n">scl_stk</span><span class="o">.</span><span class="n">data</span><span class="o">==</span><span class="mi">9</span><span class="p">)</span><span class="o">|</span> <span class="c1"># cloud: high probability</span>
+             <span class="p">(</span><span class="n">scl_stk</span><span class="o">.</span><span class="n">data</span><span class="o">==</span><span class="mi">10</span><span class="p">)</span><span class="o">|</span> <span class="c1"># cloud: thin cirrus</span>
+             <span class="p">(</span><span class="n">scl_stk</span><span class="o">.</span><span class="n">data</span><span class="o">==</span><span class="mi">11</span><span class="p">)</span> <span class="c1"># snow</span>
+            <span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-    # Iterate over bands and build composite DAG
-    for band in TGT_BANDS:
-        clear_output(wait=True) # clear Jupyter Cell output
-        print(f&#39;[Processing {band}]&#39;)
+    <span class="c1"># Iterate over bands and build composite DAG</span>
+    <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="n">TGT_BANDS</span><span class="p">:</span>
+        <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># clear Jupyter Cell output</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'[Processing </span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s1">]'</span><span class="p">)</span>
 
-        # Convert STAC query into a xarray.DataArray
-        # with stackstac
-        print(&#39;\t[Converting STAC query to DataArray]&#39;)
-        data = (
-            stackstac.stack(
-                signed_items,
-                assets=[band],
-                chunksize=READ_IN_CHUNK, # Set chunksize
-                resolution=RESOLUTION, # Set all bands res to this
-                bounds_latlon=FOOTPRINT.bounds, # clip to AOI bounds
-            ).where(lambda x: x &gt; 0, other=np.nan) # Convert nodata zero to np.nan
-        )
+        <span class="c1"># Convert STAC query into a xarray.DataArray</span>
+        <span class="c1"># with stackstac</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">[Converting STAC query to DataArray]'</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">stackstac</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span>
+                <span class="n">signed_items</span><span class="p">,</span>
+                <span class="n">assets</span><span class="o">=</span><span class="p">[</span><span class="n">band</span><span class="p">],</span>
+                <span class="n">chunksize</span><span class="o">=</span><span class="n">READ_IN_CHUNK</span><span class="p">,</span> <span class="c1"># Set chunksize</span>
+                <span class="n">resolution</span><span class="o">=</span><span class="n">RESOLUTION</span><span class="p">,</span> <span class="c1"># Set all bands res to this</span>
+                <span class="n">bounds_latlon</span><span class="o">=</span><span class="n">FOOTPRINT</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span> <span class="c1"># clip to AOI bounds</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">other</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span> <span class="c1"># Convert nodata zero to np.nan</span>
+        <span class="p">)</span>
 
-        # Mask the bands with the accompanying SCL band per time
-        print(&#39;\t[Masking data with SCL]&#39;)
-        masked = data.copy()
-        masked.data = data.data * scl_stk.data # np.nan will mask unwated pixels
+        <span class="c1"># Mask the bands with the accompanying SCL band per time</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">[Masking data with SCL]'</span><span class="p">)</span>
+        <span class="n">masked</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">masked</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span> <span class="o">*</span> <span class="n">scl_stk</span><span class="o">.</span><span class="n">data</span> <span class="c1"># np.nan will mask unwated pixels</span>
 
-        # Create median composite
-        print(&#39;\t[Creating Median composite]&#39;)
-        # skip np.nan in temporal stack with skipna=True
-        median = masked.median(dim=&#39;time&#39;, skipna=True, keep_attrs=True)
-        median = median.chunk({&#39;band&#39;: 1, &#39;y&#39;: &#39;auto&#39;, &#39;x&#39;: &#39;auto&#39;})
-        median = median.transpose(&#39;band&#39;, &#39;y&#39;, &#39;x&#39;)
+        <span class="c1"># Create median composite</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">[Creating Median composite]'</span><span class="p">)</span>
+        <span class="c1"># skip np.nan in temporal stack with skipna=True</span>
+        <span class="n">median</span> <span class="o">=</span> <span class="n">masked</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">'time'</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">keep_attrs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">median</span> <span class="o">=</span> <span class="n">median</span><span class="o">.</span><span class="n">chunk</span><span class="p">({</span><span class="s1">'band'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="s1">'auto'</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">:</span> <span class="s1">'auto'</span><span class="p">})</span>
+        <span class="n">median</span> <span class="o">=</span> <span class="n">median</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">'band'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">)</span>
 
-        # Cast the xarray.DataArray to int16
-        median = median.astype(np.uint16)
+        <span class="c1"># Cast the xarray.DataArray to int16</span>
+        <span class="n">median</span> <span class="o">=</span> <span class="n">median</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
 
-        # Get EPSG from median metadata
-        epsg = median.coords[&#39;epsg&#39;].values.tolist()
+        <span class="c1"># Get EPSG from median metadata</span>
+        <span class="n">epsg</span> <span class="o">=</span> <span class="n">median</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="s1">'epsg'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
 
-        if SYNCHRONOUS:
-            # Issues with large AOI&#39;s - limited resources - so compute each composite
-            # individually to relieve the Dask Cluster
-            print(dask.compute(write_ras(gcs, epsg, median, band, f&#39;{OUT_PTH}/{band}.tif&#39;)))
-        else:
-            # Write out each band to a file asynchronously
-            print(f&#39;\t[Processing and Writing {band}]&#39;)
-            median.name = band
-            median.attrs[&#39;long_name&#39;] = band
-            write_futs.append(write_ras(gcs, epsg, median, band, f&#39;{OUT_PTH}/{band}.tif&#39;))
+        <span class="k">if</span> <span class="n">SYNCHRONOUS</span><span class="p">:</span>
+            <span class="c1"># Issues with large AOI's - limited resources - so compute each composite</span>
+            <span class="c1"># individually to relieve the Dask Cluster</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">dask</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">write_ras</span><span class="p">(</span><span class="n">gcs</span><span class="p">,</span> <span class="n">epsg</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">band</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">OUT_PTH</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s1">.tif'</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Write out each band to a file asynchronously</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="se">\t</span><span class="s1">[Processing and Writing </span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s1">]'</span><span class="p">)</span>
+            <span class="n">median</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">band</span>
+            <span class="n">median</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">'long_name'</span><span class="p">]</span> <span class="o">=</span> <span class="n">band</span>
+            <span class="n">write_futs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">write_ras</span><span class="p">(</span><span class="n">gcs</span><span class="p">,</span> <span class="n">epsg</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">band</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">OUT_PTH</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s1">.tif'</span><span class="p">))</span>
 
-if not SYNCHRONOUS:
-    clear_output(wait=True)
-    write_futs.visualize()
-    with performance_report(&#39;dask_report.html&#39;):
-        print(dask.compute(write_futs)[0])
+<span class="k">if</span> <span class="ow">not</span> <span class="n">SYNCHRONOUS</span><span class="p">:</span>
+    <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">write_futs</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">performance_report</span><span class="p">(</span><span class="s1">'dask_report.html'</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">dask</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">write_futs</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
+</section>
 <section id="Shut-Dask-Cluster-Down">
 <h2>Shut Dask Cluster Down<a class="headerlink" href="#Shut-Dask-Cluster-Down" title="Permalink to this headline">#</a></h2>
 <p>Make sure to shut down the Dask Cluster as not to incur costs</p>
@@ -863,7 +861,8 @@ if not SYNCHRONOUS:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>cluster.shutdown()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">cluster</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -875,7 +874,8 @@ if not SYNCHRONOUS:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>os.remove(poly_file_pth)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">poly_file_pth</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -888,14 +888,14 @@ if not SYNCHRONOUS:
         
         <div class="related-pages">
           
-          <a class="prev-page" href="02-knn.html">
+          <a class="prev-page" href="02-kmeans-dask.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">KNN Land Classification with Dask [40 hours]</div>
+                <div class="title">&lt;no title&gt;</div>
                 
               </div>
             </a>
@@ -935,9 +935,7 @@ if not SYNCHRONOUS:
 <li><a class="reference internal" href="#AOI">AOI</a></li>
 <li><a class="reference internal" href="#Set-Up-STAC-Client">Set Up STAC Client</a></li>
 <li><a class="reference internal" href="#Configuration">Configuration</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#Main-Loop">Main Loop</a><ul>
+<li><a class="reference internal" href="#Main-Loop">Main Loop</a></li>
 <li><a class="reference internal" href="#Shut-Dask-Cluster-Down">Shut Dask Cluster Down</a></li>
 <li><a class="reference internal" href="#Remove-Intermediate-Files">Remove Intermediate Files</a></li>
 </ul>
@@ -959,7 +957,5 @@ if not SYNCHRONOUS:
     <script src="../_static/tabs.js"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

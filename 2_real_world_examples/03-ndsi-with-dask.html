@@ -3,12 +3,12 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="NDWI With Dask" href="04-ndwi-with-dask.html" /><link rel="prev" title="NDVI With Dask" href="02-ndvi-with-dask.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="NDMI With Dask" href="04-ndmi-with-dask.html" /><link rel="prev" title="NDVI With Dask" href="02-ndvi-with-dask.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.06.04.1"/>
-        <title>1. Initialize your Dask Gateway Clusters - GEOAnalytics Canada</title>
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+        <title>NDSI With Dask - GeoAnalytics Canada</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">GEOAnalytics Canada</div></a>
+      <a href="../index.html"><div class="brand">GeoAnalytics Canada</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -151,7 +151,7 @@
     <img class="sidebar-logo" src="../_static/geoanalytics-icon.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GEOAnalytics Canada</span>
+  <span class="sidebar-brand-text">GeoAnalytics Canada</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -159,42 +159,33 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1_getting_started/index.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/01-python-intro.html"><strong>Introduction to Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/04-authentication.html"><strong>Authentication</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05a-ssh-keys.html">Set Up SSH Keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/06-file-browser.html"><strong>File Browser</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/08-gitlab.html"><strong>GitLab</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/09-pipelines.html"><strong>Pipelines</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/10-dask.html"><strong>Dask</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Real World Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01-accessing-data.html"><strong>Accessing and Downloading Data</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="02-ndvi-with-dask.html"><strong>NDVI With Dask</strong></a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">1. Initialize your Dask Gateway Clusters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#2.-Getting-the-MODIS-Data">2. Getting the MODIS Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#3.-Calculating-the-NDSI">3. Calculating the NDSI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#4.-Visualizing-the-Results">4. Visualizing the Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04-ndwi-with-dask.html"><strong>NDWI With Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="05-change-detection.html"><strong>Change Detection</strong></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>NDSI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-ndmi-with-dask.html"><strong>NDMI With Dask</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html">KNN Land Classification with Dask [40 hours]</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#1.-Initialize-Dask-Cluster">1. Initialize Dask Cluster</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#Query-using-the-SentinelSat-API">Query using the SentinelSat API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#2.-Functions">2. Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#2.-Loading,-Masking,-and-Creating-Mosaics">2. Loading, Masking, and Creating Mosaics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html">Compositing Rasters with Dask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html#Main-Loop">Main Loop</a></li>
 </ul>
 </li>
 </ul>
@@ -215,8 +206,7 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -224,7 +214,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -440,12 +430,11 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt .copybtn {
+.prompt a.copybtn {
     display: none;
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
-.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -454,14 +443,10 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
-.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
-.jp-RenderedHTMLCommon tr,
-.jp-RenderedHTMLCommon th,
-.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -473,20 +458,18 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
-.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
-.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
-.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<p><strong>NDSI With Dask</strong></p>
+<section id="NDSI-With-Dask">
+<h1><strong>NDSI With Dask</strong><a class="headerlink" href="#NDSI-With-Dask" title="Permalink to this headline">#</a></h1>
 <p>This tutorial notebook demonstrates how to find, visualize, and analyze the Normalized Difference Snow Index with MODIS imagery, efficiently using Dask. The satellite we will be using is the MODIS Terra Surface Reflectance Daily Global 1km and 500m Version 6 (MOD09GA.006) which has a spatial resolution of 500-1000 meters and temporal resolution of 1 day. We will be focusing on the granules covering Northern British Columbia and most of Alberta.</p>
 <p><strong>What is NDSI?</strong></p>
 <p>The Normalized Difference Snow Index is used to detect the presence of snow in a pixel. Identifying snow cover is important for hazard mitigation, and for hydrological and weather forecasting. Snow has very high visible (Green) reflectance and very low reflectance in the shortwave infrared (SWIR), which makes it easy to differentiate snow cover from most cloud types.</p>
@@ -499,38 +482,39 @@ div.rendered_html tbody tr:hover {
 <p><strong>What do NDSI values represent?</strong></p>
 <p>The NDSI values ranging from 0 to 1, higher values (NDSI &gt; 0.4) represent snow. The MODIS products were tested with different NDSI thresholds ranging from 0.3 to 0.4 to map the snow cover over low-altitude glaciers due to its coarser resolution.</p>
 <section id="1.-Initialize-your-Dask-Gateway-Clusters">
-<h1>1. Initialize your Dask Gateway Clusters<a class="headerlink" href="#1.-Initialize-your-Dask-Gateway-Clusters" title="Permalink to this headline">#</a></h1>
+<h2>1. Initialize your Dask Gateway Clusters<a class="headerlink" href="#1.-Initialize-your-Dask-Gateway-Clusters" title="Permalink to this headline">#</a></h2>
 <p>Since we want to use eight years of data for our analysis, running the computation using the cores of the machine we are running this notebook on is not ideal. Let’s connect to Dask Gateway so the clusters can run our work on Elastic Compute Cloud (EC2) machines.</p>
 <p>For now, we will set our cluster to scale the workers to 20, because of the amount of data we will be working with.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[127]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
-import glob
-import re
-import datetime
-import requests
-import sys
-import time
-import io
-import math
-import yaml
-import tempfile
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
 
-import dask
-import distributed
-import rasterio
+<span class="kn">import</span> <span class="nn">dask</span>
+<span class="kn">import</span> <span class="nn">distributed</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
 
-import pandas as pd
-import xarray as xr
-import numpy as np
-import rioxarray as rxr
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">rioxarray</span> <span class="k">as</span> <span class="nn">rxr</span>
 
-from dask.distributed import wait, progress
-from rasterio.plot import show
-from urllib.request import urlopen, Request, build_opener, HTTPCookieProcessor
-from dask_gateway import Gateway
+<span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">wait</span><span class="p">,</span> <span class="n">progress</span>
+<span class="kn">from</span> <span class="nn">rasterio.plot</span> <span class="kn">import</span> <span class="n">show</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span><span class="p">,</span> <span class="n">Request</span><span class="p">,</span> <span class="n">build_opener</span><span class="p">,</span> <span class="n">HTTPCookieProcessor</span>
+<span class="kn">from</span> <span class="nn">dask_gateway</span> <span class="kn">import</span> <span class="n">Gateway</span>
 </pre></div>
 </div>
 </div>
@@ -538,9 +522,10 @@ from dask_gateway import Gateway
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>gateway = Gateway()
-options = gateway.cluster_options()
-cluster = gateway.new_cluster(options)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">gateway</span> <span class="o">=</span> <span class="n">Gateway</span><span class="p">()</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">cluster_options</span><span class="p">()</span>
+<span class="n">cluster</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">new_cluster</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -548,8 +533,9 @@ cluster = gateway.new_cluster(options)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>workers = 20
-cluster.scale(workers)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">workers</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">cluster</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">workers</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -557,7 +543,8 @@ cluster.scale(workers)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>client = cluster.get_client() #Make sure dask knows to use this cluster for computations
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">client</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">get_client</span><span class="p">()</span> <span class="c1">#Make sure dask knows to use this cluster for computations</span>
 </pre></div>
 </div>
 </div>
@@ -565,8 +552,9 @@ cluster.scale(workers)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#client.wait_for_workers(workers - 27)
-cluster
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#client.wait_for_workers(workers - 27)</span>
+<span class="n">cluster</span>
 </pre></div>
 </div>
 </div>
@@ -580,7 +568,8 @@ cluster
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[72]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dask.config.set({&quot;dask.comm.timeouts.tcp&quot;: &quot;60s&quot;})
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">dask</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">({</span><span class="s2">"dask.comm.timeouts.tcp"</span><span class="p">:</span> <span class="s2">"60s"</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -595,7 +584,7 @@ cluster
 </div>
 </section>
 <section id="2.-Getting-the-MODIS-Data">
-<h1>2. Getting the MODIS Data<a class="headerlink" href="#2.-Getting-the-MODIS-Data" title="Permalink to this headline">#</a></h1>
+<h2>2. Getting the MODIS Data<a class="headerlink" href="#2.-Getting-the-MODIS-Data" title="Permalink to this headline">#</a></h2>
 <p>In contrast to the Sentinel-2 and Landsat 8 satellite data which are publicly available for download, MODIS data is stored on NASA’s Land Processes Distributed Active Archive Center (LP DAAC) located at the USGS Earth Resources Observation and Science (EROS) Center. The data requires a NASA Earthdata Authentication with the user’s username and password. (<a class="reference external" href="https://e4ftl01.cr.usgs.gov/">https://e4ftl01.cr.usgs.gov/</a>)</p>
 <p><strong>The main steps to retrieve the MODIS data follow as such:</strong></p>
 <ol class="arabic simple">
@@ -605,13 +594,14 @@ cluster
 <li><p>Assigning a temporary file name to the object and opening the file with rasterio.</p></li>
 </ol>
 <section id="2.1-Select-the-Granules">
-<h2>2.1 Select the Granules<a class="headerlink" href="#2.1-Select-the-Granules" title="Permalink to this headline">#</a></h2>
+<h3>2.1 Select the Granules<a class="headerlink" href="#2.1-Select-the-Granules" title="Permalink to this headline">#</a></h3>
 <p>Install the <strong>python-cmr</strong> which is a wrapper to the NASA EOSDIS Common Metadata Repository API. The package allows you to make queries on the available data.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>! pip install python-cmr
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span> pip install python-cmr
 </pre></div>
 </div>
 </div>
@@ -633,9 +623,10 @@ Requirement already satisfied: chardet&lt;4,&gt;=3.0.2 in /srv/conda/envs/notebo
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[96]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Time period
-start_date = datetime.datetime(2016, 6, 30).date()
-end_date = datetime.datetime(2021, 6, 30).date()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Time period</span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -643,16 +634,17 @@ end_date = datetime.datetime(2021, 6, 30).date()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[97]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from cmr import GranuleQuery
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">cmr</span> <span class="kn">import</span> <span class="n">GranuleQuery</span>
 
-# search for MOD09GA version 006 granules at latitude 56, longitude -120
-api = GranuleQuery()
-api.parameters(
-    short_name=&quot;MOD09GA&quot;,
-    version=&quot;006&quot;,
-    point=(-120, 51), # within Tile H10V3 - encompasses northern BC area
-    temporal=(f&quot;{start_date}T00:00:00Z&quot;, f&quot;{end_date}T23:59:59Z&quot;)
-)
+<span class="c1"># search for MOD09GA version 006 granules at latitude 56, longitude -120</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">GranuleQuery</span><span class="p">()</span>
+<span class="n">api</span><span class="o">.</span><span class="n">parameters</span><span class="p">(</span>
+    <span class="n">short_name</span><span class="o">=</span><span class="s2">"MOD09GA"</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">"006"</span><span class="p">,</span>
+    <span class="n">point</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">120</span><span class="p">,</span> <span class="mi">51</span><span class="p">),</span> <span class="c1"># within Tile H10V3 - encompasses northern BC area</span>
+    <span class="n">temporal</span><span class="o">=</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">start_date</span><span class="si">}</span><span class="s2">T00:00:00Z"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">end_date</span><span class="si">}</span><span class="s2">T23:59:59Z"</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -670,8 +662,9 @@ api.parameters(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[98]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>granules = api.get_all()
-len(granules)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">granules</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">granules</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -688,7 +681,8 @@ len(granules)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[99]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>granules[0][&#39;links&#39;][0][&#39;href&#39;]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">granules</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'links'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">'href'</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -698,12 +692,12 @@ len(granules)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&#39;https://e4ftl01.cr.usgs.gov//DP109/MOLT/MOD09GA.006/2016.06.30/MOD09GA.A2016182.h10v03.006.2016187214710.hdf&#39;
+'https://e4ftl01.cr.usgs.gov//DP109/MOLT/MOD09GA.006/2016.06.30/MOD09GA.A2016182.h10v03.006.2016187214710.hdf'
 </pre></div></div>
 </div>
 </section>
 <section id="2.2-Create-an-EarthData-Account">
-<h2>2.2 Create an EarthData Account<a class="headerlink" href="#2.2-Create-an-EarthData-Account" title="Permalink to this headline">#</a></h2>
+<h3>2.2 Create an EarthData Account<a class="headerlink" href="#2.2-Create-an-EarthData-Account" title="Permalink to this headline">#</a></h3>
 <p>To download MODIS data, you will require an Earthdata account for access. Head over to <a class="reference external" href="https://urs.earthdata.nasa.gov/">https://urs.earthdata.nasa.gov/</a> and create a free account!</p>
 <p>Once you have created your account, store your credentials for the Hatfield CMR to use when authenticating for data download.</p>
 <p><strong>1. Create a yaml file, ‘ED_config.yml’ within your data folder and store your credentials as such, substituting your username and password in place:</strong></p>
@@ -716,115 +710,117 @@ len(granules)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[77]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Load the yaml file containing the authentication to EarthData
-envvars = open(&#39;data/ED_config.yml&#39; ,&#39;r&#39;)
-secrets = yaml.load(envvars, Loader=yaml.FullLoader)
-envvars.close()
-auth=(secrets[&#39;EARTHDATA_USER&#39;],secrets[&#39;EARTHDATA_PASS&#39;])
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Load the yaml file containing the authentication to EarthData</span>
+<span class="n">envvars</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'data/ED_config.yml'</span> <span class="p">,</span><span class="s1">'r'</span><span class="p">)</span>
+<span class="n">secrets</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">envvars</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">)</span>
+<span class="n">envvars</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">secrets</span><span class="p">[</span><span class="s1">'EARTHDATA_USER'</span><span class="p">],</span><span class="n">secrets</span><span class="p">[</span><span class="s1">'EARTHDATA_PASS'</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </section>
 <section id="2.3-Hatfield-CMR">
-<h2>2.3 Hatfield CMR<a class="headerlink" href="#2.3-Hatfield-CMR" title="Permalink to this headline">#</a></h2>
+<h3>2.3 Hatfield CMR<a class="headerlink" href="#2.3-Hatfield-CMR" title="Permalink to this headline">#</a></h3>
 <p>Use the Hatfield CMR functions to safely access the granules and load them as an in-memory file.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[100]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from typing import Tuple, List
-import requests
-from html.parser import HTMLParser
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">html.parser</span> <span class="kn">import</span> <span class="n">HTMLParser</span>
 
-class LinkFinder(HTMLParser):
-    def __init__(self):
-        super().__init__()
-        self.download_link = None
+<span class="k">class</span> <span class="nc">LinkFinder</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">download_link</span> <span class="o">=</span> <span class="kc">None</span>
 
-    def handle_starttag(self, tag, attrs):
-        if attrs and attrs[0][0] == &#39;href&#39;:
-            self.download_link = attrs[0][1]
+    <span class="k">def</span> <span class="nf">handle_starttag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">attrs</span> <span class="ow">and</span> <span class="n">attrs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'href'</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">download_link</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 
 
-class SessionWithHeaderRedirection(requests.Session):
-    AUTH_HOST = &#39;urs.earthdata.nasa.gov&#39;
-    def __init__(self, auth):
-        super().__init__()
-        # auth = (username, password)
-        self.auth = auth
+<span class="k">class</span> <span class="nc">SessionWithHeaderRedirection</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">):</span>
+    <span class="n">AUTH_HOST</span> <span class="o">=</span> <span class="s1">'urs.earthdata.nasa.gov'</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auth</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># auth = (username, password)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth</span> <span class="o">=</span> <span class="n">auth</span>
 
-   # Overrides from the library to keep headers when redirected to or from
-   # the NASA auth host.
-    def rebuild_auth(self, prepared_request, response):
-        headers = prepared_request.headers
-        url = prepared_request.url
-        if &#39;Authorization&#39; in headers:
-            original_parsed = requests.utils.urlparse(response.request.url)
-            redirect_parsed = requests.utils.urlparse(url)
-            if (original_parsed.hostname != redirect_parsed.hostname) and redirect_parsed.hostname != self.AUTH_HOST and original_parsed.hostname != self.AUTH_HOST:
-                del headers[&#39;Authorization&#39;]
-        return
+   <span class="c1"># Overrides from the library to keep headers when redirected to or from</span>
+   <span class="c1"># the NASA auth host.</span>
+    <span class="k">def</span> <span class="nf">rebuild_auth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prepared_request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="n">prepared_request</span><span class="o">.</span><span class="n">headers</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">prepared_request</span><span class="o">.</span><span class="n">url</span>
+        <span class="k">if</span> <span class="s1">'Authorization'</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">:</span>
+            <span class="n">original_parsed</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+            <span class="n">redirect_parsed</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">original_parsed</span><span class="o">.</span><span class="n">hostname</span> <span class="o">!=</span> <span class="n">redirect_parsed</span><span class="o">.</span><span class="n">hostname</span><span class="p">)</span> <span class="ow">and</span> <span class="n">redirect_parsed</span><span class="o">.</span><span class="n">hostname</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">AUTH_HOST</span> <span class="ow">and</span> <span class="n">original_parsed</span><span class="o">.</span><span class="n">hostname</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">AUTH_HOST</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">headers</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span>
+        <span class="k">return</span>
 
-#@dask.delayed
-def get_session(auth, retries=5):
-    # s = requests.Session()
-    s = SessionWithHeaderRedirection(auth)
-    #r = Retry(total=retries, backoff_factor=0.1, status_forcelist=[500, 502, 503, 504])
-    # s.mount(&#39;http://&#39;, HTTPAdapter(max_retries=r))
-    #s.mount(&#39;https://&#39;, HTTPAdapter(max_retries=r))
-    return s
+<span class="c1">#@dask.delayed</span>
+<span class="k">def</span> <span class="nf">get_session</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="c1"># s = requests.Session()</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">SessionWithHeaderRedirection</span><span class="p">(</span><span class="n">auth</span><span class="p">)</span>
+    <span class="c1">#r = Retry(total=retries, backoff_factor=0.1, status_forcelist=[500, 502, 503, 504])</span>
+    <span class="c1"># s.mount('http://', HTTPAdapter(max_retries=r))</span>
+    <span class="c1">#s.mount('https://', HTTPAdapter(max_retries=r))</span>
+    <span class="k">return</span> <span class="n">s</span>
 
-#@dask.delayed
-def get_stream(session, url, auth, previous_tries):
-    &quot;&quot;&quot; Traverse redirects to get the final url &quot;&quot;&quot;
+<span class="c1">#@dask.delayed</span>
+<span class="k">def</span> <span class="nf">get_stream</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span> <span class="n">previous_tries</span><span class="p">):</span>
+    <span class="sd">""" Traverse redirects to get the final url """</span>
 
-    # stream = session.get(url, auth=auth, stream=True)
-    stream = session.get(url,
-                         auth=auth,
-                         allow_redirects=True,
-                         stream=True)
+    <span class="c1"># stream = session.get(url, auth=auth, stream=True)</span>
+    <span class="n">stream</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
+                         <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span>
+                         <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    # if we get back to the same url, it&#39;s time to download
-    if url in previous_tries or stream.status_code == 200:
-        return stream
+    <span class="c1"># if we get back to the same url, it's time to download</span>
+    <span class="k">if</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">previous_tries</span> <span class="ow">or</span> <span class="n">stream</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">stream</span>
 
-    if stream.status_code == 302:
-        # if stream.status_code != 200:
-        #     print(f&quot;Error getting response {stream.status_code} {stream.text}&quot;)
-        previous_tries.append(url)
-        link = LinkFinder()
-        link.feed(stream.text)
-        return self.get_stream(session, link.download_link, auth,
-                               previous_tries)
-    else:
-        raise RuntimeError(
-            f&quot;Earthdata Authentication Error {stream.status_code} {stream.text}&quot;
-        )
-    # return stream
+    <span class="k">if</span> <span class="n">stream</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">302</span><span class="p">:</span>
+        <span class="c1"># if stream.status_code != 200:</span>
+        <span class="c1">#     print(f"Error getting response {stream.status_code} {stream.text}")</span>
+        <span class="n">previous_tries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">link</span> <span class="o">=</span> <span class="n">LinkFinder</span><span class="p">()</span>
+        <span class="n">link</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_stream</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">link</span><span class="o">.</span><span class="n">download_link</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span>
+                               <span class="n">previous_tries</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Earthdata Authentication Error </span><span class="si">{</span><span class="n">stream</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">stream</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+    <span class="c1"># return stream</span>
 
-def download_earthdata_file(url: str,
-                           auth: tuple,
-                           noauth: bool = False) -&gt; io.BytesIO:
-    session = get_session(auth, retries=5)
-    if noauth:
-        stream = session.get(url, stream=True)
-    else:
-        stream = get_stream(session, url, auth, [])
-    buf = io.BytesIO()
-    for chunk in stream.iter_content(256 * 1024):
-        buf.write(chunk)
-    buf.seek(0,0)
-    return buf
+<span class="k">def</span> <span class="nf">download_earthdata_file</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                           <span class="n">auth</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span>
+                           <span class="n">noauth</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">:</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">get_session</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">noauth</span><span class="p">:</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="n">get_stream</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">stream</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="mi">256</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">):</span>
+        <span class="n">buf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+    <span class="n">buf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">buf</span>
 </pre></div>
 </div>
 </div>
 </section>
 </section>
 <section id="3.-Calculating-the-NDSI">
-<h1>3. Calculating the NDSI<a class="headerlink" href="#3.-Calculating-the-NDSI" title="Permalink to this headline">#</a></h1>
+<h2>3. Calculating the NDSI<a class="headerlink" href="#3.-Calculating-the-NDSI" title="Permalink to this headline">#</a></h2>
 <p>Now that we have the functions ready, let’s access the data and compute the NDSI! To efficiently get the NDVI for all the data, we must first load in the MODIS image data from NASA’s LPDAAC Center, using Hatfield’s CMR.</p>
 <section id="3.1-Stream-and-Load-the-MODIS-Data">
-<h2>3.1 Stream and Load the MODIS Data<a class="headerlink" href="#3.1-Stream-and-Load-the-MODIS-Data" title="Permalink to this headline">#</a></h2>
+<h3>3.1 Stream and Load the MODIS Data<a class="headerlink" href="#3.1-Stream-and-Load-the-MODIS-Data" title="Permalink to this headline">#</a></h3>
 <p>Let’s run the cells below to generate the functions to lazily retrieve the data from NASA servers. The function <code class="docutils literal notranslate"><span class="pre">lazy_get_data()</span></code> takes in the url of an image from the list of granules, along with the Earthdata authentication and the Dask chunk sizes.</p>
 <p>The url will be used to download the file as a temporary file using the Hatfield CMR, and opened using rasterio. Since the MODIS tiles cover a large area on Earth, we will be looking at only one portion for our NDSI analysis. The rasterio <code class="docutils literal notranslate"><span class="pre">window</span></code> will only read the part of the tile we specify. In this example, the window covers Southern British Columbia, near the Rocky Mountains.</p>
 <p>We will convert the “windowed” numpy arrays from rasterio to dask arrays with the assigned chunksize, for optimal parallelization.</p>
@@ -832,8 +828,9 @@ def download_earthdata_file(url: str,
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[79]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import warnings
-warnings.filterwarnings(&quot;ignore&quot;, category=rasterio.errors.NotGeoreferencedWarning)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">rasterio</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">NotGeoreferencedWarning</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -841,49 +838,51 @@ warnings.filterwarnings(&quot;ignore&quot;, category=rasterio.errors.NotGeorefer
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[101]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>@dask.delayed
-def lazy_get_data(url, auth, chunks={&#39;band&#39;: 1, &#39;x&#39;: 2048, &#39;y&#39;: 2048}):
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nd">@dask</span><span class="o">.</span><span class="n">delayed</span>
+<span class="k">def</span> <span class="nf">lazy_get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s1">'band'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">2048</span><span class="p">}):</span>
 
-    buff = download_earthdata_file(url, auth) # download the image into memory
-    with tempfile.NamedTemporaryFile() as tmpfile:
-        tmpfile.write(buff.getvalue())
-        with rasterio.open(tmpfile.name, &#39;r&#39;) as modis_scene:
-            B4 = modis_scene.subdatasets[6]
-            B6 = modis_scene.subdatasets[8]
+    <span class="n">buff</span> <span class="o">=</span> <span class="n">download_earthdata_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="p">)</span> <span class="c1"># download the image into memory</span>
+    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpfile</span><span class="p">:</span>
+        <span class="n">tmpfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">buff</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+        <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">tmpfile</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">modis_scene</span><span class="p">:</span>
+            <span class="n">B4</span> <span class="o">=</span> <span class="n">modis_scene</span><span class="o">.</span><span class="n">subdatasets</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+            <span class="n">B6</span> <span class="o">=</span> <span class="n">modis_scene</span><span class="o">.</span><span class="n">subdatasets</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
 
-            with rasterio.open(B4) as green, rasterio.open(B6) as swir:
-                # window(row_offset, col_offset, width, height)
-                window = rasterio.windows.Window(700, 1500, 1700, 900)
+            <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">B4</span><span class="p">)</span> <span class="k">as</span> <span class="n">green</span><span class="p">,</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">B6</span><span class="p">)</span> <span class="k">as</span> <span class="n">swir</span><span class="p">:</span>
+                <span class="c1"># window(row_offset, col_offset, width, height)</span>
+                <span class="n">window</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span><span class="mi">700</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">1700</span><span class="p">,</span> <span class="mi">900</span><span class="p">)</span>
 
-                # read only the section specified by the window  and change to float type
-                green1 = green.read(window=window).astype(&#39;float64&#39;).squeeze()
-                swir1 = swir.read(window=window).astype(&#39;float64&#39;).squeeze()
+                <span class="c1"># read only the section specified by the window  and change to float type</span>
+                <span class="n">green1</span> <span class="o">=</span> <span class="n">green</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float64'</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+                <span class="n">swir1</span> <span class="o">=</span> <span class="n">swir</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float64'</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
 
-                # Convert numpy array to dask array in chunks
-                green_da = dask.array.from_array(green1, chunks=chunks)
-                swir_da = dask.array.from_array(swir1, chunks=chunks)
+                <span class="c1"># Convert numpy array to dask array in chunks</span>
+                <span class="n">green_da</span> <span class="o">=</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">from_array</span><span class="p">(</span><span class="n">green1</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="n">chunks</span><span class="p">)</span>
+                <span class="n">swir_da</span> <span class="o">=</span> <span class="n">dask</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">from_array</span><span class="p">(</span><span class="n">swir1</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="n">chunks</span><span class="p">)</span>
 
-    return (green_da, swir_da)
+    <span class="k">return</span> <span class="p">(</span><span class="n">green_da</span><span class="p">,</span> <span class="n">swir_da</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </section>
 <section id="3.2-Calculate-the-NDSI-of-each-granule">
-<h2>3.2 Calculate the NDSI of each granule<a class="headerlink" href="#3.2-Calculate-the-NDSI-of-each-granule" title="Permalink to this headline">#</a></h2>
+<h3>3.2 Calculate the NDSI of each granule<a class="headerlink" href="#3.2-Calculate-the-NDSI-of-each-granule" title="Permalink to this headline">#</a></h3>
 <p>With the bands ready for computation, we can now construct the main function for calculating the NDSI of each raster. The function <code class="docutils literal notranslate"><span class="pre">get_NDSI()</span></code> computes the NDSI using the input bands and transforms the resulting array into an Xarray DataArray with the dimensions, x and y.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[102]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>@dask.delayed
-def get_NDSI(green, swir):
-    # Compute the NDSI and return the resulting array into an Xarray DataArray
-    NDSI = (green - swir) / (green + swir)
-    #print(NDSI.load())
-    NDSI_da = xr.DataArray(NDSI, dims=[&#39;y&#39;,&#39;x&#39;])
-    #NDSI_da = xr.DataArray(NDSI)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nd">@dask</span><span class="o">.</span><span class="n">delayed</span>
+<span class="k">def</span> <span class="nf">get_NDSI</span><span class="p">(</span><span class="n">green</span><span class="p">,</span> <span class="n">swir</span><span class="p">):</span>
+    <span class="c1"># Compute the NDSI and return the resulting array into an Xarray DataArray</span>
+    <span class="n">NDSI</span> <span class="o">=</span> <span class="p">(</span><span class="n">green</span> <span class="o">-</span> <span class="n">swir</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">green</span> <span class="o">+</span> <span class="n">swir</span><span class="p">)</span>
+    <span class="c1">#print(NDSI.load())</span>
+    <span class="n">NDSI_da</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">NDSI</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">'y'</span><span class="p">,</span><span class="s1">'x'</span><span class="p">])</span>
+    <span class="c1">#NDSI_da = xr.DataArray(NDSI)</span>
 
-    return NDSI_da
+    <span class="k">return</span> <span class="n">NDSI_da</span>
 </pre></div>
 </div>
 </div>
@@ -892,18 +891,19 @@ def get_NDSI(green, swir):
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[103]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%time
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
 
-delayed_downloads = []
-dates_arr = []
-for file in granules[::3]:
-    url = file[&#39;links&#39;][0][&#39;href&#39;]
-    # Add the date to the dates list
-    get_date = re.search(&#39;\d{4}\d{3}&#39;, url)
-    date = datetime.datetime.strptime(get_date.group(), &#39;%Y%j&#39;).date()
-    dates_arr.append(date)
+<span class="n">delayed_downloads</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">dates_arr</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">granules</span><span class="p">[::</span><span class="mi">3</span><span class="p">]:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">file</span><span class="p">[</span><span class="s1">'links'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">'href'</span><span class="p">]</span>
+    <span class="c1"># Add the date to the dates list</span>
+    <span class="n">get_date</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">'\d</span><span class="si">{4}</span><span class="s1">\d</span><span class="si">{3}</span><span class="s1">'</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">get_date</span><span class="o">.</span><span class="n">group</span><span class="p">(),</span> <span class="s1">'%Y%j'</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+    <span class="n">dates_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
 
-    delayed_downloads.append(lazy_get_data(url, auth))
+    <span class="n">delayed_downloads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lazy_get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -920,9 +920,10 @@ Wall time: 40.5 ms
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[104]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>delayed_ndsi = []
-for band in delayed_downloads:
-    delayed_ndsi.append(get_NDSI(band[0], band[1]))
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">delayed_ndsi</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="n">delayed_downloads</span><span class="p">:</span>
+    <span class="n">delayed_ndsi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_NDSI</span><span class="p">(</span><span class="n">band</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">band</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -930,7 +931,8 @@ for band in delayed_downloads:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[105]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>len(delayed_ndsi)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">len</span><span class="p">(</span><span class="n">delayed_ndsi</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -947,10 +949,11 @@ for band in delayed_downloads:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[106]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%time
-ndsi_arr = []
-for i in delayed_ndsi:
-    ndsi_arr.append(i.persist())
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
+<span class="n">ndsi_arr</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">delayed_ndsi</span><span class="p">:</span>
+    <span class="n">ndsi_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">persist</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -967,7 +970,8 @@ Wall time: 752 ms
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[107]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>progress(ndsi_arr)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">progress</span><span class="p">(</span><span class="n">ndsi_arr</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -981,9 +985,10 @@ Wall time: 752 ms
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[108]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%time
-final_ndsi_arrs = [i.compute().persist() for i in ndsi_arr]
-#final_ndsi_arrs
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
+<span class="n">final_ndsi_arrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span><span class="o">.</span><span class="n">persist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ndsi_arr</span><span class="p">]</span>
+<span class="c1">#final_ndsi_arrs</span>
 </pre></div>
 </div>
 </div>
@@ -998,14 +1003,15 @@ Wall time: 2min
 </div>
 </section>
 <section id="3.3-Combine-the-NDSI-of-all-granules-together-in-one-DataArray">
-<h2>3.3 Combine the NDSI of all granules together in one DataArray<a class="headerlink" href="#3.3-Combine-the-NDSI-of-all-granules-together-in-one-DataArray" title="Permalink to this headline">#</a></h2>
+<h3>3.3 Combine the NDSI of all granules together in one DataArray<a class="headerlink" href="#3.3-Combine-the-NDSI-of-all-granules-together-in-one-DataArray" title="Permalink to this headline">#</a></h3>
 <p>The next step is to concatenate the list of DataArrays from the previous step with their respective dates into a Xarray DataArray.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[109]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>final_ndsi = xr.concat(final_ndsi_arrs, dim=pd.DatetimeIndex(dates_arr, name=&#39;time&#39;))
-final_ndsi
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">final_ndsi</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">final_ndsi_arrs</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">dates_arr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'time'</span><span class="p">))</span>
+<span class="n">final_ndsi</span>
 </pre></div>
 </div>
 </div>
@@ -1016,12 +1022,12 @@ final_ndsi
 <div class="output_area rendered_html docutils container">
 <div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
 <defs>
-<symbol id="icon-database" viewBox="0 0 32 32">
+<symbol id="icon-database" viewbox="0 0 32 32">
 <path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
 <path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
 <path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
 </symbol>
-<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
 <path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
 <path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
 <path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
@@ -1364,127 +1370,118 @@ dl.xr-attrs {
   stroke: currentColor;
   fill: currentColor;
 }
-</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray &#x27;truediv-ffd315603b16337c7e67d0e606d92a44&#x27; (time: 609, y: 900, x: 1700)&gt;
+</style><pre class="xr-text-repr-fallback">&lt;xarray.DataArray 'truediv-ffd315603b16337c7e67d0e606d92a44' (time: 609, y: 900, x: 1700)&gt;
 dask.array&lt;concatenate, shape=(609, 900, 1700), dtype=float64, chunksize=(1, 900, 1700), chunktype=numpy.ndarray&gt;
 Coordinates:
   * time     (time) datetime64[ns] 2016-06-30 2016-07-03 ... 2021-06-28
-Dimensions without coordinates: y, x</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'truediv-ffd315603b16337c7e67d0e606d92a44'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 609</li><li><span>y</span>: 900</li><li><span>x</span>: 1700</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-15267f33-59bd-4921-89de-8dccd712d90d' class='xr-array-in' type='checkbox' checked><label for='section-15267f33-59bd-4921-89de-8dccd712d90d' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>dask.array&lt;chunksize=(1, 900, 1700), meta=np.ndarray&gt;</span></div><div class='xr-array-data'><table>
+Dimensions without coordinates: y, x</pre><div class="xr-wrap" hidden=""><div class="xr-header"><div class="xr-obj-type">xarray.DataArray</div><div class="xr-array-name">'truediv-ffd315603b16337c7e67d0e606d92a44'</div><ul class="xr-dim-list"><li><span class="xr-has-index">time</span>: 609</li><li><span>y</span>: 900</li><li><span>x</span>: 1700</li></ul></div><ul class="xr-sections"><li class="xr-section-item"><div class="xr-array-wrap"><input checked="" class="xr-array-in" id="section-15267f33-59bd-4921-89de-8dccd712d90d" type="checkbox"/><label for="section-15267f33-59bd-4921-89de-8dccd712d90d" title="Show/hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-array-preview xr-preview"><span>dask.array&lt;chunksize=(1, 900, 1700), meta=np.ndarray&gt;</span></div><div class="xr-array-data"><div class="table-wrapper"><table>
 <tr>
 <td>
-<table>
-  <thead>
-    <tr><td> </td><th> Array </th><th> Chunk </th></tr>
-  </thead>
-  <tbody>
-    <tr><th> Bytes </th><td> 7.45 GB </td> <td> 12.24 MB </td></tr>
-    <tr><th> Shape </th><td> (609, 900, 1700) </td> <td> (1, 900, 1700) </td></tr>
-    <tr><th> Count </th><td> 1827 Tasks </td><td> 609 Chunks </td></tr>
-    <tr><th> Type </th><td> float64 </td><td> numpy.ndarray </td></tr>
-  </tbody>
-</table>
+<div class="table-wrapper"><table>
+<thead>
+<tr><td> </td><th> Array </th><th> Chunk </th></tr>
+</thead>
+<tbody>
+<tr><th> Bytes </th><td> 7.45 GB </td> <td> 12.24 MB </td></tr>
+<tr><th> Shape </th><td> (609, 900, 1700) </td> <td> (1, 900, 1700) </td></tr>
+<tr><th> Count </th><td> 1827 Tasks </td><td> 609 Chunks </td></tr>
+<tr><th> Type </th><td> float64 </td><td> numpy.ndarray </td></tr>
+</tbody>
+</table></div>
 </td>
 <td>
-<svg width="205" height="139" style="stroke:rgb(0,0,0);stroke-width:1" >
-
-  <!-- Horizontal lines -->
-  <line x1="10" y1="0" x2="35" y2="25" style="stroke-width:2" />
-  <line x1="10" y1="63" x2="35" y2="89" style="stroke-width:2" />
-
-  <!-- Vertical lines -->
-  <line x1="10" y1="0" x2="10" y2="63" style="stroke-width:2" />
-  <line x1="11" y1="1" x2="11" y2="64" />
-  <line x1="12" y1="2" x2="12" y2="66" />
-  <line x1="14" y1="4" x2="14" y2="67" />
-  <line x1="15" y1="5" x2="15" y2="68" />
-  <line x1="16" y1="6" x2="16" y2="70" />
-  <line x1="18" y1="8" x2="18" y2="71" />
-  <line x1="19" y1="9" x2="19" y2="73" />
-  <line x1="20" y1="10" x2="20" y2="74" />
-  <line x1="22" y1="12" x2="22" y2="75" />
-  <line x1="23" y1="13" x2="23" y2="77" />
-  <line x1="24" y1="14" x2="24" y2="78" />
-  <line x1="26" y1="16" x2="26" y2="79" />
-  <line x1="27" y1="17" x2="27" y2="81" />
-  <line x1="29" y1="19" x2="29" y2="82" />
-  <line x1="30" y1="20" x2="30" y2="83" />
-  <line x1="31" y1="21" x2="31" y2="85" />
-  <line x1="33" y1="23" x2="33" y2="86" />
-  <line x1="34" y1="24" x2="34" y2="88" />
-  <line x1="35" y1="25" x2="35" y2="89" style="stroke-width:2" />
-
-  <!-- Colored Rectangle -->
-  <polygon points="10.0,0.0 35.94456044819303,25.944560448193034 35.94456044819303,89.47397221289891 10.0,63.529411764705884" style="fill:#8B4903A0;stroke-width:0"/>
-
-  <!-- Horizontal lines -->
-  <line x1="10" y1="0" x2="130" y2="0" style="stroke-width:2" />
-  <line x1="11" y1="1" x2="131" y2="1" />
-  <line x1="12" y1="2" x2="132" y2="2" />
-  <line x1="14" y1="4" x2="134" y2="4" />
-  <line x1="15" y1="5" x2="135" y2="5" />
-  <line x1="16" y1="6" x2="136" y2="6" />
-  <line x1="18" y1="8" x2="138" y2="8" />
-  <line x1="19" y1="9" x2="139" y2="9" />
-  <line x1="20" y1="10" x2="140" y2="10" />
-  <line x1="22" y1="12" x2="142" y2="12" />
-  <line x1="23" y1="13" x2="143" y2="13" />
-  <line x1="24" y1="14" x2="144" y2="14" />
-  <line x1="26" y1="16" x2="146" y2="16" />
-  <line x1="27" y1="17" x2="147" y2="17" />
-  <line x1="29" y1="19" x2="149" y2="19" />
-  <line x1="30" y1="20" x2="150" y2="20" />
-  <line x1="31" y1="21" x2="151" y2="21" />
-  <line x1="33" y1="23" x2="153" y2="23" />
-  <line x1="34" y1="24" x2="154" y2="24" />
-  <line x1="35" y1="25" x2="155" y2="25" style="stroke-width:2" />
-
-  <!-- Vertical lines -->
-  <line x1="10" y1="0" x2="35" y2="25" style="stroke-width:2" />
-  <line x1="130" y1="0" x2="155" y2="25" style="stroke-width:2" />
-
-  <!-- Colored Rectangle -->
-  <polygon points="10.0,0.0 130.0,0.0 155.94456044819304,25.944560448193034 35.94456044819303,25.944560448193034" style="fill:#8B4903A0;stroke-width:0"/>
-
-  <!-- Horizontal lines -->
-  <line x1="35" y1="25" x2="155" y2="25" style="stroke-width:2" />
-  <line x1="35" y1="89" x2="155" y2="89" style="stroke-width:2" />
-
-  <!-- Vertical lines -->
-  <line x1="35" y1="25" x2="35" y2="89" style="stroke-width:2" />
-  <line x1="155" y1="25" x2="155" y2="89" style="stroke-width:2" />
-
-  <!-- Colored Rectangle -->
-  <polygon points="35.94456044819303,25.944560448193034 155.94456044819304,25.944560448193034 155.94456044819304,89.47397221289891 35.94456044819303,89.47397221289891" style="fill:#ECB172A0;stroke-width:0"/>
-
-  <!-- Text -->
-  <text x="95.944560" y="109.473972" font-size="1.0rem" font-weight="100" text-anchor="middle" >1700</text>
-  <text x="175.944560" y="57.709266" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(-90,175.944560,57.709266)">900</text>
-  <text x="12.972280" y="96.501692" font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(45,12.972280,96.501692)">609</text>
+<svg height="139" style="stroke:rgb(0,0,0);stroke-width:1" width="205">
+<!-- Horizontal lines -->
+<line style="stroke-width:2" x1="10" x2="35" y1="0" y2="25"></line>
+<line style="stroke-width:2" x1="10" x2="35" y1="63" y2="89"></line>
+<!-- Vertical lines -->
+<line style="stroke-width:2" x1="10" x2="10" y1="0" y2="63"></line>
+<line x1="11" x2="11" y1="1" y2="64"></line>
+<line x1="12" x2="12" y1="2" y2="66"></line>
+<line x1="14" x2="14" y1="4" y2="67"></line>
+<line x1="15" x2="15" y1="5" y2="68"></line>
+<line x1="16" x2="16" y1="6" y2="70"></line>
+<line x1="18" x2="18" y1="8" y2="71"></line>
+<line x1="19" x2="19" y1="9" y2="73"></line>
+<line x1="20" x2="20" y1="10" y2="74"></line>
+<line x1="22" x2="22" y1="12" y2="75"></line>
+<line x1="23" x2="23" y1="13" y2="77"></line>
+<line x1="24" x2="24" y1="14" y2="78"></line>
+<line x1="26" x2="26" y1="16" y2="79"></line>
+<line x1="27" x2="27" y1="17" y2="81"></line>
+<line x1="29" x2="29" y1="19" y2="82"></line>
+<line x1="30" x2="30" y1="20" y2="83"></line>
+<line x1="31" x2="31" y1="21" y2="85"></line>
+<line x1="33" x2="33" y1="23" y2="86"></line>
+<line x1="34" x2="34" y1="24" y2="88"></line>
+<line style="stroke-width:2" x1="35" x2="35" y1="25" y2="89"></line>
+<!-- Colored Rectangle -->
+<polygon points="10.0,0.0 35.94456044819303,25.944560448193034 35.94456044819303,89.47397221289891 10.0,63.529411764705884" style="fill:#8B4903A0;stroke-width:0"></polygon>
+<!-- Horizontal lines -->
+<line style="stroke-width:2" x1="10" x2="130" y1="0" y2="0"></line>
+<line x1="11" x2="131" y1="1" y2="1"></line>
+<line x1="12" x2="132" y1="2" y2="2"></line>
+<line x1="14" x2="134" y1="4" y2="4"></line>
+<line x1="15" x2="135" y1="5" y2="5"></line>
+<line x1="16" x2="136" y1="6" y2="6"></line>
+<line x1="18" x2="138" y1="8" y2="8"></line>
+<line x1="19" x2="139" y1="9" y2="9"></line>
+<line x1="20" x2="140" y1="10" y2="10"></line>
+<line x1="22" x2="142" y1="12" y2="12"></line>
+<line x1="23" x2="143" y1="13" y2="13"></line>
+<line x1="24" x2="144" y1="14" y2="14"></line>
+<line x1="26" x2="146" y1="16" y2="16"></line>
+<line x1="27" x2="147" y1="17" y2="17"></line>
+<line x1="29" x2="149" y1="19" y2="19"></line>
+<line x1="30" x2="150" y1="20" y2="20"></line>
+<line x1="31" x2="151" y1="21" y2="21"></line>
+<line x1="33" x2="153" y1="23" y2="23"></line>
+<line x1="34" x2="154" y1="24" y2="24"></line>
+<line style="stroke-width:2" x1="35" x2="155" y1="25" y2="25"></line>
+<!-- Vertical lines -->
+<line style="stroke-width:2" x1="10" x2="35" y1="0" y2="25"></line>
+<line style="stroke-width:2" x1="130" x2="155" y1="0" y2="25"></line>
+<!-- Colored Rectangle -->
+<polygon points="10.0,0.0 130.0,0.0 155.94456044819304,25.944560448193034 35.94456044819303,25.944560448193034" style="fill:#8B4903A0;stroke-width:0"></polygon>
+<!-- Horizontal lines -->
+<line style="stroke-width:2" x1="35" x2="155" y1="25" y2="25"></line>
+<line style="stroke-width:2" x1="35" x2="155" y1="89" y2="89"></line>
+<!-- Vertical lines -->
+<line style="stroke-width:2" x1="35" x2="35" y1="25" y2="89"></line>
+<line style="stroke-width:2" x1="155" x2="155" y1="25" y2="89"></line>
+<!-- Colored Rectangle -->
+<polygon points="35.94456044819303,25.944560448193034 155.94456044819304,25.944560448193034 155.94456044819304,89.47397221289891 35.94456044819303,89.47397221289891" style="fill:#ECB172A0;stroke-width:0"></polygon>
+<!-- Text -->
+<text font-size="1.0rem" font-weight="100" text-anchor="middle" x="95.944560" y="109.473972">1700</text>
+<text font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(-90,175.944560,57.709266)" x="175.944560" y="57.709266">900</text>
+<text font-size="1.0rem" font-weight="100" text-anchor="middle" transform="rotate(45,12.972280,96.501692)" x="12.972280" y="96.501692">609</text>
 </svg>
 </td>
 </tr>
-</table></div></div></li><li class='xr-section-item'><input id='section-7c9ae34d-9a18-4c46-b631-4c6611d8b65c' class='xr-section-summary-in' type='checkbox'  checked><label for='section-7c9ae34d-9a18-4c46-b631-4c6611d8b65c' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2016-06-30 ... 2021-06-28</div><input id='attrs-c82ff58e-9f84-4d38-9249-343ec1bee0b7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c82ff58e-9f84-4d38-9249-343ec1bee0b7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ab9b65f3-bbcc-47f7-ac37-8db0b1dfa3f8' class='xr-var-data-in' type='checkbox'><label for='data-ab9b65f3-bbcc-47f7-ac37-8db0b1dfa3f8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;2016-06-30T00:00:00.000000000&#x27;, &#x27;2016-07-03T00:00:00.000000000&#x27;,
-       &#x27;2016-07-06T00:00:00.000000000&#x27;, ..., &#x27;2021-06-22T00:00:00.000000000&#x27;,
-       &#x27;2021-06-25T00:00:00.000000000&#x27;, &#x27;2021-06-28T00:00:00.000000000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a07da7ff-cc62-4bc5-ae7b-ba429bd303dc' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a07da7ff-cc62-4bc5-ae7b-ba429bd303dc' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
+</table></div></div></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-7c9ae34d-9a18-4c46-b631-4c6611d8b65c" type="checkbox"/><label class="xr-section-summary" for="section-7c9ae34d-9a18-4c46-b631-4c6611d8b65c">Coordinates: <span>(1)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">time</span></div><div class="xr-var-dims">(time)</div><div class="xr-var-dtype">datetime64[ns]</div><div class="xr-var-preview xr-preview">2016-06-30 ... 2021-06-28</div><input class="xr-var-attrs-in" disabled="" id="attrs-c82ff58e-9f84-4d38-9249-343ec1bee0b7" type="checkbox"/><label for="attrs-c82ff58e-9f84-4d38-9249-343ec1bee0b7" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-ab9b65f3-bbcc-47f7-ac37-8db0b1dfa3f8" type="checkbox"/><label for="data-ab9b65f3-bbcc-47f7-ac37-8db0b1dfa3f8" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array(['2016-06-30T00:00:00.000000000', '2016-07-03T00:00:00.000000000',
+       '2016-07-06T00:00:00.000000000', ..., '2021-06-22T00:00:00.000000000',
+       '2021-06-25T00:00:00.000000000', '2021-06-28T00:00:00.000000000'],
+      dtype='datetime64[ns]')</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-a07da7ff-cc62-4bc5-ae7b-ba429bd303dc" type="checkbox"/><label class="xr-section-summary" for="section-a07da7ff-cc62-4bc5-ae7b-ba429bd303dc" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
 </div>
 </section>
 </section>
 <section id="4.-Visualizing-the-Results">
-<h1>4. Visualizing the Results<a class="headerlink" href="#4.-Visualizing-the-Results" title="Permalink to this headline">#</a></h1>
+<h2>4. Visualizing the Results<a class="headerlink" href="#4.-Visualizing-the-Results" title="Permalink to this headline">#</a></h2>
 <p>Now, let’s visualize our NDSI in a monthly average over the 6 years. Instead of using HoloViz’s <strong>hvplot</strong> as we have done in the NDVI and NDWI with Dask notebooks, let’s use Xarray’s plotting powers to display our results.</p>
 <p>The cell below iteratively creates a monthly mean for each year</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[139]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>years = np.arange(2016, 2022, 1)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">2022</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-years_list = []
-for i in years:
-    i = final_ndsi.sel(time=final_ndsi.time.dt.year.isin(i)).groupby(&#39;time.month&#39;).mean(&#39;time&#39;)
-    years_list.append(i)
+<span class="n">years_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">final_ndsi</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">final_ndsi</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'time.month'</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">'time'</span><span class="p">)</span>
+    <span class="n">years_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
-years_list
+<span class="n">years_list</span>
 </pre></div>
 </div>
 </div>
@@ -1494,32 +1491,32 @@ years_list
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[&lt;xarray.DataArray &#39;truediv-ffd315603b16337c7e67d0e606d92a44&#39; (month: 7, y: 900, x: 1700)&gt;
+[&lt;xarray.DataArray 'truediv-ffd315603b16337c7e67d0e606d92a44' (month: 7, y: 900, x: 1700)&gt;
  dask.array&lt;stack, shape=(7, 900, 1700), dtype=float64, chunksize=(1, 900, 1700), chunktype=numpy.ndarray&gt;
  Coordinates:
    * month    (month) int64 6 7 8 9 10 11 12
  Dimensions without coordinates: y, x,
- &lt;xarray.DataArray &#39;truediv-ffd315603b16337c7e67d0e606d92a44&#39; (month: 12, y: 900, x: 1700)&gt;
+ &lt;xarray.DataArray 'truediv-ffd315603b16337c7e67d0e606d92a44' (month: 12, y: 900, x: 1700)&gt;
  dask.array&lt;stack, shape=(12, 900, 1700), dtype=float64, chunksize=(1, 900, 1700), chunktype=numpy.ndarray&gt;
  Coordinates:
    * month    (month) int64 1 2 3 4 5 6 7 8 9 10 11 12
  Dimensions without coordinates: y, x,
- &lt;xarray.DataArray &#39;truediv-ffd315603b16337c7e67d0e606d92a44&#39; (month: 12, y: 900, x: 1700)&gt;
+ &lt;xarray.DataArray 'truediv-ffd315603b16337c7e67d0e606d92a44' (month: 12, y: 900, x: 1700)&gt;
  dask.array&lt;stack, shape=(12, 900, 1700), dtype=float64, chunksize=(1, 900, 1700), chunktype=numpy.ndarray&gt;
  Coordinates:
    * month    (month) int64 1 2 3 4 5 6 7 8 9 10 11 12
  Dimensions without coordinates: y, x,
- &lt;xarray.DataArray &#39;truediv-ffd315603b16337c7e67d0e606d92a44&#39; (month: 12, y: 900, x: 1700)&gt;
+ &lt;xarray.DataArray 'truediv-ffd315603b16337c7e67d0e606d92a44' (month: 12, y: 900, x: 1700)&gt;
  dask.array&lt;stack, shape=(12, 900, 1700), dtype=float64, chunksize=(1, 900, 1700), chunktype=numpy.ndarray&gt;
  Coordinates:
    * month    (month) int64 1 2 3 4 5 6 7 8 9 10 11 12
  Dimensions without coordinates: y, x,
- &lt;xarray.DataArray &#39;truediv-ffd315603b16337c7e67d0e606d92a44&#39; (month: 12, y: 900, x: 1700)&gt;
+ &lt;xarray.DataArray 'truediv-ffd315603b16337c7e67d0e606d92a44' (month: 12, y: 900, x: 1700)&gt;
  dask.array&lt;stack, shape=(12, 900, 1700), dtype=float64, chunksize=(1, 900, 1700), chunktype=numpy.ndarray&gt;
  Coordinates:
    * month    (month) int64 1 2 3 4 5 6 7 8 9 10 11 12
  Dimensions without coordinates: y, x,
- &lt;xarray.DataArray &#39;truediv-ffd315603b16337c7e67d0e606d92a44&#39; (month: 6, y: 900, x: 1700)&gt;
+ &lt;xarray.DataArray 'truediv-ffd315603b16337c7e67d0e606d92a44' (month: 6, y: 900, x: 1700)&gt;
  dask.array&lt;stack, shape=(6, 900, 1700), dtype=float64, chunksize=(1, 900, 1700), chunktype=numpy.ndarray&gt;
  Coordinates:
    * month    (month) int64 1 2 3 4 5 6
@@ -1530,9 +1527,10 @@ years_list
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[142]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for i in range(len(years_list)):
-    years_list[i].plot.imshow(&#39;x&#39;, &#39;y&#39;, col=&#39;month&#39;, vmin=0, vmax=1, col_wrap=12, cmap=&#39;RdYlBu&#39;)
-    plt.title(years[i])
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">years_list</span><span class="p">)):</span>
+    <span class="n">years_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">'x'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">'month'</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'RdYlBu'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">years</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1540,66 +1538,68 @@ years_list
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/2_real_world_examples_03-ndsi-with-dask_36_0.png" src="../_images/2_real_world_examples_03-ndsi-with-dask_36_0.png" />
+<img alt="../_images/2_real_world_examples_03-ndsi-with-dask_36_0.png" src="../_images/2_real_world_examples_03-ndsi-with-dask_36_0.png"/>
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/2_real_world_examples_03-ndsi-with-dask_36_1.png" src="../_images/2_real_world_examples_03-ndsi-with-dask_36_1.png" />
+<img alt="../_images/2_real_world_examples_03-ndsi-with-dask_36_1.png" src="../_images/2_real_world_examples_03-ndsi-with-dask_36_1.png"/>
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/2_real_world_examples_03-ndsi-with-dask_36_2.png" src="../_images/2_real_world_examples_03-ndsi-with-dask_36_2.png" />
+<img alt="../_images/2_real_world_examples_03-ndsi-with-dask_36_2.png" src="../_images/2_real_world_examples_03-ndsi-with-dask_36_2.png"/>
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/2_real_world_examples_03-ndsi-with-dask_36_3.png" src="../_images/2_real_world_examples_03-ndsi-with-dask_36_3.png" />
+<img alt="../_images/2_real_world_examples_03-ndsi-with-dask_36_3.png" src="../_images/2_real_world_examples_03-ndsi-with-dask_36_3.png"/>
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/2_real_world_examples_03-ndsi-with-dask_36_4.png" src="../_images/2_real_world_examples_03-ndsi-with-dask_36_4.png" />
+<img alt="../_images/2_real_world_examples_03-ndsi-with-dask_36_4.png" src="../_images/2_real_world_examples_03-ndsi-with-dask_36_4.png"/>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/2_real_world_examples_03-ndsi-with-dask_36_5.png" src="../_images/2_real_world_examples_03-ndsi-with-dask_36_5.png" />
+<img alt="../_images/2_real_world_examples_03-ndsi-with-dask_36_5.png" src="../_images/2_real_world_examples_03-ndsi-with-dask_36_5.png"/>
 </div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%time
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
 
-# Creates gif
-from matplotlib.animation import FuncAnimation
-import numpy as np
-import matplotlib.pyplot as plt
+<span class="c1"># Creates gif</span>
+<span class="kn">from</span> <span class="nn">matplotlib.animation</span> <span class="kn">import</span> <span class="n">FuncAnimation</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-fig, ax = plt.subplots(figsize=(8,8))
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
 
-def animate(i):
-    ax.imshow(final_ndsi_arrs[i], cmap=&#39;RdYlBu&#39;, clim=(0,1))
-    ax.set_title(&quot;Date: {}&quot;.format(dates_arr[i]), fontsize=30)
-    ax.set_axis_off()
+<span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">final_ndsi_arrs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'RdYlBu'</span><span class="p">,</span> <span class="n">clim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Date: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dates_arr</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
 
-anim = FuncAnimation(fig, animate, frames=np.arange(len(final_ndsi_arrs)), interval=80)
-anim.save(&#39;NDSI_anim_2016-366.gif&#39;, dpi=50, writer=&#39;pillow&#39;)
-plt.close()
-<br/></pre></div>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">final_ndsi_arrs</span><span class="p">)),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+<span class="n">anim</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">'NDSI_anim_2016-366.gif'</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="s1">'pillow'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+</pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1615,7 +1615,8 @@ Wall time: 2h 14min 9s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>len(final_ndsi_arrs)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">len</span><span class="p">(</span><span class="n">final_ndsi_arrs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1633,10 +1634,12 @@ Wall time: 2h 14min 9s
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[143]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>cluster.close()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">cluster</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+</section>
 </section>
 
         </article>
@@ -1644,12 +1647,12 @@ Wall time: 2h 14min 9s
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="04-ndwi-with-dask.html">
+          <a class="next-page" href="04-ndmi-with-dask.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><strong>NDWI With Dask</strong></div>
+                <div class="title"><strong>NDMI With Dask</strong></div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -1684,8 +1687,40 @@ Wall time: 2h 14min 9s
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><strong>NDSI With Dask</strong></a><ul>
+<li><a class="reference internal" href="#1.-Initialize-your-Dask-Gateway-Clusters">1. Initialize your Dask Gateway Clusters</a></li>
+<li><a class="reference internal" href="#2.-Getting-the-MODIS-Data">2. Getting the MODIS Data</a><ul>
+<li><a class="reference internal" href="#2.1-Select-the-Granules">2.1 Select the Granules</a></li>
+<li><a class="reference internal" href="#2.2-Create-an-EarthData-Account">2.2 Create an EarthData Account</a></li>
+<li><a class="reference internal" href="#2.3-Hatfield-CMR">2.3 Hatfield CMR</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#3.-Calculating-the-NDSI">3. Calculating the NDSI</a><ul>
+<li><a class="reference internal" href="#3.1-Stream-and-Load-the-MODIS-Data">3.1 Stream and Load the MODIS Data</a></li>
+<li><a class="reference internal" href="#3.2-Calculate-the-NDSI-of-each-granule">3.2 Calculate the NDSI of each granule</a></li>
+<li><a class="reference internal" href="#3.3-Combine-the-NDSI-of-all-granules-together-in-one-DataArray">3.3 Combine the NDSI of all granules together in one DataArray</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#4.-Visualizing-the-Results">4. Visualizing the Results</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -1698,7 +1733,5 @@ Wall time: 2h 14min 9s
     <script src="../_static/tabs.js"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

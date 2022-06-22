@@ -10,6 +10,7 @@ This page we'll go through the first steps of orienting you to the key parts of 
 04-authentication
 03-jupyter-notebooks
 05-desktop-vm
+05a-ssh-keys
 05b-remote-connect-vscode
 06-file-browser
 07-stac

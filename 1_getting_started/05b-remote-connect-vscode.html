@@ -3,12 +3,12 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="File Browser" href="06-file-browser.html" /><link rel="prev" title="Desktop VM’s" href="05-desktop-vm.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="File Browser" href="06-file-browser.html" /><link rel="prev" title="Set Up SSH Keys" href="05a-ssh-keys.html" />
 
-    <meta name="generator" content="sphinx-4.5.0, furo 2022.06.04.1"/>
-        <title>&lt;no title&gt; - GEOAnalytics Canada</title>
+    <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
+        <title>Remote Connection via VSCode - GeoAnalytics Canada</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">GEOAnalytics Canada</div></a>
+      <a href="../index.html"><div class="brand">GeoAnalytics Canada</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -151,7 +151,7 @@
     <img class="sidebar-logo" src="../_static/geoanalytics-icon.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GEOAnalytics Canada</span>
+  <span class="sidebar-brand-text">GeoAnalytics Canada</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -159,42 +159,33 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-python-intro.html"><strong>Introduction to Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="04-authentication.html"><strong>Authentication</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="05a-ssh-keys.html">Set Up SSH Keys</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Remote Connection via VSCode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-file-browser.html"><strong>File Browser</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="08-gitlab.html"><strong>GitLab</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="09-pipelines.html"><strong>Pipelines</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/01-accessing-data.html"><strong>Accessing and Downloading Data</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/02-ndvi-with-dask.html"><strong>NDVI With Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html">1. Initialize your Dask Gateway Clusters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html#2.-Getting-the-MODIS-Data">2. Getting the MODIS Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html#3.-Calculating-the-NDSI">3. Calculating the NDSI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html#4.-Visualizing-the-Results">4. Visualizing the Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/04-ndwi-with-dask.html"><strong>NDWI With Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/05-change-detection.html"><strong>Change Detection</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html"><strong>NDSI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/04-ndmi-with-dask.html"><strong>NDMI With Dask</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html">KNN Land Classification with Dask [40 hours]</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#1.-Initialize-Dask-Cluster">1. Initialize Dask Cluster</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#Query-using-the-SentinelSat-API">Query using the SentinelSat API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#2.-Functions">2. Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-knn.html#2.-Loading,-Masking,-and-Creating-Mosaics">2. Loading, Masking, and Creating Mosaics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html">Compositing Rasters with Dask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html#Main-Loop">Main Loop</a></li>
 </ul>
 </li>
 </ul>
@@ -215,8 +206,7 @@
           </svg>
           <span>Back to top</span>
         </a>
-        <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -224,7 +214,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -440,12 +430,11 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt .copybtn {
+.prompt a.copybtn {
     display: none;
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
-.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -454,14 +443,10 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
-.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
-.jp-RenderedHTMLCommon tr,
-.jp-RenderedHTMLCommon th,
-.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -473,27 +458,70 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
-.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
-.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
-.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
+<section id="Remote-Connection-via-VSCode">
+<h1>Remote Connection via VSCode<a class="headerlink" href="#Remote-Connection-via-VSCode" title="Permalink to this headline">#</a></h1>
+<p>Moving your algorithms (code) to execute close to the data you are processing (while minimizing data movement) is a key part of scalable data processing. To allow code and algorithms that are on your local computer to be executed on GeoAnalytics Canada, you can setup your locally installed Visual Studio Code (VSCode) to leverage SSH connections. This will enable you to execute on your GeoAnaltytics Canada Remote Desktop using an SSH tunnel thereby granting you access to all of GeoAnalytics
+Canada’s processing infrastructure through a local IDE. This tutorial will go over how to use VSCode (open source) to connect to our Remote Desktops.</p>
+<p>Requirements:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">VSCode</span> <span class="n">installed</span> <span class="n">on</span> <span class="n">your</span> <span class="n">machine</span>
+<span class="o">-</span> <span class="n">A</span> <span class="n">Running</span> <span class="n">Remote</span> <span class="n">Desktop</span> <span class="n">environment</span>
+</pre></div>
+</div>
+<section id="VSCode-“Remote---SSH”-Extension">
+<h2>VSCode “Remote - SSH” Extension<a class="headerlink" href="#VSCode-“Remote---SSH”-Extension" title="Permalink to this headline">#</a></h2>
+<p>In your VSCode Editor, you will need to install the extention: <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh</a></p>
+<p>Once installed, you will have a green icon in the bottom left of your Editor window:</p>
+<p><img alt="Remote Connection Icon" src="https://microsoft.github.io/vscode-remote-release/images/remote-dev-status-bar.png"/></p>
+</section>
+<section id="Configuring-SSH-Connection">
+<h2>Configuring SSH Connection<a class="headerlink" href="#Configuring-SSH-Connection" title="Permalink to this headline">#</a></h2>
+<p>After clicking the green icon, you will be presented with a list of remote connection options:</p>
+<p><img alt="Remote Connection SSH List" src="https://code.visualstudio.com/assets/blogs/2019/10/03/remote-extension-commands.png"/></p>
+<p>From here we can connect directly to the Remote Desktop the same way you would connect passing in the destination via SSH terminal commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">username</span><span class="nd">@IPAddress</span>
+</pre></div>
+</div>
+<p>Make sure you only enter “<a class="reference external" href="mailto:username%40IPAddress">username<span>@</span>IPAddress</a>” since it is already done through the same SSH protocol as the terminal.</p>
+</section>
+<section id="Configure-SSH-Config-File">
+<h2>Configure SSH Config File<a class="headerlink" href="#Configure-SSH-Config-File" title="Permalink to this headline">#</a></h2>
+<p>If you have not already, you can configure your SSH config file to automatically connect. The .ssh/config file would look something like the following:</p>
+<pre>
+Host geoanalytics-remote-desktop
+   HostName "Your IP Address for the Remote Desktop"
+   User "username"
+</pre><p>If you have SSH keys configured for your Remote Desktop session, you may want to point the configuration to the Identity File. Also, an SSH connection will need X11 Forwarding enabled to allow for a Remote Desktop client like X2Go. Your configuration file will look something like this:</p>
+<pre>
+Host geoanalytics-remote-desktop
+   HostName "Your IP Address for the Remote Desktop"
+   User "username"
+   IdentityFile ~/.ssh/geoanalytics-remote-desktop
+   ForwardAgent yes
+   ForwardX11 yes
+   ForwardX11Trusted yes
+</pre><p>If configured, then when you click “Connect to Host…”, your target Host will be in the drop down list.</p>
+<p>When connected, you will be able to mount to a directory in your VSCode Explorer, run a terminal, and start developing remotely!</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
 </pre></div>
 </div>
 </div>
+</section>
+</section>
 
         </article>
       </div>
@@ -509,14 +537,14 @@ div.rendered_html tbody tr:hover {
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="05-desktop-vm.html">
+          <a class="prev-page" href="05a-ssh-keys.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><strong>Desktop VM’s</strong></div>
+                <div class="title">Set Up SSH Keys</div>
                 
               </div>
             </a>
@@ -540,8 +568,29 @@ div.rendered_html tbody tr:hover {
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Remote Connection via VSCode</a><ul>
+<li><a class="reference internal" href="#VSCode-“Remote---SSH”-Extension">VSCode “Remote - SSH” Extension</a></li>
+<li><a class="reference internal" href="#Configuring-SSH-Connection">Configuring SSH Connection</a></li>
+<li><a class="reference internal" href="#Configure-SSH-Config-File">Configure SSH Config File</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -554,7 +603,5 @@ div.rendered_html tbody tr:hover {
     <script src="../_static/tabs.js"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>
