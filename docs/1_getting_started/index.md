@@ -1,10 +1,11 @@
 (getting_started_index)=
 # Getting Started
 
-This page we'll go through the first steps of orienting you to the key parts of the GEOAnalytics Canada platform.
+This section provides the first steps of orienting you to the key parts of the GEOAnalytics Canada platform.
 
 
 ```{toctree}
+00-how-to-use-this-documentation
 01-python-intro
 02-geospatial-python
 04-authentication
