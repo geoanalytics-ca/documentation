@@ -41,11 +41,8 @@ extensions = [
     'IPython.sphinxext.ipython_console_highlighting'
 ]
 
-<<<<<<< HEAD
-=======
 source_suffix = [".rst", ".md"]
 
->>>>>>> main
 exclude_patterns = ['_build', '**.ipynb_checkpoints']
 
 nbsphinx_execute_arguments = [
