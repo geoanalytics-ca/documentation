@@ -32,39 +32,39 @@ As the volume of satellite EO data continues to grow, new analytical possibiliti
 To demonstrate how cloud computing systems can overcome issues with traditional approaches to satellite EO data analytics, `Hatfield <https://www.hatfieldgroup.com>`_ created the GEOAnalytics Canada Platform. This provides data, tools, and compute resources in the same environment and enables users to gain experience and understand the benefits of working in the cloud.
 
 
-Overview of our Documentation
-===============================
-The GEOAnalytics Canada documentation is organized into sections consisting of all tutorials and guides, from getting started with the platform, to step-by-step workflow examples. Click the card below that's most relevant to your needs!
+.. Overview of our Documentation
+.. ===============================
+.. The GEOAnalytics Canada documentation is organized into sections consisting of all tutorials and guides, from getting started with the platform, to step-by-step workflow examples. Click the card below that's most relevant to your needs!
 
-.. _cards-clickable:
+.. .. _cards-clickable:
 
-.. grid:: 3
+.. .. grid:: 3
 
-    .. grid-item-card::
-      :link: getting_started_index
-      :link-type: ref
+..     .. grid-item-card::
+..       :link: getting_started_index
+..       :link-type: ref
 
-      :octicon:`terminal;1em;sd-text-info` **Getting Started**
-      ^^^
-      **The Basics.** If you're new to GEOAnalytics Canada, start here. These
-      tutorials are designed to introduce you to the most important features of GEOAnalytics Canada.
+..       :octicon:`terminal;1em;sd-text-info` **Getting Started**
+..       ^^^
+..       **The Basics.** If you're new to GEOAnalytics Canada, start here. These
+..       tutorials are designed to introduce you to the most important features of GEOAnalytics Canada.
 
 
-    .. grid-item-card::
-      :link: real_world_index
-      :link-type: ref
+..     .. grid-item-card::
+..       :link: real_world_index
+..       :link-type: ref
 
-      :octicon:`checklist;1em;sd-text-info` **Real World Examples**
-      ^^^
-      **Common Use Cases.** Practical single use-case examples of problems typically see in a real world situation.
+..       :octicon:`checklist;1em;sd-text-info` **Real World Examples**
+..       ^^^
+..       **Common Use Cases.** Practical single use-case examples of problems typically see in a real world situation.
 
-    .. grid-item-card::
-      :link: scientific_workflows_index
-      :link-type: ref
+..     .. grid-item-card::
+..       :link: scientific_workflows_index
+..       :link-type: ref
 
-      :octicon:`workflow;1em;sd-text-info` **Scientific Workflows**
-      ^^^
-      **End-to-End Pipelines.** Practical step-by-step example workflows from start to finish that you would typically see in a real world situation.
+..       :octicon:`workflow;1em;sd-text-info` **Scientific Workflows**
+..       ^^^
+..       **End-to-End Pipelines.** Practical step-by-step example workflows from start to finish that you would typically see in a real world situation.
 
 Already know what you're looking for?
 --------------------------------------
@@ -74,8 +74,7 @@ on the left sidebar.
 
 .. toctree::
    :caption: Contents:
-   :hidden:
-   :maxdepth: 0
+   :maxdepth: 1
 
    Introduction <self>
    1_getting_started/index
