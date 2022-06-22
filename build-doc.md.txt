@@ -1,0 +1,7 @@
+## Building the documentation using Sphinx
+
+1. Make sure the folders/files to be built are specified under the toctree in `index.rst`
+
+2. To build, run the following command in terminal: `python -m sphinx . _build/`
+
+***Copyright 2022, Hatfield Consultants.***
