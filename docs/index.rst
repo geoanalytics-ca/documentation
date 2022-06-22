@@ -31,9 +31,12 @@ As the volume of satellite EO data continues to grow, new analytical possibiliti
 
 To demonstrate how cloud computing systems can overcome issues with traditional approaches to satellite EO data analytics, `Hatfield <https://www.hatfieldgroup.com>`_ created the GEOAnalytics Canada Platform. This provides data, tools, and compute resources in the same environment and enables users to gain experience and understand the benefits of working in the cloud.
 
+<<<<<<< HEAD
 How to use this documentation
 -----------
 This documentation is made as a series of Jupyter Notebooks that you can copy (or git clone) to follow-through interactively. To see how to set this up, `follow the instructions here <1_getting_started/00-how-to-use-this-documentation.html>`_
+=======
+>>>>>>> main
 
 Overview of our Documentation
 ===============================
@@ -77,8 +80,12 @@ on the left sidebar.
 
 .. toctree::
    :caption: Contents:
+<<<<<<< HEAD
    :hidden:
    :maxdepth: 0
+=======
+   :maxdepth: 1
+>>>>>>> main
 
    Introduction <self>
    1_getting_started/index

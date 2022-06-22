@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 lxml==4.6.4
+=======
+lxml>=4.6.5
+>>>>>>> main
 kfp==1.1.2
 kfp-server-api==1.2.0
