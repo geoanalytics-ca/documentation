@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Dask" href="10-dask.html" /><link rel="prev" title="GitLab" href="08-gitlab.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
         <title>Pipelines - GeoAnalytics Canada</title>
@@ -159,7 +159,39 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-python-intro.html"><strong>Introduction to Python</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-authentication.html"><strong>Authentication</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="05a-ssh-keys.html">Set Up SSH Keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-file-browser.html"><strong>File Browser</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="08-gitlab.html"><strong>GitLab</strong></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>Pipelines</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/01-accessing-data.html"><strong>Accessing and Downloading Data</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/02-ndvi-with-dask.html"><strong>NDVI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-with-dask.html"><strong>NDSI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/04-ndmi-with-dask.html"><strong>NDMI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/05-change-detection.html"><strong>Change Detection</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-kmeans-dask.html">K-Means Land Classification with Dask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html">Compositing Rasters with Dask</a></li>
+</ul>
+</li>
+</ul>
+
 </div>
 </div>
 
@@ -909,7 +941,7 @@ Username:  asaini
 <h2>3. Exploring the GEOAnalytics Kubeflow UI<a class="headerlink" href="#3.-Exploring-the-GEOAnalytics-Kubeflow-UI" title="Permalink to this headline">#</a></h2>
 <section id="3.1-Kubeflow-Pipelines-and-Experiments">
 <h3>3.1 Kubeflow Pipelines and Experiments<a class="headerlink" href="#3.1-Kubeflow-Pipelines-and-Experiments" title="Permalink to this headline">#</a></h3>
-<p>The central Kubeflow Dashboard can be accessed from the main GEOAnalytics Canada page by clicking on Kubeflow to launch. <img alt="dc609c73872544478fcb54748324de29" src="../_images/08_launching-kubeflow.gif"/></p>
+<p>The central Kubeflow Dashboard can be accessed from the main GEOAnalytics Canada page by clicking on Kubeflow to launch. <img alt="0fa96a6eae9d4327928cf95a7c55cc6b" src="../_images/08_launching-kubeflow.gif"/></p>
 <p>Now you will have access to the Kubeflow User Interface (UI).</p>
 <p>On the left sidebar, click on the <strong>Pipelines</strong> tab which will lead to the main workspace for Kubeflow Pipelines UI. On the left panel in this section, there are multiple tabs, but for this tutorial we will focus on only the Pipelines and Experiments tab. The <em>Pipelines</em> tab leads you to all the existing pipelines you have access to and the option to upload a new pipeline. And the <em>Experiments</em> tab displays all the experients and the runs of each experiment. You can create runs, compare existing
 runs, or even clone the runs.</p>
@@ -919,7 +951,7 @@ runs, or even clone the runs.</p>
 <h3>3.2 Analyzing the Hello World Pipeline<a class="headerlink" href="#3.2-Analyzing-the-Hello-World-Pipeline" title="Permalink to this headline">#</a></h3>
 <p>Under the Pipelines tab, you should see the newly built “Hello World Example Pipeline” at the top of the list of pipelines. There are other Tutorial and Demo pipelines preconfigured by Kubeflow for you to experiment with.</p>
 <p>To invoke a specific pipeline, simply click it which will bring up Pipeline’s view as shown in the GIF below.</p>
-<p><img alt="a5b6b73c2a74452c82745774caabce4e" src="../_images/08_kubeflow-pipelines.gif"/></p>
+<p><img alt="e5930e750e084aa39d123406df0ed25e" src="../_images/08_kubeflow-pipelines.gif"/></p>
 <p>Within this pipeline there is a graph representing the runtime execution of the pipeline, with edges indicating parent/child relationships between the steps (nodes). Clicking on a node will give information about that step, such as the input parameter, the output result, arguments, internal commands to execute that step, and the volume mounts.</p>
 <p><strong>Notebook and the pipeline run independently, so in case the notebook crashes, the experiment will continue running once executed.</strong></p>
 </section>
@@ -940,18 +972,18 @@ runs, or even clone the runs.</p>
 <li><p>There are two different types of Runs, we will discuss these in the next part. For now, select <strong>“One-off”</strong> which executes the pipeline only once.</p></li>
 <li><p>Now since we specified <em>Parameters</em> in our pipeline function, enter any two words in place of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p></li>
 </ul>
-<p><img alt="5d8ce73b0569475582c0f0aa574cd308" src="../_images/08_start-run.png"/></p>
+<p><img alt="7bf721cfea864b4bb5f866ebd7345679" src="../_images/08_start-run.png"/></p>
 <p>After these sections have been filled in, select the <strong>“Start”</strong> to execute the run which will take a few seconds (or minutes depending on the pipeline). When the Status updates to a green checkmark it indicates the run was successfully executed. Click on the run to explore the details of the run.</p>
-<p><img alt="3872cb70bbd347ef9877304e802f8bdc" src="../_images/08_run-created.gif"/></p>
+<p><img alt="69dd26ca60214b5786aa5eb326f84352" src="../_images/08_run-created.gif"/></p>
 </section>
 <section id="3.5-Running-Pipelines-on-Schedule">
 <h3>3.5 Running Pipelines on Schedule<a class="headerlink" href="#3.5-Running-Pipelines-on-Schedule" title="Permalink to this headline">#</a></h3>
 <p>All our previous runs have been done manually, which is not ideal for some scenarios. Recurring runs are repeatable runs of a pipeline, very helpful if the pipeline is expected to run for a long period of time and is triggered to run frequently.</p>
 <p>Let’s create a Recurring run on our “Echo Image Pipeline.” Fill in the details as shown in the screenshot below. Now you can create a periodic run by selecting a run type of <strong>“Recurring”</strong>, then choosing <strong>“Periodic”</strong> as the trigger type. Period runs specify <strong>how often</strong> to run a pipeline. In this example we are setting a pipeline to run every second day. Once you start the run, it is executed immediately and then executed with the defined frequency (of 2 days).</p>
-<p><img alt="8319c5449dcd4ca4a8264418fd550a70" src="../_images/08_create-recurring-run.png"/></p>
+<p><img alt="974dd32a8a784eb7b79d9b6a31f0c1fb" src="../_images/08_create-recurring-run.png"/></p>
 <p>From the “echo-image” experiment, you will see recurring run active, with the option to <code class="docutils literal notranslate"><span class="pre">enable</span></code> or <code class="docutils literal notranslate"><span class="pre">disable</span></code> the schedule.</p>
 <p><strong>If you enable a recurring run for this example notebook, make sure to disable the run.</strong></p>
-<p><img alt="3ce1cd5370644799a4ea3226a41a8b14" src="../_images/08_recurring-run.gif"/></p>
+<p><img alt="db0dcf4acf58427a92e72bbf12f3c1b1" src="../_images/08_recurring-run.gif"/></p>
 </section>
 <section id="3.6-Terminating-Runs">
 <h3>3.6 Terminating Runs<a class="headerlink" href="#3.6-Terminating-Runs" title="Permalink to this headline">#</a></h3>
@@ -1117,8 +1149,26 @@ f0617ebf-64e1-4c7e-9447-c421f46f29b8
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="10-dask.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><strong>Dask</strong></div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="08-gitlab.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><strong>GitLab</strong></div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
