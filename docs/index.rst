@@ -74,8 +74,7 @@ on the left sidebar.
 
 .. toctree::
    :caption: Contents:
-   :hidden:
-   :maxdepth: 0
+   :maxdepth: 1
 
    Introduction <self>
    1_getting_started/index
