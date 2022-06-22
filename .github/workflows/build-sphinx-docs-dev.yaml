@@ -1,4 +1,4 @@
-name: Pages-Dev-TestBuild
+name: Pages-Dev-Deploy
 on: 
   push:
     branches:
