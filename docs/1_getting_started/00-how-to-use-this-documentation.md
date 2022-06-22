@@ -6,14 +6,14 @@ This documentation is made as a series of Jupyter Notebooks that you can copy (o
 
 This documentation is hosted on GitHub in this repository: https://github.com/geoanalytics-ca/documentation/
 
-# Downloading this documentation into your GEOAnalytics Canada Jupyter Notebook
+## Downloading this documentation into your GEOAnalytics Canada Jupyter Notebook
 
 Before downloading this documentation, you should first be familiar with the GEOAnalytics Canada Jupyter Notebook system. Be sure to complete the [Jupyter Notebooks](03-jupyter-notebooks) tutorial before proceeding.
 
 1. Open up your GEOAnalytics Canada Jupyter environment
-1. Open up a new terminal by selecting File -> New -> Terminal
+2. Open up a new terminal by selecting File -> New -> Terminal
 ![The San Juan Mountains are beautiful!](../images/getting_started_images/00_jupter-menu-new-terminal.png)
-1. In the terminal type the following command. This will download the tutorials into a folder named "`tutorials`" :
+3. In the terminal type the following command. This will download the tutorials into a folder named "`tutorials`" :
 
 `git clone https://github.com/geoanalytics-ca/documentation/ tutorials`
 
