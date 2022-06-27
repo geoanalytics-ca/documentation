@@ -41,6 +41,8 @@ extensions = [
     'IPython.sphinxext.ipython_console_highlighting'
 ]
 
+source_suffix = [".rst", ".md"]
+
 exclude_patterns = ['_build', '**.ipynb_checkpoints']
 
 nbsphinx_execute_arguments = [
@@ -73,7 +75,7 @@ html_theme = 'furo'
 
 html_logo = "images/geoanalytics-icon.png"
 
-html_title = "GEOAnalytics Canada"
+html_title = "GeoAnalytics Canada"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

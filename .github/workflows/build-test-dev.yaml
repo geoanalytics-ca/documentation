@@ -1,0 +1,22 @@
+name: Pages-Dev-TestBuild
+on: 
+  pull_request:
+    branches: 
+      - dev
+    types: 
+      - open
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/setup-python@v2
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    - name: Install dependencies
+      run: |
+        sudo apt install pandoc
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Build Check
+      uses: sphinx-notes/pages@v2

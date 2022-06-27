@@ -1,4 +1,4 @@
-nbsphinx==0.8.0
+nbsphinx==0.8.3
 sphinx-inline-tabs==2022.1.2b11
 sphinx-design==0.1.0
 myst-parser==0.17.2
@@ -6,3 +6,5 @@ sphinxcontrib-spelling==7.5.0
 furo==2022.4.7
 MarkupSafe==2.0.1
 ipython==8.4.0
+flake8==4.0.1
+flake8-nb==0.4.0
