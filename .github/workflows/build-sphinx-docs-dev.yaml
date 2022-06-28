@@ -1,4 +1,4 @@
-name: Pages-Dev
+name: Pages-Dev-Deploy
 on: 
   push:
     branches:
