@@ -185,7 +185,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/05-change-detection.html"><strong>Change Detection</strong></a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-kmeans-dask.html">K-Means Land Classification with Dask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html">Compositing Rasters with Dask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/04-add-to-stac.html"><strong>Adding data to the Geoanalytics STAC server</strong></a></li>
 </ul>
 </li>
 </ul>
@@ -234,7 +238,7 @@
 <li><p>Finally, click the “Create project”.</p></li>
 </ol>
 <p>Below is a visualization of these steps.</p>
-<p><img alt="483a275f1afa4e1baa6834b933257681" src="../_images/07_create-project.gif"/></p>
+<p><img alt="dea3b2279a034d1ea499e81a3ee384d1" src="../_images/07_create-project.gif"/></p>
 </section>
 <section id="2.-Set-up-the-Project-using-Git-Commands">
 <h2>2. Set up the Project using Git Commands<a class="headerlink" href="#2.-Set-up-the-Project-using-Git-Commands" title="Permalink to this headline">#</a></h2>
@@ -257,9 +261,9 @@ local machine. Replace the <code class="docutils literal notranslate"><span clas
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">master</span></code> : Send changes to the master branch of your remote repository.</p></li>
 </ol>
 <p>Here is a screenshot showing all the steps done within the Jupyterhub terminal.</p>
-<p><img alt="78f4a5c7d6a142a38686d3b9b8cdc26a" src="../_images/07_git-cmd.png"/></p>
+<p><img alt="5c5e15462336457085a59e59e0610b22" src="../_images/07_git-cmd.png"/></p>
 <p>Head back to your Repository on GitLab and refresh the page. You should see the README.md added within your project repository!</p>
-<p><img alt="813c6e33ed29478cae1d82cdde43959f" src="../_images/07_readme-added.png"/></p>
+<p><img alt="092d64122e78470185984cef2741ba35" src="../_images/07_readme-added.png"/></p>
 <p>This was only to set up a new project, if you have an existing folder you would like to link to your GitLab repository, then it can be done by:</p>
 <ul class="simple">
 <li><p>Changing into the existing folder: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">&lt;existing_folder&gt;</span></code></p></li>
@@ -281,7 +285,7 @@ local machine. Replace the <code class="docutils literal notranslate"><span clas
 <ol class="arabic simple" start="2">
 <li><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">hello-world</span></code></p></li>
 </ol>
-<p><img alt="f362d8bb529840bea43ebea451c72e02" src="../_images/07_docker-gitlab1.png"/></p>
+<p><img alt="056996347a29452698670ef547d2c70e" src="../_images/07_docker-gitlab1.png"/></p>
 <p>Now, we want to add the “hello-world” image to the container registry. To achieve that, we must rename the image from “hello-world” to the location of our container registry, using the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">tag</span> <span class="pre">&lt;source-img-name&gt;</span> <span class="pre">&lt;target-img-name&gt;</span></code> command. The target image name is the registry location because we want to push the image to a private registry and not the central Docker registry.</p>
 <ol class="arabic simple" start="3">
 <li><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">tag</span> <span class="pre">hello-world</span> <span class="pre">registry.geoanalytics.ca/&lt;username&gt;/test-docker</span></code> : Replace <code class="docutils literal notranslate"><span class="pre">&lt;username&gt;</span></code> with your GEOAnalytics GitLab username.</p></li>
@@ -290,13 +294,13 @@ local machine. Replace the <code class="docutils literal notranslate"><span clas
 <ol class="arabic simple" start="4">
 <li><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">registry.geoanalytics.ca/&lt;username&gt;/test-docker</span></code></p></li>
 </ol>
-<p>Here is a snapshot of the two commands being executed in terminal: <img alt="434ac2522e544a2a8af881ac4e22a409" src="../_images/07_docker-gitlab2.png"/></p>
+<p>Here is a snapshot of the two commands being executed in terminal: <img alt="f9c976e2369b4313be0f9ca8246c3f74" src="../_images/07_docker-gitlab2.png"/></p>
 <p>The final step is to <strong>push</strong> the local Docker image to our test-docker repository. This is done by executing the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">push</span> <span class="pre">&lt;img-name&gt;</span></code> below:</p>
 <ol class="arabic simple" start="5">
 <li><p><strong>``docker push registry.geoanalytics.ca/&lt;username&gt;/test-docker``</strong> (Remember to use <em>your</em> username.)</p></li>
 </ol>
 <p>Now head over to your Gitlab page and click on <code class="docutils literal notranslate"><span class="pre">Packages</span> <span class="pre">&gt;</span> <span class="pre">Container</span> <span class="pre">Registry</span></code> from the left sidebar. You will see the Docker image you just pushed added to the repository’s container registry!</p>
-<p><img alt="c7c60188ed0c46098a6fd63409ef08f6" src="../_images/07_container-registry.gif"/></p>
+<p><img alt="7bdf8477142a4b338e2fbdb665213dc5" src="../_images/07_container-registry.gif"/></p>
 <p>These were a just a few Docker commands we explored, to learn all the docker commands available, take a look at the Docker documentation and a sample Docker workflow:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.docker.com/engine/reference/run/">https://docs.docker.com/engine/reference/run/</a></p></li>

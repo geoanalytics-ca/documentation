@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="K-Means Land Classification with Dask" href="02-kmeans-dask.html" /><link rel="prev" title="Scientific Workflows" href="index.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
         <title>Daily NDSI Average Pipeline - GeoAnalytics Canada</title>
@@ -160,7 +160,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1_getting_started/index.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/00-how-to-use-this-documentation.html">How to use this documentation</a></li>
@@ -185,7 +185,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/05-change-detection.html"><strong>Change Detection</strong></a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Scientific Workflows</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>Daily NDSI Average Pipeline</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-kmeans-dask.html">K-Means Land Classification with Dask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-composite.html">Compositing Rasters with Dask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-add-to-stac.html"><strong>Adding data to the Geoanalytics STAC server</strong></a></li>
 </ul>
 </li>
 </ul>
@@ -1195,9 +1199,9 @@ Username:  asaini
 <section id="4.-The-Results">
 <h2>4. The Results<a class="headerlink" href="#4.-The-Results" title="Permalink to this headline">#</a></h2>
 <p>Head over to the Kubeflow Pipeline UI and take a look at the Run you created. Once finished, the pipeline graph should look like this image below.</p>
-<p><img alt="ed0054f8f47b4a39ba0083f13f385907" src="../_images/01_pipeline-graph.png"/></p>
+<p><img alt="56f869ea614b4ff485a6bcdd9174b00c" src="../_images/01_pipeline-graph.png"/></p>
 <p>To see the final plot of the Averaged NDSI over the past few days, click on the <code class="docutils literal notranslate"><span class="pre">plot_ndsi</span></code> operation and under the <strong>“Input/Output”</strong>, click on the link in the Output Artifacts section. This is open a new tab with the final plot shown, which should look similar to this:</p>
-<p><img alt="7e65ed3726704bc39128a7909285c35e" src="../_images/01_pipeline-result.png"/></p>
+<p><img alt="cffc98ccfc7f4cb59c2c9d1015ffa983" src="../_images/01_pipeline-result.png"/></p>
 <p><strong>Note: This NDSI was processed on September 2nd, 2021.</strong></p>
 </section>
 <section id="5.-Additional-Sources">
@@ -1218,8 +1222,26 @@ Username:  asaini
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="02-kmeans-dask.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">K-Means Land Classification with Dask</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Scientific Workflows</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
