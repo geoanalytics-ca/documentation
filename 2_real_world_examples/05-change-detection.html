@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="&lt;no title&gt;" href="06-add-to-stac.html" /><link rel="prev" title="NDMI With Dask" href="04-ndmi-with-dask.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Scientific Workflows" href="../3_scientific_workflows/index.html" /><link rel="prev" title="NDMI with Landsat 8 Dask" href="04-ndmi-landsat8-dask.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
         <title>Change Detection - GeoAnalytics Canada</title>
@@ -164,7 +164,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1_getting_started/index.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/00-how-to-use-this-documentation.html">How to use this documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/01-python-intro.html"><strong>Introduction to Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/04-authentication.html"><strong>Authentication</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
@@ -180,16 +179,13 @@
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Real World Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01-accessing-data.html"><strong>Accessing and Downloading Data</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-ndvi-with-dask.html"><strong>NDVI With Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-ndsi-with-dask.html"><strong>NDSI With Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="04-ndmi-with-dask.html"><strong>NDMI With Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-ndvi-s2-dask.html"><strong>NDVI with Sentinel-2 and Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-ndsi-modis-dask.html"><strong>NDSI with MODIS and Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-ndmi-landsat8-dask.html"><strong>NDMI with Landsat 8 Dask</strong></a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>Change Detection</strong></a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-kmeans-dask.html">K-Means Land Classification with Dask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html">Compositing Rasters with Dask</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -4379,23 +4375,23 @@ Coordinates:
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="06-add-to-stac.html">
+          <a class="next-page" href="../3_scientific_workflows/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">&lt;no title&gt;</div>
+                <div class="title">Scientific Workflows</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="04-ndmi-with-dask.html">
+          <a class="prev-page" href="04-ndmi-landsat8-dask.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><strong>NDMI With Dask</strong></div>
+                <div class="title"><strong>NDMI with Landsat 8 Dask</strong></div>
                 
               </div>
             </a>
