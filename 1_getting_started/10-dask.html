@@ -474,14 +474,17 @@ div.rendered_html tbody tr:hover {
 </style>
 <section id="Dask">
 <h1><strong>Dask</strong><a class="headerlink" href="#Dask" title="Permalink to this headline">#</a></h1>
+<section id="Introduction-to-Dask">
+<h2>Introduction to Dask<a class="headerlink" href="#Introduction-to-Dask" title="Permalink to this headline">#</a></h2>
 <p><strong>What is Dask?</strong> Dask is a distributed system which can scale efficiently from a single computer to hundreds of servers. Dask uses regular Python code and Python APIs to scale the work for existing python structures (like NumPy arrays and Pandas dataframes) concurrently.</p>
 <p><strong>Why should we scale?</strong> Computations are much faster when data can be held in local memory. Most computers do not have massive memory storages to store big data, those that do are extremely expensive. An easier and cost effective method is to use the pool of memory from a collections of systems to store large datasets.</p>
 <p><strong>Dask Gateway</strong> The GeoAnalytics Canada Platform uses Dask Gateway to provide our users a secure multi-tenant server for managing Dask clusters. Our administrators manage the backend configuration of the clusters, so user’s can connect to the Dask Gateway without hassle.</p>
 <p>Here’s a diagram representing the Dask architecture, which consists of the Dask Clusters, a proxy for connecting the user’s client with the scheduler, and the main Gateway for authentication and cluster management.</p>
-<p><img alt="03b6a488994f4fad9c41637e91abdf11" src="../_images/02_dask-architecture.png"/></p>
-<section id="1.0-Connecting-to-Dask-Gateway">
-<h2>1.0 Connecting to Dask-Gateway<a class="headerlink" href="#1.0-Connecting-to-Dask-Gateway" title="Permalink to this headline">#</a></h2>
-<p>To connect to the Dask Gateway server through Jupyterhub, a session must be activated by creating a Gateway client.</p>
+<p><img alt="2946f6a7bbc34fbeaf763b6f09dbfc93" src="../_images/02_dask-architecture.png"/></p>
+</section>
+<section id="1.0-Connecting-to-Dask">
+<h2>1.0 Connecting to Dask<a class="headerlink" href="#1.0-Connecting-to-Dask" title="Permalink to this headline">#</a></h2>
+<p>To connect to the GeoAnalytics Canada Dask Gateway server through Jupyterhub, a session must be activated by creating a Gateway client.</p>
 <p>The address and authentication method to use are already configured within this notebook environment, therefore, we can initialize the gateway object without any parameters.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -495,7 +498,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>If you want to connect to a Dask Gateway server outside of this environment, then the full address of the dask-gateway server and the authentication method to use must be provided.</p>
+<p>If you want to connect to a Dask Gateway server outside of the GeoAnalytics Canada Jupyter environment (such as through a Desktop VM), then the full address of the dask-gateway server and the authentication method to use must be provided.</p>
 <p>Such as this line of code: <code class="docutils literal notranslate"><span class="pre">gateway</span> <span class="pre">=</span> <span class="pre">Gateway("http://traefik-dask-gateway.geoanalytics.ca/services/dask-gateway/",</span> <span class="pre">auth="jupyterhub")</span></code></p>
 </section>
 <section id="2.0-Creating-a-new-cluster">
@@ -756,7 +759,8 @@ libraries or dependencies you require.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><strong>Dask</strong></a><ul>
-<li><a class="reference internal" href="#1.0-Connecting-to-Dask-Gateway">1.0 Connecting to Dask-Gateway</a></li>
+<li><a class="reference internal" href="#Introduction-to-Dask">Introduction to Dask</a></li>
+<li><a class="reference internal" href="#1.0-Connecting-to-Dask">1.0 Connecting to Dask</a></li>
 <li><a class="reference internal" href="#2.0-Creating-a-new-cluster">2.0 Creating a new cluster</a></li>
 <li><a class="reference internal" href="#3.0-Configuring-a-cluster">3.0 Configuring a cluster</a></li>
 <li><a class="reference internal" href="#4.0-Scaling-the-Clusters">4.0 Scaling the Clusters</a></li>
