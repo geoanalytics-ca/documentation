@@ -4,7 +4,7 @@ This documentation is made as a series of Jupyter Notebooks that you can copy (o
 
 ## Documentation Git repository
 
-This documentation is hosted on GitHub in this repository: https://github.com/geoanalytics-ca/documentation/
+This documentation is hosted on GitHub in this repository: [https://github.com/geoanalytics-ca/documentation/](https://github.com/geoanalytics-ca/documentation/)
 
 ## Downloading this documentation into your GEOAnalytics Canada Jupyter Notebook
 
