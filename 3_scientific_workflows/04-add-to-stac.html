@@ -474,6 +474,8 @@ div.rendered_html tbody tr:hover {
 </style>
 <section id="Adding-data-to-the-Geoanalytics-STAC-server">
 <h1><strong>Adding data to the Geoanalytics STAC server</strong><a class="headerlink" href="#Adding-data-to-the-Geoanalytics-STAC-server" title="Permalink to this headline">#</a></h1>
+<p>```{admonition} Tutorial does not work on EO4PH Cluster :class: warning</p>
+<p>This tutorial is specific to the GEOAnalytics cluster deployed to the Google Cloud environment. To use this tutorial on the EO4PH cluster, ensure that the EO4PH STAC Server URL (<a class="reference external" href="https://stac.eo4ph.geoanalytics.ca/">https://stac.eo4ph.geoanalytics.ca/</a>) is used. ```</p>
 <p>In this workflow we will leverage our knowledge on querying STAC servers and adding data to a STAC server. This workflow will find Sentinel-2 data from Planetary Computer, download it and access it’s Metadata so as to allow us to add said data to our GeoAnalytics STAC server. These are the steps we will follow: 1. Write functions to query the STAC server, download the data, and create the STAC items 2. Apply our functions 3. Create a STAC Collection to which append our STAC items 4. Add our
 completed collection to the GeoAnalytics STAC Server</p>
 <div class="nbinput nblast docutils container">
@@ -759,6 +761,7 @@ completed collection to the GeoAnalytics STAC Server</p>
     <span class="n">geom</span> <span class="o">=</span> <span class="n">FOOTPRINT</span>
 
     <span class="c1"># Instantiate pystac item</span>
+    <span class="c1"># NOTE: on EO4PH, change the href base to https://stac.eo4ph.geoanalytics.ca/</span>
     <span class="n">new_stac_item</span> <span class="o">=</span> <span class="n">pystac</span><span class="o">.</span><span class="n">Item</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">image_name</span><span class="p">,</span>
                                 <span class="n">href</span><span class="o">=</span><span class="sa">f</span><span class="s1">'https://stac.geoanalytics.ca/collections/Sentinel2_TEST/items/</span><span class="si">{</span><span class="n">image_name</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
                                <span class="n">geometry</span><span class="o">=</span><span class="n">mapping</span><span class="p">(</span><span class="n">geom</span><span class="p">),</span>
@@ -1032,6 +1035,7 @@ completed collection to the GeoAnalytics STAC Server</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">'cookie'</span><span class="p">:</span> <span class="n">auth_token</span><span class="p">}</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="c1"># NOTE: on EO4PH, change the href base to https://stac.eo4ph.geoanalytics.ca/</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'https://stac.geoanalytics.ca/collections/Sentinel2_TEST/'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1055,6 +1059,7 @@ completed collection to the GeoAnalytics STAC Server</p>
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">stac_item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">local_stac_items</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">stac_item</span><span class="p">)</span>
     <span class="n">data2</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">stac_item</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+    <span class="c1"># NOTE: on EO4PH, change the href base to https://stac.eo4ph.geoanalytics.ca/</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'https://stac.geoanalytics.ca/collections/Sentinel2_TEST/items'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data2</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </pre></div>

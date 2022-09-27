@@ -238,7 +238,7 @@
 <li><p>Finally, click the “Create project”.</p></li>
 </ol>
 <p>Below is a visualization of these steps.</p>
-<p><img alt="a09d8778371d4cf59d952f34587b6816" src="../_images/07_create-project.gif"/></p>
+<p><img alt="b160a632abb94e65a83d82bb0f6bb426" src="../_images/07_create-project.gif"/></p>
 </section>
 <section id="2.-Set-up-the-Project-using-Git-Commands">
 <h2>2. Set up the Project using Git Commands<a class="headerlink" href="#2.-Set-up-the-Project-using-Git-Commands" title="Permalink to this headline">#</a></h2>
@@ -261,9 +261,9 @@ local machine. Replace the <code class="docutils literal notranslate"><span clas
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">master</span></code> : Send changes to the master branch of your remote repository.</p></li>
 </ol>
 <p>Here is a screenshot showing all the steps done within the Jupyterhub terminal.</p>
-<p><img alt="a4d4fa2dbdb340e1826ab9a8a1ee48df" src="../_images/07_git-cmd.png"/></p>
+<p><img alt="925b8c4b0bec40f999f1e78649ce4334" src="../_images/07_git-cmd.png"/></p>
 <p>Head back to your Repository on GitLab and refresh the page. You should see the README.md added within your project repository!</p>
-<p><img alt="c9a29587202340deb1ceabcb5241decc" src="../_images/07_readme-added.png"/></p>
+<p><img alt="7a415d25e49e4dd683d242ac331fffe3" src="../_images/07_readme-added.png"/></p>
 <p>This was only to set up a new project, if you have an existing folder you would like to link to your GitLab repository, then it can be done by:</p>
 <ul class="simple">
 <li><p>Changing into the existing folder: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">&lt;existing_folder&gt;</span></code></p></li>
@@ -285,7 +285,7 @@ local machine. Replace the <code class="docutils literal notranslate"><span clas
 <ol class="arabic simple" start="2">
 <li><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">hello-world</span></code></p></li>
 </ol>
-<p><img alt="a82ba6b5e08d40459f2466ac70d0995c" src="../_images/07_docker-gitlab1.png"/></p>
+<p><img alt="44fb02574a8b491181037c0f5115e75c" src="../_images/07_docker-gitlab1.png"/></p>
 <p>Now, we want to add the “hello-world” image to the container registry. To achieve that, we must rename the image from “hello-world” to the location of our container registry, using the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">tag</span> <span class="pre">&lt;source-img-name&gt;</span> <span class="pre">&lt;target-img-name&gt;</span></code> command. The target image name is the registry location because we want to push the image to a private registry and not the central Docker registry.</p>
 <ol class="arabic simple" start="3">
 <li><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">tag</span> <span class="pre">hello-world</span> <span class="pre">registry.geoanalytics.ca/&lt;username&gt;/test-docker</span></code> : Replace <code class="docutils literal notranslate"><span class="pre">&lt;username&gt;</span></code> with your GEOAnalytics GitLab username.</p></li>
@@ -294,13 +294,13 @@ local machine. Replace the <code class="docutils literal notranslate"><span clas
 <ol class="arabic simple" start="4">
 <li><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">registry.geoanalytics.ca/&lt;username&gt;/test-docker</span></code></p></li>
 </ol>
-<p>Here is a snapshot of the two commands being executed in terminal: <img alt="8ca5912971e44be9af18bfc10088c30f" src="../_images/07_docker-gitlab2.png"/></p>
+<p>Here is a snapshot of the two commands being executed in terminal: <img alt="f37aa6f039fc4cf4a083e846bfef49f1" src="../_images/07_docker-gitlab2.png"/></p>
 <p>The final step is to <strong>push</strong> the local Docker image to our test-docker repository. This is done by executing the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">push</span> <span class="pre">&lt;img-name&gt;</span></code> below:</p>
 <ol class="arabic simple" start="5">
 <li><p><strong>``docker push registry.geoanalytics.ca/&lt;username&gt;/test-docker``</strong> (Remember to use <em>your</em> username.)</p></li>
 </ol>
 <p>Now head over to your Gitlab page and click on <code class="docutils literal notranslate"><span class="pre">Packages</span> <span class="pre">&gt;</span> <span class="pre">Container</span> <span class="pre">Registry</span></code> from the left sidebar. You will see the Docker image you just pushed added to the repository’s container registry!</p>
-<p><img alt="f49592cf338c4bf8bb36593ca5394247" src="../_images/07_container-registry.gif"/></p>
+<p><img alt="e47143d06e8d45c1809eb8f3d72aa783" src="../_images/07_container-registry.gif"/></p>
 <p>These were a just a few Docker commands we explored, to learn all the docker commands available, take a look at the Docker documentation and a sample Docker workflow:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.docker.com/engine/reference/run/">https://docs.docker.com/engine/reference/run/</a></p></li>
