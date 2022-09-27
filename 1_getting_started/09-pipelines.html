@@ -476,234 +476,287 @@ div.rendered_html tbody tr:hover {
 <h1><strong>Pipelines</strong><a class="headerlink" href="#Pipelines" title="Permalink to this headline">#</a></h1>
 <section id="1.-Basics-of-GEOAnalytics-Canada-Pipelines">
 <h2>1. Basics of GEOAnalytics Canada Pipelines<a class="headerlink" href="#1.-Basics-of-GEOAnalytics-Canada-Pipelines" title="Permalink to this headline">#</a></h2>
-<p>Kubeflow Pipelines is a platform that provides tools for developing and building portable, scalable machine learning (ML) workflows based on Docker containers.</p>
-<p><strong>The Kubeflow Pipelines platform consists of:</strong></p>
+<p>The GeoAnalytics Canada Pipeline system helps with developing and building portable, scalable Earth Observation pre-processing pipelines and machine learning (ML) workflows based on Docker containers.</p>
+<p><strong>The Pipelines platform consists of:</strong></p>
 <ul class="simple">
-<li><p>A UI for managing and tracking pipelines and their execution</p></li>
+<li><p>A UI for managing and tracking pipelines and their execution. The <a class="reference external" href="https://pipeline.eo4ph.geoanalytics.ca/">EO4PH Pipeline UI is available here</a></p></li>
 <li><p>An engine for scheduling a pipeline’s execution</p></li>
-<li><p>An SDK for defining, building, and deploying pipelines in Python</p></li>
+<li><p>An SDK for defining, building, and deploying pipelines in Python. The SDK we use is the <a class="reference external" href="https://couler-proj.github.io/couler/">Couler python library</a></p></li>
 </ul>
 <p>A pipeline is a representation of a ML workflow containing the parameters required to run the pipeline and the inputs and outputs of each component. Each pipeline component is a self-contained code block, packaged as a Docker image.</p>
-<p>In this tutorial notebook, we will build our first Kubeflow Pipelines with Python functions converted to container components and with Docker images. First, run the following command to install all the packages and dependencies required for this tutorial. The requirements.txt file contains the Kubeflow Pipelines SDK and <code class="docutils literal notranslate"><span class="pre">lxml</span></code> (a Python library which allows for easy handling of XML and HTML files, and can also be used for web scraping).</p>
+<p>In this tutorial notebook, we will build our first Pipeline.</p>
+<p>First, run the following command to install all the packages and dependencies required for this tutorial.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span> pip install -r data/requirements.txt
+<span></span><span class="c1"># install the Couler SDK from source</span>
+<span class="o">!</span>python3 -m pip install git+https://github.com/couler-proj/couler --ignore-installed
 </pre></div>
 </div>
 </div>
 </section>
-<section id="2.-Building-Pipelines-in-Jupyterhub">
-<h2>2. Building Pipelines in Jupyterhub<a class="headerlink" href="#2.-Building-Pipelines-in-Jupyterhub" title="Permalink to this headline">#</a></h2>
-<p>In this section we will connect to the GEOAnalytics Kubeflow Client where our Pipeline will be uploaded, and create, compile, and run a simple ‘Hello World!’ pipeline.</p>
-<p>A regular pattern for building pipelines in Kubeflow Pipelines is:</p>
-<ol class="arabic simple">
-<li><p>Define components for each task</p></li>
-<li><p>Stitch the components in a <code class="docutils literal notranslate"><span class="pre">@dsl.pipeline</span></code> decorated function</p></li>
-<li><p>Compile the pipeline, upload the YAML file, and run the pipeline.</p></li>
-</ol>
-<p>This pattern lets you define portable components that can be individually tested before combining them into a full pipeline.</p>
-<p><strong>Important Note: The Kubeflow platform provides Jupyter Notebook Servers for using the SDK and pipeline execution, but please DO NOT create a pipeline from these server notebooks.</strong></p>
-<section id="2.1-Connect-to-GEOAnalytics-Pipeline-Client¶">
-<h3>2.1 Connect to GEOAnalytics Pipeline Client¶<a class="headerlink" href="#2.1-Connect-to-GEOAnalytics-Pipeline-Client¶" title="Permalink to this headline">#</a></h3>
-<p>The first step is to get connected with the the Kubeflow Client in GEOAnalytics Canada.</p>
+<section id="2.-Building-A-Basic-Pipeline">
+<h2>2. Building A Basic Pipeline<a class="headerlink" href="#2.-Building-A-Basic-Pipeline" title="Permalink to this headline">#</a></h2>
+<p>After installing the required dependencies for this tutorial, we then need to import the necessary modules. Next, we define a job template that pacakges each step into its own Container.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">### GEOAnalyticsKubeflowClient</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">kfp</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">getpass</span>
-
-<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">html</span>
-
-<span class="c1">#from auth_providers.DexProvider import DexProvider</span>
-
-<span class="k">class</span> <span class="nc">GEOAnalyticsKubeflowClient</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">auth_provider</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_logger</span><span class="p">()</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span> <span class="o">=</span> <span class="n">username</span> <span class="k">if</span> <span class="n">namespace</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">namespace</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_authenticate</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">auth_provider</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_client_connection</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">_initialize_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)s</span><span class="s1"> (</span><span class="si">%(name)s</span><span class="s1">): </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">datefmt</span><span class="o">=</span><span class="s1">'%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"GEOAnalyticsKubeflowClient"</span><span class="p">)</span>
-
-    <span class="c1"># https://github.com/kubeflow/kfctl/issues/140#issuecomment-719894529</span>
-    <span class="k">def</span> <span class="nf">_authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">auth_provider</span><span class="p">):</span>
-        <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">auth_provider</span><span class="o">.</span><span class="n">host</span><span class="p">)</span>
-        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">"Content-Type"</span><span class="p">:</span> <span class="s2">"application/x-www-form-urlencoded"</span><span class="p">,</span>
-        <span class="p">}</span>
-
-        <span class="n">data</span> <span class="o">=</span> <span class="n">auth_provider</span><span class="o">.</span><span class="n">get_auth_data_dict</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
-        <span class="n">post_url</span> <span class="o">=</span> <span class="n">auth_provider</span><span class="o">.</span><span class="n">get_auth_post_url</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-        <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">post_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">session_cookie</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">cookies</span><span class="o">.</span><span class="n">get_dict</span><span class="p">()[</span><span class="s2">"authservice_session"</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="s2">"invalid host or credentials"</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">kfp</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span>
-            <span class="n">host</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">auth_provider</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s2">/pipeline"</span><span class="p">,</span>
-            <span class="n">cookies</span><span class="o">=</span><span class="sa">f</span><span class="s2">"authservice_session=</span><span class="si">{</span><span class="n">session_cookie</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
-            <span class="n">namespace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="p">,</span>
-        <span class="p">)</span>
-
-
-    <span class="k">def</span> <span class="nf">_validate_client_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">list_pipelines</span><span class="p">()</span><span class="o">.</span><span class="n">total_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"successfully authenticated with kubeflow"</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="s2">"unable to validate kubeflow client connection. listing pipelines failed."</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span></span><span class="kn">import</span> <span class="nn">couler.argo</span> <span class="k">as</span> <span class="nn">couler</span>
+<span class="kn">from</span> <span class="nn">couler.argo_submitter</span> <span class="kn">import</span> <span class="n">ArgoSubmitter</span>
+<span class="kn">from</span> <span class="nn">couler.core.templates.toleration</span> <span class="kn">import</span> <span class="n">Toleration</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">class</span> <span class="nc">DexProvider</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"dex"</span>
-
-    <span class="k">def</span> <span class="nf">get_auth_data_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">"login"</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="s2">"password"</span><span class="p">:</span> <span class="n">password</span><span class="p">}</span>
-
-    <span class="k">def</span> <span class="nf">get_auth_post_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_response</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">initial_response</span><span class="o">.</span><span class="n">url</span>
-
-    <span class="k">def</span> <span class="nf">get_provider_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+<span></span><span class="k">def</span> <span class="nf">job</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="c1"># two tolerations are needed to ensure the job is scheduled on the correct GEOAnalytics Canada cluster nodes.</span>
+    <span class="n">toleration</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="s1">'ga.nodepool/type'</span><span class="p">,</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">add_toleration</span><span class="p">(</span><span class="n">toleration</span><span class="p">)</span> <span class="c1"># pipeline/nodepool=pipe:NoSchedule</span>
+    <span class="n">toleration2</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="s1">'kubernetes.azure.com/scalesetpriority'</span><span class="p">,</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">add_toleration</span><span class="p">(</span><span class="n">toleration2</span><span class="p">)</span>
+    <span class="c1"># Set the container to run. You could use your own container hosted in the GEOAnalytics Canada container registry, or in this case docker/whalesay</span>
+    <span class="c1"># Documentation on the docker/whalesay image and arguments is here: https://hub.docker.com/r/docker/whalesay/</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">run_container</span><span class="p">(</span>
+        <span class="n">image</span><span class="o">=</span><span class="s2">"docker/whalesay:latest"</span><span class="p">,</span>
+        <span class="n">command</span><span class="o">=</span><span class="p">[</span><span class="s2">"cowsay"</span><span class="p">],</span>
+        <span class="c1"># pass the name as an argument to the whalesay docker image</span>
+        <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">name</span><span class="p">],</span>
+        <span class="n">step_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+        <span class="c1"># node_selector needs to be {'pipeline':'small'}</span>
+        <span class="n">node_selector</span><span class="o">=</span><span class="p">{</span><span class="s1">'pipeline'</span><span class="p">:</span><span class="s1">'small'</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The next two functions demonstrate the dependencies between each pipeline step that can be created. Further down, we will see a more complex example, however, declaring simple dependencies such as these to block subsequent steps from operating before a given step has finished running can prove to be a powerful tool when building complex products.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#     A</span>
+<span class="c1">#    / \</span>
+<span class="c1">#   B   C</span>
+<span class="c1">#  /</span>
+<span class="c1"># D</span>
+<span class="k">def</span> <span class="nf">linear_pipeline</span><span class="p">():</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">set_dependencies</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"A"</span><span class="p">),</span> <span class="n">dependencies</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">set_dependencies</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"B"</span><span class="p">),</span> <span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">])</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">set_dependencies</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"C"</span><span class="p">),</span> <span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">])</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">set_dependencies</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"D"</span><span class="p">),</span> <span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s2">"B"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#   A</span>
+<span class="c1">#  / \</span>
+<span class="c1"># B   C</span>
+<span class="c1">#  \ /</span>
+<span class="c1">#   D</span>
+<span class="k">def</span> <span class="nf">diamond_pipeline</span><span class="p">():</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">dag</span><span class="p">(</span> <span class="c1"># DAG: Directed Acyclic Graph (the same as a 'pipeline')</span>
+        <span class="p">[</span>
+            <span class="p">[</span><span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"A"</span><span class="p">)],</span>
+            <span class="p">[</span><span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"A"</span><span class="p">),</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"B"</span><span class="p">)],</span>  <span class="c1"># A -&gt; B</span>
+            <span class="p">[</span><span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"A"</span><span class="p">),</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"C"</span><span class="p">)],</span>  <span class="c1"># A -&gt; C</span>
+            <span class="p">[</span><span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"B"</span><span class="p">),</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"D"</span><span class="p">)],</span>  <span class="c1"># B -&gt; D</span>
+            <span class="p">[</span><span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"C"</span><span class="p">),</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"D"</span><span class="p">)],</span>  <span class="c1"># C -&gt; D</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># linear_pipeline()</span>
+<span class="n">diamond_pipeline</span><span class="p">()</span>
 
 </pre></div>
 </div>
 </div>
-<p>The following cell block takes in the URL to the GEOAnalytics Kubeflow server as the provider and requires you to enter your GEOAnalytics Canada username and password to gain authentication.</p>
+<p>We then will submit our job to the <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> namespace where jobs will be run. Using any other namespace will just result in errors. First, we declare which submitter we will be using - we will use the ArgoSubmitter as the backend is leveraging Argo.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">provider</span> <span class="o">=</span> <span class="n">DexProvider</span><span class="p">(</span><span class="s2">"http://kubeflow.geoanalytics.ca"</span><span class="p">)</span>
-<span class="n">kubeflow_client</span> <span class="o">=</span> <span class="n">GEOAnalyticsKubeflowClient</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">"Username: "</span><span class="p">),</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(),</span> <span class="n">provider</span><span class="p">)</span>
+<span></span><span class="n">submitter</span> <span class="o">=</span> <span class="n">ArgoSubmitter</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="s1">'pipeline'</span><span class="p">)</span> <span class="c1"># namespace must be 'pipeline'</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Username:  asaini
- ············
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-2021-06-25 21:54:16 INFO (GEOAnalyticsKubeflowClient): successfully authenticated with kubeflow
+INFO:root:Argo submitter namespace: pipeline
+INFO:root:Cannot find local k8s config. Trying in-cluster config.
+INFO:root:Initialized with in-cluster config.
 </pre></div></div>
 </div>
-<p>Now that we are authenticated, let’s build our pipelines. There are two ways components of a pipeline can be generated: Using python functions or using docker images. We will create two pipelines experimenting with both these methods.</p>
+<p>Finally, we submit our Directed Acyclic Graph (DAG) that represents our “pipeline” we defined above to the Executor.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">deployment</span> <span class="o">=</span> <span class="n">couler</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">submitter</span><span class="p">)</span>
+<span class="n">deployment</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:root:Checking workflow name/generatedName runpy-
+INFO:root:Submitting workflow to Argo
+INFO:root:Workflow runpy-j8w5g has been submitted in "pipeline" namespace!
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'apiVersion': 'argoproj.io/v1alpha1',
+ 'kind': 'Workflow',
+ 'metadata': {'creationTimestamp': '2022-09-27T02:44:08Z',
+  'generateName': 'runpy-',
+  'generation': 1,
+  'managedFields': [{'apiVersion': 'argoproj.io/v1alpha1',
+    'fieldsType': 'FieldsV1',
+    'fieldsV1': {'f:metadata': {'f:generateName': {}}, 'f:spec': {}},
+    'manager': 'OpenAPI-Generator',
+    'operation': 'Update',
+    'time': '2022-09-27T02:44:08Z'}],
+  'name': 'runpy-j8w5g',
+  'namespace': 'pipeline',
+  'resourceVersion': '42779483',
+  'uid': '6a864b5c-68d4-4bf0-8c2e-e4053f0b02e5'},
+ 'spec': {'entrypoint': 'runpy',
+  'templates': [{'dag': {'tasks': [{'arguments': {'parameters': [{'name': 'para-A-0',
+          'value': 'A'}]},
+       'name': 'A',
+       'template': 'A'},
+      {'arguments': {'parameters': [{'name': 'para-B-0', 'value': 'B'}]},
+       'dependencies': ['A'],
+       'name': 'B',
+       'template': 'B'},
+      {'arguments': {'parameters': [{'name': 'para-C-0', 'value': 'C'}]},
+       'dependencies': ['A'],
+       'name': 'C',
+       'template': 'C'},
+      {'arguments': {'parameters': [{'name': 'para-D-0', 'value': 'D'}]},
+       'dependencies': ['B', 'C'],
+       'name': 'D',
+       'template': 'D'}]},
+    'name': 'runpy'},
+   {'container': {'args': ['{{inputs.parameters.para-A-0}}'],
+     'command': ['cowsay'],
+     'image': 'docker/whalesay:latest'},
+    'inputs': {'parameters': [{'name': 'para-A-0'}]},
+    'name': 'A',
+    'nodeSelector': {'pipeline': 'small'}},
+   {'container': {'args': ['{{inputs.parameters.para-B-0}}'],
+     'command': ['cowsay'],
+     'image': 'docker/whalesay:latest'},
+    'inputs': {'parameters': [{'name': 'para-B-0'}]},
+    'name': 'B',
+    'nodeSelector': {'pipeline': 'small'}},
+   {'container': {'args': ['{{inputs.parameters.para-C-0}}'],
+     'command': ['cowsay'],
+     'image': 'docker/whalesay:latest'},
+    'inputs': {'parameters': [{'name': 'para-C-0'}]},
+    'name': 'C',
+    'nodeSelector': {'pipeline': 'small'}},
+   {'container': {'args': ['{{inputs.parameters.para-D-0}}'],
+     'command': ['cowsay'],
+     'image': 'docker/whalesay:latest'},
+    'inputs': {'parameters': [{'name': 'para-D-0'}]},
+    'name': 'D',
+    'nodeSelector': {'pipeline': 'small'}}],
+  'tolerations': [{'effect': 'NoSchedule',
+    'key': 'ga.nodepool/type',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'}]}}
+</pre></div></div>
+</div>
+<p>The following screenshot shows the successful run that the above JSON pipeline object represents.</p>
+<p><img alt="pipeline DAG" src="../_images/09_pipeline-dag.png"/></p>
+<p>And finally, the output of the above pipeline:</p>
+<p><img alt="whalesayAB" src="../_images/09_whalesayAB.png"/><img alt="whalesayCD" src="../_images/09_whalesayCD.png"/></p>
+<p>These screenshots were gathered from our Pipeline UI: <a class="reference external" href="https://pipeline.eo4ph.geoanalytics.ca">https://pipeline.eo4ph.geoanalytics.ca</a>.</p>
 </section>
-<section id="2.2-Building-Pipelines-through-Python-Function-Based-Components">
-<h3>2.2 Building Pipelines through Python Function Based Components<a class="headerlink" href="#2.2-Building-Pipelines-through-Python-Function-Based-Components" title="Permalink to this headline">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Define a standard python function</strong>: For our example, the function will combine two separate strings together. The function should not use any code declared outside of the function definition and helper function must be declared within the function. The input and output data type should also be explicitly declared.</p></li>
-</ol>
+<section id="3.-Building-A-Pipeline-that-Handles-Failures">
+<h2>3. Building A Pipeline that Handles Failures<a class="headerlink" href="#3.-Building-A-Pipeline-that-Handles-Failures" title="Permalink to this headline">#</a></h2>
+<p>In this example, we create a pipeline that handles failures in previous steps gracefully.</p>
+<p>Purely to illustrate how failures can be handled, we are using <a class="reference external" href="https://step.esa.int/main/snap-supported-plugins/sen2cor/">Sen2Cor</a> as an example. <strong>Note: were are not actually running Sen2Cor here!</strong>. The idea is to begin with the most recent version of Sen2Cor and then if an error occurs while processing the L1C input data then the pipeline will failover to the next release of Sen2Cor. If the process fails over on all conditions, an error job is thrown to perform what would be any cleanup
+and notification that processing of the file failed.</p>
+<p>This pipeline can be adapted into many other uses.</p>
+<p>First, after importing our libraries, we build a template job function that can take in <code class="docutils literal notranslate"><span class="pre">callable</span></code> objects to be inserted in to a Python3.6 image.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">kfp</span>
-<span class="kn">import</span> <span class="nn">kfp.dsl</span> <span class="k">as</span> <span class="nn">dsl</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Combine two strings together</span>
-<span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-</pre></div>
-</div>
-</div>
-<ol class="arabic simple" start="2">
-<li><p><strong>Wrap the function in a Kubeflow lightweight component</strong>: the Kubeflow Python SDK allows you to build lightweight components by defining python functions and converting them using <code class="docutils literal notranslate"><span class="pre">kfp.components.create_component_from_func(&lt;python</span> <span class="pre">function&gt;)</span></code>. Specifying a custom Docker container image can be provided as a parameter of this function. The default base image is <em>python3.7</em>.</p></li>
-</ol>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">combine_op</span> <span class="o">=</span> <span class="n">kfp</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">create_component_from_func</span><span class="p">(</span><span class="n">combine</span><span class="p">)</span> <span class="c1"># default base_image is python3.7</span>
-</pre></div>
-</div>
-</div>
-<ol class="arabic simple" start="3">
-<li><p><strong>Build a Kubeflow Pipeline using the component</strong>: You can use the component created above in a pipeline. The parameters of <code class="docutils literal notranslate"><span class="pre">@dsl.pipeline</span></code> define the metadata of the pipeline. The combine_strings_pipeline has a decorator function with the goal of printing “Hello World!” as the final result.</p></li>
-</ol>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nd">@dsl</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
-  <span class="n">name</span><span class="o">=</span><span class="s1">'Hello World pipeline'</span><span class="p">,</span>
-  <span class="n">description</span><span class="o">=</span><span class="s1">'An easy example pipeline that combines strings together to create the Hello World phrase.'</span>
-<span class="p">)</span>
-<span class="k">def</span> <span class="nf">combine_strings_pipeline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">'Hello'</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s1">'World'</span><span class="p">):</span>
-    <span class="c1"># Passing in the first pipeline parameter ('Hello') and a space to be combined by the  `combine_op` function.</span>
-    <span class="n">add_space</span> <span class="o">=</span> <span class="n">combine_op</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">' '</span><span class="p">)</span>
-
-    <span class="c1"># Passes an output reference from `add_space` and the next pipeline parameter ('World')</span>
-    <span class="n">combine_words</span> <span class="o">=</span> <span class="n">combine_op</span><span class="p">(</span><span class="n">add_space</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-
-    <span class="c1"># Adding an exclamation to the output reference from `combine_words`</span>
-    <span class="n">add_exclamation</span> <span class="o">=</span> <span class="n">combine_op</span><span class="p">(</span><span class="n">combine_words</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="s1">'!'</span><span class="p">)</span>
-
-</pre></div>
-</div>
-</div>
-<ol class="arabic simple" start="3">
-<li><p><strong>Compiling the Kubeflow Pipeline</strong>: Here we compile the pipeline function into a YAML file that Kubeflow Pipelines can use. A pipeline name, and the pipeline function to be processed are inputs for the compiler.</p></li>
-</ol>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># COMPILE PIPELINE #</span>
-<span class="n">pipeline_name</span> <span class="o">=</span> <span class="s2">"Hello World Pipeline!"</span>
-<span class="n">pipeline_func</span> <span class="o">=</span> <span class="n">combine_strings_pipeline</span>
-<span class="n">pipeline_filename</span> <span class="o">=</span> <span class="n">pipeline_func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s1">'.pipeline.yaml'</span>
-<span class="n">kfp</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">Compiler</span><span class="p">()</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pipeline_func</span><span class="p">,</span> <span class="n">pipeline_filename</span><span class="p">)</span>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">couler.argo</span> <span class="k">as</span> <span class="nn">couler</span>
+<span class="kn">from</span> <span class="nn">couler.argo_submitter</span> <span class="kn">import</span> <span class="n">ArgoSubmitter</span>
+<span class="kn">from</span> <span class="nn">couler.core.templates.toleration</span> <span class="kn">import</span> <span class="n">Toleration</span>
+<span class="kn">from</span> <span class="nn">couler.core.templates.volume_claim</span> <span class="kn">import</span> <span class="n">VolumeClaimTemplate</span>
+<span class="kn">from</span> <span class="nn">couler.core.constants</span> <span class="kn">import</span> <span class="n">WFStatus</span>
 </pre></div>
 </div>
 </div>
@@ -712,166 +765,151 @@ Username:  asaini
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">arguments</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="s1">'Hello'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="s1">'World'</span><span class="p">}</span> <span class="c1"># pipeline argument values</span>
-</pre></div>
-</div>
-</div>
-<ol class="arabic simple" start="4">
-<li><p><strong>Run the experiments</strong>: Kubeflow Pipelines lets you group pipeline runs by <strong>Experiments</strong>. Experiments are workspaces where you can try different configurations of your pipelines. You can use experiments to organize your runs into logical groups.</p></li>
-</ol>
-<ul class="simple">
-<li><p>In this code block below, we create an experiment with the name “combine-hello-world” and label the run iteration manually. The <code class="docutils literal notranslate"><span class="pre">.run_pipeline(&lt;parameters&gt;)</span></code> function runs our specifc pipeline, outputting the hyperlinks to the Experiment and Run details.</p></li>
-</ul>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># If the experiment under the given name already exists - get it's ID, else - create a new experiment</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">experiment_id</span> <span class="o">=</span> <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="s2">"combine-hello-world"</span><span class="p">)</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="n">experiment</span> <span class="o">=</span> <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">create_experiment</span><span class="p">(</span><span class="s2">"combine-hello-world"</span><span class="p">)</span>
-
-<span class="n">run_name</span> <span class="o">=</span> <span class="n">pipeline_func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s1">'-run#1'</span>
-<span class="n">run_result</span> <span class="o">=</span> <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">run_pipeline</span><span class="p">(</span><span class="n">experiment</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">run_name</span><span class="p">,</span> <span class="n">pipeline_filename</span><span class="p">,</span> <span class="n">arguments</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-2021-06-25 21:54:17 INFO (root): Creating experiment combine-hello-world.
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area rendered_html docutils container">
-<a href="http://kubeflow.geoanalytics.ca/pipeline/#/experiments/details/5a34b033-4187-44f0-b851-10498d3b42ea" target="_blank">Experiment details</a>.</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area rendered_html docutils container">
-<a href="http://kubeflow.geoanalytics.ca/pipeline/#/runs/details/f0617ebf-64e1-4c7e-9447-c421f46f29b8" target="_blank">Run details</a>.</div>
-</div>
-<ol class="arabic simple" start="5">
-<li><p><strong>Upload to the Kubeflow Pipelines UI</strong>: After developing your pipeline,the pipeline can be shared on the Kubeflow Pipelines UI.</p></li>
-</ol>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">combine_hw_pipeline</span> <span class="o">=</span> <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">upload_pipeline</span><span class="p">(</span><span class="n">pipeline_filename</span><span class="p">,</span> <span class="n">pipeline_name</span><span class="p">,</span> <span class="s2">"'Hello World!' created by the combine_strings pipeline!"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area rendered_html docutils container">
-<a href="http://kubeflow.geoanalytics.ca/pipeline/#/pipelines/details/968ad52f-71a0-4109-b72f-e06740c4388e">Pipeline details</a>.</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">combine_hw_pipeline</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-{'created_at': datetime.datetime(2021, 6, 25, 21, 54, 17, tzinfo=tzlocal()),
- 'default_version': {'code_source_url': None,
-                     'created_at': datetime.datetime(2021, 6, 25, 21, 54, 17, tzinfo=tzlocal()),
-                     'id': '968ad52f-71a0-4109-b72f-e06740c4388e',
-                     'name': 'Hello World Pipeline!',
-                     'package_url': None,
-                     'parameters': [{'name': 'a', 'value': 'Hello'},
-                                    {'name': 'b', 'value': 'World'}],
-                     'resource_references': [{'key': {'id': '968ad52f-71a0-4109-b72f-e06740c4388e',
-                                                      'type': 'PIPELINE'},
-                                              'name': None,
-                                              'relationship': 'OWNER'}]},
- 'description': "'Hello World!' created by the combine_strings pipeline!",
- 'error': None,
- 'id': '968ad52f-71a0-4109-b72f-e06740c4388e',
- 'name': 'Hello World Pipeline!',
- 'parameters': [{'name': 'a', 'value': 'Hello'},
-                {'name': 'b', 'value': 'World'}],
- 'url': None}
-</pre></div></div>
-</div>
-</section>
-<section id="2.3-Building-Pipelines-by-Docker-Images">
-<h3>2.3 Building Pipelines by Docker Images<a class="headerlink" href="#2.3-Building-Pipelines-by-Docker-Images" title="Permalink to this headline">#</a></h3>
-<p>Now that we have seen how lightweight containers are used in pipelines, we will explore how to build a pipeline using a docker container image. When Kubeflow Pipelines executes a component, a container image is started in a Kubernetes Pod and your component’s inputs are passed in as command-line arguments.</p>
-<p>Before we can build our pipeline, let’s get our docker image ready for use. For our example, we will be using ‘library/bash:4.4.23’ image, publicly available on DockerHub. Using the same techniques from the <strong>Gitlab</strong> tutorial notebook, push this image to a private container registry.</p>
-<ul class="simple">
-<li><p><strong>Hint:</strong> Rename the image to <code class="docutils literal notranslate"><span class="pre">registry.geoanalytics.ca/&lt;username&gt;/bash-library</span></code></p></li>
-</ul>
-<p>Now let’s talk run the cell below to create an echo operation to be called within our pipeline. This function will return an operation that runs an image. <code class="docutils literal notranslate"><span class="pre">dsl.ContainerOp()</span></code> takes in multiple parameters, but for our example we will focus on only these four:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> – the name of the operation, which is ‘echo’ in this case.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">image</span></code> – the name of our container image.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">command</span></code> – the command to run in the container. <strong>‘sh’</strong> invokes the default shell as interpreter and the <strong>‘-c’</strong> flag means execute the following command as interpreted by this program.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">arguments</span></code> – the arguments of the command. At container run time the argument will be <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">"hello</span> <span class="pre">world"</span></code>.</p></li>
-</ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">echo_op</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">dsl</span><span class="o">.</span><span class="n">ContainerOp</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s1">'echo'</span><span class="p">,</span>
-        <span class="n">image</span><span class="o">=</span><span class="s1">'registry.geoanalytics.ca/examples/bash-library'</span><span class="p">,</span>
-        <span class="n">command</span><span class="o">=</span><span class="p">[</span><span class="s1">'sh'</span><span class="p">,</span> <span class="s1">'-c'</span><span class="p">],</span>
-        <span class="n">arguments</span><span class="o">=</span><span class="p">[</span><span class="s1">'echo "hello world"'</span><span class="p">]</span>
+<span></span><span class="k">def</span> <span class="nf">job</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">callable</span><span class="p">):</span>
+    <span class="c1"># two tolerations are needed to ensure the job is scheduled on the correct GEOAnalytics Canada cluster nodes.</span>
+    <span class="n">toleration</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="s1">'ga.nodepool/type'</span><span class="p">,</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">add_toleration</span><span class="p">(</span><span class="n">toleration</span><span class="p">)</span> <span class="c1"># pipeline/nodepool=pipe:NoSchedule</span>
+    <span class="n">toleration2</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="s1">'kubernetes.azure.com/scalesetpriority'</span><span class="p">,</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">add_toleration</span><span class="p">(</span><span class="n">toleration2</span><span class="p">)</span>
+    <span class="c1"># we aren't actually going to run Sen2Cor, instead we're just running a docker image that runs python version 3.6</span>
+    <span class="c1"># If we were actually going to run Sen2Cor, we would have to create a docker image for each version of Sen2Cor we want to run.</span>
+    <span class="c1"># The arguments for run_script() is here :https://github.com/couler-proj/couler/blob/master/couler/core/run_templates.py#L41</span>
+    <span class="k">return</span> <span class="n">couler</span><span class="o">.</span><span class="n">run_script</span><span class="p">(</span>
+        <span class="n">image</span><span class="o">=</span><span class="s2">"python:alpine3.6"</span><span class="p">,</span>
+        <span class="c1"># the source will be injected inside of the container and run</span>
+        <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
+        <span class="n">step_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+        <span class="n">node_selector</span><span class="o">=</span><span class="p">{</span><span class="s1">'pipeline'</span><span class="p">:</span><span class="s1">'small'</span><span class="p">}</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>This python function directly returns a container operation and can be used in the pipeline. This means in contrast to the previous Python function (combine_op), there is no need to wrap the function as a component for it be processed in a pipeline.</p>
-<p>The function below builds a Kubeflow Pipeline using the echo operation, similar to the lightweight function pipeline. The pipeline function calls our echo component as the main task. The image to be used exists in a private container registry which requires additional authentication steps. The <code class="docutils literal notranslate"><span class="pre">dsl.get_pipeline_conf()</span></code> allows configuration of the pipeline and uses the <code class="docutils literal notranslate"><span class="pre">.set_image_pull_secrets(...)</span></code> to authenticate the docker image using the secret name “regcredgeoanalytics.”</p>
+<p>Next, we define our steps that represent success or failure of running the Sen2Cor binary.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">kubernetes</span> <span class="kn">import</span> <span class="n">client</span>
+<span></span><span class="k">def</span> <span class="nf">gather_files</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s1">'ras1'</span><span class="p">,</span><span class="s1">'ras2'</span><span class="p">,</span><span class="s1">'ras3'</span><span class="p">,</span><span class="s1">'ras4'</span><span class="p">]</span>
 
-<span class="nd">@dsl</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">'Echo Image pipeline'</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s1">'An example pipeline that echos "hello world" in the container image.'</span>
-<span class="p">)</span>
-<span class="k">def</span> <span class="nf">echo_hello_world_pipeline</span><span class="p">():</span>
-    <span class="n">echo_task</span> <span class="o">=</span> <span class="n">echo_op</span><span class="p">()</span>
-    <span class="n">dsl</span><span class="o">.</span><span class="n">get_pipeline_conf</span><span class="p">()</span><span class="o">.</span><span class="n">set_image_pull_secrets</span><span class="p">([</span><span class="n">client</span><span class="o">.</span><span class="n">V1LocalObjectReference</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"regcredgeoanalytics"</span><span class="p">)])</span> <span class="c1"># access to your registry</span>
+<span class="k">def</span> <span class="nf">preprocess</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'preprocess'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">sen2cor290</span><span class="p">():</span>
+    <span class="c1"># choose randomly if this function will succeed or fail</span>
+    <span class="kn">import</span> <span class="nn">random</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'success'</span><span class="p">,</span> <span class="s1">'fail'</span><span class="p">]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="n">res</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="s1">'fail'</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">sen2cor280</span><span class="p">():</span>
+    <span class="c1"># choose randomly if this function will succeed or fail</span>
+    <span class="kn">import</span> <span class="nn">random</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'success'</span><span class="p">,</span> <span class="s1">'fail'</span><span class="p">]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="n">res</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="s1">'fail'</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">sen2cor255</span><span class="p">():</span>
+    <span class="c1"># choose randomly if this function will succeed or fail</span>
+    <span class="kn">import</span> <span class="nn">random</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'success'</span><span class="p">,</span> <span class="s1">'fail'</span><span class="p">]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="n">res</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="s1">'fail'</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">fin</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'fin'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">err</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'error'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>Compile, run, and upload your pipeline!</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<p>Once decalared, we wrap our functions inside of a submittable job</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># COMPILE PIPELINE #</span>
-<span class="n">pipeline_name</span> <span class="o">=</span> <span class="s2">"Echo Image Pipeline"</span>
-<span class="n">pipeline_func</span> <span class="o">=</span> <span class="n">echo_hello_world_pipeline</span>
-<span class="n">pipeline_filename</span> <span class="o">=</span> <span class="n">pipeline_func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s1">'.pipeline.yaml'</span>
-<span class="n">kfp</span><span class="o">.</span><span class="n">compiler</span><span class="o">.</span><span class="n">Compiler</span><span class="p">()</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pipeline_func</span><span class="p">,</span> <span class="n">pipeline_filename</span><span class="p">)</span>
+<span></span><span class="k">def</span> <span class="nf">preprocess_job</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'preprocess'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">preprocess</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">sen2cor290_job</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'sen2cor290'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">sen2cor290</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">sen2cor280_job</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'sen2cor280'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">sen2cor280</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">sen2cor255_job</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'sen2cor255'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">sen2cor255</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">fin_job</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'fin'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">fin</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">err_job</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'err'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">err</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We now need to build our pipeline.</p>
+<p>First we gather our files, which is generally a list and then any necessary preprocessing steps. Once ready, the input is passed into our first Step: “Sen2Cor version 2.9.0”. Using Boolean logic and the set_dependencies function, we can determine how the failovers are managed.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">setup_failover_pipeline</span><span class="p">():</span>
+
+    <span class="n">couler</span><span class="o">.</span><span class="n">set_dependencies</span><span class="p">(</span>
+        <span class="n">preprocess_job</span><span class="p">,</span>
+        <span class="n">dependencies</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">)</span>
+
+    <span class="n">couler</span><span class="o">.</span><span class="n">set_dependencies</span><span class="p">(</span>
+        <span class="n">sen2cor290_job</span><span class="p">,</span>
+        <span class="n">dependencies</span><span class="o">=</span><span class="s1">'preprocess.Succeeded'</span>
+    <span class="p">)</span>
+
+    <span class="n">couler</span><span class="o">.</span><span class="n">set_dependencies</span><span class="p">(</span>
+        <span class="n">sen2cor280_job</span><span class="p">,</span>
+        <span class="n">dependencies</span><span class="o">=</span><span class="s1">'sen2cor290.Failed'</span>
+    <span class="p">)</span>
+
+    <span class="n">couler</span><span class="o">.</span><span class="n">set_dependencies</span><span class="p">(</span>
+        <span class="n">sen2cor255_job</span><span class="p">,</span>
+        <span class="n">dependencies</span><span class="o">=</span><span class="s1">'sen2cor280.Failed'</span>
+    <span class="p">)</span>
+
+    <span class="n">couler</span><span class="o">.</span><span class="n">set_dependencies</span><span class="p">(</span>
+        <span class="n">err_job</span><span class="p">,</span>
+        <span class="n">dependencies</span><span class="o">=</span><span class="s1">'sen2cor280.Failed &amp;&amp; sen2cor290.Failed &amp;&amp; sen2cor255.Failed'</span>
+    <span class="p">)</span>
+
+    <span class="n">couler</span><span class="o">.</span><span class="n">set_dependencies</span><span class="p">(</span>
+        <span class="n">fin_job</span><span class="p">,</span>
+        <span class="n">dependencies</span><span class="o">=</span><span class="s1">'sen2cor290.Succeeded || sen2cor280.Succeeded || sen2cor255.Succeeded'</span>
+    <span class="p">)</span>
+
+<span class="n">setup_failover_pipeline</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Finally, we submit our job to the Executor!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">submitter</span> <span class="o">=</span> <span class="n">ArgoSubmitter</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="s1">'pipeline'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -880,25 +918,17 @@ Username:  asaini
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/srv/conda/envs/notebook/lib/python3.8/site-packages/kfp/dsl/_container_op.py:1021: FutureWarning: Please create reusable components instead of constructing ContainerOp instances directly. Reusable components are shareable, portable and have compatibility and support guarantees. Please see the documentation: https://www.kubeflow.org/docs/pipelines/sdk/component-development/#writing-your-component-definition-file The components can be created manually (or, in case of python, using kfp.components.create_component_from_func or func_to_container_op) and then loaded using kfp.components.load_component_from_file, load_component_from_uri or load_component_from_text: https://kubeflow-pipelines.readthedocs.io/en/stable/source/kfp.components.html#kfp.components.load_component_from_file
-  warnings.warn(
+INFO:root:Argo submitter namespace: pipeline
+INFO:root:Cannot find local k8s config. Trying in-cluster config.
+INFO:root:Initialized with in-cluster config.
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># If the experiment under the given name already exists - get it's ID, else - create a new experiment</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">experiment_id</span> <span class="o">=</span> <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="s2">"echo-image"</span><span class="p">)</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="n">experiment</span> <span class="o">=</span> <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">create_experiment</span><span class="p">(</span><span class="s2">"echo-image"</span><span class="p">)</span>
-
-<span class="c1"># RUN THE PIPELINE #</span>
-<span class="n">run_name</span> <span class="o">=</span> <span class="n">pipeline_func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s1">'-run#1'</span>
-<span class="n">arguments</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'arg'</span><span class="p">:</span> <span class="s1">'echo "hello world"'</span><span class="p">}</span> <span class="c1"># passing in the arguments</span>
-<span class="n">run_result</span> <span class="o">=</span> <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">run_pipeline</span><span class="p">(</span><span class="n">experiment</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">run_name</span><span class="p">,</span> <span class="n">pipeline_filename</span><span class="p">)</span>
+<span></span><span class="n">couler</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">submitter</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -907,242 +937,118 @@ Username:  asaini
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-2021-06-25 21:54:17 INFO (root): Creating experiment echo-image.
+INFO:root:Checking workflow name/generatedName runpy-
+INFO:root:Submitting workflow to Argo
+INFO:root:Workflow runpy-knlcd has been submitted in "pipeline" namespace!
 </pre></div></div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area rendered_html docutils container">
-<a href="http://kubeflow.geoanalytics.ca/pipeline/#/experiments/details/7ab33a7e-97d6-4435-9b46-59d97b13e840" target="_blank">Experiment details</a>.</div>
-</div>
 <div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area rendered_html docutils container">
-<a href="http://kubeflow.geoanalytics.ca/pipeline/#/runs/details/67833d3e-0926-41f4-91d3-9683d496925e" target="_blank">Run details</a>.</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">echo_pipeline</span> <span class="o">=</span> <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">upload_pipeline</span><span class="p">(</span><span class="n">pipeline_filename</span><span class="p">,</span> <span class="n">pipeline_name</span><span class="p">,</span> <span class="s2">"ECHO IMAGE PIPELINE"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area rendered_html docutils container">
-<a href="http://kubeflow.geoanalytics.ca/pipeline/#/pipelines/details/ad822c7a-1103-4a0c-86c1-1337bbb34461">Pipeline details</a>.</div>
-</div>
-</section>
-</section>
-<section id="3.-Exploring-the-GEOAnalytics-Pipeline-UI">
-<h2>3. Exploring the GEOAnalytics Pipeline UI<a class="headerlink" href="#3.-Exploring-the-GEOAnalytics-Pipeline-UI" title="Permalink to this headline">#</a></h2>
-<section id="3.1-Kubeflow-Pipelines-and-Experiments">
-<h3>3.1 Kubeflow Pipelines and Experiments<a class="headerlink" href="#3.1-Kubeflow-Pipelines-and-Experiments" title="Permalink to this headline">#</a></h3>
-<p>The central Kubeflow Dashboard can be accessed from the main GEOAnalytics Canada page by clicking on Kubeflow to launch. <img alt="d745a85103a0423abe138321da1d8240" src="../_images/08_launching-kubeflow.gif"/></p>
-<p>Now you will have access to the Kubeflow User Interface (UI).</p>
-<p>On the left sidebar, click on the <strong>Pipelines</strong> tab which will lead to the main workspace for Kubeflow Pipelines UI. On the left panel in this section, there are multiple tabs, but for this tutorial we will focus on only the Pipelines and Experiments tab. The <em>Pipelines</em> tab leads you to all the existing pipelines you have access to and the option to upload a new pipeline. And the <em>Experiments</em> tab displays all the experients and the runs of each experiment. You can create runs, compare existing
-runs, or even clone the runs.</p>
-<p>You are welcome to experiment with running pipelines to get a better feel for their execution and the capabilities of the Pipelines UI.</p>
-</section>
-<section id="3.2-Analyzing-the-Hello-World-Pipeline">
-<h3>3.2 Analyzing the Hello World Pipeline<a class="headerlink" href="#3.2-Analyzing-the-Hello-World-Pipeline" title="Permalink to this headline">#</a></h3>
-<p>Under the Pipelines tab, you should see the newly built “Hello World Example Pipeline” at the top of the list of pipelines. There are other Tutorial and Demo pipelines preconfigured by Kubeflow for you to experiment with.</p>
-<p>To invoke a specific pipeline, simply click it which will bring up Pipeline’s view as shown in the GIF below.</p>
-<p><img alt="4126538d289449c0a275011882c279f6" src="../_images/08_kubeflow-pipelines.gif"/></p>
-<p>Within this pipeline there is a graph representing the runtime execution of the pipeline, with edges indicating parent/child relationships between the steps (nodes). Clicking on a node will give information about that step, such as the input parameter, the output result, arguments, internal commands to execute that step, and the volume mounts.</p>
-<p><strong>Notebook and the pipeline run independently, so in case the notebook crashes, the experiment will continue running once executed.</strong></p>
-</section>
-<section id="3.3-Analyzing-the-Docker-Image-Pipeline">
-<h3>3.3 Analyzing the Docker Image Pipeline<a class="headerlink" href="#3.3-Analyzing-the-Docker-Image-Pipeline" title="Permalink to this headline">#</a></h3>
-<p>Take the same steps to view the information about our Echo Image Pipeline. In the graph there is only one node, “echo.” As you can note, the arguments, commands, at the image are the same ones we specified in the <code class="docutils literal notranslate"><span class="pre">ContainerOp</span></code>.</p>
-<p>There is also another tab next to Graph, called <strong>YAML</strong>. This will show our pipeline filename we created when the pipeline was compiled.</p>
-</section>
-<section id="3.4-Create-a-New-Run-through-the-UI">
-<h3>3.4 Create a New Run through the UI<a class="headerlink" href="#3.4-Create-a-New-Run-through-the-UI" title="Permalink to this headline">#</a></h3>
-<p>While you can create a run through Jupyter notebooks, it can also be done directly through the UI if the pipeline is already uploaded. The image below shows the Kubeflow Pipelines UI for starting a run of the “Hello World Pipeline”. To run the pipeline, click the <strong>“Create Run”</strong> button and fill in the run details on the screen.</p>
-<p>Filling in the Run Details:</p>
-<ul class="simple">
-<li><p>The <em>Pipeline</em> and <em>Pipeline Version</em> should already be set to the current pipeline, “Hello World Pipeline!”</p></li>
-<li><p>The <em>Run name</em> can be set to anything you prefer, identifying the unique run.</p></li>
-<li><p>The <em>Description</em> is an option to describe the details of the current run.</p></li>
-<li><p>The <em>Experiment</em> to be associated with the run must be selected from the list of existing experiments, in our case it should be the <strong>“combine-hello-world”</strong>.</p></li>
-<li><p>There are two different types of Runs, we will discuss these in the next part. For now, select <strong>“One-off”</strong> which executes the pipeline only once.</p></li>
-<li><p>Now since we specified <em>Parameters</em> in our pipeline function, enter any two words in place of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p></li>
-</ul>
-<p><img alt="a27616bf016c4208a51dfaafd2933f52" src="../_images/08_start-run.png"/></p>
-<p>After these sections have been filled in, select the <strong>“Start”</strong> to execute the run which will take a few seconds (or minutes depending on the pipeline). When the Status updates to a green checkmark it indicates the run was successfully executed. Click on the run to explore the details of the run.</p>
-<p><img alt="bed8cc9ae6e64898a8d3194e5f11c24d" src="../_images/08_run-created.gif"/></p>
-</section>
-<section id="3.5-Running-Pipelines-on-Schedule">
-<h3>3.5 Running Pipelines on Schedule<a class="headerlink" href="#3.5-Running-Pipelines-on-Schedule" title="Permalink to this headline">#</a></h3>
-<p>All our previous runs have been done manually, which is not ideal for some scenarios. Recurring runs are repeatable runs of a pipeline, very helpful if the pipeline is expected to run for a long period of time and is triggered to run frequently.</p>
-<p>Let’s create a Recurring run on our “Echo Image Pipeline.” Fill in the details as shown in the screenshot below. Now you can create a periodic run by selecting a run type of <strong>“Recurring”</strong>, then choosing <strong>“Periodic”</strong> as the trigger type. Period runs specify <strong>how often</strong> to run a pipeline. In this example we are setting a pipeline to run every second day. Once you start the run, it is executed immediately and then executed with the defined frequency (of 2 days).</p>
-<p><img alt="602e7bef675743efbf8bcd715e039081" src="../_images/08_create-recurring-run.png"/></p>
-<p>From the “echo-image” experiment, you will see recurring run active, with the option to <code class="docutils literal notranslate"><span class="pre">enable</span></code> or <code class="docutils literal notranslate"><span class="pre">disable</span></code> the schedule.</p>
-<p><strong>If you enable a recurring run for this example notebook, make sure to disable the run.</strong></p>
-<p><img alt="eb3c186cffe3417b992e8a9112394be0" src="../_images/08_recurring-run.gif"/></p>
-</section>
-<section id="3.6-Terminating-Runs">
-<h3>3.6 Terminating Runs<a class="headerlink" href="#3.6-Terminating-Runs" title="Permalink to this headline">#</a></h3>
-<p>In the case where the run takes a while to execute and you want to stop the run, it can be terminated through the UI. Once you click on the ongoing run, you will see a <strong>“Terminate”</strong> button in the top right of the page. This will immediately terminate the execution of that run, but it will not delete the record of the run.</p>
-<p>The next section will show how to delete runs, experiments, and pipelines in a Jupyter notebook.</p>
-</section>
-</section>
-<section id="4.-Deleting-Runs,-Experiments,-and-Pipelines">
-<h2>4. Deleting Runs, Experiments, and Pipelines<a class="headerlink" href="#4.-Deleting-Runs,-Experiments,-and-Pipelines" title="Permalink to this headline">#</a></h2>
-<p>To keep your environment clean, let’s delete the runs, experiments, and pipelines we created in this notebook. (You can choose to keep them if you prefer!)</p>
-<section id="4.1-Delete-all-the-runs">
-<h3>4.1 Delete all the runs<a class="headerlink" href="#4.1-Delete-all-the-runs" title="Permalink to this headline">#</a></h3>
-<p>The following code blocks show how to delete runs of a particular experiments.</p>
-<p>We use <code class="docutils literal notranslate"><span class="pre">.get_experiment(&lt;name&gt;)</span></code> to get the experiment id which will be used to find all the runs within this experiment. Let’s start by getting the experiment information for the “echo-image” and the “combine-hello-world image” experiments.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">echo_experiment</span> <span class="o">=</span> <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="n">experiment_name</span><span class="o">=</span><span class="s1">'echo-image'</span><span class="p">)</span>
-<span class="n">echo_experiment</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{'created_at': datetime.datetime(2021, 6, 25, 21, 54, 17, tzinfo=tzlocal()),
- 'description': None,
- 'id': '7ab33a7e-97d6-4435-9b46-59d97b13e840',
- 'name': 'echo-image',
- 'resource_references': None,
- 'storage_state': None}
+{'apiVersion': 'argoproj.io/v1alpha1',
+ 'kind': 'Workflow',
+ 'metadata': {'creationTimestamp': '2022-09-27T02:37:01Z',
+  'generateName': 'runpy-',
+  'generation': 1,
+  'managedFields': [{'apiVersion': 'argoproj.io/v1alpha1',
+    'fieldsType': 'FieldsV1',
+    'fieldsV1': {'f:metadata': {'f:generateName': {}}, 'f:spec': {}},
+    'manager': 'OpenAPI-Generator',
+    'operation': 'Update',
+    'time': '2022-09-27T02:37:01Z'}],
+  'name': 'runpy-knlcd',
+  'namespace': 'pipeline',
+  'resourceVersion': '42775569',
+  'uid': 'd3fef132-6be1-47f6-bd21-0c8ef710b7d0'},
+ 'spec': {'entrypoint': 'runpy',
+  'templates': [{'dag': {'tasks': [{'name': 'preprocess',
+       'template': 'preprocess'},
+      {'depends': 'preprocess.Succeeded',
+       'name': 'sen2cor290',
+       'template': 'sen2cor290'},
+      {'depends': 'sen2cor290.Failed',
+       'name': 'sen2cor280',
+       'template': 'sen2cor280'},
+      {'depends': 'sen2cor280.Failed',
+       'name': 'sen2cor255',
+       'template': 'sen2cor255'},
+      {'depends': 'sen2cor280.Failed &amp;&amp; sen2cor290.Failed &amp;&amp; sen2cor255.Failed',
+       'name': 'err',
+       'template': 'err'},
+      {'depends': 'sen2cor290.Succeeded || sen2cor280.Succeeded || sen2cor255.Succeeded',
+       'name': 'fin',
+       'template': 'fin'}]},
+    'name': 'runpy'},
+   {'name': 'preprocess',
+    'nodeSelector': {'pipeline': 'small'},
+    'script': {'command': ['python'],
+     'image': 'python:alpine3.6',
+     'source': "\nprint(f'preprocess')\n"}},
+   {'name': 'sen2cor290',
+    'nodeSelector': {'pipeline': 'small'},
+    'script': {'command': ['python'],
+     'image': 'python:alpine3.6',
+     'source': "\ntask = ['success', 'fail']\nres = random.randint(0, 1)\nres = task[res]\nprint(f'{res}')\nif res == 'fail':\n    sys.exit(2)\n"}},
+   {'name': 'sen2cor280',
+    'nodeSelector': {'pipeline': 'small'},
+    'script': {'command': ['python'],
+     'image': 'python:alpine3.6',
+     'source': "\ntask = ['success', 'fail']\nres = random.randint(0, 1)\nres = task[res]\nprint(f'{res}')\nif res == 'fail':\n    sys.exit(2)\n"}},
+   {'name': 'sen2cor255',
+    'nodeSelector': {'pipeline': 'small'},
+    'script': {'command': ['python'],
+     'image': 'python:alpine3.6',
+     'source': "\ntask = ['success', 'fail']\nres = random.randint(0, 1)\nres = task[res]\nprint(f'{res}')\nif res == 'fail':\n    sys.exit(2)\n"}},
+   {'name': 'err',
+    'nodeSelector': {'pipeline': 'small'},
+    'script': {'command': ['python'],
+     'image': 'python:alpine3.6',
+     'source': "\nprint('error')\n"}},
+   {'name': 'fin',
+    'nodeSelector': {'pipeline': 'small'},
+    'script': {'command': ['python'],
+     'image': 'python:alpine3.6',
+     'source': "\nprint('fin')\n"}}],
+  'tolerations': [{'effect': 'NoSchedule',
+    'key': 'ga.nodepool/type',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'}]}}
 </pre></div></div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">combine_hw_experiment</span> <span class="o">=</span> <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="n">experiment_name</span><span class="o">=</span><span class="s1">'combine-hello-world'</span><span class="p">)</span>
-<span class="n">combine_hw_experiment</span>
+<span></span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-{'created_at': datetime.datetime(2021, 6, 25, 21, 54, 17, tzinfo=tzlocal()),
- 'description': None,
- 'id': '5a34b033-4187-44f0-b851-10498d3b42ea',
- 'name': 'combine-hello-world',
- 'resource_references': None,
- 'storage_state': None}
-</pre></div></div>
-</div>
-<p>Now that we have the the information for our experiments in a dictionary, we can use the ‘id’ key to delete the experiments’ runs. The cells below collects information for all the runs of each experiment, and iteratively deletes each run.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">combine_hw_runs</span> <span class="o">=</span> <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">list_runs</span><span class="p">(</span><span class="n">experiment_id</span><span class="o">=</span><span class="n">combine_hw_experiment</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-<span class="c1"># Delete all runs from the "combine-hello-world" experiment</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">combine_hw_runs</span><span class="o">.</span><span class="n">runs</span><span class="p">)):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">combine_hw_runs</span><span class="o">.</span><span class="n">runs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-    <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">runs</span><span class="o">.</span><span class="n">delete_run</span><span class="p">(</span><span class="n">combine_hw_runs</span><span class="o">.</span><span class="n">runs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-f0617ebf-64e1-4c7e-9447-c421f46f29b8
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">echo_runs</span> <span class="o">=</span> <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">list_runs</span><span class="p">(</span><span class="n">experiment_id</span><span class="o">=</span><span class="n">echo_experiment</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-<span class="c1"># Delete all runs from the "combine-hello-world" experiment</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">echo_runs</span><span class="o">.</span><span class="n">runs</span><span class="p">)):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">echo_runs</span><span class="o">.</span><span class="n">runs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-    <span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">runs</span><span class="o">.</span><span class="n">delete_run</span><span class="p">(</span><span class="n">echo_runs</span><span class="o">.</span><span class="n">runs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-67833d3e-0926-41f4-91d3-9683d496925e
-</pre></div></div>
-</div>
-<p>Now, if you head over to the Kubeflow Pipeline UI and take a look at the experiments, there should be no runs available anymore.</p>
-</section>
-<section id="4.2-Delete-the-experiments">
-<h3>4.2 Delete the experiments<a class="headerlink" href="#4.2-Delete-the-experiments" title="Permalink to this headline">#</a></h3>
-<p>Since the runs are deleted, we can safely delete the experiments without worrying about unexpected behaviors.</p>
-<p>We already have the experiment IDs which will be the parameter input for the function <code class="docutils literal notranslate"><span class="pre">.experiments.delete_experiments(&lt;experiment_id&gt;)</span></code>. Once you have run the cell below, refresh your Experiments page on the UI to see these experiments disappear from the list.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">experiments</span><span class="o">.</span><span class="n">delete_experiment</span><span class="p">(</span><span class="n">combine_hw_experiment</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="c1"># deletes combine-hello-world experiment</span>
-<span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">experiments</span><span class="o">.</span><span class="n">delete_experiment</span><span class="p">(</span><span class="n">echo_experiment</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="c1"># deletes echo-image experiment</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-{}
-</pre></div></div>
-</div>
-</section>
-<section id="4.3-Delete-the-pipelines">
-<h3>4.3 Delete the pipelines<a class="headerlink" href="#4.3-Delete-the-pipelines" title="Permalink to this headline">#</a></h3>
-<p>Pipelines can be deleted through Jupyter <em>and</em> through the Kubeflow Pipeline UI!</p>
-<p>To delete through the UI, simply tick off the boxes next to the pipelines and select the <strong>Delete</strong> button to delete them.</p>
-<p>There are different steps for deleting through a Jupyter notebook. When we uploaded the combine_strings pipeline and echo_image pipeline, we assigned the information of the pipelines to variables <strong>combine_hw_pipeline</strong> and <strong>echo_pipeline</strong>, respectively. We will use the <strong>‘id’</strong> keys from their pipeline information dictionaries (similar to how the experiment IDs were retrieved) as the parameter for identifying the pipelines we wish to delete, using the function
-<code class="docutils literal notranslate"><span class="pre">delete_pipeline(&lt;pipeline_id&gt;)</span></code>.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">delete_pipeline</span><span class="p">(</span><span class="n">combine_hw_pipeline</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-<span class="n">kubeflow_client</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">delete_pipeline</span><span class="p">(</span><span class="n">echo_pipeline</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-{}
-</pre></div></div>
-</div>
-</section>
 </section>
 </section>
 
@@ -1205,27 +1111,8 @@ f0617ebf-64e1-4c7e-9447-c421f46f29b8
             <ul>
 <li><a class="reference internal" href="#"><strong>Pipelines</strong></a><ul>
 <li><a class="reference internal" href="#1.-Basics-of-GEOAnalytics-Canada-Pipelines">1. Basics of GEOAnalytics Canada Pipelines</a></li>
-<li><a class="reference internal" href="#2.-Building-Pipelines-in-Jupyterhub">2. Building Pipelines in Jupyterhub</a><ul>
-<li><a class="reference internal" href="#2.1-Connect-to-GEOAnalytics-Pipeline-Client¶">2.1 Connect to GEOAnalytics Pipeline Client¶</a></li>
-<li><a class="reference internal" href="#2.2-Building-Pipelines-through-Python-Function-Based-Components">2.2 Building Pipelines through Python Function Based Components</a></li>
-<li><a class="reference internal" href="#2.3-Building-Pipelines-by-Docker-Images">2.3 Building Pipelines by Docker Images</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#3.-Exploring-the-GEOAnalytics-Pipeline-UI">3. Exploring the GEOAnalytics Pipeline UI</a><ul>
-<li><a class="reference internal" href="#3.1-Kubeflow-Pipelines-and-Experiments">3.1 Kubeflow Pipelines and Experiments</a></li>
-<li><a class="reference internal" href="#3.2-Analyzing-the-Hello-World-Pipeline">3.2 Analyzing the Hello World Pipeline</a></li>
-<li><a class="reference internal" href="#3.3-Analyzing-the-Docker-Image-Pipeline">3.3 Analyzing the Docker Image Pipeline</a></li>
-<li><a class="reference internal" href="#3.4-Create-a-New-Run-through-the-UI">3.4 Create a New Run through the UI</a></li>
-<li><a class="reference internal" href="#3.5-Running-Pipelines-on-Schedule">3.5 Running Pipelines on Schedule</a></li>
-<li><a class="reference internal" href="#3.6-Terminating-Runs">3.6 Terminating Runs</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#4.-Deleting-Runs,-Experiments,-and-Pipelines">4. Deleting Runs, Experiments, and Pipelines</a><ul>
-<li><a class="reference internal" href="#4.1-Delete-all-the-runs">4.1 Delete all the runs</a></li>
-<li><a class="reference internal" href="#4.2-Delete-the-experiments">4.2 Delete the experiments</a></li>
-<li><a class="reference internal" href="#4.3-Delete-the-pipelines">4.3 Delete the pipelines</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#2.-Building-A-Basic-Pipeline">2. Building A Basic Pipeline</a></li>
+<li><a class="reference internal" href="#3.-Building-A-Pipeline-that-Handles-Failures">3. Building A Pipeline that Handles Failures</a></li>
 </ul>
 </li>
 </ul>
