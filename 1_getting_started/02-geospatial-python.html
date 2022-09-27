@@ -480,7 +480,8 @@ div.rendered_html tbody tr:hover {
 <p>Rasterio provides easy ways to process and analyze different types of raster data used in the Geographic Information (GI) Science field. Geographic Information Systems use multiple different formats to store satellite images, terrain models, and much more. Rasterio reads/writes these formats using Python and its APIs.</p>
 <section id="1.1-Accessing-and-Understanding-the-Geospatial-Raster-data">
 <h3>1.1 Accessing and Understanding the Geospatial Raster data<a class="headerlink" href="#1.1-Accessing-and-Understanding-the-Geospatial-Raster-data" title="Permalink to this headline">#</a></h3>
-<p>The data we will be using for exploring Rasterio’s features are the Landsat 8 data stored in <strong>Cloud-Optimized GeoTIFF</strong> (COG) format. COGS are normal geoTIFF files that are hosted on a cloud server and are optimized for remote reads. This data does not need to be downloaded on your local machine! Any operations on the data can be done cloud natively, meaning operations are performed in memory on the Google Cloud.</p>
+<p>The data we will be using for exploring Rasterio’s features are the Landsat 8 data stored in <strong>Cloud-Optimized GeoTIFF</strong> (COG) format. COGS are normal geoTIFF files that are hosted on a cloud server and are optimized for remote reads. This data does not need to be downloaded on your local machine! Any operations on the data can be done cloud natively, meaning operations are performed in memory in Azure.</p>
+<p>For the introductory purposes of this notebook we will be reading in data from Google’s cloud storage. However, going forward we recommend using Planetary Computer’s STAC api, as the data costs will be reduced in so doing. How to access data in STAC servers as well as working with this data will be introduced in future notebooks.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -488,11 +489,12 @@ div.rendered_html tbody tr:hover {
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># import the rasterio module, and the "show" function for plotting the maps</span>
 <span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">rasterio.plot</span> <span class="kn">import</span> <span class="n">show</span>
 
 <span class="c1"># Let's import all the bands we will be using for this section.</span>
 <span class="n">band1</span> <span class="o">=</span> <span class="s1">'https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/038/038/LC08_L1TP_038038_20200831_20200906_01_T1/LC08_L1TP_038038_20200831_20200906_01_T1_B1.TIF'</span>
-
 <span class="n">band2</span> <span class="o">=</span> <span class="s1">'https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/038/038/LC08_L1TP_038038_20200831_20200906_01_T1/LC08_L1TP_038038_20200831_20200906_01_T1_B2.TIF'</span>
 <span class="n">band3</span> <span class="o">=</span> <span class="s1">'https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/038/038/LC08_L1TP_038038_20200831_20200906_01_T1/LC08_L1TP_038038_20200831_20200906_01_T1_B3.TIF'</span>
 <span class="n">band4</span> <span class="o">=</span> <span class="s1">'https://storage.googleapis.com/gcp-public-data-landsat/LC08/01/038/038/LC08_L1TP_038038_20200831_20200906_01_T1/LC08_L1TP_038038_20200831_20200906_01_T1_B4.TIF'</span>
@@ -591,7 +593,7 @@ long-term datasets.</p>
 </div>
 <p>An alternative way for opening a raster image is to assign the <code class="docutils literal notranslate"><span class="pre">rasterio.open(&lt;img&gt;)</span></code> to a variable. <em>However</em>, this is not a recommended approach as it does not use a context manager and you have to manually <strong>close</strong> the files after you are done working with the data.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -607,7 +609,7 @@ long-term datasets.</p>
 proving another reason for why Cloud-optimized GeoTIFFs are an optimal format.</p>
 <p>Let’s get started by opening <strong>band 5</strong> of a new Landsat 8 image taken on May 10th, 2020 in Southern British Columbia (path 47, row 26).</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -617,7 +619,7 @@ proving another reason for why Cloud-optimized GeoTIFFs are an optimal format.</
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -634,7 +636,7 @@ proving another reason for why Cloud-optimized GeoTIFFs are an optimal format.</
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -650,12 +652,12 @@ proving another reason for why Cloud-optimized GeoTIFFs are an optimal format.</
 </div>
 </div>
 </section>
-<section id="1.3-Performing-calculation-on-the-Raster-Images">
-<h3>1.3 Performing calculation on the Raster Images<a class="headerlink" href="#1.3-Performing-calculation-on-the-Raster-Images" title="Permalink to this headline">#</a></h3>
-<p>Doing computation on the raster data is an essential part of geospatial analysis, such as presenting the spectral indices of granules or even just normalizing the data for plotting purposed. Let’s experiment by plotting a combination of Landsat bands to create an RGB True colour composite image. Let’s begin by importing in the Red, Green, and Blue bands from the Landsat 8 image taken on <em>August 31st, 2020, in the Bay region south of California, US in Northwestern Mexico.</em></p>
+<section id="1.3-Performing-calculations-on-the-Raster-Images">
+<h3>1.3 Performing calculations on the Raster Images<a class="headerlink" href="#1.3-Performing-calculations-on-the-Raster-Images" title="Permalink to this headline">#</a></h3>
+<p>Doing computations on the raster data is an essential part of geospatial analysis, such as presenting the spectral indices of granules or even just normalizing the data for plotting purposed. Let’s experiment by plotting a combination of Landsat bands to create an RGB True colour composite image. Let’s begin by importing in the Red, Green, and Blue bands from the Landsat 8 image taken on <em>August 31st, 2020, in the Bay region south of California, US in Northwestern Mexico.</em></p>
 <p>Before we can plot the RGB image, the arrays must be normalized, only then can they be combined together. The array is normalized by dividing each array item by the total array maximum. (NumPy makes it quick to calculate with only 1 line, no for loop needed!) After that, using the NumPy <code class="docutils literal notranslate"><span class="pre">.dstack()</span></code> function to combine the three bands, we can plot the final RGB image.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -666,12 +668,12 @@ proving another reason for why Cloud-optimized GeoTIFFs are an optimal format.</
     <span class="n">red</span> <span class="o">=</span> <span class="n">b4</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># Normalize the numpy arrays</span>
-    <span class="n">redN</span> <span class="o">=</span> <span class="n">red</span><span class="o">/</span><span class="n">red</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-    <span class="n">greenN</span> <span class="o">=</span> <span class="n">green</span><span class="o">/</span><span class="n">green</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-    <span class="n">blueN</span> <span class="o">=</span> <span class="n">blue</span><span class="o">/</span><span class="n">blue</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">redN</span> <span class="o">=</span> <span class="p">(</span><span class="n">red</span><span class="o">/</span><span class="n">red</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">*</span><span class="mi">255</span>
+    <span class="n">greenN</span> <span class="o">=</span> <span class="p">(</span><span class="n">green</span><span class="o">/</span><span class="n">green</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">*</span><span class="mi">255</span>
+    <span class="n">blueN</span> <span class="o">=</span> <span class="p">(</span><span class="n">blue</span><span class="o">/</span><span class="n">blue</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">*</span><span class="mi">255</span>
 
     <span class="c1"># Stack the 3 bands together (order matters)</span>
-    <span class="n">rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="n">redN</span><span class="p">,</span> <span class="n">greenN</span><span class="p">,</span> <span class="n">blueN</span><span class="p">))</span>
+    <span class="n">rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">((</span><span class="n">redN</span><span class="p">,</span> <span class="n">greenN</span><span class="p">,</span> <span class="n">blueN</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
 
     <span class="c1"># Using matplotlib, let's see how the True colour image looks</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span>
@@ -708,17 +710,16 @@ dimensional labels.</p>
 <h3>2.1 Reading in Data as DataArray<a class="headerlink" href="#2.1-Reading-in-Data-as-DataArray" title="Permalink to this headline">#</a></h3>
 <p>Let’s get started with a quick example to understand how xarray works. We’ll pass in band 2 from the raster image used in the Rasterio section. The band will be read in using xarray’s <code class="docutils literal notranslate"><span class="pre">.open_rasterio(&lt;filename&gt;)</span></code> function. After that, we will convert the numpy array into an xarray DataArray of name ‘blue’ and plot the image using the native xarray <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> function.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -729,6 +730,15 @@ dimensional labels.</p>
     <span class="n">blue_da</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_1494/226097659.py:1: DeprecationWarning: open_rasterio is Deprecated in favor of rioxarray. For information about transitioning, see: https://corteva.github.io/rioxarray/stable/getting_started/getting_started.html
+  with xr.open_rasterio(band2) as src:
+</pre></div></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
@@ -750,7 +760,7 @@ Dimensions without coordinates: dim_0, dim_1, dim_2
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/1_getting_started_02-geospatial-python_24_1.png" src="../_images/1_getting_started_02-geospatial-python_24_1.png"/>
+<img alt="../_images/1_getting_started_02-geospatial-python_24_2.png" src="../_images/1_getting_started_02-geospatial-python_24_2.png"/>
 </div>
 </div>
 </section>
@@ -758,8 +768,8 @@ Dimensions without coordinates: dim_0, dim_1, dim_2
 <h3>2.2 Merging DataArrays into a Dataset<a class="headerlink" href="#2.2-Merging-DataArrays-into-a-Dataset" title="Permalink to this headline">#</a></h3>
 <p>With complex data, the extra-multidimensionality of Datasets is sometimes necessary. We have already plotted an RGB image using Rasterio, now let’s try to perform the same task using xarray functions by converting the bands from DataArrays together to one Dataset!</p>
 <p>First let’s initialize an empty dataset to which we will combine the DataArrays. Next, open all three bands (bands 2, 3, and 4) which make up Blue, Green, and Red, respectively. Similar to the Rasterio method, we must normalize the three bands so they can be stacked on the same scale. Then these NumPy arrays will be converted to DataArrays (as in the example above) before being merged to the Dataset.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[72]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -767,34 +777,50 @@ Dimensions without coordinates: dim_0, dim_1, dim_2
 
 <span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="n">band2</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">blue</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">data</span>
-    <span class="n">blueN</span> <span class="o">=</span> <span class="n">blue</span><span class="o">/</span><span class="n">blue</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">blueN</span> <span class="o">=</span> <span class="n">blue</span><span class="o">/</span><span class="n">blue</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">*</span><span class="mi">255</span>
+    <span class="c1"># blueND = blueN.astype(np.uint8)</span>
     <span class="n">xr_ds</span> <span class="o">=</span> <span class="n">xr_ds</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">blueN</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'b2'</span><span class="p">))</span>
 
 <span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="n">band3</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">green</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">data</span>
-    <span class="n">greenN</span> <span class="o">=</span> <span class="n">green</span><span class="o">/</span><span class="n">green</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">greenN</span> <span class="o">=</span> <span class="n">green</span><span class="o">/</span><span class="n">green</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">*</span><span class="mi">255</span>
+    <span class="c1"># greenND = greenN.astype(np.uint8)</span>
     <span class="n">xr_ds</span> <span class="o">=</span> <span class="n">xr_ds</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">greenN</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'b3'</span><span class="p">))</span>
 
 <span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_rasterio</span><span class="p">(</span><span class="n">band4</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
     <span class="n">red</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">data</span>
-    <span class="n">redN</span> <span class="o">=</span> <span class="n">red</span><span class="o">/</span><span class="n">red</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">redN</span> <span class="o">=</span> <span class="n">red</span><span class="o">/</span><span class="n">red</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">*</span><span class="mi">255</span>
+    <span class="c1"># redND = redN.astype(np.uint8)</span>
     <span class="n">xr_ds</span> <span class="o">=</span> <span class="n">xr_ds</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">redN</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'b4'</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_1494/2566492551.py:3: DeprecationWarning: open_rasterio is Deprecated in favor of rioxarray. For information about transitioning, see: https://corteva.github.io/rioxarray/stable/getting_started/getting_started.html
+  with xr.open_rasterio(band2) as src:
+/tmp/ipykernel_1494/2566492551.py:9: DeprecationWarning: open_rasterio is Deprecated in favor of rioxarray. For information about transitioning, see: https://corteva.github.io/rioxarray/stable/getting_started/getting_started.html
+  with xr.open_rasterio(band3) as src:
+/tmp/ipykernel_1494/2566492551.py:15: DeprecationWarning: open_rasterio is Deprecated in favor of rioxarray. For information about transitioning, see: https://corteva.github.io/rioxarray/stable/getting_started/getting_started.html
+  with xr.open_rasterio(band4) as src:
+</pre></div></div>
+</div>
 <p>Once the bands have been combined in one DataSet, we need to assign them as a separate Data Variable known as “rgb” which is the stacking of bands 4, 3, and 2 along their dimensions.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">xr_ds</span><span class="p">[</span><span class="s1">'rgb'</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="s2">"dim0"</span><span class="p">,</span> <span class="s2">"dim1"</span><span class="p">,</span> <span class="s2">"dim2"</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">xr_ds</span><span class="o">.</span><span class="n">b4</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">xr_ds</span><span class="o">.</span><span class="n">b3</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="n">xr_ds</span><span class="o">.</span><span class="n">b2</span><span class="o">.</span><span class="n">data</span><span class="p">]))</span>
+<span></span><span class="n">xr_ds</span><span class="p">[</span><span class="s1">'rgb'</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="s2">"dim0"</span><span class="p">,</span> <span class="s2">"dim1"</span><span class="p">,</span> <span class="s2">"dim2"</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">xr_ds</span><span class="o">.</span><span class="n">b4</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span><span class="n">xr_ds</span><span class="o">.</span><span class="n">b3</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span><span class="n">xr_ds</span><span class="o">.</span><span class="n">b2</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)]))</span>
 <span class="n">xr_ds</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -829,6 +855,7 @@ Dimensions without coordinates: dim_0, dim_1, dim_2
 }
 
 html[theme=dark],
+body[data-theme=dark],
 body.vscode-dark {
   --xr-font-color0: rgba(255, 255, 255, 1);
   --xr-font-color2: rgba(255, 255, 255, 0.54);
@@ -841,7 +868,7 @@ body.vscode-dark {
 }
 
 .xr-wrap {
-  display: block;
+  display: block !important;
   min-width: 300px;
   max-width: 700px;
 }
@@ -1113,7 +1140,8 @@ dl.xr-attrs {
   grid-template-columns: 125px auto;
 }
 
-.xr-attrs dt, dd {
+.xr-attrs dt,
+.xr-attrs dd {
   padding: 0;
   margin: 0;
   float: left;
@@ -1149,57 +1177,58 @@ dl.xr-attrs {
   fill: currentColor;
 }
 </style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt;
-Dimensions:  (dim0: 3, dim1: 7701, dim2: 7551, dim_0: 1, dim_1: 7701, dim_2: 7551)
-Dimensions without coordinates: dim0, dim1, dim2, dim_0, dim_1, dim_2
+Dimensions:  (dim_0: 1, dim_1: 7701, dim_2: 7551, dim0: 3, dim1: 7701,
+              dim2: 7551)
+Dimensions without coordinates: dim_0, dim_1, dim_2, dim0, dim1, dim2
 Data variables:
     b2       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
     b3       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
     b4       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
-    rgb      (dim0, dim1, dim2) float64 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</pre><div class="xr-wrap" hidden=""><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-859c65a7-7b6a-47e5-ab86-0d5a6227a5a4" type="checkbox"/><label class="xr-section-summary" for="section-859c65a7-7b6a-47e5-ab86-0d5a6227a5a4" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span>dim0</span>: 3</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li><li><span>dim_0</span>: 1</li><li><span>dim_1</span>: 7701</li><li><span>dim_2</span>: 7551</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-0696e768-8c79-4263-af7b-a522fbced258" type="checkbox"/><label class="xr-section-summary" for="section-0696e768-8c79-4263-af7b-a522fbced258" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-a39d1c8a-e10b-4c05-90cb-4079ad01e1c7" type="checkbox"/><label class="xr-section-summary" for="section-a39d1c8a-e10b-4c05-90cb-4079ad01e1c7">Data variables: <span>(4)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>b2</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-9b6fb6c7-419c-4137-8305-8f589b9af629" type="checkbox"/><label for="attrs-9b6fb6c7-419c-4137-8305-8f589b9af629" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-1ec0cac8-0811-432e-94a6-13a7df43a65b" type="checkbox"/><label for="data-1ec0cac8-0811-432e-94a6-13a7df43a65b" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+    rgb      (dim0, dim1, dim2) uint8 0 0 0 0 0 0 0 0 0 0 ... 0 0 0 0 0 0 0 0 0</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-865283d0-fd23-46b0-9bab-af9c7db54939" type="checkbox"/><label class="xr-section-summary" for="section-865283d0-fd23-46b0-9bab-af9c7db54939" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span>dim_0</span>: 1</li><li><span>dim_1</span>: 7701</li><li><span>dim_2</span>: 7551</li><li><span>dim0</span>: 3</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-bd74ce84-5509-4ccc-b033-0d15e8caf8ae" type="checkbox"/><label class="xr-section-summary" for="section-bd74ce84-5509-4ccc-b033-0d15e8caf8ae" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-f791581a-7fc4-4a91-8588-1ff5f105dbd0" type="checkbox"/><label class="xr-section-summary" for="section-f791581a-7fc4-4a91-8588-1ff5f105dbd0">Data variables: <span>(4)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>b2</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-1b05d5f3-6b17-4896-a910-41552c1e1f14" type="checkbox"/><label for="attrs-1b05d5f3-6b17-4896-a910-41552c1e1f14" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-9b06d9fe-760f-44fa-a5cc-00aa13312ed1" type="checkbox"/><label for="data-9b06d9fe-760f-44fa-a5cc-00aa13312ed1" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b3</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-322cc31d-3f31-4182-b9f2-3aec162f98b9" type="checkbox"/><label for="attrs-322cc31d-3f31-4182-b9f2-3aec162f98b9" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-432e3fef-6803-4eb1-9323-7f10f4387599" type="checkbox"/><label for="data-432e3fef-6803-4eb1-9323-7f10f4387599" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b3</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-d22d7cf8-5f50-467b-b52b-9e68ebc204d0" type="checkbox"/><label for="attrs-d22d7cf8-5f50-467b-b52b-9e68ebc204d0" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-6c53c4af-4962-4b3a-ad5b-167cae79bada" type="checkbox"/><label for="data-6c53c4af-4962-4b3a-ad5b-167cae79bada" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b4</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-096753d8-8079-4eea-8b72-3c4c957613cd" type="checkbox"/><label for="attrs-096753d8-8079-4eea-8b72-3c4c957613cd" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-59d54434-7466-4039-a770-4e37a65ef26b" type="checkbox"/><label for="data-59d54434-7466-4039-a770-4e37a65ef26b" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b4</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-60564c20-3cad-4a9a-b327-9893c3ceb577" type="checkbox"/><label for="attrs-60564c20-3cad-4a9a-b327-9893c3ceb577" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-a5923a34-b611-416c-b7f1-ede0e7c3c97c" type="checkbox"/><label for="data-a5923a34-b611-416c-b7f1-ede0e7c3c97c" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>rgb</span></div><div class="xr-var-dims">(dim0, dim1, dim2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-6c16c63c-d575-42d2-bd27-18ddb2ec29e8" type="checkbox"/><label for="attrs-6c16c63c-d575-42d2-bd27-18ddb2ec29e8" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-a08c30ad-5b75-48e9-a1c6-0e0f198474f1" type="checkbox"/><label for="data-a08c30ad-5b75-48e9-a1c6-0e0f198474f1" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>rgb</span></div><div class="xr-var-dims">(dim0, dim1, dim2)</div><div class="xr-var-dtype">uint8</div><div class="xr-var-preview xr-preview">0 0 0 0 0 0 0 0 ... 0 0 0 0 0 0 0 0</div><input class="xr-var-attrs-in" disabled="" id="attrs-e83457c6-d9fd-4e53-b501-a3e63ef5f4c0" type="checkbox"/><label for="attrs-e83457c6-d9fd-4e53-b501-a3e63ef5f4c0" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-b8137acf-c402-4c2c-a4a7-87a79e3199fc" type="checkbox"/><label for="data-b8137acf-c402-4c2c-a4a7-87a79e3199fc" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
         ...,
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]],
 
-       [[0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
+       [[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
         ...,
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]],
 
-       [[0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
+       [[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
         ...,
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-b8cb832f-07c6-43ca-995f-197fd67846a1" type="checkbox"/><label class="xr-section-summary" for="section-b8cb832f-07c6-43ca-995f-197fd67846a1" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]]], dtype=uint8)</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-44d88e2a-20d3-4d43-8d0a-1b3a3ab22330" type="checkbox"/><label class="xr-section-summary" for="section-44d88e2a-20d3-4d43-8d0a-1b3a3ab22330" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
 </div>
 <p>Now, we can plot the multi-band image using the “rgb” variable.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1208,12 +1237,12 @@ Data variables:
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.image.AxesImage at 0x7eff8b8ed070&gt;
+&lt;matplotlib.image.AxesImage at 0x7f617a6c0760&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1231,7 +1260,7 @@ Data variables:
 <p><strong>Label-based indexing</strong></p>
 <p>Label-based index allows to access the information of a coordinate by calling its label. This feature is inspired by pandas method of indexing.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1241,7 +1270,7 @@ Data variables:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1276,6 +1305,7 @@ Data variables:
 }
 
 html[theme=dark],
+body[data-theme=dark],
 body.vscode-dark {
   --xr-font-color0: rgba(255, 255, 255, 1);
   --xr-font-color2: rgba(255, 255, 255, 0.54);
@@ -1288,7 +1318,7 @@ body.vscode-dark {
 }
 
 .xr-wrap {
-  display: block;
+  display: block !important;
   min-width: 300px;
   max-width: 700px;
 }
@@ -1560,7 +1590,8 @@ dl.xr-attrs {
   grid-template-columns: 125px auto;
 }
 
-.xr-attrs dt, dd {
+.xr-attrs dt,
+.xr-attrs dd {
   padding: 0;
   margin: 0;
   float: left;
@@ -1596,42 +1627,42 @@ dl.xr-attrs {
   fill: currentColor;
 }
 </style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt;
-Dimensions:  (dim1: 7701, dim2: 7551, dim_0: 1, dim_1: 7701, dim_2: 7551)
-Dimensions without coordinates: dim1, dim2, dim_0, dim_1, dim_2
+Dimensions:  (dim_0: 1, dim_1: 7701, dim_2: 7551, dim1: 7701, dim2: 7551)
+Dimensions without coordinates: dim_0, dim_1, dim_2, dim1, dim2
 Data variables:
     b2       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
     b3       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
     b4       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
-    rgb      (dim1, dim2) float64 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0 0.0</pre><div class="xr-wrap" hidden=""><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-24abbaa7-c341-4695-bba5-a2bd7cfd5910" type="checkbox"/><label class="xr-section-summary" for="section-24abbaa7-c341-4695-bba5-a2bd7cfd5910" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li><li><span>dim_0</span>: 1</li><li><span>dim_1</span>: 7701</li><li><span>dim_2</span>: 7551</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-e18da26e-d05c-4fc3-8f8f-1cc46f74dc72" type="checkbox"/><label class="xr-section-summary" for="section-e18da26e-d05c-4fc3-8f8f-1cc46f74dc72" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-9aa8201a-7598-4f42-938a-ac4f0c5ee1fe" type="checkbox"/><label class="xr-section-summary" for="section-9aa8201a-7598-4f42-938a-ac4f0c5ee1fe">Data variables: <span>(4)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>b2</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-e5d1c024-d8a7-46c0-8448-9dd27b9201fc" type="checkbox"/><label for="attrs-e5d1c024-d8a7-46c0-8448-9dd27b9201fc" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-6fb303ec-5c82-45d5-b9b9-8374bb5eaade" type="checkbox"/><label for="data-6fb303ec-5c82-45d5-b9b9-8374bb5eaade" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+    rgb      (dim1, dim2) uint8 0 0 0 0 0 0 0 0 0 0 0 ... 0 0 0 0 0 0 0 0 0 0 0</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-a48e82b3-b21a-4db0-b02a-2f6d1ba4000e" type="checkbox"/><label class="xr-section-summary" for="section-a48e82b3-b21a-4db0-b02a-2f6d1ba4000e" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span>dim_0</span>: 1</li><li><span>dim_1</span>: 7701</li><li><span>dim_2</span>: 7551</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-90516330-8785-4bcb-8587-5af53f00b1a8" type="checkbox"/><label class="xr-section-summary" for="section-90516330-8785-4bcb-8587-5af53f00b1a8" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-a9c6e126-fb5a-4420-9ffc-1dbb6206a0d3" type="checkbox"/><label class="xr-section-summary" for="section-a9c6e126-fb5a-4420-9ffc-1dbb6206a0d3">Data variables: <span>(4)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>b2</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-a6f7af0f-4def-486e-8763-bff0fcd020c4" type="checkbox"/><label for="attrs-a6f7af0f-4def-486e-8763-bff0fcd020c4" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-6ae8f011-9f10-4c8e-ad19-021d01c46cc2" type="checkbox"/><label for="data-6ae8f011-9f10-4c8e-ad19-021d01c46cc2" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b3</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-39f67f84-a762-47a6-b8df-a3a13162f43e" type="checkbox"/><label for="attrs-39f67f84-a762-47a6-b8df-a3a13162f43e" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-35ed15b1-50d9-419e-9165-e98920302b78" type="checkbox"/><label for="data-35ed15b1-50d9-419e-9165-e98920302b78" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b3</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-cff92315-84be-4349-9b50-b459eaa7e054" type="checkbox"/><label for="attrs-cff92315-84be-4349-9b50-b459eaa7e054" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-3366e1d6-a24a-4099-ab53-b98205546c20" type="checkbox"/><label for="data-3366e1d6-a24a-4099-ab53-b98205546c20" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b4</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-7e3455b8-bb86-4e80-9dd1-f67e678e3116" type="checkbox"/><label for="attrs-7e3455b8-bb86-4e80-9dd1-f67e678e3116" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-8133deea-44df-4d66-9fbc-30e0ac832f5d" type="checkbox"/><label for="data-8133deea-44df-4d66-9fbc-30e0ac832f5d" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b4</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-9c210667-d165-4ff1-b9a5-8dc0bb812eb7" type="checkbox"/><label for="attrs-9c210667-d165-4ff1-b9a5-8dc0bb812eb7" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-bd2c1cda-fcc7-42c4-bf5d-b506d0a653b2" type="checkbox"/><label for="data-bd2c1cda-fcc7-42c4-bf5d-b506d0a653b2" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>rgb</span></div><div class="xr-var-dims">(dim1, dim2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-3f1afb0c-6278-498a-885a-55cba8b068f3" type="checkbox"/><label for="attrs-3f1afb0c-6278-498a-885a-55cba8b068f3" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-8c919f9c-e2cd-4df2-af98-3bdf5b4b30bf" type="checkbox"/><label for="data-8c919f9c-e2cd-4df2-af98-3bdf5b4b30bf" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[0., 0., 0., ..., 0., 0., 0.],
-       [0., 0., 0., ..., 0., 0., 0.],
-       [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>rgb</span></div><div class="xr-var-dims">(dim1, dim2)</div><div class="xr-var-dtype">uint8</div><div class="xr-var-preview xr-preview">0 0 0 0 0 0 0 0 ... 0 0 0 0 0 0 0 0</div><input class="xr-var-attrs-in" disabled="" id="attrs-af79a560-f86c-4f72-b4a3-6b2d510eaf89" type="checkbox"/><label for="attrs-af79a560-f86c-4f72-b4a3-6b2d510eaf89" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-fe4c1ccc-1a59-4aaa-b344-5b492561eb07" type="checkbox"/><label for="data-fe4c1ccc-1a59-4aaa-b344-5b492561eb07" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
        ...,
-       [0., 0., 0., ..., 0., 0., 0.],
-       [0., 0., 0., ..., 0., 0., 0.],
-       [0., 0., 0., ..., 0., 0., 0.]])</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-d8396662-39f1-4770-a077-6d059694284a" type="checkbox"/><label class="xr-section-summary" for="section-d8396662-39f1-4770-a077-6d059694284a" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-6aa85023-359b-43e9-8f80-31764754cf58" type="checkbox"/><label class="xr-section-summary" for="section-6aa85023-359b-43e9-8f80-31764754cf58" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
 </div>
 <p><strong>Position-based indexing</strong></p>
 <p>Position-based index takes after the method of NumPy array indexing, with the power of labelled dimensions.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1640,7 +1671,7 @@ Data variables:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1675,6 +1706,7 @@ Data variables:
 }
 
 html[theme=dark],
+body[data-theme=dark],
 body.vscode-dark {
   --xr-font-color0: rgba(255, 255, 255, 1);
   --xr-font-color2: rgba(255, 255, 255, 0.54);
@@ -1687,7 +1719,7 @@ body.vscode-dark {
 }
 
 .xr-wrap {
-  display: block;
+  display: block !important;
   min-width: 300px;
   max-width: 700px;
 }
@@ -1959,7 +1991,8 @@ dl.xr-attrs {
   grid-template-columns: 125px auto;
 }
 
-.xr-attrs dt, dd {
+.xr-attrs dt,
+.xr-attrs dd {
   padding: 0;
   margin: 0;
   float: left;
@@ -1995,42 +2028,42 @@ dl.xr-attrs {
   fill: currentColor;
 }
 </style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt;
-Dimensions:  (dim0: 3, dim1: 7701, dim2: 7551, dim_0: 1)
-Dimensions without coordinates: dim0, dim1, dim2, dim_0
+Dimensions:  (dim_0: 1, dim0: 3, dim1: 7701, dim2: 7551)
+Dimensions without coordinates: dim_0, dim0, dim1, dim2
 Data variables:
     b2       (dim_0) float64 0.0
     b3       (dim_0) float64 0.0
     b4       (dim_0) float64 0.0
-    rgb      (dim0, dim1, dim2) float64 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</pre><div class="xr-wrap" hidden=""><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-ee531570-cd6d-4741-af37-0648fec9f1df" type="checkbox"/><label class="xr-section-summary" for="section-ee531570-cd6d-4741-af37-0648fec9f1df" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span>dim0</span>: 3</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li><li><span>dim_0</span>: 1</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-0c41f2ab-07ec-4edd-a8d9-d108b68df59c" type="checkbox"/><label class="xr-section-summary" for="section-0c41f2ab-07ec-4edd-a8d9-d108b68df59c" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-8f24fe64-8c47-4c79-ab7a-e07a2dab53ce" type="checkbox"/><label class="xr-section-summary" for="section-8f24fe64-8c47-4c79-ab7a-e07a2dab53ce">Data variables: <span>(4)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>b2</span></div><div class="xr-var-dims">(dim_0)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-5cfeadcf-eac6-470a-9905-f26642ef1ca0" type="checkbox"/><label for="attrs-5cfeadcf-eac6-470a-9905-f26642ef1ca0" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-cef1dcd6-b797-4b1b-835d-6041dc312f73" type="checkbox"/><label for="data-cef1dcd6-b797-4b1b-835d-6041dc312f73" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([0.])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b3</span></div><div class="xr-var-dims">(dim_0)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-f3cb42dd-175e-4d5a-bd24-b9b24371680e" type="checkbox"/><label for="attrs-f3cb42dd-175e-4d5a-bd24-b9b24371680e" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-e5fc4fc7-5b46-4345-9aac-363cfd37b969" type="checkbox"/><label for="data-e5fc4fc7-5b46-4345-9aac-363cfd37b969" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([0.])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b4</span></div><div class="xr-var-dims">(dim_0)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-279adf6c-3bbd-45ec-bcab-d784aab7dbef" type="checkbox"/><label for="attrs-279adf6c-3bbd-45ec-bcab-d784aab7dbef" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-6dba2440-f58f-4308-8fc1-79200a2c6057" type="checkbox"/><label for="data-6dba2440-f58f-4308-8fc1-79200a2c6057" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([0.])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>rgb</span></div><div class="xr-var-dims">(dim0, dim1, dim2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-ac4a7c26-ab7e-4b3e-a357-032e85ed8390" type="checkbox"/><label for="attrs-ac4a7c26-ab7e-4b3e-a357-032e85ed8390" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-67165c37-f4f9-4e1a-b25e-d1a7ff4d1043" type="checkbox"/><label for="data-67165c37-f4f9-4e1a-b25e-d1a7ff4d1043" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
+    rgb      (dim0, dim1, dim2) uint8 0 0 0 0 0 0 0 0 0 0 ... 0 0 0 0 0 0 0 0 0</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-1af24a8a-2b1c-4e9a-b18e-0878d1636a43" type="checkbox"/><label class="xr-section-summary" for="section-1af24a8a-2b1c-4e9a-b18e-0878d1636a43" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span>dim_0</span>: 1</li><li><span>dim0</span>: 3</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-e8b0c6c1-83ab-4b82-885c-4663b0182efb" type="checkbox"/><label class="xr-section-summary" for="section-e8b0c6c1-83ab-4b82-885c-4663b0182efb" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-f00b85af-b842-408b-8ae9-3233c64bcb19" type="checkbox"/><label class="xr-section-summary" for="section-f00b85af-b842-408b-8ae9-3233c64bcb19">Data variables: <span>(4)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>b2</span></div><div class="xr-var-dims">(dim_0)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-14393b88-1740-4af6-a377-55dd00e0aa6b" type="checkbox"/><label for="attrs-14393b88-1740-4af6-a377-55dd00e0aa6b" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-03fa34be-a81f-430c-8a00-17bef92c3c89" type="checkbox"/><label for="data-03fa34be-a81f-430c-8a00-17bef92c3c89" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([0.])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b3</span></div><div class="xr-var-dims">(dim_0)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-2b8f160c-df67-4b69-8c59-5de2e61916c3" type="checkbox"/><label for="attrs-2b8f160c-df67-4b69-8c59-5de2e61916c3" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-241a9b80-4cf7-47c8-a615-090416d90587" type="checkbox"/><label for="data-241a9b80-4cf7-47c8-a615-090416d90587" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([0.])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b4</span></div><div class="xr-var-dims">(dim_0)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-b68acf06-dafe-4f94-9db6-f63b9f05b174" type="checkbox"/><label for="attrs-b68acf06-dafe-4f94-9db6-f63b9f05b174" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-0f3d208f-f47c-4793-8be8-df107f61edce" type="checkbox"/><label for="data-0f3d208f-f47c-4793-8be8-df107f61edce" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([0.])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>rgb</span></div><div class="xr-var-dims">(dim0, dim1, dim2)</div><div class="xr-var-dtype">uint8</div><div class="xr-var-preview xr-preview">0 0 0 0 0 0 0 0 ... 0 0 0 0 0 0 0 0</div><input class="xr-var-attrs-in" disabled="" id="attrs-340baa3d-42ac-4c58-bd02-9393899c6560" type="checkbox"/><label for="attrs-340baa3d-42ac-4c58-bd02-9393899c6560" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-e1701831-ddf1-43ff-920e-d173cc8578cc" type="checkbox"/><label for="data-e1701831-ddf1-43ff-920e-d173cc8578cc" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
         ...,
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]],
 
-       [[0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
+       [[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
         ...,
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]],
 
-       [[0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
+       [[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
         ...,
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-16d19ba5-dced-4fef-81ee-ee1211e2d614" type="checkbox"/><label class="xr-section-summary" for="section-16d19ba5-dced-4fef-81ee-ee1211e2d614" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]]], dtype=uint8)</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-f35e0bee-da56-40e1-b0b1-ecb899d5b42e" type="checkbox"/><label class="xr-section-summary" for="section-f35e0bee-da56-40e1-b0b1-ecb899d5b42e" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
 </div>
 </section>
 <section id="2.4-Overlaying-a-Clipped-Raster-Image">
 <h3>2.4 Overlaying a Clipped Raster Image<a class="headerlink" href="#2.4-Overlaying-a-Clipped-Raster-Image" title="Permalink to this headline">#</a></h3>
 <p>Similar to how we used Rasterio’s windows to select a subset of the image, let’s create a numpy array which will contain the values for the clipped image. This array will be converted into a DataArray and merged with our existing Dataset. Let’s read in a different band (band 1) of the same image to be clipped and overlay it on the full RGB data.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[77]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2043,8 +2076,17 @@ Data variables:
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_1494/3279054872.py:1: DeprecationWarning: open_rasterio is Deprecated in favor of rioxarray. For information about transitioning, see: https://corteva.github.io/rioxarray/stable/getting_started/getting_started.html
+  with xr.open_rasterio(band1) as src:
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[77]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2079,6 +2121,7 @@ Data variables:
 }
 
 html[theme=dark],
+body[data-theme=dark],
 body.vscode-dark {
   --xr-font-color0: rgba(255, 255, 255, 1);
   --xr-font-color2: rgba(255, 255, 255, 0.54);
@@ -2091,7 +2134,7 @@ body.vscode-dark {
 }
 
 .xr-wrap {
-  display: block;
+  display: block !important;
   min-width: 300px;
   max-width: 700px;
 }
@@ -2363,7 +2406,8 @@ dl.xr-attrs {
   grid-template-columns: 125px auto;
 }
 
-.xr-attrs dt, dd {
+.xr-attrs dt,
+.xr-attrs dd {
   padding: 0;
   margin: 0;
   float: left;
@@ -2399,63 +2443,64 @@ dl.xr-attrs {
   fill: currentColor;
 }
 </style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt;
-Dimensions:  (dim0: 3, dim1: 7701, dim2: 7551, dim_0: 1, dim_1: 7701, dim_2: 7551)
-Dimensions without coordinates: dim0, dim1, dim2, dim_0, dim_1, dim_2
+Dimensions:  (dim_0: 1, dim_1: 7701, dim_2: 7551, dim0: 3, dim1: 7701,
+              dim2: 7551)
+Dimensions without coordinates: dim_0, dim_1, dim_2, dim0, dim1, dim2
 Data variables:
     b2       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
     b3       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
     b4       (dim_0, dim_1, dim_2) float64 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
-    rgb      (dim0, dim1, dim2) float64 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
-    b1       (dim_0, dim_1, dim_2) float64 nan nan nan nan ... nan nan nan nan</pre><div class="xr-wrap" hidden=""><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-bd4ca416-1ba2-44f4-abb3-f8888c3bd0c4" type="checkbox"/><label class="xr-section-summary" for="section-bd4ca416-1ba2-44f4-abb3-f8888c3bd0c4" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span>dim0</span>: 3</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li><li><span>dim_0</span>: 1</li><li><span>dim_1</span>: 7701</li><li><span>dim_2</span>: 7551</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-ee4ff28c-38b5-4d3f-a4b1-3fc0cb056a3c" type="checkbox"/><label class="xr-section-summary" for="section-ee4ff28c-38b5-4d3f-a4b1-3fc0cb056a3c" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-55739b30-db25-4c60-bd35-56c03ab09e38" type="checkbox"/><label class="xr-section-summary" for="section-55739b30-db25-4c60-bd35-56c03ab09e38">Data variables: <span>(5)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>b2</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-f7ebdd45-005c-4c92-be72-55cb239a2ad7" type="checkbox"/><label for="attrs-f7ebdd45-005c-4c92-be72-55cb239a2ad7" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-7e2e1fbb-d6eb-44f7-b43a-f490bec190df" type="checkbox"/><label for="data-7e2e1fbb-d6eb-44f7-b43a-f490bec190df" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+    rgb      (dim0, dim1, dim2) uint8 0 0 0 0 0 0 0 0 0 0 ... 0 0 0 0 0 0 0 0 0
+    b1       (dim_0, dim_1, dim_2) float64 nan nan nan nan ... nan nan nan nan</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-d61b8433-eca4-4e70-b12b-ef2f1a50729b" type="checkbox"/><label class="xr-section-summary" for="section-d61b8433-eca4-4e70-b12b-ef2f1a50729b" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span>dim_0</span>: 1</li><li><span>dim_1</span>: 7701</li><li><span>dim_2</span>: 7551</li><li><span>dim0</span>: 3</li><li><span>dim1</span>: 7701</li><li><span>dim2</span>: 7551</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-155ca8a5-f79c-4d07-859e-ebdfe3089464" type="checkbox"/><label class="xr-section-summary" for="section-155ca8a5-f79c-4d07-859e-ebdfe3089464" title="Expand/collapse section">Coordinates: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"></ul></div></li><li class="xr-section-item"><input checked="" class="xr-section-summary-in" id="section-c5d345af-69e0-44aa-ad8b-046cb64a6b41" type="checkbox"/><label class="xr-section-summary" for="section-c5d345af-69e0-44aa-ad8b-046cb64a6b41">Data variables: <span>(5)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>b2</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-7fe48155-9118-403d-86ee-00a88f3fbb5a" type="checkbox"/><label for="attrs-7fe48155-9118-403d-86ee-00a88f3fbb5a" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-4665bafc-46b4-441a-88a7-752be12f7a2f" type="checkbox"/><label for="data-4665bafc-46b4-441a-88a7-752be12f7a2f" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b3</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-1d0b7347-23d6-44b3-945f-5e7460f68653" type="checkbox"/><label for="attrs-1d0b7347-23d6-44b3-945f-5e7460f68653" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-6971837a-1f22-470e-8dad-83e840eb3224" type="checkbox"/><label for="data-6971837a-1f22-470e-8dad-83e840eb3224" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b3</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-e79a67c6-93dc-41e8-9ba0-e1f7ac2bfebc" type="checkbox"/><label for="attrs-e79a67c6-93dc-41e8-9ba0-e1f7ac2bfebc" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-2535473b-0b58-4caa-b620-900ffd8ae6dd" type="checkbox"/><label for="data-2535473b-0b58-4caa-b620-900ffd8ae6dd" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b4</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-10a131ba-5554-4f1b-940f-3f1c5f889ddc" type="checkbox"/><label for="attrs-10a131ba-5554-4f1b-940f-3f1c5f889ddc" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-fe5a4f1b-7a4a-4e60-b841-aeb127e2d45b" type="checkbox"/><label for="data-fe5a4f1b-7a4a-4e60-b841-aeb127e2d45b" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b4</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-70eadcf6-21f5-41f0-9bea-d63f1245b5f9" type="checkbox"/><label for="attrs-70eadcf6-21f5-41f0-9bea-d63f1245b5f9" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-153f07e8-215d-44a7-a446-aa1855da5170" type="checkbox"/><label for="data-153f07e8-215d-44a7-a446-aa1855da5170" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
         ...,
         [0., 0., 0., ..., 0., 0., 0.],
         [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>rgb</span></div><div class="xr-var-dims">(dim0, dim1, dim2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input class="xr-var-attrs-in" disabled="" id="attrs-c975bcbe-6a09-4ce2-b450-35047b9b00aa" type="checkbox"/><label for="attrs-c975bcbe-6a09-4ce2-b450-35047b9b00aa" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-23888d0c-097f-4b69-a961-15f9052e2e65" type="checkbox"/><label for="data-23888d0c-097f-4b69-a961-15f9052e2e65" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
+        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>rgb</span></div><div class="xr-var-dims">(dim0, dim1, dim2)</div><div class="xr-var-dtype">uint8</div><div class="xr-var-preview xr-preview">0 0 0 0 0 0 0 0 ... 0 0 0 0 0 0 0 0</div><input class="xr-var-attrs-in" disabled="" id="attrs-9dc5e0dc-d864-455a-a522-e95c8f773eb3" type="checkbox"/><label for="attrs-9dc5e0dc-d864-455a-a522-e95c8f773eb3" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-52001c05-bd31-479d-9298-929d82aa88a8" type="checkbox"/><label for="data-52001c05-bd31-479d-9298-929d82aa88a8" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
         ...,
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]],
 
-       [[0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
+       [[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
         ...,
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]],
 
-       [[0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
+       [[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
         ...,
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.],
-        [0., 0., 0., ..., 0., 0., 0.]]])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b1</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">nan nan nan nan ... nan nan nan nan</div><input class="xr-var-attrs-in" disabled="" id="attrs-3095cdff-580a-4be3-a49c-c88306f96b03" type="checkbox"/><label for="attrs-3095cdff-580a-4be3-a49c-c88306f96b03" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-145104d6-b466-4ee4-8d99-287dac8d6b94" type="checkbox"/><label for="data-145104d6-b466-4ee4-8d99-287dac8d6b94" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[nan, nan, nan, ..., nan, nan, nan],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]]], dtype=uint8)</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>b1</span></div><div class="xr-var-dims">(dim_0, dim_1, dim_2)</div><div class="xr-var-dtype">float64</div><div class="xr-var-preview xr-preview">nan nan nan nan ... nan nan nan nan</div><input class="xr-var-attrs-in" disabled="" id="attrs-8d2633ee-8627-482d-9508-2b11514e6876" type="checkbox"/><label for="attrs-8d2633ee-8627-482d-9508-2b11514e6876" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use xlink:href="#icon-file-text2"></use></svg></label><input class="xr-var-data-in" id="data-c89877c3-85eb-4f5a-b138-1d5b36e2e4f0" type="checkbox"/><label for="data-c89877c3-85eb-4f5a-b138-1d5b36e2e4f0" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use xlink:href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[nan, nan, nan, ..., nan, nan, nan],
         [nan, nan, nan, ..., nan, nan, nan],
         [nan, nan, nan, ..., nan, nan, nan],
         ...,
         [nan, nan, nan, ..., nan, nan, nan],
         [nan, nan, nan, ..., nan, nan, nan],
-        [nan, nan, nan, ..., nan, nan, nan]]])</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-f1392e1a-11ab-4a79-8fa9-612cc15e035a" type="checkbox"/><label class="xr-section-summary" for="section-f1392e1a-11ab-4a79-8fa9-612cc15e035a" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
+        [nan, nan, nan, ..., nan, nan, nan]]])</pre></div></li></ul></div></li><li class="xr-section-item"><input class="xr-section-summary-in" disabled="" id="section-ad495607-25ff-44de-a796-b13a53a5dacc" type="checkbox"/><label class="xr-section-summary" for="section-ad495607-25ff-44de-a796-b13a53a5dacc" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[78]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2464,12 +2509,12 @@ Data variables:
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[78]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.image.AxesImage at 0x7eff8b845df0&gt;
+&lt;matplotlib.image.AxesImage at 0x7f617a649700&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -2481,7 +2526,7 @@ Data variables:
 </div>
 <p>Now that we know how the clipped image and the full RGB image look in different plots, let’s combine them together in one image.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[79]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2492,12 +2537,12 @@ Data variables:
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[79]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.image.AxesImage at 0x7eff6c2e8790&gt;
+&lt;matplotlib.image.AxesImage at 0x7f617a59eaf0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -2586,7 +2631,7 @@ Data variables:
 <li><a class="reference internal" href="#1.-RasterIO-Basics">1. RasterIO Basics</a><ul>
 <li><a class="reference internal" href="#1.1-Accessing-and-Understanding-the-Geospatial-Raster-data">1.1 Accessing and Understanding the Geospatial Raster data</a></li>
 <li><a class="reference internal" href="#1.2-Performing-the-task-of-clipping-the-image">1.2 Performing the task of clipping the image</a></li>
-<li><a class="reference internal" href="#1.3-Performing-calculation-on-the-Raster-Images">1.3 Performing calculation on the Raster Images</a></li>
+<li><a class="reference internal" href="#1.3-Performing-calculations-on-the-Raster-Images">1.3 Performing calculations on the Raster Images</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#2.-XArray-Basics">2. XArray Basics</a><ul>
