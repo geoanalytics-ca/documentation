@@ -38,7 +38,8 @@ extensions = [
     "sphinxcontrib.spelling",
     "sphinx_design",
     "myst_parser",
-    'IPython.sphinxext.ipython_console_highlighting'
+    'IPython.sphinxext.ipython_console_highlighting',
+    "colon_fence"
 ]
 
 source_suffix = [".rst", ".md"]
