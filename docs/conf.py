@@ -39,7 +39,6 @@ extensions = [
     "sphinx_design",
     "myst_parser",
     'IPython.sphinxext.ipython_console_highlighting',
-    "colon_fence"
 ]
 
 source_suffix = [".rst", ".md"]
@@ -51,7 +50,10 @@ nbsphinx_execute_arguments = [
     "--InlineBackend.rc={'figure.dpi': 96}",
 ]
 
-myst_enable_extensions = ["colon_fence"]
+myst_enable_extensions = [
+    "colon_fence",
+    "html_admonition",
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
