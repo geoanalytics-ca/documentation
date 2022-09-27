@@ -17,6 +17,6 @@ This page we'll go through the first steps of orienting you to the key parts of 
     05b-remote-connect-vscode
     06-file-browser
     07-stac
-    08-gitlab
+    08-container-registry
     09-pipelines
     10-dask
