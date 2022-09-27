@@ -172,7 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-file-browser.html"><strong>File Browser</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="08-gitlab.html"><strong>GitLab</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="08-container-registry.html"><strong>Container Registry</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="09-pipelines.html"><strong>Pipelines</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
 </ul>
@@ -478,9 +478,9 @@ div.rendered_html tbody tr:hover {
 <h2>1. Levels of Authentication<a class="headerlink" href="#1.-Levels-of-Authentication" title="Permalink to this headline">#</a></h2>
 <p>All software systems implemented in the GEOAnalytics Canada Platform require users to be authenticated before access is given. The GEOAnalytics platform uses LDAP (Lightweight Directory Access Protocol) to store user information and allow users to authenticate and log into the platform. Hatfield has also implemented a single sign-on (SSO) system based on the industry-standard OAuth 2 protocol, where you, the user, only needs to login to the platform once to gain access of all platform functions.
 Using this SSO system, an API token is given when you first login and is validated by platform services when accessed by you.</p>
-<p>All users need to login through the single-sign-on system with their <strong>username</strong> and <strong>password</strong> to access platform systems and data. <img alt="581942b670c7417abf63b279663d28fa" src="../_images/03_login.png"/></p>
+<p>All users need to login through the single-sign-on system with their <strong>username</strong> and <strong>password</strong> to access platform systems and data. <img alt="2ba6f228d1704a60bccd9b6d40176773" src="../_images/03_login.png"/></p>
 <p>Once you have logged in, you will be led to the GEOAnalytics Platform’s main dashboard.</p>
-<p><img alt="ced6cf7992f34efab80b03e1fbcb951a" src="../_images/03_platform.png"/></p>
+<p><img alt="d3c9ea03ac6b493195ef4fe3dde3b26c" src="../_images/03_platform.png"/></p>
 <p>From the image above, take note of the <strong>“API Access Token”</strong> in the top right corner and the bottom of the dashboard. This API token is another authentication method to access parts of the GEOAnalytics API. The token is primarily used by pasting the token into certain scripts for access to the platform’s tools.</p>
 </section>
 <section id="2.-Systems-Accessible-with-Username-and-Password">
@@ -607,17 +607,17 @@ Using this SSO system, an API token is given when you first login and is validat
 </ol>
 <p>If you get a “Success!” message, then you have gained access!</p>
 <p>However, if you receive the error: “Error response from daemon: Get <a class="reference external" href="https://registry.geoanalytics.ca/v2/">https://registry.geoanalytics.ca/v2/</a>: unauthorized: HTTP Basic: Access denied,” then we have a few more steps to get you connected!</p>
-<p><img alt="d2d910d1d73444b29fc12c2dd00dade2" class="no-scaled-link" src="../_images/03_docker-error.png" style="width: 900px;"/></p>
+<p><img alt="d5431b45333748dda30ab10a4de4471b" class="no-scaled-link" src="../_images/03_docker-error.png" style="width: 900px;"/></p>
 </section>
 <section id="4.3-Alternate-Login-Method">
 <h3>4.3 Alternate Login Method<a class="headerlink" href="#4.3-Alternate-Login-Method" title="Permalink to this headline">#</a></h3>
 <p>Some accounts run into errors while attempting to connect to their docker registry, you have the same error as shown above, these are the steps to get access:</p>
 <p><strong>First we must create a personal access token (PAT) on gitlab. Navigate to https://git.geoanalytics.ca</strong></p>
 <ol class="arabic simple">
-<li><p>Select “Settings” from the drop down menu in the top right corner. <img alt="fbb5138b953d4a309fb5588525a02daa" src="../_images/03_git-settings.gif"/></p></li>
-<li><p>In the left sidebar, click on “Access Tokens”. <img alt="12c5d33074404c14948b35b29878672a" src="../_images/03_git-access-tokens.gif"/></p></li>
-<li><p>Now, assign a <strong>name</strong> and an <strong>expiry date</strong> (can be set to any date in the future when you want the token to expire), and check on <strong>“api”</strong>. <img alt="14f354405d874ed0a8c1111af6089d1d" src="../_images/03_creating_token.gif"/></p></li>
-<li><p>Once created, this personal access token is <strong>only available once, when it is created</strong>. <strong>NOTE: Store this PAT in a secure location because you will not be able to access the same code again!</strong> <img alt="0c805e4a0ade4582a24bb1c8089cd0d7" src="../_images/03_copy_token.gif"/></p></li>
+<li><p>Select “Settings” from the drop down menu in the top right corner. <img alt="c0307192cba24cd69f70099abd71bc99" src="../_images/03_git-settings.gif"/></p></li>
+<li><p>In the left sidebar, click on “Access Tokens”. <img alt="c97afac41699401695a263b3ca3aa276" src="../_images/03_git-access-tokens.gif"/></p></li>
+<li><p>Now, assign a <strong>name</strong> and an <strong>expiry date</strong> (can be set to any date in the future when you want the token to expire), and check on <strong>“api”</strong>. <img alt="fd5b8a24001644baa40017f29d3ae8a0" src="../_images/03_creating_token.gif"/></p></li>
+<li><p>Once created, this personal access token is <strong>only available once, when it is created</strong>. <strong>NOTE: Store this PAT in a secure location because you will not be able to access the same code again!</strong> <img alt="266237c6d77346c3b69187e4fd912c98" src="../_images/03_copy_token.gif"/></p></li>
 </ol>
 <p><strong>Next, with this personal access token created, run the following command in terminal, inputting in your username and the PAT in place.</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">-u</span> <span class="pre">&lt;username&gt;</span> <span class="pre">-p</span> <span class="pre">&lt;personal</span> <span class="pre">access</span> <span class="pre">token&gt;</span> <span class="pre">registry.geoanalytics.ca</span></code></p>

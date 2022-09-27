@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Accessing and Downloading Data" href="01-accessing-data.html" /><link rel="prev" title="Dask" href="../1_getting_started/10-dask.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Pipelines" href="09-pipelines.html" /><link rel="prev" title="SpatioTemporal Asset Catalog (STAC)" href="07-stac.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>Real World Examples - GeoAnalytics Canada</title>
+        <title>Container Registry - GeoAnalytics Canada</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -162,27 +162,27 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../1_getting_started/index.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/00-how-to-use-this-documentation.html">How to use this documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/04-authentication.html"><strong>Authentication</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05a-ssh-keys.html">Set Up SSH Keys</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/06-file-browser.html"><strong>File Browser</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/08-container-registry.html"><strong>Container Registry</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/09-pipelines.html"><strong>Pipelines</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/10-dask.html"><strong>Dask</strong></a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00-how-to-use-this-documentation.html">How to use this documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-geospatial-python.html"><strong>Working with Earth Observation data in Python</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="04-authentication.html"><strong>Authentication</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="05a-ssh-keys.html">Set Up SSH Keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06-file-browser.html"><strong>File Browser</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>Container Registry</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="09-pipelines.html"><strong>Pipelines</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Real World Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="01-accessing-data.html"><strong>Accessing and Downloading Data</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="02-ndvi-s2-dask.html"><strong>NDVI with Sentinel-2 and Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="03-ndsi-modis-dask.html"><strong>NDSI with MODIS and Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="04-ndmi-landsat8-dask.html"><strong>NDMI with Landsat 8 Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="05-change-detection.html"><strong>Change Detection</strong></a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/01-accessing-data.html"><strong>Accessing and Downloading Data</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/02-ndvi-s2-dask.html"><strong>NDVI with Sentinel-2 and Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/03-ndsi-modis-dask.html"><strong>NDSI with MODIS and Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/04-ndmi-landsat8-dask.html"><strong>NDMI with Landsat 8 Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_real_world_examples/05-change-detection.html"><strong>Change Detection</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -218,24 +218,68 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="real-world-examples">
-<h1>Real World Examples<a class="headerlink" href="#real-world-examples" title="Permalink to this headline">#</a></h1>
-<p>This page will go through the single use-case examples. These examples will be used with each other to form scientific workflows in the next group of notebooks.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="01-accessing-data.html"><strong>Accessing and Downloading Data</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="02-ndvi-s2-dask.html"><strong>NDVI with Sentinel-2 and Dask</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-ndsi-modis-dask.html"><strong>NDSI with MODIS and Dask</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="04-ndmi-landsat8-dask.html"><strong>NDMI with Landsat 8 Dask</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="05-change-detection.html"><strong>Change Detection</strong></a></li>
-</ul>
+          <section id="Container-Registry">
+<h1><strong>Container Registry</strong><a class="headerlink" href="#Container-Registry" title="Permalink to this headline">#</a></h1>
+<p>The GEOAnalytics Canada Platform hosts a Container Registry to allow users to share and manage Docker images within specific projects. Within each project, an image repository is available to push and pull Docker container images. In this notebook, we will learn how to login, create a project, and finally how to push/pull Docker images within the Container Registry.</p>
+<section id="1.-Logging-into-the-Container-Registry-and-creating-a-Project">
+<h2>1. Logging into the Container Registry and creating a Project<a class="headerlink" href="#1.-Logging-into-the-Container-Registry-and-creating-a-Project" title="Permalink to this headline">#</a></h2>
+<ol class="arabic simple">
+<li><p>To access the container registry follow this link: <a class="reference external" href="https://registry.eo4ph.geoanalytics.ca/">https://registry.eo4ph.geoanalytics.ca/</a> The registry can be accessed through the GEOAnalytics Canada home page by clicking on “Container Registry”.</p></li>
+<li><p>The link will take you to the container registry’s homepage (see the first image below). You can log in using your GEOAnalytics Canada credentials.</p></li>
+<li><p>Once you have accessed the container registry, you will find yourself in the Projects Tab. Click on the “NEW PROJECT” button (see the second image below).</p></li>
+<li><p>Input your desired project name, and leave the Access Level as private (keep the “Public” box unchecked). Click “OK” (see the third image below).</p></li>
+</ol>
+<p><img alt="268f3aacba384a038a296248ccf37996" src="../_images/08-container-registry-homepage.png"/></p>
+<p><img alt="2232f8d5acb14fc29d38c9312a3ebea4" src="../_images/08-container-registry-homepage1.png"/></p>
+<p><img alt="513b6d2137e84a90a6d431a078c915f6" src="../_images/08-container-registry-newproject.png"/></p>
+</section>
+<section id="2.-How-to-link-your-workspace-to-the-Container-Registry">
+<h2>2. How to link your workspace to the Container Registry<a class="headerlink" href="#2.-How-to-link-your-workspace-to-the-Container-Registry" title="Permalink to this headline">#</a></h2>
+Now we will use the terminal to login our Docker CLI to our Container Registry. To do this we will require our GEOAnalytics Canada username and password.
+To start, run the command below:
+
+1. `docker login registry.eo4ph.geoanalytics.ca`
+
+2. When prompted input your GEOAnalytics Canada username and press enter.
+
+3. When prompoted input your GEOAnalytics Canada password and press enter.
+
+Now that this is done we can push or pull Docker images from our Container Registry's projects.</section>
+<section id="3.-Adding-Docker-Images-to-the-Container-Registry">
+<h2>3. Adding Docker Images to the Container Registry<a class="headerlink" href="#3.-Adding-Docker-Images-to-the-Container-Registry" title="Permalink to this headline">#</a></h2>
+<p>In this section we will be exploring how to add images to the container registry.</p>
+<p>We’ll start by running a few commands to show how Docker works.</p>
+<p>The command below will <strong>pull</strong> the hello-world Docker image from the Dockerhub, if not present already, and <strong>run</strong> it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run hello-world
+</pre></div>
 </div>
+<p>Now let’s try pushing the hello-world image into our container registry. To do that we must rename the image from “hello-world” to the location of our container registry, using the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">tag</span> <span class="pre">&lt;source-img-name&gt;</span> <span class="pre">&lt;target-img-name&gt;</span></code> command. The target image name is the registry location because we want to push the image to a private registry and not the central Docker registry. In this example I’m going to push the image to the test registry I created called ‘test-123’.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker tag hello-world registry.eo4ph.geoanalytics.ca/test-123/hello-world
+</pre></div>
+</div>
+<p>Now that we have pushed the image to our container registry location, let’s run the image.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run registry.eo4ph.geoanalytics.ca/test-123/hello-world
+</pre></div>
+</div>
+<p>The final step is to <strong>push</strong> the local Docker image to our test-123 repository. This is done by executing the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">push</span> <span class="pre">&lt;img-name&gt;</span></code> below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker push registry.eo4ph.geoanalytics.ca/test-123/hello-world
+</pre></div>
+</div>
+<p>Now head over to the Container Registry and click on <code class="docutils literal notranslate"><span class="pre">Projects</span> <span class="pre">&gt;</span> <span class="pre">test-123</span></code>. You will see the Docker image you just pushed added to the repository’s container registry!</p>
+<p><img alt="0c18a0ccb2e84ef5b512046d56172594" src="../_images/08-container-registry-pushed-image.png"/></p>
+<p>These were a just a few Docker commands we explored, to learn all the Docker commands available, take a look at the Docker documentation and a sample Docker workflow:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.docker.com/engine/reference/run/">https://docs.docker.com/engine/reference/run/</a></p></li>
+<li><p><a class="reference external" href="https://docker-curriculum.com">https://docker-curriculum.com</a></p></li>
+</ul>
+<p><strong>Important Note: NEVER run a Docker image you don’t know about. Only run a dockerfile from a trusted page and make sure to examine its source code!</strong></p>
+</section>
 </section>
 
         </article>
@@ -243,23 +287,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="01-accessing-data.html">
+          <a class="next-page" href="09-pipelines.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><strong>Accessing and Downloading Data</strong></div>
+                <div class="title"><strong>Pipelines</strong></div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../1_getting_started/10-dask.html">
+          <a class="prev-page" href="07-stac.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><strong>Dask</strong></div>
+                <div class="title"><strong>SpatioTemporal Asset Catalog (STAC)</strong></div>
                 
               </div>
             </a>
@@ -283,8 +327,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><strong>Container Registry</strong></a><ul>
+<li><a class="reference internal" href="#1.-Logging-into-the-Container-Registry-and-creating-a-Project">1. Logging into the Container Registry and creating a Project</a></li>
+<li><a class="reference internal" href="#2.-How-to-link-your-workspace-to-the-Container-Registry">2. How to link your workspace to the Container Registry</a></li>
+<li><a class="reference internal" href="#3.-Adding-Docker-Images-to-the-Container-Registry">3. Adding Docker Images to the Container Registry</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
