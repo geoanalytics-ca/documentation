@@ -518,9 +518,9 @@ div.rendered_html tbody tr:hover {
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="k">def</span> <span class="nf">job</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
     <span class="c1"># two tolerations are needed to ensure the job is scheduled on the correct GEOAnalytics Canada cluster nodes.</span>
-    <span class="n">toleration</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="s1">'toleration1'</span><span class="p">,</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
+    <span class="n">toleration</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="s1">'ga.nodepool/type'</span><span class="p">,</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
     <span class="n">couler</span><span class="o">.</span><span class="n">add_toleration</span><span class="p">(</span><span class="n">toleration</span><span class="p">)</span> <span class="c1"># pipeline/nodepool=pipe:NoSchedule</span>
-    <span class="n">toleration2</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="s1">'toleration2'</span><span class="p">,</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
+    <span class="n">toleration2</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="s1">'kubernetes.azure.com/scalesetpriority'</span><span class="p">,</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
     <span class="n">couler</span><span class="o">.</span><span class="n">add_toleration</span><span class="p">(</span><span class="n">toleration2</span><span class="p">)</span>
     <span class="c1"># Set the container to run. You could use your own container hosted in the GEOAnalytics Canada container registry, or in this case docker/whalesay</span>
     <span class="c1"># Documentation on the docker/whalesay image and arguments is here: https://hub.docker.com/r/docker/whalesay/</span>
@@ -531,7 +531,7 @@ div.rendered_html tbody tr:hover {
         <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">name</span><span class="p">],</span>
         <span class="n">step_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
         <span class="c1"># node_selector needs to be {'pipeline':'small'}</span>
-        <span class="n">node_selector</span><span class="o">=</span><span class="p">{</span><span class="s1">'pipeline'</span><span class="p">:</span><span class="s1">'nodepool'</span><span class="p">}</span>
+        <span class="n">node_selector</span><span class="o">=</span><span class="p">{</span><span class="s1">'pipeline'</span><span class="p">:</span><span class="s1">'small'</span><span class="p">}</span>
     <span class="p">)</span>
 </pre></div>
 </div>
@@ -590,8 +590,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>We then will submit our job to the <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> namespace where jobs will be run. Using any other namespace will just result in errors. First, we declare which submitter we will be using - we will use the ArgoSubmitter as the backend is leveraging Argo.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -599,9 +599,19 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:root:Argo submitter namespace: pipeline
+INFO:root:Cannot find local k8s config. Trying in-cluster config.
+INFO:root:Initialized with in-cluster config.
+</pre></div></div>
+</div>
 <p>Finally, we submit our Directed Acyclic Graph (DAG) that represents our “pipeline” we defined above to the Executor.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -609,6 +619,119 @@ div.rendered_html tbody tr:hover {
 <span class="n">deployment</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:root:Checking workflow name/generatedName runpy-
+INFO:root:Submitting workflow to Argo
+INFO:root:Workflow runpy-j8w5g has been submitted in "pipeline" namespace!
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'apiVersion': 'argoproj.io/v1alpha1',
+ 'kind': 'Workflow',
+ 'metadata': {'creationTimestamp': '2022-09-27T02:44:08Z',
+  'generateName': 'runpy-',
+  'generation': 1,
+  'managedFields': [{'apiVersion': 'argoproj.io/v1alpha1',
+    'fieldsType': 'FieldsV1',
+    'fieldsV1': {'f:metadata': {'f:generateName': {}}, 'f:spec': {}},
+    'manager': 'OpenAPI-Generator',
+    'operation': 'Update',
+    'time': '2022-09-27T02:44:08Z'}],
+  'name': 'runpy-j8w5g',
+  'namespace': 'pipeline',
+  'resourceVersion': '42779483',
+  'uid': '6a864b5c-68d4-4bf0-8c2e-e4053f0b02e5'},
+ 'spec': {'entrypoint': 'runpy',
+  'templates': [{'dag': {'tasks': [{'arguments': {'parameters': [{'name': 'para-A-0',
+          'value': 'A'}]},
+       'name': 'A',
+       'template': 'A'},
+      {'arguments': {'parameters': [{'name': 'para-B-0', 'value': 'B'}]},
+       'dependencies': ['A'],
+       'name': 'B',
+       'template': 'B'},
+      {'arguments': {'parameters': [{'name': 'para-C-0', 'value': 'C'}]},
+       'dependencies': ['A'],
+       'name': 'C',
+       'template': 'C'},
+      {'arguments': {'parameters': [{'name': 'para-D-0', 'value': 'D'}]},
+       'dependencies': ['B', 'C'],
+       'name': 'D',
+       'template': 'D'}]},
+    'name': 'runpy'},
+   {'container': {'args': ['{{inputs.parameters.para-A-0}}'],
+     'command': ['cowsay'],
+     'image': 'docker/whalesay:latest'},
+    'inputs': {'parameters': [{'name': 'para-A-0'}]},
+    'name': 'A',
+    'nodeSelector': {'pipeline': 'small'}},
+   {'container': {'args': ['{{inputs.parameters.para-B-0}}'],
+     'command': ['cowsay'],
+     'image': 'docker/whalesay:latest'},
+    'inputs': {'parameters': [{'name': 'para-B-0'}]},
+    'name': 'B',
+    'nodeSelector': {'pipeline': 'small'}},
+   {'container': {'args': ['{{inputs.parameters.para-C-0}}'],
+     'command': ['cowsay'],
+     'image': 'docker/whalesay:latest'},
+    'inputs': {'parameters': [{'name': 'para-C-0'}]},
+    'name': 'C',
+    'nodeSelector': {'pipeline': 'small'}},
+   {'container': {'args': ['{{inputs.parameters.para-D-0}}'],
+     'command': ['cowsay'],
+     'image': 'docker/whalesay:latest'},
+    'inputs': {'parameters': [{'name': 'para-D-0'}]},
+    'name': 'D',
+    'nodeSelector': {'pipeline': 'small'}}],
+  'tolerations': [{'effect': 'NoSchedule',
+    'key': 'ga.nodepool/type',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'}]}}
+</pre></div></div>
 </div>
 <p>The following screenshot shows the successful run that the above JSON pipeline object represents.</p>
 <p><img alt="pipeline DAG" src="../_images/09_pipeline-dag.png"/></p>
@@ -670,55 +793,69 @@ and notification that processing of the file failed.</p>
 <span></span><span class="k">def</span> <span class="nf">gather_files</span><span class="p">():</span>
     <span class="k">return</span> <span class="p">[</span><span class="s1">'ras1'</span><span class="p">,</span><span class="s1">'ras2'</span><span class="p">,</span><span class="s1">'ras3'</span><span class="p">,</span><span class="s1">'ras4'</span><span class="p">]</span>
 
-<span class="k">def</span> <span class="nf">preprocess_job</span><span class="p">():</span>
-    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'preprocess'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">preprocess</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'preprocess'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">sen2cor290</span><span class="p">():</span>
+    <span class="c1"># choose randomly if this function will succeed or fail</span>
+    <span class="kn">import</span> <span class="nn">random</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'success'</span><span class="p">,</span> <span class="s1">'fail'</span><span class="p">]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="n">res</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="s1">'fail'</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">sen2cor280</span><span class="p">():</span>
+    <span class="c1"># choose randomly if this function will succeed or fail</span>
+    <span class="kn">import</span> <span class="nn">random</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'success'</span><span class="p">,</span> <span class="s1">'fail'</span><span class="p">]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="n">res</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="s1">'fail'</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">sen2cor255</span><span class="p">():</span>
+    <span class="c1"># choose randomly if this function will succeed or fail</span>
+    <span class="kn">import</span> <span class="nn">random</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'success'</span><span class="p">,</span> <span class="s1">'fail'</span><span class="p">]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="n">res</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="s1">'fail'</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">fin</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'fin'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">err</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'error'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Once decalared, we wrap our functions inside of a submittable job</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">preprocess_job</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'preprocess'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">preprocess</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">sen2cor290_job</span><span class="p">():</span>
-    <span class="k">def</span> <span class="nf">sen2cor290</span><span class="p">():</span>
-        <span class="c1"># choose randomly if this function will succeed or fail</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        <span class="n">task</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'success'</span><span class="p">,</span> <span class="s1">'fail'</span><span class="p">]</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="n">res</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="s1">'fail'</span><span class="p">:</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'sen2cor290'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">sen2cor290</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">sen2cor280_job</span><span class="p">():</span>
-    <span class="k">def</span> <span class="nf">sen2cor280</span><span class="p">():</span>
-        <span class="c1"># choose randomly if this function will succeed or fail</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        <span class="n">task</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'success'</span><span class="p">,</span> <span class="s1">'fail'</span><span class="p">]</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="n">res</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="s1">'fail'</span><span class="p">:</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'sen2cor280'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">sen2cor280</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">sen2cor255_job</span><span class="p">():</span>
-    <span class="k">def</span> <span class="nf">sen2cor255</span><span class="p">():</span>
-        <span class="c1"># choose randomly if this function will succeed or fail</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        <span class="n">task</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'success'</span><span class="p">,</span> <span class="s1">'fail'</span><span class="p">]</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="n">res</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="s1">'fail'</span><span class="p">:</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'sen2cor255'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">sen2cor255</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">fin_job</span><span class="p">():</span>
-    <span class="k">def</span> <span class="nf">fin</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">'fin'</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'fin'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">fin</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">err_job</span><span class="p">():</span>
-    <span class="k">def</span> <span class="nf">err</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">'error'</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'err'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">err</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -767,8 +904,8 @@ and notification that processing of the file failed.</p>
 </div>
 </div>
 <p>Finally, we submit our job to the Executor!</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -776,12 +913,139 @@ and notification that processing of the file failed.</p>
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:root:Argo submitter namespace: pipeline
+INFO:root:Cannot find local k8s config. Trying in-cluster config.
+INFO:root:Initialized with in-cluster config.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">couler</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">submitter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:root:Checking workflow name/generatedName runpy-
+INFO:root:Submitting workflow to Argo
+INFO:root:Workflow runpy-knlcd has been submitted in "pipeline" namespace!
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{'apiVersion': 'argoproj.io/v1alpha1',
+ 'kind': 'Workflow',
+ 'metadata': {'creationTimestamp': '2022-09-27T02:37:01Z',
+  'generateName': 'runpy-',
+  'generation': 1,
+  'managedFields': [{'apiVersion': 'argoproj.io/v1alpha1',
+    'fieldsType': 'FieldsV1',
+    'fieldsV1': {'f:metadata': {'f:generateName': {}}, 'f:spec': {}},
+    'manager': 'OpenAPI-Generator',
+    'operation': 'Update',
+    'time': '2022-09-27T02:37:01Z'}],
+  'name': 'runpy-knlcd',
+  'namespace': 'pipeline',
+  'resourceVersion': '42775569',
+  'uid': 'd3fef132-6be1-47f6-bd21-0c8ef710b7d0'},
+ 'spec': {'entrypoint': 'runpy',
+  'templates': [{'dag': {'tasks': [{'name': 'preprocess',
+       'template': 'preprocess'},
+      {'depends': 'preprocess.Succeeded',
+       'name': 'sen2cor290',
+       'template': 'sen2cor290'},
+      {'depends': 'sen2cor290.Failed',
+       'name': 'sen2cor280',
+       'template': 'sen2cor280'},
+      {'depends': 'sen2cor280.Failed',
+       'name': 'sen2cor255',
+       'template': 'sen2cor255'},
+      {'depends': 'sen2cor280.Failed &amp;&amp; sen2cor290.Failed &amp;&amp; sen2cor255.Failed',
+       'name': 'err',
+       'template': 'err'},
+      {'depends': 'sen2cor290.Succeeded || sen2cor280.Succeeded || sen2cor255.Succeeded',
+       'name': 'fin',
+       'template': 'fin'}]},
+    'name': 'runpy'},
+   {'name': 'preprocess',
+    'nodeSelector': {'pipeline': 'small'},
+    'script': {'command': ['python'],
+     'image': 'python:alpine3.6',
+     'source': "\nprint(f'preprocess')\n"}},
+   {'name': 'sen2cor290',
+    'nodeSelector': {'pipeline': 'small'},
+    'script': {'command': ['python'],
+     'image': 'python:alpine3.6',
+     'source': "\ntask = ['success', 'fail']\nres = random.randint(0, 1)\nres = task[res]\nprint(f'{res}')\nif res == 'fail':\n    sys.exit(2)\n"}},
+   {'name': 'sen2cor280',
+    'nodeSelector': {'pipeline': 'small'},
+    'script': {'command': ['python'],
+     'image': 'python:alpine3.6',
+     'source': "\ntask = ['success', 'fail']\nres = random.randint(0, 1)\nres = task[res]\nprint(f'{res}')\nif res == 'fail':\n    sys.exit(2)\n"}},
+   {'name': 'sen2cor255',
+    'nodeSelector': {'pipeline': 'small'},
+    'script': {'command': ['python'],
+     'image': 'python:alpine3.6',
+     'source': "\ntask = ['success', 'fail']\nres = random.randint(0, 1)\nres = task[res]\nprint(f'{res}')\nif res == 'fail':\n    sys.exit(2)\n"}},
+   {'name': 'err',
+    'nodeSelector': {'pipeline': 'small'},
+    'script': {'command': ['python'],
+     'image': 'python:alpine3.6',
+     'source': "\nprint('error')\n"}},
+   {'name': 'fin',
+    'nodeSelector': {'pipeline': 'small'},
+    'script': {'command': ['python'],
+     'image': 'python:alpine3.6',
+     'source': "\nprint('fin')\n"}}],
+  'tolerations': [{'effect': 'NoSchedule',
+    'key': 'ga.nodepool/type',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'},
+   {'effect': 'NoSchedule', 'key': 'ga.nodepool/type', 'operator': 'Exists'},
+   {'effect': 'NoSchedule',
+    'key': 'kubernetes.azure.com/scalesetpriority',
+    'operator': 'Exists'}]}}
+</pre></div></div>
+</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">couler</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">submitter</span><span class="p">)</span>
+<span></span>
 </pre></div>
 </div>
 </div>

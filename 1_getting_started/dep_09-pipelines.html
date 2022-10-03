@@ -943,7 +943,7 @@ Username:  asaini
 <h2>3. Exploring the GEOAnalytics Pipeline UI<a class="headerlink" href="#3.-Exploring-the-GEOAnalytics-Pipeline-UI" title="Permalink to this headline">#</a></h2>
 <section id="3.1-Kubeflow-Pipelines-and-Experiments">
 <h3>3.1 Kubeflow Pipelines and Experiments<a class="headerlink" href="#3.1-Kubeflow-Pipelines-and-Experiments" title="Permalink to this headline">#</a></h3>
-<p>The central Kubeflow Dashboard can be accessed from the main GEOAnalytics Canada page by clicking on Kubeflow to launch. <img alt="f140fc5263a5463aab874e782909a164" src="../_images/08_launching-kubeflow.gif"/></p>
+<p>The central Kubeflow Dashboard can be accessed from the main GEOAnalytics Canada page by clicking on Kubeflow to launch. <img alt="46ef8218aba34f4284c76c5bf97be62a" src="../_images/08_launching-kubeflow.gif"/></p>
 <p>Now you will have access to the Kubeflow User Interface (UI).</p>
 <p>On the left sidebar, click on the <strong>Pipelines</strong> tab which will lead to the main workspace for Kubeflow Pipelines UI. On the left panel in this section, there are multiple tabs, but for this tutorial we will focus on only the Pipelines and Experiments tab. The <em>Pipelines</em> tab leads you to all the existing pipelines you have access to and the option to upload a new pipeline. And the <em>Experiments</em> tab displays all the experients and the runs of each experiment. You can create runs, compare existing
 runs, or even clone the runs.</p>
@@ -953,7 +953,7 @@ runs, or even clone the runs.</p>
 <h3>3.2 Analyzing the Hello World Pipeline<a class="headerlink" href="#3.2-Analyzing-the-Hello-World-Pipeline" title="Permalink to this headline">#</a></h3>
 <p>Under the Pipelines tab, you should see the newly built “Hello World Example Pipeline” at the top of the list of pipelines. There are other Tutorial and Demo pipelines preconfigured by Kubeflow for you to experiment with.</p>
 <p>To invoke a specific pipeline, simply click it which will bring up Pipeline’s view as shown in the GIF below.</p>
-<p><img alt="1b3776c5c5ae4b359e64e80daf5ce3f2" src="../_images/08_kubeflow-pipelines.gif"/></p>
+<p><img alt="c6b62639503d477782d7bb222b4cd4f7" src="../_images/08_kubeflow-pipelines.gif"/></p>
 <p>Within this pipeline there is a graph representing the runtime execution of the pipeline, with edges indicating parent/child relationships between the steps (nodes). Clicking on a node will give information about that step, such as the input parameter, the output result, arguments, internal commands to execute that step, and the volume mounts.</p>
 <p><strong>Notebook and the pipeline run independently, so in case the notebook crashes, the experiment will continue running once executed.</strong></p>
 </section>
@@ -974,18 +974,18 @@ runs, or even clone the runs.</p>
 <li><p>There are two different types of Runs, we will discuss these in the next part. For now, select <strong>“One-off”</strong> which executes the pipeline only once.</p></li>
 <li><p>Now since we specified <em>Parameters</em> in our pipeline function, enter any two words in place of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p></li>
 </ul>
-<p><img alt="bb31b90cd4ea4d97bb502dcbd7f23d54" src="../_images/08_start-run.png"/></p>
+<p><img alt="bc9a8a5e78a64419981a2ac7f720496e" src="../_images/08_start-run.png"/></p>
 <p>After these sections have been filled in, select the <strong>“Start”</strong> to execute the run which will take a few seconds (or minutes depending on the pipeline). When the Status updates to a green checkmark it indicates the run was successfully executed. Click on the run to explore the details of the run.</p>
-<p><img alt="fa9f49974a8446ebb9b5f85dbc16940f" src="../_images/08_run-created.gif"/></p>
+<p><img alt="4e732502a82b436eadbd975e7a9d0abc" src="../_images/08_run-created.gif"/></p>
 </section>
 <section id="3.5-Running-Pipelines-on-Schedule">
 <h3>3.5 Running Pipelines on Schedule<a class="headerlink" href="#3.5-Running-Pipelines-on-Schedule" title="Permalink to this headline">#</a></h3>
 <p>All our previous runs have been done manually, which is not ideal for some scenarios. Recurring runs are repeatable runs of a pipeline, very helpful if the pipeline is expected to run for a long period of time and is triggered to run frequently.</p>
 <p>Let’s create a Recurring run on our “Echo Image Pipeline.” Fill in the details as shown in the screenshot below. Now you can create a periodic run by selecting a run type of <strong>“Recurring”</strong>, then choosing <strong>“Periodic”</strong> as the trigger type. Period runs specify <strong>how often</strong> to run a pipeline. In this example we are setting a pipeline to run every second day. Once you start the run, it is executed immediately and then executed with the defined frequency (of 2 days).</p>
-<p><img alt="9f528f22ea8740a49678c167a67f4365" src="../_images/08_create-recurring-run.png"/></p>
+<p><img alt="5669b3d4bdd845fa84f53802726c1f99" src="../_images/08_create-recurring-run.png"/></p>
 <p>From the “echo-image” experiment, you will see recurring run active, with the option to <code class="docutils literal notranslate"><span class="pre">enable</span></code> or <code class="docutils literal notranslate"><span class="pre">disable</span></code> the schedule.</p>
 <p><strong>If you enable a recurring run for this example notebook, make sure to disable the run.</strong></p>
-<p><img alt="83266c30df884bdea0bf49dd79e4fc0a" src="../_images/08_recurring-run.gif"/></p>
+<p><img alt="75a5a75abbd54d509a6567e8bd2cd2a0" src="../_images/08_recurring-run.gif"/></p>
 </section>
 <section id="3.6-Terminating-Runs">
 <h3>3.6 Terminating Runs<a class="headerlink" href="#3.6-Terminating-Runs" title="Permalink to this headline">#</a></h3>
