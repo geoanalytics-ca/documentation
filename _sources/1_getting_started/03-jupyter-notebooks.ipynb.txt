@@ -77,12 +77,7 @@
     "### 1.2 Launching Terminal\n",
     "To start a new terminal session, click the terminal in the Launcher tab. Terminal provides full support for all system shells on Mac, Linux, and Windows. Just like the shell on your local system, anything can be run with this server terminal.\n",
     "\n",
-    "<img src=\"../images/getting_started_images/02_terminal.png\">\n",
-    "\n",
-    "Closing a running terminal will not shut down the terminal, rather it will continue running in the background. In the \"Running Terminals and Kernels\" tab, you can reopen a closed terminal, or completely shut the terminal down. \n",
-    "\n",
-    "\n",
-    "<img src=\"../images/getting_started_images/02_exiting-terminal.gif\">"
+    "Closing a running terminal will not shut down the terminal, rather it will continue running in the background. In the \"Running Terminals and Kernels\" tab, you can reopen a closed terminal, or completely shut the terminal down. "
    ]
   },
   {
@@ -98,19 +93,13 @@
    "id": "f2e4114f",
    "metadata": {},
    "source": [
-    "## 2. Location of the GEOAnalytics folders\n",
+    "## 2. Types of folders in GEOAnalytics\n",
     "\n",
-    "As you can see in the file browser tab, there are 5 folders and multiple files provided as default. There are three different type of folders available in the GEOAnalytics JupyterLab platform:\n",
-    "\n",
-    "- **Public Mounted Buckets**: Folders that do not require any access key (publicly available).\n",
-    "    - `gcp-public-data-landsat` - All Landsat data (worldwide; including Landsat 4, 5, 7 and 8) as provided by Google’s public data program. This location is *read-only.*\n",
-    "    - `gcp-public-data-sentinel-2` - All Sentinel-2 data (worldwide) as provided by Google’s public data program. This location is *read-only.*\n",
+    "There are two different type of folders available in the GEOAnalytics JupyterLab platform:\n",
     "\n",
     "- **Private Mounted Buckets**: Folders available only if you have GEOAnalytics Platform access. \n",
-    "    - `geoanalytics_data` - EO data collections (such as sen2cor, VIIRS data) available to all users of GEOAnalytics. This location is *read-only.*\n",
-    "    - `geoanalytics_user_shared_data` - All platform EO data collections including raw datasets and pre-processed datasets. *All users can read and write to this location.*\n",
-    "- **Personal Storage**\n",
-    "    - `geoanalytics_<username>` - A user’s personal network file system where only the logged in user can *read or write* to their own personal storage directory.\n"
+    "\n",
+    "- **Personal Storage**: A user's personal network file system where only the logged in user can *read or write* files."
    ]
   },
   {
@@ -392,7 +381,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.9.12"
+   "version": "3.9.13"
   }
  },
  "nbformat": 4,

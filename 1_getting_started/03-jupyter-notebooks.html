@@ -487,7 +487,7 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>Using these core packages, especially Xarray and Dask, scalable big data analytics can be executed on satellite EO data. Our JupyterLab is configured to allow direct access to scalable processing power and all EO and ground-truth datasets.</p>
 <p>To get started with your project, select the <strong>Jupyter</strong> tool from the main page on your GEOAnalytics Canada platform. This will lead you to your JupyterHub interface.</p>
-<p><img alt="6c01f454b13a4501a3f7884d9eab9b1b" src="../_images/02_launching-jupyterlab.gif"/></p>
+<p><img alt="cd47382a3301436480dbc518353ce05b" src="../_images/02_launching-jupyterlab.gif"/></p>
 <p><strong>The main workspace consists of:</strong></p>
 <ul class="simple">
 <li><p>the launcher tab at start-up where you can work with Jupyter notebooks, Jupyter consoles, terminal, and text or markdown files</p></li>
@@ -504,43 +504,26 @@ div.rendered_html tbody tr:hover {
 <li><p>the tabs list</p></li>
 <li><p>the extension manager.</p></li>
 </ul>
-<p><img alt="028bb85e8e894c908c2de11779e0b24d" src="../_images/02_jupyter-platform.png"/></p>
+<p><img alt="d7c187fdd4b64555a8a449d6e771fa50" src="../_images/02_jupyter-platform.png"/></p>
 <section id="1.1-Launching-New-Notebooks">
 <h3>1.1 Launching New Notebooks<a class="headerlink" href="#1.1-Launching-New-Notebooks" title="Permalink to this headline">#</a></h3>
 <p>Within the Launcher tab, there are two environments to choose from. The <em>Python 3</em> environment and the <em>Python [conda env:notebook]</em> are both the same environments. These environments are created specifically for EO analysis, with essential packages already installed.</p>
 <p>Let’s create a notebook with either the <em>conda notebook environment</em> and begin writing some code!</p>
-<p><img alt="912ca3b97f9f4075959b9866d5d701a8" src="../_images/02_launching-notebook.gif"/></p>
+<p><img alt="45b57c73a22942188ff61e83cf286a5f" src="../_images/02_launching-notebook.gif"/></p>
 </section>
 <section id="1.2-Launching-Terminal">
 <h3>1.2 Launching Terminal<a class="headerlink" href="#1.2-Launching-Terminal" title="Permalink to this headline">#</a></h3>
 <p>To start a new terminal session, click the terminal in the Launcher tab. Terminal provides full support for all system shells on Mac, Linux, and Windows. Just like the shell on your local system, anything can be run with this server terminal.</p>
-<p><img alt="db8e7ce67b524844af8980f1fdd7f326" src="../_images/02_terminal.png"/></p>
 <p>Closing a running terminal will not shut down the terminal, rather it will continue running in the background. In the “Running Terminals and Kernels” tab, you can reopen a closed terminal, or completely shut the terminal down.</p>
-<p><img alt="ca49faa1a808466b9cabeca4b7b3e0b4" src="../_images/02_exiting-terminal.gif"/></p>
 <p><strong>NOTE: Sudo / Root access is not available from the Jupyterlab environment’s terminal.</strong></p>
 </section>
 </section>
-<section id="2.-Location-of-the-GEOAnalytics-folders">
-<h2>2. Location of the GEOAnalytics folders<a class="headerlink" href="#2.-Location-of-the-GEOAnalytics-folders" title="Permalink to this headline">#</a></h2>
-<p>As you can see in the file browser tab, there are 5 folders and multiple files provided as default. There are three different type of folders available in the GEOAnalytics JupyterLab platform:</p>
+<section id="2.-Types-of-folders-in-GEOAnalytics">
+<h2>2. Types of folders in GEOAnalytics<a class="headerlink" href="#2.-Types-of-folders-in-GEOAnalytics" title="Permalink to this headline">#</a></h2>
+<p>There are two different type of folders available in the GEOAnalytics JupyterLab platform:</p>
 <ul class="simple">
-<li><p><strong>Public Mounted Buckets</strong>: Folders that do not require any access key (publicly available).</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">gcp-public-data-landsat</span></code> - All Landsat data (worldwide; including Landsat 4, 5, 7 and 8) as provided by Google’s public data program. This location is <em>read-only.</em></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">gcp-public-data-sentinel-2</span></code> - All Sentinel-2 data (worldwide) as provided by Google’s public data program. This location is <em>read-only.</em></p></li>
-</ul>
-</li>
-<li><p><strong>Private Mounted Buckets</strong>: Folders available only if you have GEOAnalytics Platform access.</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">geoanalytics_data</span></code> - EO data collections (such as sen2cor, VIIRS data) available to all users of GEOAnalytics. This location is <em>read-only.</em></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">geoanalytics_user_shared_data</span></code> - All platform EO data collections including raw datasets and pre-processed datasets. <em>All users can read and write to this location.</em></p></li>
-</ul>
-</li>
-<li><p><strong>Personal Storage</strong></p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">geoanalytics_&lt;username&gt;</span></code> - A user’s personal network file system where only the logged in user can <em>read or write</em> to their own personal storage directory.</p></li>
-</ul>
-</li>
+<li><p><strong>Private Mounted Buckets</strong>: Folders available only if you have GEOAnalytics Platform access.</p></li>
+<li><p><strong>Personal Storage</strong>: A user’s personal network file system where only the logged in user can <em>read or write</em> files.</p></li>
 </ul>
 </section>
 <section id="3.-How-the-Jupyter-environment-is-set-up">
@@ -784,7 +767,7 @@ div.rendered_html tbody tr:hover {
 <li><a class="reference internal" href="#1.2-Launching-Terminal">1.2 Launching Terminal</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#2.-Location-of-the-GEOAnalytics-folders">2. Location of the GEOAnalytics folders</a></li>
+<li><a class="reference internal" href="#2.-Types-of-folders-in-GEOAnalytics">2. Types of folders in GEOAnalytics</a></li>
 <li><a class="reference internal" href="#3.-How-the-Jupyter-environment-is-set-up">3. How the Jupyter environment is set up</a><ul>
 <li><a class="reference internal" href="#3.1-Conda-and-Pip">3.1 Conda and Pip</a></li>
 <li><a class="reference internal" href="#3.2-Installing-using-conda">3.2 Installing using conda</a></li>
