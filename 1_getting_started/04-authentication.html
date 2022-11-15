@@ -478,9 +478,9 @@ div.rendered_html tbody tr:hover {
 <h2>1. Levels of Authentication<a class="headerlink" href="#1.-Levels-of-Authentication" title="Permalink to this headline">#</a></h2>
 <p>All software systems implemented in the GEOAnalytics Canada Platform require users to be authenticated before access is given. The GEOAnalytics platform uses LDAP (Lightweight Directory Access Protocol) to store user information and allow users to authenticate and log into the platform. Hatfield has also implemented a single sign-on (SSO) system based on the industry-standard OAuth 2 protocol, where you, the user, only needs to login to the platform once to gain access of all platform functions.
 Using this SSO system, an API token is given when you first login and is validated by platform services when accessed by you.</p>
-<p>All users need to login through the single-sign-on system with their <strong>username</strong> and <strong>password</strong> to access platform systems and data. <img alt="9c1ef6b83a224d98a09b50facfa43c88" src="../_images/03_login.png"/></p>
+<p>All users need to login through the single-sign-on system with their <strong>username</strong> and <strong>password</strong> to access platform systems and data. <img alt="1ce6915c671a4d5e85c1fc7277face28" src="../_images/03_login.png"/></p>
 <p>Once you have logged in, you will be led to the GEOAnalytics Platform’s main dashboard.</p>
-<p><img alt="84df50e26a4f46d09805573c7ad6b279" src="../_images/03_platform.png"/></p>
+<p><img alt="fa6943bfe5424d17b616f0a6c6e374fc" src="../_images/03_platform.png"/></p>
 <p>From the image above, take note of the <strong>“API Access Token”</strong> in the top right corner and the bottom of the dashboard. This API token is another authentication method to access parts of the GEOAnalytics API. The token is primarily used by pasting the token into certain scripts for access to the platform’s tools.</p>
 </section>
 <section id="2.-Systems-Accessible-with-Username-and-Password">
@@ -508,7 +508,7 @@ Using this SSO system, an API token is given when you first login and is validat
 <p>The API Token grants access to GEOAnalytics API which cannot be accessed with just your username and password.</p>
 <p>An example of how to use this API token is down below. Here, Python sends a request to GEOAnalytics’ STAC Server, using the API token to directly access the STAC Browser and output the Server’s request header.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -518,8 +518,8 @@ Using this SSO system, an API token is given when you first login and is validat
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -527,18 +527,26 @@ Using this SSO system, an API token is given when you first login and is validat
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Please copy and paste your API Access Token here:
+</pre></div></div>
+</div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">STAC_BASE_URL</span> <span class="o">=</span> <span class="s2">"https://stac.geoanalytics.ca"</span>
+<span></span><span class="n">STAC_BASE_URL</span> <span class="o">=</span> <span class="s2">"https://stac.eo4ph.geoanalytics.ca/browser"</span>
 <span class="n">requests_headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'cookie'</span><span class="p">:</span> <span class="n">API_TOKEN</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -554,7 +562,7 @@ Using this SSO system, an API token is given when you first login and is validat
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -563,32 +571,11 @@ Using this SSO system, an API token is given when you first login and is validat
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
-</pre></div>
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{'description': 'Arturo raster datastore',
- 'title': 'Arturo STAC API',
- 'links': [{'href': 'http://stac.geoanalytics.ca/',
-   'rel': 'self',
-   'type': 'application/json'},
-  {'href': 'http://stac.geoanalytics.ca/docs',
-   'rel': 'docs',
-   'type': 'text/html',
-   'title': 'OpenAPI docs'},
-  {'href': 'http://stac.geoanalytics.ca/conformance',
-   'rel': 'conformance',
-   'type': 'application/json',
-   'title': 'STAC/WFS3 conformance classes implemented by this server'},
-  {'href': 'http://stac.geoanalytics.ca/search',
-   'rel': 'search',
-   'type': 'application/geo+json',
-   'title': 'STAC search'},
-  {'href': 'http://stac.geoanalytics.ca/collections/landsat-8-l1_EXAMPLE',
-   'rel': 'child',
-   'type': 'application/json',
-   'title': 'Landsat 8 L1'}]}
+STAC server did not return json. This is likely an issue with your access token. Please re-run cells from beginning and re-enter your token.
 </pre></div></div>
 </div>
 <p>If the above cell returns a dictionary with the STAC server’s header requests, then congratulations! You are authenticated! Otherwise, make sure you are assigning the correct authentication token to the <em>API_TOKEN</em> variable.</p>
@@ -607,17 +594,17 @@ Using this SSO system, an API token is given when you first login and is validat
 </ol>
 <p>If you get a “Success!” message, then you have gained access!</p>
 <p>However, if you receive the error: “Error response from daemon: Get <a class="reference external" href="https://registry.geoanalytics.ca/v2/">https://registry.geoanalytics.ca/v2/</a>: unauthorized: HTTP Basic: Access denied,” then we have a few more steps to get you connected!</p>
-<p><img alt="1d2fb7dae8f442daac9f5e4f6127369b" class="no-scaled-link" src="../_images/03_docker-error.png" style="width: 900px;"/></p>
+<p><img alt="d6c72329c2c24c79bc9d1bc9a4604bba" class="no-scaled-link" src="../_images/03_docker-error.png" style="width: 900px;"/></p>
 </section>
 <section id="4.3-Alternate-Login-Method">
 <h3>4.3 Alternate Login Method<a class="headerlink" href="#4.3-Alternate-Login-Method" title="Permalink to this headline">#</a></h3>
 <p>Some accounts run into errors while attempting to connect to their docker registry, you have the same error as shown above, these are the steps to get access:</p>
 <p><strong>First we must create a personal access token (PAT) on gitlab. Navigate to https://git.geoanalytics.ca</strong></p>
 <ol class="arabic simple">
-<li><p>Select “Settings” from the drop down menu in the top right corner. <img alt="af817f26dda648e18b9e69ff611d49eb" src="../_images/03_git-settings.gif"/></p></li>
-<li><p>In the left sidebar, click on “Access Tokens”. <img alt="90c024716f494d939bb597f012acb9bb" src="../_images/03_git-access-tokens.gif"/></p></li>
-<li><p>Now, assign a <strong>name</strong> and an <strong>expiry date</strong> (can be set to any date in the future when you want the token to expire), and check on <strong>“api”</strong>. <img alt="b370385ec927441c85b2968f64f02931" src="../_images/03_creating_token.gif"/></p></li>
-<li><p>Once created, this personal access token is <strong>only available once, when it is created</strong>. <strong>NOTE: Store this PAT in a secure location because you will not be able to access the same code again!</strong> <img alt="ab9250ed9640467bbd853127368b0aff" src="../_images/03_copy_token.gif"/></p></li>
+<li><p>Select “Settings” from the drop down menu in the top right corner. <img alt="b7230b314e6b410b967485c5f443c019" src="../_images/03_git-settings.gif"/></p></li>
+<li><p>In the left sidebar, click on “Access Tokens”. <img alt="dbdf5845cb104b2faf4c78107151dfae" src="../_images/03_git-access-tokens.gif"/></p></li>
+<li><p>Now, assign a <strong>name</strong> and an <strong>expiry date</strong> (can be set to any date in the future when you want the token to expire), and check on <strong>“api”</strong>. <img alt="962ece9c09454b3497ac9aaca842d55b" src="../_images/03_creating_token.gif"/></p></li>
+<li><p>Once created, this personal access token is <strong>only available once, when it is created</strong>. <strong>NOTE: Store this PAT in a secure location because you will not be able to access the same code again!</strong> <img alt="c4639d2de97c4440ad8a9e37858c19d2" src="../_images/03_copy_token.gif"/></p></li>
 </ol>
 <p><strong>Next, with this personal access token created, run the following command in terminal, inputting in your username and the PAT in place.</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">-u</span> <span class="pre">&lt;username&gt;</span> <span class="pre">-p</span> <span class="pre">&lt;personal</span> <span class="pre">access</span> <span class="pre">token&gt;</span> <span class="pre">registry.geoanalytics.ca</span></code></p>
