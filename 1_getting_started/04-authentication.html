@@ -478,9 +478,9 @@ div.rendered_html tbody tr:hover {
 <h2>1. Levels of Authentication<a class="headerlink" href="#1.-Levels-of-Authentication" title="Permalink to this headline">#</a></h2>
 <p>All software systems implemented in the GEOAnalytics Canada Platform require users to be authenticated before access is given. The GEOAnalytics platform uses LDAP (Lightweight Directory Access Protocol) to store user information and allow users to authenticate and log into the platform. Hatfield has also implemented a single sign-on (SSO) system based on the industry-standard OAuth 2 protocol, where you, the user, only needs to login to the platform once to gain access of all platform functions.
 Using this SSO system, an API token is given when you first login and is validated by platform services when accessed by you.</p>
-<p>All users need to login through the single-sign-on system with their <strong>username</strong> and <strong>password</strong> to access platform systems and data. <img alt="1ce6915c671a4d5e85c1fc7277face28" src="../_images/03_login.png"/></p>
+<p>All users need to login through the single-sign-on system with their <strong>username</strong> and <strong>password</strong> to access platform systems and data. <img alt="8055eb63161a433aa839ba8e60543509" src="../_images/03_login.png"/></p>
 <p>Once you have logged in, you will be led to the GEOAnalytics Platform’s main dashboard.</p>
-<p><img alt="fa6943bfe5424d17b616f0a6c6e374fc" src="../_images/03_platform.png"/></p>
+<p><img alt="7eb327c443bc41ebb5fd1c84f6001289" src="../_images/03_platform.png"/></p>
 <p>From the image above, take note of the <strong>“API Access Token”</strong> in the top right corner and the bottom of the dashboard. This API token is another authentication method to access parts of the GEOAnalytics API. The token is primarily used by pasting the token into certain scripts for access to the platform’s tools.</p>
 </section>
 <section id="2.-Systems-Accessible-with-Username-and-Password">
@@ -491,24 +491,15 @@ Using this SSO system, an API token is given when you first login and is validat
 <li><p><strong>Ground Truth</strong> system implements powerful APIs that allow ground truth data to be integrated into other platform services, such as the EO data pre-processing and Jupyter-Lab analytic environments.</p></li>
 <li><p><strong>JupyterLab</strong> allows interactive data analytics to be executed without worrying about computational resources or installing software.</p></li>
 <li><p><strong>Desktop App</strong> is a personal Ubuntu Desktop environment available in a web browser.</p></li>
-<li><p><strong>Kubeflow</strong> is a platform for large scale batch processing and machine learning tasks.</p></li>
-<li><p><strong>Gitlab</strong> is your private Git repository for managing and controlling scripts, programs, and docker images of your GEOAnalytics projects. It contains a container registry for Docker images.</p></li>
 <li><p><strong>FileBrowser</strong> contains the catelogue of data on the platform, ready to use/download.</p></li>
 </ul>
-<p>However, <em>Kubeflow</em> and <em>Gitlab</em> require you to enter in your username and password for access.</p>
-<p><strong>For Example:</strong> to access Kubeflow through your JupyterLab environment, importing <code class="docutils literal notranslate"><span class="pre">GeoAnalyticsKubflowClient</span></code> and providing the username and password will give direct access. <strong>(This library to access Kubeflow will soon be available!)</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">GEOAnalyticsKubeflowClient</span> <span class="kn">import</span> <span class="n">GEOAnalyticsKubeflowClient</span>
-<span class="n">provider</span> <span class="o">=</span> <span class="n">DexProvider</span><span class="p">(</span><span class="s2">"http://kubeflow.geoanalytics.ca"</span><span class="p">)</span>
-<span class="n">kubeflow_client</span> <span class="o">=</span> <span class="n">GEOAnalyticsKubeflowClient</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">"Username: "</span><span class="p">),</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(),</span> <span class="n">provider</span><span class="p">)</span>
-</pre></div>
-</div>
 </section>
 <section id="3.-Systems-Accessible-with-API-Token">
 <h2>3. Systems Accessible with API Token<a class="headerlink" href="#3.-Systems-Accessible-with-API-Token" title="Permalink to this headline">#</a></h2>
 <p>The API Token grants access to GEOAnalytics API which cannot be accessed with just your username and password.</p>
 <p>An example of how to use this API token is down below. Here, Python sends a request to GEOAnalytics’ STAC Server, using the API token to directly access the STAC Browser and output the Server’s request header.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -518,8 +509,8 @@ Using this SSO system, an API token is given when you first login and is validat
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -527,31 +518,23 @@ Using this SSO system, an API token is given when you first login and is validat
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Please copy and paste your API Access Token here:
-</pre></div></div>
-</div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">STAC_BASE_URL</span> <span class="o">=</span> <span class="s2">"https://stac.eo4ph.geoanalytics.ca/browser"</span>
+<span></span><span class="n">STAC_BASE_URL</span> <span class="o">=</span> <span class="s2">"https://stac.eo4ph.geoanalytics.ca"</span>
 <span class="n">requests_headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'cookie'</span><span class="p">:</span> <span class="n">API_TOKEN</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="k">def</span> <span class="nf">test_STAC_server_request</span><span class="p">():</span>
-    <span class="n">test_STAC_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://stac.geoanalytics.ca"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">requests_headers</span><span class="p">)</span>
+    <span class="n">test_STAC_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">STAC_BASE_URL</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">requests_headers</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">res</span> <span class="o">=</span> <span class="n">test_STAC_request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">res</span>
@@ -562,7 +545,7 @@ Please copy and paste your API Access Token here:
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -571,44 +554,79 @@ Please copy and paste your API Access Token here:
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-STAC server did not return json. This is likely an issue with your access token. Please re-run cells from beginning and re-enter your token.
+{'type': 'Catalog',
+ 'id': 'stac-fastapi',
+ 'title': 'GEOAnalytics Canada STAC Server',
+ 'description': 'Search, store and browse metadata for EO datasets stored on GEOAnalytics Canada using this STAC Server. &lt;p&gt;View documentation and tutorials on how to use this service in the &lt;a href="https://docs.geoanalytics.ca/1_getting_started/07-stac.html" target="_blank"&gt;GEOAnalytics Canada Documentation and Tutorials&lt;/a&gt;&lt;/p&gt; ',
+ 'stac_version': '1.0.0',
+ 'conformsTo': ['https://api.stacspec.org/v1.0.0-beta.4/item-search',
+  'https://api.stacspec.org/v1.0.0-beta.4/item-search/#context',
+  'https://api.stacspec.org/v1.0.0-beta.4/item-search/#query',
+  'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core',
+  'https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features',
+  'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/oas30',
+  'https://api.stacspec.org/v1.0.0-beta.4/ogcapi-features/extensions/transaction/',
+  'http://www.opengis.net/spec/ogcapi-features-4/1.0/conf/simpletx',
+  'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson',
+  'https://api.stacspec.org/v1.0.0-beta.4/item-search/#sort',
+  'https://api.stacspec.org/v1.0.0-beta.4/item-search/#fields',
+  'https://api.stacspec.org/v1.0.0-beta.4/core'],
+ 'links': [{'rel': 'self',
+   'type': 'application/json',
+   'href': 'http://stac.eo4ph.geoanalytics.ca/'},
+  {'rel': 'root',
+   'type': 'application/json',
+   'href': 'http://stac.eo4ph.geoanalytics.ca/'},
+  {'rel': 'data',
+   'type': 'application/json',
+   'href': 'http://stac.eo4ph.geoanalytics.ca/collections'},
+  {'rel': 'conformance',
+   'type': 'application/json',
+   'title': 'STAC/WFS3 conformance classes implemented by this server',
+   'href': 'http://stac.eo4ph.geoanalytics.ca/conformance'},
+  {'rel': 'search',
+   'type': 'application/geo+json',
+   'title': 'STAC search',
+   'href': 'http://stac.eo4ph.geoanalytics.ca/search',
+   'method': 'GET'},
+  {'rel': 'search',
+   'type': 'application/json',
+   'title': 'STAC search',
+   'href': 'http://stac.eo4ph.geoanalytics.ca/search',
+   'method': 'POST'},
+  {'rel': 'service-desc',
+   'type': 'application/vnd.oai.openapi+json;version=3.0',
+   'title': 'OpenAPI service description',
+   'href': 'http://stac.eo4ph.geoanalytics.ca/api'},
+  {'rel': 'service-doc',
+   'type': 'text/html',
+   'title': 'OpenAPI service documentation',
+   'href': 'http://stac.eo4ph.geoanalytics.ca/api.html'}],
+ 'stac_extensions': ['https://raw.githubusercontent.com/radiantearth/stac-api-spec/v1.0.0-beta.4/fragments/context/json-schema/schema.json']}
 </pre></div></div>
 </div>
 <p>If the above cell returns a dictionary with the STAC server’s header requests, then congratulations! You are authenticated! Otherwise, make sure you are assigning the correct authentication token to the <em>API_TOKEN</em> variable.</p>
 </section>
-<section id="4.-Logging-in-to-the-Docker-Container-Registry">
-<h2>4. Logging in to the Docker Container Registry<a class="headerlink" href="#4.-Logging-in-to-the-Docker-Container-Registry" title="Permalink to this headline">#</a></h2>
+<section id="4.-Logging-in-to-the-Container-Registry">
+<h2>4. Logging in to the Container Registry<a class="headerlink" href="#4.-Logging-in-to-the-Container-Registry" title="Permalink to this headline">#</a></h2>
 <p>Docker is an open platform tool designed for developing, deploying, and running applications using containers. Containers are used to combine the libraries, dependencies, and other parts of an application and deliver it as one package. Docker allows for efficient management of your infrastructure. GEOAnalytics Gitlab repositories each have a container registry associated with it.</p>
 <p><strong>Docker must be installed on your computer to access the container registry.</strong></p>
 <p>Visit <a class="reference external" href="https://docs.docker.com/">https://docs.docker.com/</a> and install the application based on your Operating System.</p>
 <section id="4.2-Default-Login-Method">
 <h3>4.2 Default Login Method<a class="headerlink" href="#4.2-Default-Login-Method" title="Permalink to this headline">#</a></h3>
-<p>Currently, accessing your Docker registry is not possible through GEOAnalytics’ Jupyter environment. To access and manage your docker images, login to the registry through your desktop’s Command Prompt (Terminal) with the following steps:</p>
+<p>Currently, accessing your registry is not possible through GEOAnalytics’ Jupyter environment. To access and manage your docker images, login to the registry through your desktop’s Command Prompt (Terminal) with the following steps:</p>
 <ol class="arabic simple">
-<li><p>Type this command into terminal: <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">registry.geoanalytics.ca</span></code></p></li>
+<li><p>Type this command into terminal: <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">registry.eo4ph.geoanalytics.ca</span></code></p></li>
 <li><p>This will prompt you to enter your <em>Username</em>, followed by your <em>password</em>. (Password is not visible for security purposes)</p></li>
 </ol>
 <p>If you get a “Success!” message, then you have gained access!</p>
-<p>However, if you receive the error: “Error response from daemon: Get <a class="reference external" href="https://registry.geoanalytics.ca/v2/">https://registry.geoanalytics.ca/v2/</a>: unauthorized: HTTP Basic: Access denied,” then we have a few more steps to get you connected!</p>
-<p><img alt="d6c72329c2c24c79bc9d1bc9a4604bba" class="no-scaled-link" src="../_images/03_docker-error.png" style="width: 900px;"/></p>
-</section>
-<section id="4.3-Alternate-Login-Method">
-<h3>4.3 Alternate Login Method<a class="headerlink" href="#4.3-Alternate-Login-Method" title="Permalink to this headline">#</a></h3>
-<p>Some accounts run into errors while attempting to connect to their docker registry, you have the same error as shown above, these are the steps to get access:</p>
-<p><strong>First we must create a personal access token (PAT) on gitlab. Navigate to https://git.geoanalytics.ca</strong></p>
-<ol class="arabic simple">
-<li><p>Select “Settings” from the drop down menu in the top right corner. <img alt="b7230b314e6b410b967485c5f443c019" src="../_images/03_git-settings.gif"/></p></li>
-<li><p>In the left sidebar, click on “Access Tokens”. <img alt="dbdf5845cb104b2faf4c78107151dfae" src="../_images/03_git-access-tokens.gif"/></p></li>
-<li><p>Now, assign a <strong>name</strong> and an <strong>expiry date</strong> (can be set to any date in the future when you want the token to expire), and check on <strong>“api”</strong>. <img alt="962ece9c09454b3497ac9aaca842d55b" src="../_images/03_creating_token.gif"/></p></li>
-<li><p>Once created, this personal access token is <strong>only available once, when it is created</strong>. <strong>NOTE: Store this PAT in a secure location because you will not be able to access the same code again!</strong> <img alt="c4639d2de97c4440ad8a9e37858c19d2" src="../_images/03_copy_token.gif"/></p></li>
-</ol>
-<p><strong>Next, with this personal access token created, run the following command in terminal, inputting in your username and the PAT in place.</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">-u</span> <span class="pre">&lt;username&gt;</span> <span class="pre">-p</span> <span class="pre">&lt;personal</span> <span class="pre">access</span> <span class="pre">token&gt;</span> <span class="pre">registry.geoanalytics.ca</span></code></p>
-<p>Now you should get a “Login Succeeded” message!</p>
+<p>However, if you receive the error: “Error response from daemon: Get <a class="reference external" href="https://registry.eo4ph.geoanalytics.ca/">https://registry.eo4ph.geoanalytics.ca/</a>: unauthorized: HTTP Basic: Access denied,” then we have a few more steps to get you connected!</p>
+<p><img alt="9f86c6a713a2498d82cf2b228f1bc3bd" class="no-scaled-link" src="../_images/03_docker-error.png" style="width: 900px;"/></p>
 </section>
 </section>
 </section>
@@ -674,9 +692,8 @@ STAC server did not return json. This is likely an issue with your access token.
 <li><a class="reference internal" href="#1.-Levels-of-Authentication">1. Levels of Authentication</a></li>
 <li><a class="reference internal" href="#2.-Systems-Accessible-with-Username-and-Password">2. Systems Accessible with Username and Password</a></li>
 <li><a class="reference internal" href="#3.-Systems-Accessible-with-API-Token">3. Systems Accessible with API Token</a></li>
-<li><a class="reference internal" href="#4.-Logging-in-to-the-Docker-Container-Registry">4. Logging in to the Docker Container Registry</a><ul>
+<li><a class="reference internal" href="#4.-Logging-in-to-the-Container-Registry">4. Logging in to the Container Registry</a><ul>
 <li><a class="reference internal" href="#4.2-Default-Login-Method">4.2 Default Login Method</a></li>
-<li><a class="reference internal" href="#4.3-Alternate-Login-Method">4.3 Alternate Login Method</a></li>
 </ul>
 </li>
 </ul>
