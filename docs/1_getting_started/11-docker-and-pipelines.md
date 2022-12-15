@@ -107,6 +107,11 @@ def create_job():
         lambda: pipeline_job(name='job1', source=user_function, env_user=env),
         dependencies=None
     )
+
+create_job()
+submitter = ArgoSubmitter(namespace='pipeline')
+deployment = couler.run(submitter=submitter)
+deployment
 ```
 
 <!-- ### Hera Workflows -->
