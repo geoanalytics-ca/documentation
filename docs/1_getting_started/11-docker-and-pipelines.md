@@ -6,7 +6,6 @@
   - [Pushing to the Container Registry](#pushing-to-the-container-registry)
   - [Using Your Docker Image in a Pipeline](#using-your-docker-image-in-a-pipeline)
     - [Couler](#couler)
-    - [Hera Workflows](#hera-workflows)
 
 ## Docker in the Remote Desktop
 
@@ -79,7 +78,35 @@ docker push registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag
 ### Couler 
 
 ```python
+def pipeline_job(name, source, env_user):
+    toleration = Toleration('ga.nodepool/type', 'NoSchedule', 'Exists')
+    couler.add_toleration(toleration)
+    toleration2 = Toleration('kubernetes.azure.com/scalesetpriority', 'NoSchedule', 'Exists')
+    couler.add_toleration(toleration2)
+    image_secret = ImagePullSecret('harborregcred')
+    couler.add_image_pull_secret(image_secret)
+    return couler.run_script(
+        image="registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag",
+        step_name=name,
+        source=source,
+        env=env_user,
+        node_selector={'pipeline':'small'},
+        secret=image_secret
+    )
 
+# Some environment variables for the Job Task
+env = {
+  'some-env': 'env-value'
+}
+
+def user_function():
+  # Do Something
+
+def create_job():
+    A = couler.set_dependencies(
+        lambda: pipeline_job(name='job1', source=user_function, env_user=env),
+        dependencies=None
+    )
 ```
 
-### Hera Workflows
+<!-- ### Hera Workflows -->
