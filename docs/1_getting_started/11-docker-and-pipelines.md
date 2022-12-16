@@ -26,6 +26,8 @@ Alternatively, you can run each docker command as follows:
 docker command -H tcp://localhost:2375 ...
 ```
 
+Where `command` is a Docker command such as `images`, `ps`, etc.
+
 ## Dockerfile
 
 To build a Container Image, once the application has
@@ -37,7 +39,7 @@ your application will run in.
 It it highly recommend to keep this as slim and consice as necessary to run your application. 
 
 ```dockerfile
-FROM ubuntu:22.04-slim
+FROM ubuntu:22.04
 
 COPY src /app
 
