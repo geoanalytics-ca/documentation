@@ -2,6 +2,7 @@
 
 - [Docker \& Pipelines](#docker--pipelines)
   - [Docker in the Remote Desktop](#docker-in-the-remote-desktop)
+  - [Example Project](#example-project)
   - [Dockerfile](#dockerfile)
   - [Pushing to the Container Registry](#pushing-to-the-container-registry)
   - [Using Your Docker Image in a Pipeline](#using-your-docker-image-in-a-pipeline)
@@ -28,6 +29,26 @@ docker command -H tcp://localhost:2375 ...
 
 Where `command` is a Docker command such as `images`, `ps`, etc.
 
+## Example Project
+
+```bash
+dockerfile
+./src
+    - requirements.txt
+    - main.py
+    - lib/
+        - helpers.py
+    - README.md
+```
+
+```text
+# /src/requirements.txt
+xarray==2022.10.0
+numpy==1.23.3
+pandas==1.5.1
+geopandas==0.12.1
+```
+
 ## Dockerfile
 
 To build a Container Image, once the application has
@@ -37,14 +58,6 @@ to allow the Container Engine to containerize your application.
 This `dockerfile` describes/builds the environment which 
 your application will run in. 
 It it highly recommend to keep this as slim and consice as necessary to run your application. 
-
-```text
-# /src/requirements.txt
-xarray==2022.10.0
-numpy==1.23.3
-pandas==1.5.1
-geopandas==0.12.1
-```
 
 ```dockerfile
 FROM python:3.10.9-slim
