@@ -38,10 +38,23 @@ This `dockerfile` describes/builds the environment which
 your application will run in. 
 It it highly recommend to keep this as slim and consice as necessary to run your application. 
 
+```text
+# /src/requirements.txt
+xarray==2022.10.0
+numpy==1.23.3
+pandas==1.5.1
+geopandas==0.12.1
+```
+
 ```dockerfile
-FROM ubuntu:22.04
+FROM python:3.10.9-slim
+
+RUN apt update && apt install -y \
+      software-properties-common
 
 COPY src /app
+
+RUN pip install -r /app/requirements.txt
 
 ENTRYPOINT ['/bin/bash', '-c', 'entryscript.sh']
 
