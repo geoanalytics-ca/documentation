@@ -4,30 +4,29 @@
   - [Docker in the Remote Desktop](#docker-in-the-remote-desktop)
   - [Example Project](#example-project)
   - [Dockerfile](#dockerfile)
-  - [Pushing to the Container Registry](#pushing-to-the-container-registry)
+  - [Building and Pushing to the Container Registry](#building-and-pushing-to-the-container-registry)
   - [Using Your Docker Image in a Pipeline](#using-your-docker-image-in-a-pipeline)
     - [Couler](#couler)
+    - [Hera-Workflows](#hera-workflows)
 
 ## Docker in the Remote Desktop
 
 Docker is running in a sidecar to the remote desktop. 
-What this means is that we will need to connect to the 
-Docker daemon on the local network.
-We can accomplish this by opening up a terminal in the
-Remote Desktop and setting the Environment variable 
-as follows: 
+What this means is that the daemon is not running inside 
+the remote desktop directly, but adjacent to it.
+This does not affect the way you interact with Docker, 
+but is useful to know. 
+
+To run Docker commands against the daemon, you can 
+accomplish this using `sudo`, as follows:
 
 ```bash
-export DOCKER_HOST=tcp://localhost:2375
+sudo docker command ...
 ```
 
-Alternatively, you can run each docker command as follows:
+Where `command` is a Docker command such as `images`, `ps`, `build`, `push`, etc.
 
-```bash
-docker command -H tcp://localhost:2375 ...
-```
-
-Where `command` is a Docker command such as `images`, `ps`, etc.
+[Docker Commands](https://docs.docker.com/engine/reference/commandline/docker/)
 
 ## Example Project
 
@@ -73,7 +72,7 @@ ENTRYPOINT ['/bin/bash', '-c', 'entryscript.sh']
 
 ```
 
-## Pushing to the Container Registry
+## Building and Pushing to the Container Registry
 
 First, to ensure we will successfully push our built Container Image, we must login to our container registry with your provided username and password:
 
@@ -85,40 +84,43 @@ Using the above information, replace the keywords in
 the following Docker commands
 
 ```bash
-docker login registry.eo4ph.geoanalytics.ca
+sudo docker login registry.eo4ph.geoanalytics.ca
 ```
 
 Next, we must build and tag our Container Image 
 so that it will push to the correct registry:
 
 ```bash
-docker build -t registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag .
+sudo docker build -t registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag .
 ```
 
 Finally, we can push the successfully built Container Image:
 
 ```bash
-docker push registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag
+sudo docker push registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag
 ```
 
 ## Using Your Docker Image in a Pipeline
 
 ### Couler 
 
+Couler is a generic Pipeline framework that aims to interact with
+all Pipeline engines - currently only Argo is supported.
+
 ```python
 def pipeline_job(name, source, env_user):
-    toleration = Toleration('ga.nodepool/type', 'NoSchedule', 'Exists')
+    toleration = Toleration(os.getenv('WORKFLOW_NODE_TOLERATION_KEY'), 'NoSchedule', 'Exists')
     couler.add_toleration(toleration)
     toleration2 = Toleration('kubernetes.azure.com/scalesetpriority', 'NoSchedule', 'Exists')
     couler.add_toleration(toleration2)
-    image_secret = ImagePullSecret('harborregcred')
+    image_secret = ImagePullSecret(os.getenv('REGISTRY_PULL_SECRET'))
     couler.add_image_pull_secret(image_secret)
     return couler.run_script(
         image="registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag",
         step_name=name,
         source=source,
         env=env_user,
-        node_selector={'pipeline':'small'},
+        node_selector={os.getenv('WORKFLOW_NODE_SELECTOR_KEY'):os.getenv('WORKFLOW_NODE_SELECTOR_VALUE')},
         secret=image_secret
     )
 
@@ -137,9 +139,62 @@ def create_job():
     )
 
 create_job()
-submitter = ArgoSubmitter(namespace='pipeline')
+submitter = ArgoSubmitter(namespace=os.getenv('WORKFLOW_NS'))
 deployment = couler.run(submitter=submitter)
 deployment
 ```
 
-<!-- ### Hera Workflows -->
+### Hera-Workflows
+
+Hera-Workflows is the successive pipeline framework built by argoproj.
+When you need more control over your pipeline, consider using 
+Hera-Workflows SDK as it provides a more mature and stable framework. 
+
+Caveats: 
+
+- Argo requires unique names for Workflows and will complain if duplicates are submitted
+
+
+```python
+# Configure Pipeline Environment
+ws = hera.workflow_service.WorkflowService(
+    host=os.getenv('PIPELINE_HOST'),
+    namespace=os.getenv('PIPELINE_NS'),
+    token=os.getenv('PIPELINE_TOKEN')
+)
+w = hera.workflow.Workflow(
+    name='unique-name-of-workflow',
+    image_pull_secrets=[os.getenv('REGISTRY_PULL_SECRET')],
+    node_selectors={os.getenv('WORKFLOW_NODE_SELECTOR_KEY'):os.getenv('WORKFLOW_NODE_SELECTOR_VALUE')},
+    tolerations=[
+        hera.toleration.Toleration(key=os.getenv('WORKFLOW_NODE_TOLERATION_KEY'), operator='Equal', effect='NoSchedule', value=os.getenv('WORKFLOW_NODE_TOLERATION_VALUE_SMALL')),
+        hera.toleration.Toleration(key='kubernetes.azure.com/scalesetpriority', operator='Exists', effect='NoSchedule')
+    ],
+    service_account_name=os.getenv('WORKFLOW_SA'),
+    parallelism=10, # Number of tasks to run in parallel 
+)
+```
+
+Define your tasks and add them to the current workflow:
+
+```python
+# Task using a function as input
+t1 = hera.task.Task(
+
+)
+
+# Task using a prebuilt Docker Image 
+t1 = hera.task.Task(
+  name='container-task',
+  image=''
+  command=[]
+)
+
+w.add_task(t1)
+```
+
+Build and submit your workflow:
+
+```python
+ws.create_workflow(w.build())
+```
