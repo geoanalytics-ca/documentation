@@ -8,6 +8,7 @@
   - [Using Your Docker Image in a Pipeline](#using-your-docker-image-in-a-pipeline)
     - [Couler](#couler)
     - [Hera-Workflows](#hera-workflows)
+  - [Useful Links](#useful-links)
 
 ## Docker in the Remote Desktop
 
@@ -64,7 +65,7 @@ FROM python:3.10.9-slim
 RUN apt update && apt install -y \
       software-properties-common
 
-COPY src /app
+COPY src/ /app
 
 RUN pip install -r /app/requirements.txt
 
@@ -101,6 +102,10 @@ sudo docker push registry.eo4ph.geoanalytics.ca/project-name/image-name:image-ta
 ```
 
 ## Using Your Docker Image in a Pipeline
+
+The following two Python frameworks, Couler and Hera-Workflows, submit
+Workflows to our pipeline executor and can be monitored here:
+- [GEOAnalytics Pipelines](https://pipeline.eo4ph.geoanalytics.ca)
 
 ### Couler 
 
@@ -146,51 +151,88 @@ deployment
 
 ### Hera-Workflows
 
-Hera-Workflows is the successive pipeline framework built by argoproj.
+Hera-Workflows is a pipeline framework built by argoproj - the creators of Argo Workflows.
 When you need more control over your pipeline, consider using 
 Hera-Workflows SDK as it provides a more mature and stable framework. 
+
+Hera-Workflows is capable of setting the number of 
+parallel tasks permitted to run at any one time, this enables more 
+fine-tuned allocation of resources. This especially comes in handy,
+for example, when downloading data from Earthdata and server rate limits
+causes a Failure for the task to complete. 
 
 Caveats: 
 
 - Argo requires unique names for Workflows and will complain if duplicates are submitted
+- Not restricted to images from the private registry - you can use images publically available, too
 
 
 ```python
-# Configure Pipeline Environment
+# Configure GEOAnalytics Pipeline Environment
 ws = hera.workflow_service.WorkflowService(
     host=os.getenv('PIPELINE_HOST'),
     namespace=os.getenv('PIPELINE_NS'),
     token=os.getenv('PIPELINE_TOKEN')
 )
+
+node_selectors = {
+  os.getenv('WORKFLOW_NODE_SELECTOR_KEY'):os.getenv('WORKFLOW_NODE_SELECTOR_VALUE_SMALL')
+}
+
+tolerations = [
+        hera.toleration.Toleration(key=os.getenv('WORKFLOW_NODE_TOLERATION_KEY'), operator='Equal', effect='NoSchedule', value=os.getenv('WORKFLOW_NODE_TOLERATION_VALUE')),
+        hera.toleration.Toleration(key='kubernetes.azure.com/scalesetpriority', operator='Exists', effect='NoSchedule')
+    ]
+
 w = hera.workflow.Workflow(
     name='unique-name-of-workflow',
     image_pull_secrets=[os.getenv('REGISTRY_PULL_SECRET')],
-    node_selectors={os.getenv('WORKFLOW_NODE_SELECTOR_KEY'):os.getenv('WORKFLOW_NODE_SELECTOR_VALUE')},
-    tolerations=[
-        hera.toleration.Toleration(key=os.getenv('WORKFLOW_NODE_TOLERATION_KEY'), operator='Equal', effect='NoSchedule', value=os.getenv('WORKFLOW_NODE_TOLERATION_VALUE_SMALL')),
-        hera.toleration.Toleration(key='kubernetes.azure.com/scalesetpriority', operator='Exists', effect='NoSchedule')
-    ],
+    node_selectors=node_selectors,
+    tolerations=tolerations,
     service_account_name=os.getenv('WORKFLOW_SA'),
     parallelism=10, # Number of tasks to run in parallel 
 )
 ```
 
+
 Define your tasks and add them to the current workflow:
 
 ```python
+
+def some_func():
+  import os
+  #do something
+  print(os.getenv('TASKSAY'))
+
+# Environment Variables for running source/container
+env_list = [
+  hera.env.Env(name='SOME_ENV', value='SOME_VAL'),
+  hera.env.Env(name='TASKSAY', value='Workflows Are Powerful!')
+]
+
 # Task using a function as input
 t1 = hera.task.Task(
-
+  name='source-task',
+  image='registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag',
+  source=some_func,
+  node_selectors=node_selectors,
+  tolerations=tolerations,
+  env=env_list
 )
 
-# Task using a prebuilt Docker Image 
-t1 = hera.task.Task(
+# Task using a prebuilt Docker Image running some Python application
+t2 = hera.task.Task(
   name='container-task',
-  image=''
-  command=[]
+  image='registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag'
+  command=['/bin/bash', '-c', 'python run.py'],
+  node_selectors=node_selectors,
+  tolerations=tolerations,
+  env=env_list
 )
 
-w.add_task(t1)
+w.add_task(t1) # Add source-task to workflow
+w.add_task(t2) # Add container-task to workflow
+t1 >> t2 # DAG - make t1 run before t2
 ```
 
 Build and submit your workflow:
@@ -198,3 +240,9 @@ Build and submit your workflow:
 ```python
 ws.create_workflow(w.build())
 ```
+
+## Useful Links
+
+- [Dockerfile Reference](https://docs.docker.com/engine/reference/builder/)
+- [Hera-Workflows API & Examples](https://hera-workflows.readthedocs.io/en/latest/?badge=latest)
+- [Couler Documentation](https://couler-proj.github.io/couler/)
