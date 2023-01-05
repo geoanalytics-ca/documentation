@@ -20,3 +20,4 @@ This page we'll go through the first steps of orienting you to the key parts of 
     08-container-registry
     09-pipelines
     10-dask
+    11-docker-and-pipelines
