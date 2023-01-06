@@ -175,6 +175,7 @@
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>Container Registry</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="09-pipelines.html"><strong>Pipelines</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="11-docker-and-pipelines.html">Docker &amp; Pipelines</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -233,15 +234,15 @@
 <li><p>To access the container registry follow this link: <a class="reference external" href="https://registry.eo4ph.geoanalytics.ca/">https://registry.eo4ph.geoanalytics.ca/</a> The registry can be accessed through the GEOAnalytics Canada home page by clicking on “Container Registry”.</p></li>
 <li><p>The link will take you to the container registry’s homepage (see the image below). You can log in using your GEOAnalytics Canada credentials.</p></li>
 </ol>
-<p><img alt="8cebd2f7d40a4ecd877a279b8d49a8f9" src="../_images/08-container-registry-homepage.png"/></p>
+<p><img alt="6381da89b3d742d3897f689b02ef9310" src="../_images/08-container-registry-homepage.png"/></p>
 <ol class="arabic simple">
 <li><p>Once you have accessed the container registry, you will find yourself in the Projects Tab. Click on the “NEW PROJECT” button (see the image below).</p></li>
 </ol>
-<p><img alt="f6ffab414f40496dbb66ec8652a7e27c" src="../_images/08-container-registry-homepage1.png"/></p>
+<p><img alt="f1564709181b4ccf85434a1b4303e024" src="../_images/08-container-registry-homepage1.png"/></p>
 <ol class="arabic simple">
 <li><p>Input your desired project name, and leave the Access Level as private (keep the “Public” box unchecked). Click “OK” (see the image below).</p></li>
 </ol>
-<p><img alt="2f6eace3135440dcbb1c5f133e8a150f" src="../_images/08-container-registry-newproject.png"/></p>
+<p><img alt="f49501a5b5b143f9aae5affd099a6d46" src="../_images/08-container-registry-newproject.png"/></p>
 </section>
 <section id="2.-How-to-link-your-workspace-to-the-Container-Registry">
 <h2>2. How to link your workspace to the Container Registry<a class="headerlink" href="#2.-How-to-link-your-workspace-to-the-Container-Registry" title="Permalink to this headline">#</a></h2>
@@ -260,23 +261,23 @@ Now that this is done we can push or pull Docker images from our Container Regis
 <p>In this section we will be exploring how to add images to the container registry.</p>
 <p>We’ll start by running a few commands to show how Docker works.</p>
 <p>The command below will <strong>pull</strong> the hello-world Docker image from the Dockerhub, if not present already, and <strong>run</strong> it.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run hello-world
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>hello-world
 </pre></div>
 </div>
 <p>Now let’s try pushing the hello-world image into our container registry. To do that we must rename the image from “hello-world” to the location of our container registry, using the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">tag</span> <span class="pre">&lt;source-img-name&gt;</span> <span class="pre">&lt;target-img-name&gt;</span></code> command. The target image name is the registry location because we want to push the image to a private registry and not the central Docker registry. In this example I’m going to push the image to the test registry I created called ‘test-123’.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker tag hello-world registry.eo4ph.geoanalytics.ca/test-123/hello-world
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>tag<span class="w"> </span>hello-world<span class="w"> </span>registry.eo4ph.geoanalytics.ca/test-123/hello-world
 </pre></div>
 </div>
 <p>Now that we have pushed the image to our container registry location, let’s run the image.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run registry.eo4ph.geoanalytics.ca/test-123/hello-world
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>registry.eo4ph.geoanalytics.ca/test-123/hello-world
 </pre></div>
 </div>
 <p>The final step is to <strong>push</strong> the local Docker image to our test-123 repository. This is done by executing the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">push</span> <span class="pre">&lt;img-name&gt;</span></code> below:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker push registry.eo4ph.geoanalytics.ca/test-123/hello-world
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>push<span class="w"> </span>registry.eo4ph.geoanalytics.ca/test-123/hello-world
 </pre></div>
 </div>
 <p>Now head over to the Container Registry and click on <code class="docutils literal notranslate"><span class="pre">Projects</span> <span class="pre">&gt;</span> <span class="pre">test-123</span></code>. You will see the Docker image you just pushed added to the repository’s container registry!</p>
-<p><img alt="2a2e234ce4cd4f6384ea0e6fa893e08d" src="../_images/08-container-registry-pushed-image.png"/></p>
+<p><img alt="d4057d9dc3db49a2b081260b5d459314" src="../_images/08-container-registry-pushed-image.png"/></p>
 <p>These were a just a few Docker commands we explored, to learn all the Docker commands available, take a look at the Docker documentation and a sample Docker workflow:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.docker.com/engine/reference/run/">https://docs.docker.com/engine/reference/run/</a></p></li>

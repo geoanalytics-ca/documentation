@@ -175,6 +175,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/08-container-registry.html"><strong>Container Registry</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/09-pipelines.html"><strong>Pipelines</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_getting_started/10-dask.html"><strong>Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_getting_started/11-docker-and-pipelines.html">Docker &amp; Pipelines</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Real World Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
@@ -605,7 +606,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span> pip install python-cmr
+<span></span><span class="o">!</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>python-cmr
 </pre></div>
 </div>
 </div>
@@ -776,7 +777,7 @@ Requirement already satisfied: chardet&lt;4,&gt;=3.0.2 in /srv/conda/envs/notebo
 
 <span class="c1">#@dask.delayed</span>
 <span class="k">def</span> <span class="nf">get_stream</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span> <span class="n">previous_tries</span><span class="p">):</span>
-    <span class="sd">""" Traverse redirects to get the final url """</span>
+<span class="w">    </span><span class="sd">""" Traverse redirects to get the final url """</span>
 
     <span class="c1"># stream = session.get(url, auth=auth, stream=True)</span>
     <span class="n">stream</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>

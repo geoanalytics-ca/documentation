@@ -175,6 +175,7 @@
 <li class="toctree-l2"><a class="reference internal" href="08-container-registry.html"><strong>Container Registry</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="09-pipelines.html"><strong>Pipelines</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="11-docker-and-pipelines.html">Docker &amp; Pipelines</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -478,9 +479,9 @@ div.rendered_html tbody tr:hover {
 <h2>1. Levels of Authentication<a class="headerlink" href="#1.-Levels-of-Authentication" title="Permalink to this headline">#</a></h2>
 <p>All software systems implemented in the GEOAnalytics Canada Platform require users to be authenticated before access is given. The GEOAnalytics platform uses LDAP (Lightweight Directory Access Protocol) to store user information and allow users to authenticate and log into the platform. Hatfield has also implemented a single sign-on (SSO) system based on the industry-standard OAuth 2 protocol, where you, the user, only needs to login to the platform once to gain access of all platform functions.
 Using this SSO system, an API token is given when you first login and is validated by platform services when accessed by you.</p>
-<p>All users need to login through the single-sign-on system with their <strong>username</strong> and <strong>password</strong> to access platform systems and data. <img alt="8055eb63161a433aa839ba8e60543509" src="../_images/03_login.png"/></p>
+<p>All users need to login through the single-sign-on system with their <strong>username</strong> and <strong>password</strong> to access platform systems and data. <img alt="864ec6e938b8405a80cdcbc58c194de8" src="../_images/03_login.png"/></p>
 <p>Once you have logged in, you will be led to the GEOAnalytics Platform’s main dashboard.</p>
-<p><img alt="7eb327c443bc41ebb5fd1c84f6001289" src="../_images/03_platform.png"/></p>
+<p><img alt="971cc802abbf4b60b8bf9277fa47a051" src="../_images/03_platform.png"/></p>
 <p>From the image above, take note of the <strong>“API Access Token”</strong> in the top right corner and the bottom of the dashboard. This API token is another authentication method to access parts of the GEOAnalytics API. The token is primarily used by pasting the token into certain scripts for access to the platform’s tools.</p>
 </section>
 <section id="2.-Systems-Accessible-with-Username-and-Password">
@@ -626,7 +627,7 @@ Using this SSO system, an API token is given when you first login and is validat
 </ol>
 <p>If you get a “Success!” message, then you have gained access!</p>
 <p>However, if you receive the error: “Error response from daemon: Get <a class="reference external" href="https://registry.eo4ph.geoanalytics.ca/">https://registry.eo4ph.geoanalytics.ca/</a>: unauthorized: HTTP Basic: Access denied,” then we have a few more steps to get you connected!</p>
-<p><img alt="9f86c6a713a2498d82cf2b228f1bc3bd" class="no-scaled-link" src="../_images/03_docker-error.png" style="width: 900px;"/></p>
+<p><img alt="4e774cfb61244b278e2df9d6d2b1d3fe" class="no-scaled-link" src="../_images/03_docker-error.png" style="width: 900px;"/></p>
 </section>
 </section>
 </section>

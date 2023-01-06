@@ -175,6 +175,7 @@
 <li class="toctree-l2"><a class="reference internal" href="08-container-registry.html"><strong>Container Registry</strong></a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>Pipelines</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="11-docker-and-pipelines.html">Docker &amp; Pipelines</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -492,7 +493,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># install the Couler SDK from source</span>
-<span class="o">!</span>python3 -m pip install git+https://github.com/couler-proj/couler --ignore-installed
+<span class="o">!</span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/couler-proj/couler<span class="w"> </span>--ignore-installed
 </pre></div>
 </div>
 </div>
@@ -505,7 +506,10 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">couler.argo</span> <span class="k">as</span> <span class="nn">couler</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">couler.argo</span> <span class="k">as</span> <span class="nn">couler</span>
+
 <span class="kn">from</span> <span class="nn">couler.argo_submitter</span> <span class="kn">import</span> <span class="n">ArgoSubmitter</span>
 <span class="kn">from</span> <span class="nn">couler.core.templates.toleration</span> <span class="kn">import</span> <span class="n">Toleration</span>
 </pre></div>
@@ -518,7 +522,7 @@ div.rendered_html tbody tr:hover {
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="k">def</span> <span class="nf">job</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
     <span class="c1"># two tolerations are needed to ensure the job is scheduled on the correct GEOAnalytics Canada cluster nodes.</span>
-    <span class="n">toleration</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="s1">'ga.nodepool/type'</span><span class="p">,</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
+    <span class="n">toleration</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NODE_SELECTOR_KEY'</span><span class="p">),</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
     <span class="n">couler</span><span class="o">.</span><span class="n">add_toleration</span><span class="p">(</span><span class="n">toleration</span><span class="p">)</span> <span class="c1"># pipeline/nodepool=pipe:NoSchedule</span>
     <span class="n">toleration2</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="s1">'kubernetes.azure.com/scalesetpriority'</span><span class="p">,</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
     <span class="n">couler</span><span class="o">.</span><span class="n">add_toleration</span><span class="p">(</span><span class="n">toleration2</span><span class="p">)</span>
@@ -530,8 +534,7 @@ div.rendered_html tbody tr:hover {
         <span class="c1"># pass the name as an argument to the whalesay docker image</span>
         <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">name</span><span class="p">],</span>
         <span class="n">step_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-        <span class="c1"># node_selector needs to be {'pipeline':'small'}</span>
-        <span class="n">node_selector</span><span class="o">=</span><span class="p">{</span><span class="s1">'pipeline'</span><span class="p">:</span><span class="s1">'small'</span><span class="p">}</span>
+        <span class="n">node_selector</span><span class="o">=</span><span class="p">{</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NODE_SELECTOR_KEY'</span><span class="p">):</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NODE_SELECTOR_VALUE'</span><span class="p">)}</span>
     <span class="p">)</span>
 </pre></div>
 </div>
@@ -909,7 +912,7 @@ and notification that processing of the file failed.</p>
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">submitter</span> <span class="o">=</span> <span class="n">ArgoSubmitter</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="s1">'pipeline'</span><span class="p">)</span>
+<span></span><span class="n">submitter</span> <span class="o">=</span> <span class="n">ArgoSubmitter</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NS'</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
