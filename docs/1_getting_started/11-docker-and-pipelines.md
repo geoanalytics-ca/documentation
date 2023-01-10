@@ -6,8 +6,8 @@
   - [Dockerfile](#dockerfile)
   - [Building and Pushing to the Container Registry](#building-and-pushing-to-the-container-registry)
   - [Using Your Docker Image in a Pipeline](#using-your-docker-image-in-a-pipeline)
-    - [Couler](#couler)
     - [Hera-Workflows](#hera-workflows)
+    - [Couler](#couler)
   - [Useful Links](#useful-links)
 
 ## Docker in the Remote Desktop
@@ -31,15 +31,21 @@ Where `command` is a Docker command such as `images`, `ps`, `build`, `push`, etc
 
 ## Example Project
 
+The following code shows a simple project folder:
+
 ```bash
-dockerfile
-./src
-    - requirements.txt
-    - main.py
-    - lib/
-        - helpers.py
+projectfolder/
+  dockerfile
+  ./src
+      - requirements.txt
+      - main.py        # main python app
+      - lib/
+          - helpers.py # subdirectory example
+      - entrypoint.sh  # runs application via script
     - README.md
 ```
+
+The following is the contents of a `requirements.txt`:
 
 ```text
 # /src/requirements.txt
@@ -49,15 +55,30 @@ pandas==1.5.1
 geopandas==0.12.1
 ```
 
+Where the `entrypoint.sh` script looks something like this: 
+
+```bash
+#!/bin/bash
+
+set -eu
+
+python main.py
+```
+
 ## Dockerfile
 
 To build a Container Image, once the application has
-been implemented, you will need to sue a `dockerfile`
+been implemented, you will need to use a `dockerfile` manifest 
 to allow the Container Engine to containerize your application. 
 
-This `dockerfile` describes/builds the environment which 
+This `dockerfile` describes the environment which 
 your application will run in. 
-It it highly recommend to keep this as slim and consice as necessary to run your application. 
+It it highly recommend to keep this as small (dependency disksize) as necessary to run your application. 
+
+> __NOTE__  
+> This helps speeding up pulling of the Image as well as minimizing the 
+> amount of resources required to host the application. Giving those 
+> resources back to the application to use. 
 
 ```dockerfile
 FROM python:3.10.9-slim
@@ -69,24 +90,25 @@ COPY src/ /app
 
 RUN pip install -r /app/requirements.txt
 
-ENTRYPOINT ['/bin/bash', '-c', 'entryscript.sh']
+# ENTRYPOINT ['/bin/bash', '-c', 'entryscript.sh']
+ENTRYPOINT ['python', 'main.py'] # Since this is a Python Base Image
 
 ```
 
 ## Building and Pushing to the Container Registry
 
-First, to ensure we will successfully push our built Container Image, we must login to our container registry with your provided username and password:
-
-- `project-name` : The name of your project in the Container Registry
-- `image-name` : The name that describes the Container Image
-- `image-tag` : The version of the Image being built
-
-Using the above information, replace the keywords in 
-the following Docker commands
+First, to ensure we can push our built Container Image, we must login to our container registry with your provided username and password:
 
 ```bash
 sudo docker login registry.eo4ph.geoanalytics.ca
 ```
+
+Using the below information, replace the keywords in 
+the subsequent Docker commands:
+
+- `project-name` : The name of your project in the Container Registry
+- `image-name` : The name that describes the Container Image
+- `image-tag` : The version of the Image being built
 
 Next, we must build and tag our Container Image 
 so that it will push to the correct registry:
@@ -101,53 +123,19 @@ Finally, we can push the successfully built Container Image:
 sudo docker push registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag
 ```
 
+You can also run your container: 
+
+```bash
+sudo docker run --rm -it registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag
+```
+
 ## Using Your Docker Image in a Pipeline
 
-The following two Python frameworks, Couler and Hera-Workflows, submit
+The following two Python frameworks, 
+[Hera-Workflows](https://hera-workflows.readthedocs.io/en/latest/index.html) 
+and [Couler](https://couler-proj.github.io/couler/), can submit
 Workflows to our pipeline executor and can be monitored here:
 - [GEOAnalytics Pipelines](https://pipeline.eo4ph.geoanalytics.ca)
-
-### Couler 
-
-Couler is a generic Pipeline framework that aims to interact with
-all Pipeline engines - currently only Argo is supported.
-
-```python
-def pipeline_job(name, source, env_user):
-    toleration = Toleration(os.getenv('WORKFLOW_NODE_TOLERATION_KEY'), 'NoSchedule', 'Exists')
-    couler.add_toleration(toleration)
-    toleration2 = Toleration('kubernetes.azure.com/scalesetpriority', 'NoSchedule', 'Exists')
-    couler.add_toleration(toleration2)
-    image_secret = ImagePullSecret(os.getenv('REGISTRY_PULL_SECRET'))
-    couler.add_image_pull_secret(image_secret)
-    return couler.run_script(
-        image="registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag",
-        step_name=name,
-        source=source,
-        env=env_user,
-        node_selector={os.getenv('WORKFLOW_NODE_SELECTOR_KEY'):os.getenv('WORKFLOW_NODE_SELECTOR_VALUE')},
-        secret=image_secret
-    )
-
-# Some environment variables for the Job Task
-env = {
-  'some-env': 'env-value'
-}
-
-def user_function():
-  # Do Something
-
-def create_job():
-    A = couler.set_dependencies(
-        lambda: pipeline_job(name='job1', source=user_function, env_user=env),
-        dependencies=None
-    )
-
-create_job()
-submitter = ArgoSubmitter(namespace=os.getenv('WORKFLOW_NS'))
-deployment = couler.run(submitter=submitter)
-deployment
-```
 
 ### Hera-Workflows
 
@@ -164,8 +152,12 @@ causes a Failure for the task to complete.
 Caveats: 
 
 - Argo requires unique names for Workflows and will complain if duplicates are submitted
-- Not restricted to images from the private registry - you can use images publically available, too
 
+Benefits:
+
+-  Use both images from the private registry and and those publically available, too (eg. from DockerHub)
+
+Thow following code will set up the framework for a simple pipeline:
 
 ```python
 # Configure GEOAnalytics Pipeline Environment
@@ -239,6 +231,48 @@ Build and submit your workflow:
 
 ```python
 ws.create_workflow(w.build())
+```
+
+### Couler 
+
+Couler is a generic Pipeline framework that aims to interact with
+all Pipeline engines - currently only Argo is supported.
+
+```python
+def pipeline_job(name, source, env_user):
+    toleration = Toleration(os.getenv('WORKFLOW_NODE_TOLERATION_KEY'), 'NoSchedule', 'Exists')
+    couler.add_toleration(toleration)
+    toleration2 = Toleration('kubernetes.azure.com/scalesetpriority', 'NoSchedule', 'Exists')
+    couler.add_toleration(toleration2)
+    image_secret = ImagePullSecret(os.getenv('REGISTRY_PULL_SECRET'))
+    couler.add_image_pull_secret(image_secret)
+    return couler.run_script(
+        image="registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag",
+        step_name=name,
+        source=source,
+        env=env_user,
+        node_selector={os.getenv('WORKFLOW_NODE_SELECTOR_KEY'):os.getenv('WORKFLOW_NODE_SELECTOR_VALUE')},
+        secret=image_secret
+    )
+
+# Some environment variables for the Job Task
+env = {
+  'some-env': 'env-value'
+}
+
+def user_function():
+  # Do Something
+
+def create_job():
+    A = couler.set_dependencies(
+        lambda: pipeline_job(name='job1', source=user_function, env_user=env),
+        dependencies=None
+    )
+
+create_job()
+submitter = ArgoSubmitter(namespace=os.getenv('WORKFLOW_NS'))
+deployment = couler.run(submitter=submitter)
+deployment
 ```
 
 ## Useful Links
