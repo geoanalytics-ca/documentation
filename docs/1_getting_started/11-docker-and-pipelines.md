@@ -176,7 +176,7 @@ ws = hera.workflow_service.WorkflowService(
 )
 
 node_selectors = {
-  os.getenv('WORKFLOW_NODE_SELECTOR_KEY'):os.getenv('WORKFLOW_NODE_SELECTOR_VALUE_SMALL')
+  os.getenv('WORKFLOW_NODE_SELECTOR_KEY'): os.getenv('WORKFLOW_NODE_SELECTOR_VALUE_SMALL')
 }
 
 tolerations = [
