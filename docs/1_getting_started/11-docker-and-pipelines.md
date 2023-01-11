@@ -32,7 +32,7 @@ for a secure and reproducible environment to run tests and/or
 The following Pipeline workflow accesses various environment variables to 
 set appropriate values in the configuration functions. 
 
-> [**Note**]
+> **Note**  
 > You can find a table of all relevant environment variables for 
 > the Pipeline under `/home/jovyan/config/` in your JupyterHub filebrowser tab. Right click, Open With, and then select "Render Markdown" to see 
 > a user-friendly table.
@@ -108,7 +108,7 @@ This `dockerfile` describes the environment which
 your application will run in. 
 It it highly recommend to keep this as small (dependency disksize) as necessary to run your application. 
 
-> __NOTE__  
+> **NOTE**  
 > Smaller Images help speed up pulling of the Image as well as minimizing the 
 > amount of resources required to host the application. Giving those 
 > resources back to the application to use. 
@@ -122,6 +122,7 @@ RUN apt update && apt install -y \
 COPY src/ /app
 
 RUN pip install -r /app/requirements.txt
+RUN chmod 0555 entrypoint # Read and Execute
 
 # ENTRYPOINT ['/bin/bash', '-c', 'entryscript.sh'] # Custom script entrypoint
 ENTRYPOINT ['python', 'main.py'] # Run Python application
