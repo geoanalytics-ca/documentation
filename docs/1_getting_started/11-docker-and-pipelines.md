@@ -108,7 +108,7 @@ This `dockerfile` describes the environment which
 your application will run in. 
 It it highly recommend to keep this as small (dependency disksize) as necessary to run your application. 
 
-> **NOTE**  
+> **Note**  
 > Smaller Images help speed up pulling of the Image as well as minimizing the 
 > amount of resources required to host the application. Giving those 
 > resources back to the application to use. 
