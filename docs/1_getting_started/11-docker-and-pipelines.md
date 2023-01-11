@@ -1,14 +1,41 @@
 # Docker & Pipelines
 
+Pairing Docker with Pipelines enables us to create customized solutions 
+that we have full control over. 
+Defining environments to run applications inside a `dockerfile` and 
+running them in an isolated space on the Pipelines engine allows 
+for a secure and reproducible environment to run tests and/or 
+(scheduled) reproducible workflows. 
+
 - [Docker \& Pipelines](#docker--pipelines)
+  - [Useful Links](#useful-links)
+  - [Environtment Variables](#environtment-variables)
   - [Docker in the Remote Desktop](#docker-in-the-remote-desktop)
+  - [Using Docker and Pipelines](#using-docker-and-pipelines)
   - [Example Project](#example-project)
   - [Dockerfile](#dockerfile)
   - [Building and Pushing to the Container Registry](#building-and-pushing-to-the-container-registry)
   - [Using Your Docker Image in a Pipeline](#using-your-docker-image-in-a-pipeline)
     - [Hera-Workflows](#hera-workflows)
     - [Couler](#couler)
-  - [Useful Links](#useful-links)
+
+## Useful Links
+
+- [Docker Container Engine API](https://docs.docker.com/engine/api/)
+- [Dockerfile Reference](https://docs.docker.com/engine/reference/builder/)
+- [Hera-Workflows API & Examples](https://hera-workflows.readthedocs.io/en/latest/?badge=latest)
+- [Couler Documentation](https://couler-proj.github.io/couler/)
+
+
+## Environtment Variables
+
+The following Pipeline workflow accesses various environment variables to 
+set appropriate values in the configuration functions. 
+
+> [**Note**]
+> You can find a table of all relevant environment variables for 
+> the Pipeline under `/home/jovyan/config/` in your JupyterHub filebrowser tab. Right click, Open With, and then select "Render Markdown" to see 
+> a user-friendly table.
 
 ## Docker in the Remote Desktop
 
@@ -16,7 +43,7 @@ Docker is running in a sidecar to the remote desktop.
 What this means is that the daemon is not running inside 
 the remote desktop directly, but adjacent to it.
 This does not affect the way you interact with Docker, 
-but is useful to know. 
+but is useful to know if you're looking for the daemon. 
 
 To run Docker commands against the daemon, you can 
 accomplish this using `sudo`, as follows:
@@ -29,20 +56,26 @@ Where `command` is a Docker command such as `images`, `ps`, `build`, `push`, etc
 
 [Docker Commands](https://docs.docker.com/engine/reference/commandline/docker/)
 
+## Using Docker and Pipelines
+
+The below Sections will go over how to leverage Docker for your 
+own Pipeline workflows. 
+
 ## Example Project
 
 The following code shows a simple project folder:
 
 ```bash
-projectfolder/
+project/
   dockerfile
-  ./src
+  src/
       - requirements.txt
       - main.py        # main python app
       - lib/
           - helpers.py # subdirectory example
       - entrypoint.sh  # runs application via script
-    - README.md
+      - README.md
+  README.md
 ```
 
 The following is the contents of a `requirements.txt`:
@@ -76,7 +109,7 @@ your application will run in.
 It it highly recommend to keep this as small (dependency disksize) as necessary to run your application. 
 
 > __NOTE__  
-> This helps speeding up pulling of the Image as well as minimizing the 
+> Smaller Images help speed up pulling of the Image as well as minimizing the 
 > amount of resources required to host the application. Giving those 
 > resources back to the application to use. 
 
@@ -90,8 +123,8 @@ COPY src/ /app
 
 RUN pip install -r /app/requirements.txt
 
-# ENTRYPOINT ['/bin/bash', '-c', 'entryscript.sh']
-ENTRYPOINT ['python', 'main.py'] # Since this is a Python Base Image
+# ENTRYPOINT ['/bin/bash', '-c', 'entryscript.sh'] # Custom script entrypoint
+ENTRYPOINT ['python', 'main.py'] # Run Python application
 
 ```
 
@@ -274,9 +307,3 @@ submitter = ArgoSubmitter(namespace=os.getenv('WORKFLOW_NS'))
 deployment = couler.run(submitter=submitter)
 deployment
 ```
-
-## Useful Links
-
-- [Dockerfile Reference](https://docs.docker.com/engine/reference/builder/)
-- [Hera-Workflows API & Examples](https://hera-workflows.readthedocs.io/en/latest/?badge=latest)
-- [Couler Documentation](https://couler-proj.github.io/couler/)
