@@ -8,7 +8,7 @@ This page we'll go through the first steps of orienting you to the key parts of 
     :maxdepth: 1
     
     00-how-to-use-this-documentation
-    01-python-intro
+    01-accessing-other-data
     02-geospatial-python
     04-authentication
     03-jupyter-notebooks
