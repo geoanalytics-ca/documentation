@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Pipelines" href="09-pipelines.html" /><link rel="prev" title="SpatioTemporal Asset Catalog (STAC)" href="07-stac.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>Container Registry - GeoAnalytics Canada</title>
+        <title>Container Registry - GeoAnalytics Canada Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">GeoAnalytics Canada</div></a>
+      <a href="../index.html"><div class="brand">GeoAnalytics Canada Documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -151,7 +151,7 @@
     <img class="sidebar-logo" src="../_static/geoanalytics-icon.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GeoAnalytics Canada</span>
+  <span class="sidebar-brand-text">GeoAnalytics Canada Documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -227,35 +227,33 @@
         <article role="main">
           <section id="Container-Registry">
 <h1><strong>Container Registry</strong><a class="headerlink" href="#Container-Registry" title="Permalink to this headline">#</a></h1>
-<p>The GEOAnalytics Canada Platform hosts a Container Registry to allow users to share and manage Docker images within specific projects. Within each project, an image repository is available to push and pull Docker container images. In this notebook, we will learn how to login, create a project, and finally how to push/pull Docker images within the Container Registry.</p>
+<p>The GEOAnalytics Canada Platform hosts a Container Registry to allow users to share and manage Docker images within the platform. Docker containers are especially useful for running <a class="reference external" href="09-pipelines.html">custom data processing pipelines</a> on the platform. In this notebook, we will learn how to login, create a project, and finally how to push/pull Docker images within the Container Registry.</p>
 <section id="1.-Logging-into-the-Container-Registry-and-creating-a-Project">
 <h2>1. Logging into the Container Registry and creating a Project<a class="headerlink" href="#1.-Logging-into-the-Container-Registry-and-creating-a-Project" title="Permalink to this headline">#</a></h2>
 <ol class="arabic simple">
 <li><p>To access the container registry follow this link: <a class="reference external" href="https://registry.eo4ph.geoanalytics.ca/">https://registry.eo4ph.geoanalytics.ca/</a> The registry can be accessed through the GEOAnalytics Canada home page by clicking on “Container Registry”.</p></li>
 <li><p>The link will take you to the container registry’s homepage (see the image below). You can log in using your GEOAnalytics Canada credentials.</p></li>
 </ol>
-<p><img alt="2b84cf7124b9433396e12be90a6826b0" src="../_images/08-container-registry-homepage.png"/></p>
+<p><img alt="8554aee1ae3742fbb2e8a1cfcf7d11aa" src="../_images/08-container-registry-homepage.png"/></p>
 <ol class="arabic simple">
 <li><p>Once you have accessed the container registry, you will find yourself in the Projects Tab. Click on the “NEW PROJECT” button (see the image below).</p></li>
 </ol>
-<p><img alt="6ada9f7a04ab48df8b3a5c90c8fec947" src="../_images/08-container-registry-homepage1.png"/></p>
+<p><img alt="497f81c54fc34193b71e3629796c1ac6" src="../_images/08-container-registry-homepage1.png"/></p>
 <ol class="arabic simple">
 <li><p>Input your desired project name, and leave the Access Level as private (keep the “Public” box unchecked). Click “OK” (see the image below).</p></li>
 </ol>
-<p><img alt="8a83230c6ceb4555ae94e86ebbd79e3b" src="../_images/08-container-registry-newproject.png"/></p>
+<p><img alt="eadf5c7dab2649768e32a1966ce2fe1b" src="../_images/08-container-registry-newproject.png"/></p>
 </section>
 <section id="2.-How-to-link-your-workspace-to-the-Container-Registry">
 <h2>2. How to link your workspace to the Container Registry<a class="headerlink" href="#2.-How-to-link-your-workspace-to-the-Container-Registry" title="Permalink to this headline">#</a></h2>
-Now we will use the terminal to login our Docker CLI to our Container Registry. To do this we will require our GEOAnalytics Canada username and password.
-To start, run the command below:
-
-1. `docker login registry.eo4ph.geoanalytics.ca`
-
-2. When prompted input your GEOAnalytics Canada username and press enter.
-
-3. When prompoted input your GEOAnalytics Canada password and press enter.
-
-Now that this is done we can push or pull Docker images from our Container Registry's projects.</section>
+<p>Now we will use the terminal to login our Docker CLI to our Container Registry. To do this we will require our GEOAnalytics Canada username and password. To start, follow these steps:</p>
+<ol class="arabic simple">
+<li><p>Run the command <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">login</span> <span class="pre">registry.eo4ph.geoanalytics.ca</span></code></p></li>
+<li><p>When prompted input your GEOAnalytics Canada username and press enter.</p></li>
+<li><p>When prompoted input your GEOAnalytics Canada password and press enter.</p></li>
+</ol>
+<p>Now that this is done we can push or pull Docker images from our Container Registry’s projects.</p>
+</section>
 <section id="3.-Adding-Docker-Images-to-the-Container-Registry">
 <h2>3. Adding Docker Images to the Container Registry<a class="headerlink" href="#3.-Adding-Docker-Images-to-the-Container-Registry" title="Permalink to this headline">#</a></h2>
 <p>In this section we will be exploring how to add images to the container registry.</p>
@@ -277,13 +275,13 @@ Now that this is done we can push or pull Docker images from our Container Regis
 </pre></div>
 </div>
 <p>Now head over to the Container Registry and click on <code class="docutils literal notranslate"><span class="pre">Projects</span> <span class="pre">&gt;</span> <span class="pre">test-123</span></code>. You will see the Docker image you just pushed added to the repository’s container registry!</p>
-<p><img alt="01c36b59007c4624aaf4dc28e759515d" src="../_images/08-container-registry-pushed-image.png"/></p>
+<p><img alt="9bf3f79bfe4243d88c2092ffed7e0d26" src="../_images/08-container-registry-pushed-image.png"/></p>
 <p>These were a just a few Docker commands we explored, to learn all the Docker commands available, take a look at the Docker documentation and a sample Docker workflow:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.docker.com/engine/reference/run/">https://docs.docker.com/engine/reference/run/</a></p></li>
 <li><p><a class="reference external" href="https://docker-curriculum.com">https://docker-curriculum.com</a></p></li>
 </ul>
-<p><strong>Important Note: NEVER run a Docker image you don’t know about. Only run a dockerfile from a trusted page and make sure to examine its source code!</strong></p>
+<p><strong>Important Note: NEVER run a Docker image you don’t know about. This is a major security issue. Only run a dockerfile from a trusted page and make sure to examine its source code!</strong></p>
 </section>
 </section>
 
@@ -316,7 +314,7 @@ Now that this is done we can push or pull Docker images from our Container Regis
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2022, Hatfield Consultants
+                Copyright &#169; 2023, Hatfield Consultants
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

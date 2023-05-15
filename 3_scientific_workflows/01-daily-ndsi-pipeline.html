@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="K-Means Land Classification with Dask" href="02-kmeans-dask.html" /><link rel="prev" title="Scientific Workflows" href="index.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>Daily NDSI Average Pipeline - GeoAnalytics Canada</title>
+        <title>Daily NDSI Average Pipeline - GeoAnalytics Canada Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">GeoAnalytics Canada</div></a>
+      <a href="../index.html"><div class="brand">GeoAnalytics Canada Documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -151,7 +151,7 @@
     <img class="sidebar-logo" src="../_static/geoanalytics-icon.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">GeoAnalytics Canada</span>
+  <span class="sidebar-brand-text">GeoAnalytics Canada Documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -565,7 +565,7 @@ div.rendered_html tbody tr:hover {
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">message</span> <span class="o">=</span> <span class="s2">"invalid host or credentials"</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="kn">from</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">kfp</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span>
             <span class="n">host</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">auth_provider</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s2">/pipeline"</span><span class="p">,</span>
@@ -1200,9 +1200,9 @@ Username:  asaini
 <section id="4.-The-Results">
 <h2>4. The Results<a class="headerlink" href="#4.-The-Results" title="Permalink to this headline">#</a></h2>
 <p>Head over to the Kubeflow Pipeline UI and take a look at the Run you created. Once finished, the pipeline graph should look like this image below.</p>
-<p><img alt="b1ec6b4adb264618a47ef89755ae5dba" src="../_images/01_pipeline-graph.png"/></p>
+<p><img alt="0878702c8b7c4afcbb873109302336db" src="../_images/01_pipeline-graph.png"/></p>
 <p>To see the final plot of the Averaged NDSI over the past few days, click on the <code class="docutils literal notranslate"><span class="pre">plot_ndsi</span></code> operation and under the <strong>“Input/Output”</strong>, click on the link in the Output Artifacts section. This is open a new tab with the final plot shown, which should look similar to this:</p>
-<p><img alt="e70bc58456444238a417689e318a0583" src="../_images/01_pipeline-result.png"/></p>
+<p><img alt="2865a09b7223469194b46d598f512667" src="../_images/01_pipeline-result.png"/></p>
 <p><strong>Note: This NDSI was processed on September 2nd, 2021.</strong></p>
 </section>
 <section id="5.-Additional-Sources">
@@ -1247,7 +1247,7 @@ Username:  asaini
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2022, Hatfield Consultants
+                Copyright &#169; 2023, Hatfield Consultants
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

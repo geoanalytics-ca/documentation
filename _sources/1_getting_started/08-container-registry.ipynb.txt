@@ -9,11 +9,12 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "id": "44554656-9ff1-491c-85ce-54ab7e031de2",
    "metadata": {},
    "source": [
-    "The GEOAnalytics Canada Platform hosts a Container Registry to allow users to share and manage Docker images within specific projects. Within each project, an image repository is available to push and pull Docker container images.\n",
+    "The GEOAnalytics Canada Platform hosts a Container Registry to allow users to share and manage Docker images within the platform. Docker containers are especially useful for running [custom data processing pipelines](09-pipelines.html) on the platform. \n",
     "In this notebook, we will learn how to login, create a project, and finally how to push/pull Docker images within the Container Registry.\n",
     "\n",
     "## 1. Logging into the Container Registry and creating a Project\n",
@@ -73,14 +74,15 @@
    ]
   },
   {
-   "cell_type": "raw",
+   "attachments": {},
+   "cell_type": "markdown",
    "id": "a8cffef1-09bd-48eb-a25f-31c9494774d6",
    "metadata": {},
    "source": [
     "Now we will use the terminal to login our Docker CLI to our Container Registry. To do this we will require our GEOAnalytics Canada username and password. \n",
-    "To start, run the command below:\n",
+    "To start, follow these steps: \n",
     "\n",
-    "1. `docker login registry.eo4ph.geoanalytics.ca`\n",
+    "1. Run the command `docker login registry.eo4ph.geoanalytics.ca`\n",
     "\n",
     "2. When prompted input your GEOAnalytics Canada username and press enter.\n",
     "\n",
@@ -147,6 +149,7 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "id": "e7c65a4f-95fc-49ec-bd1c-d576e6d42d14",
    "metadata": {},
@@ -156,7 +159,7 @@
     "- https://docs.docker.com/engine/reference/run/\n",
     "- https://docker-curriculum.com\n",
     " \n",
-    "***Important Note: NEVER run a Docker image you don't know about. Only run a dockerfile from a trusted page and make sure to examine its source code!***"
+    "***Important Note: NEVER run a Docker image you don't know about. This is a major security issue. Only run a dockerfile from a trusted page and make sure to examine its source code!***"
    ]
   }
  ],
