@@ -17,8 +17,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'GEOAnalytics Canada'
-copyright = '2022, Hatfield Consultants'
+project = 'GEOAnalytics Canada Documentation'
+copyright = '2023, Hatfield Consultants'
 author = 'Hatfield Consultants'
 
 # The full version, including alpha/beta/rc tags
@@ -75,7 +75,7 @@ html_theme = 'furo'
 
 html_logo = "images/geoanalytics-icon.png"
 
-html_title = "GeoAnalytics Canada"
+html_title = "GeoAnalytics Canada Documentation"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

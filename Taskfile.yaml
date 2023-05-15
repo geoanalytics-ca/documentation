@@ -27,7 +27,7 @@ tasks:
     cmds:
       - conda create -y -n sphinx python=3.9
       - conda activate sphinx
-      - conda install --file conda-requirements.txt
+      - conda install --yes --file conda-requirements.txt
       - pip3 install -r requirements.txt
 
   build:
@@ -41,6 +41,7 @@ tasks:
     prefix: "📕 > build"
     desc: Build the Sphinx documentation
     cmds:
+      # - rmdir /s /q _build
       - sphinx-build docs _build
 
   test-pep:
