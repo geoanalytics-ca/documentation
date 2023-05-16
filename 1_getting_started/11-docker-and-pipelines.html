@@ -227,30 +227,58 @@
         <article role="main">
           <section id="docker-pipelines">
 <h1>Docker &amp; Pipelines<a class="headerlink" href="#docker-pipelines" title="Permalink to this headline">#</a></h1>
+<p>Pairing Docker with Pipelines enables us to create customized solutions
+that we have full control over.
+Defining environments to run applications inside a <code class="docutils literal notranslate"><span class="pre">dockerfile</span></code> and
+running them in an isolated space on the Pipelines engine allows
+for a secure and reproducible environment to run tests and/or
+(scheduled) reproducible workflows.</p>
 <ul class="simple">
 <li><p><span class="xref myst">Docker &amp; Pipelines</span></p>
 <ul>
+<li><p><span class="xref myst">Useful Links</span></p></li>
+<li><p><span class="xref myst">Environtment Variables</span></p></li>
 <li><p><span class="xref myst">Docker in the Remote Desktop</span></p></li>
+<li><p><span class="xref myst">Using Docker and Pipelines</span></p></li>
 <li><p><span class="xref myst">Example Project</span></p></li>
 <li><p><span class="xref myst">Dockerfile</span></p></li>
 <li><p><span class="xref myst">Building and Pushing to the Container Registry</span></p></li>
 <li><p><span class="xref myst">Using Your Docker Image in a Pipeline</span></p>
 <ul>
-<li><p><span class="xref myst">Couler</span></p></li>
 <li><p><span class="xref myst">Hera-Workflows</span></p></li>
+<li><p><span class="xref myst">Couler</span></p></li>
 </ul>
 </li>
-<li><p><span class="xref myst">Useful Links</span></p></li>
 </ul>
 </li>
 </ul>
+<section id="useful-links">
+<h2>Useful Links<a class="headerlink" href="#useful-links" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.docker.com/engine/api/">Docker Container Engine API</a></p></li>
+<li><p><a class="reference external" href="https://docs.docker.com/engine/reference/builder/">Dockerfile Reference</a></p></li>
+<li><p><a class="reference external" href="https://hera-workflows.readthedocs.io/en/latest/?badge=latest">Hera-Workflows API &amp; Examples</a></p></li>
+<li><p><a class="reference external" href="https://couler-proj.github.io/couler/">Couler Documentation</a></p></li>
+</ul>
+</section>
+<section id="environtment-variables">
+<h2>Environtment Variables<a class="headerlink" href="#environtment-variables" title="Permalink to this headline">#</a></h2>
+<p>The following Pipeline workflow accesses various environment variables to
+set appropriate values in the configuration functions.</p>
+<blockquote>
+<div><p><strong>Note</strong><br/>
+You can find a table of all relevant environment variables for
+the Pipeline under <code class="docutils literal notranslate"><span class="pre">/home/jovyan/config/</span></code> in your JupyterHub filebrowser tab. Right click, Open With, and then select “Render Markdown” to see
+a user-friendly table.</p>
+</div></blockquote>
+</section>
 <section id="docker-in-the-remote-desktop">
 <h2>Docker in the Remote Desktop<a class="headerlink" href="#docker-in-the-remote-desktop" title="Permalink to this headline">#</a></h2>
 <p>Docker is running in a sidecar to the remote desktop.
 What this means is that the daemon is not running inside
 the remote desktop directly, but adjacent to it.
 This does not affect the way you interact with Docker,
-but is useful to know.</p>
+but is useful to know if you’re looking for the daemon.</p>
 <p>To run Docker commands against the daemon, you can
 accomplish this using <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, as follows:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span><span class="nb">command</span><span class="w"> </span>...
@@ -259,17 +287,27 @@ accomplish this using <code class="docutils literal notranslate"><span class="pr
 <p>Where <code class="docutils literal notranslate"><span class="pre">command</span></code> is a Docker command such as <code class="docutils literal notranslate"><span class="pre">images</span></code>, <code class="docutils literal notranslate"><span class="pre">ps</span></code>, <code class="docutils literal notranslate"><span class="pre">build</span></code>, <code class="docutils literal notranslate"><span class="pre">push</span></code>, etc.</p>
 <p><a class="reference external" href="https://docs.docker.com/engine/reference/commandline/docker/">Docker Commands</a></p>
 </section>
+<section id="using-docker-and-pipelines">
+<h2>Using Docker and Pipelines<a class="headerlink" href="#using-docker-and-pipelines" title="Permalink to this headline">#</a></h2>
+<p>The below Sections will go over how to leverage Docker for your
+own Pipeline workflows.</p>
+</section>
 <section id="example-project">
 <h2>Example Project<a class="headerlink" href="#example-project" title="Permalink to this headline">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dockerfile
-./src
-<span class="w">    </span>-<span class="w"> </span>requirements.txt
-<span class="w">    </span>-<span class="w"> </span>main.py
-<span class="w">    </span>-<span class="w"> </span>lib/
-<span class="w">        </span>-<span class="w"> </span>helpers.py
-<span class="w">    </span>-<span class="w"> </span>README.md
+<p>The following code shows a simple project folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>project/
+<span class="w">  </span>dockerfile
+<span class="w">  </span>src/
+<span class="w">      </span>-<span class="w"> </span>requirements.txt
+<span class="w">      </span>-<span class="w"> </span>main.py<span class="w">        </span><span class="c1"># main python app</span>
+<span class="w">      </span>-<span class="w"> </span>lib/
+<span class="w">          </span>-<span class="w"> </span>helpers.py<span class="w"> </span><span class="c1"># subdirectory example</span>
+<span class="w">      </span>-<span class="w"> </span>entrypoint.sh<span class="w">  </span><span class="c1"># runs application via script</span>
+<span class="w">      </span>-<span class="w"> </span>README.md
+<span class="w">  </span>README.md
 </pre></div>
 </div>
+<p>The following is the contents of a <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># /src/requirements.txt
 xarray==2022.10.0
 numpy==1.23.3
@@ -277,15 +315,29 @@ pandas==1.5.1
 geopandas==0.12.1
 </pre></div>
 </div>
+<p>Where the <code class="docutils literal notranslate"><span class="pre">entrypoint.sh</span></code> script looks something like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nb">set</span><span class="w"> </span>-eu
+
+python<span class="w"> </span>main.py
+</pre></div>
+</div>
 </section>
 <section id="dockerfile">
 <h2>Dockerfile<a class="headerlink" href="#dockerfile" title="Permalink to this headline">#</a></h2>
 <p>To build a Container Image, once the application has
-been implemented, you will need to sue a <code class="docutils literal notranslate"><span class="pre">dockerfile</span></code>
+been implemented, you will need to use a <code class="docutils literal notranslate"><span class="pre">dockerfile</span></code> manifest
 to allow the Container Engine to containerize your application.</p>
-<p>This <code class="docutils literal notranslate"><span class="pre">dockerfile</span></code> describes/builds the environment which
+<p>This <code class="docutils literal notranslate"><span class="pre">dockerfile</span></code> describes the environment which
 your application will run in.
-It it highly recommend to keep this as slim and consice as necessary to run your application.</p>
+It it highly recommend to keep this as small (dependency disksize) as necessary to run your application.</p>
+<blockquote>
+<div><p><strong>Note</strong><br/>
+Smaller Images help speed up pulling of the Image as well as minimizing the
+amount of resources required to host the application. Giving those
+resources back to the application to use.</p>
+</div></blockquote>
 <div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span>FROM python:3.10.9-slim
 
 RUN apt update &amp;&amp; apt install -y \
@@ -294,25 +346,27 @@ RUN apt update &amp;&amp; apt install -y \
 COPY src/ /app
 
 RUN pip install -r /app/requirements.txt
+RUN chmod 0555 entrypoint # Read and Execute
 
-ENTRYPOINT ['/bin/bash', '-c', 'entryscript.sh']
+# ENTRYPOINT ['/bin/bash', '-c', 'entryscript.sh'] # Custom script entrypoint
+ENTRYPOINT ['python', 'main.py'] # Run Python application
 
 </pre></div>
 </div>
 </section>
 <section id="building-and-pushing-to-the-container-registry">
 <h2>Building and Pushing to the Container Registry<a class="headerlink" href="#building-and-pushing-to-the-container-registry" title="Permalink to this headline">#</a></h2>
-<p>First, to ensure we will successfully push our built Container Image, we must login to our container registry with your provided username and password:</p>
+<p>First, to ensure we can push our built Container Image, we must login to our container registry with your provided username and password:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>registry.eo4ph.geoanalytics.ca
+</pre></div>
+</div>
+<p>Using the below information, replace the keywords in
+the subsequent Docker commands:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">project-name</span></code> : The name of your project in the Container Registry</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">image-name</span></code> : The name that describes the Container Image</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">image-tag</span></code> : The version of the Image being built</p></li>
 </ul>
-<p>Using the above information, replace the keywords in
-the following Docker commands</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>registry.eo4ph.geoanalytics.ca
-</pre></div>
-</div>
 <p>Next, we must build and tag our Container Image
 so that it will push to the correct registry:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag<span class="w"> </span>.
@@ -322,55 +376,20 @@ so that it will push to the correct registry:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>push<span class="w"> </span>registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag
 </pre></div>
 </div>
+<p>You can also run your container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag
+</pre></div>
+</div>
 </section>
 <section id="using-your-docker-image-in-a-pipeline">
 <h2>Using Your Docker Image in a Pipeline<a class="headerlink" href="#using-your-docker-image-in-a-pipeline" title="Permalink to this headline">#</a></h2>
-<p>The following two Python frameworks, Couler and Hera-Workflows, submit
+<p>The following two Python frameworks,
+<a class="reference external" href="https://hera-workflows.readthedocs.io/en/latest/index.html">Hera-Workflows</a>
+and <a class="reference external" href="https://couler-proj.github.io/couler/">Couler</a>, can submit
 Workflows to our pipeline executor and can be monitored here:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://pipeline.eo4ph.geoanalytics.ca">GEOAnalytics Pipelines</a></p></li>
 </ul>
-<section id="couler">
-<h3>Couler<a class="headerlink" href="#couler" title="Permalink to this headline">#</a></h3>
-<p>Couler is a generic Pipeline framework that aims to interact with
-all Pipeline engines - currently only Argo is supported.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pipeline_job</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">env_user</span><span class="p">):</span>
-    <span class="n">toleration</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NODE_TOLERATION_KEY'</span><span class="p">),</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
-    <span class="n">couler</span><span class="o">.</span><span class="n">add_toleration</span><span class="p">(</span><span class="n">toleration</span><span class="p">)</span>
-    <span class="n">toleration2</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="s1">'kubernetes.azure.com/scalesetpriority'</span><span class="p">,</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
-    <span class="n">couler</span><span class="o">.</span><span class="n">add_toleration</span><span class="p">(</span><span class="n">toleration2</span><span class="p">)</span>
-    <span class="n">image_secret</span> <span class="o">=</span> <span class="n">ImagePullSecret</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'REGISTRY_PULL_SECRET'</span><span class="p">))</span>
-    <span class="n">couler</span><span class="o">.</span><span class="n">add_image_pull_secret</span><span class="p">(</span><span class="n">image_secret</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">couler</span><span class="o">.</span><span class="n">run_script</span><span class="p">(</span>
-        <span class="n">image</span><span class="o">=</span><span class="s2">"registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag"</span><span class="p">,</span>
-        <span class="n">step_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-        <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
-        <span class="n">env</span><span class="o">=</span><span class="n">env_user</span><span class="p">,</span>
-        <span class="n">node_selector</span><span class="o">=</span><span class="p">{</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NODE_SELECTOR_KEY'</span><span class="p">):</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NODE_SELECTOR_VALUE'</span><span class="p">)},</span>
-        <span class="n">secret</span><span class="o">=</span><span class="n">image_secret</span>
-    <span class="p">)</span>
-
-<span class="c1"># Some environment variables for the Job Task</span>
-<span class="n">env</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">'some-env'</span><span class="p">:</span> <span class="s1">'env-value'</span>
-<span class="p">}</span>
-
-<span class="k">def</span> <span class="nf">user_function</span><span class="p">():</span>
-  <span class="c1"># Do Something</span>
-
-<span class="k">def</span> <span class="nf">create_job</span><span class="p">():</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">couler</span><span class="o">.</span><span class="n">set_dependencies</span><span class="p">(</span>
-        <span class="k">lambda</span><span class="p">:</span> <span class="n">pipeline_job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'job1'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">user_function</span><span class="p">,</span> <span class="n">env_user</span><span class="o">=</span><span class="n">env</span><span class="p">),</span>
-        <span class="n">dependencies</span><span class="o">=</span><span class="kc">None</span>
-    <span class="p">)</span>
-
-<span class="n">create_job</span><span class="p">()</span>
-<span class="n">submitter</span> <span class="o">=</span> <span class="n">ArgoSubmitter</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NS'</span><span class="p">))</span>
-<span class="n">deployment</span> <span class="o">=</span> <span class="n">couler</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">submitter</span><span class="p">)</span>
-<span class="n">deployment</span>
-</pre></div>
-</div>
-</section>
 <section id="hera-workflows">
 <h3>Hera-Workflows<a class="headerlink" href="#hera-workflows" title="Permalink to this headline">#</a></h3>
 <p>Hera-Workflows is a pipeline framework built by argoproj - the creators of Argo Workflows.
@@ -384,8 +403,12 @@ causes a Failure for the task to complete.</p>
 <p>Caveats:</p>
 <ul class="simple">
 <li><p>Argo requires unique names for Workflows and will complain if duplicates are submitted</p></li>
-<li><p>Not restricted to images from the private registry - you can use images publically available, too</p></li>
 </ul>
+<p>Benefits:</p>
+<ul class="simple">
+<li><p>Use both images from the private registry and and those publically available, too (eg. from DockerHub)</p></li>
+</ul>
+<p>Thow following code will set up the framework for a simple pipeline:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure GEOAnalytics Pipeline Environment</span>
 <span class="n">ws</span> <span class="o">=</span> <span class="n">hera</span><span class="o">.</span><span class="n">workflow_service</span><span class="o">.</span><span class="n">WorkflowService</span><span class="p">(</span>
     <span class="n">host</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'PIPELINE_HOST'</span><span class="p">),</span>
@@ -455,14 +478,47 @@ causes a Failure for the task to complete.</p>
 </pre></div>
 </div>
 </section>
+<section id="couler">
+<h3>Couler<a class="headerlink" href="#couler" title="Permalink to this headline">#</a></h3>
+<p>Couler is a generic Pipeline framework that aims to interact with
+all Pipeline engines - currently only Argo is supported.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pipeline_job</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">env_user</span><span class="p">):</span>
+    <span class="n">toleration</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NODE_TOLERATION_KEY'</span><span class="p">),</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">add_toleration</span><span class="p">(</span><span class="n">toleration</span><span class="p">)</span>
+    <span class="n">toleration2</span> <span class="o">=</span> <span class="n">Toleration</span><span class="p">(</span><span class="s1">'kubernetes.azure.com/scalesetpriority'</span><span class="p">,</span> <span class="s1">'NoSchedule'</span><span class="p">,</span> <span class="s1">'Exists'</span><span class="p">)</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">add_toleration</span><span class="p">(</span><span class="n">toleration2</span><span class="p">)</span>
+    <span class="n">image_secret</span> <span class="o">=</span> <span class="n">ImagePullSecret</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'REGISTRY_PULL_SECRET'</span><span class="p">))</span>
+    <span class="n">couler</span><span class="o">.</span><span class="n">add_image_pull_secret</span><span class="p">(</span><span class="n">image_secret</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">couler</span><span class="o">.</span><span class="n">run_script</span><span class="p">(</span>
+        <span class="n">image</span><span class="o">=</span><span class="s2">"registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag"</span><span class="p">,</span>
+        <span class="n">step_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+        <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span>
+        <span class="n">env</span><span class="o">=</span><span class="n">env_user</span><span class="p">,</span>
+        <span class="n">node_selector</span><span class="o">=</span><span class="p">{</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NODE_SELECTOR_KEY'</span><span class="p">):</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NODE_SELECTOR_VALUE'</span><span class="p">)},</span>
+        <span class="n">secret</span><span class="o">=</span><span class="n">image_secret</span>
+    <span class="p">)</span>
+
+<span class="c1"># Some environment variables for the Job Task</span>
+<span class="n">env</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'some-env'</span><span class="p">:</span> <span class="s1">'env-value'</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">user_function</span><span class="p">():</span>
+  <span class="c1"># Do Something</span>
+
+<span class="k">def</span> <span class="nf">create_job</span><span class="p">():</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">couler</span><span class="o">.</span><span class="n">set_dependencies</span><span class="p">(</span>
+        <span class="k">lambda</span><span class="p">:</span> <span class="n">pipeline_job</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'job1'</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">user_function</span><span class="p">,</span> <span class="n">env_user</span><span class="o">=</span><span class="n">env</span><span class="p">),</span>
+        <span class="n">dependencies</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">)</span>
+
+<span class="n">create_job</span><span class="p">()</span>
+<span class="n">submitter</span> <span class="o">=</span> <span class="n">ArgoSubmitter</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NS'</span><span class="p">))</span>
+<span class="n">deployment</span> <span class="o">=</span> <span class="n">couler</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">submitter</span><span class="p">)</span>
+<span class="n">deployment</span>
+</pre></div>
+</div>
 </section>
-<section id="useful-links">
-<h2>Useful Links<a class="headerlink" href="#useful-links" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://docs.docker.com/engine/reference/builder/">Dockerfile Reference</a></p></li>
-<li><p><a class="reference external" href="https://hera-workflows.readthedocs.io/en/latest/?badge=latest">Hera-Workflows API &amp; Examples</a></p></li>
-<li><p><a class="reference external" href="https://couler-proj.github.io/couler/">Couler Documentation</a></p></li>
-</ul>
 </section>
 </section>
 
@@ -524,16 +580,18 @@ causes a Failure for the task to complete.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Docker &amp; Pipelines</a><ul>
+<li><a class="reference internal" href="#useful-links">Useful Links</a></li>
+<li><a class="reference internal" href="#environtment-variables">Environtment Variables</a></li>
 <li><a class="reference internal" href="#docker-in-the-remote-desktop">Docker in the Remote Desktop</a></li>
+<li><a class="reference internal" href="#using-docker-and-pipelines">Using Docker and Pipelines</a></li>
 <li><a class="reference internal" href="#example-project">Example Project</a></li>
 <li><a class="reference internal" href="#dockerfile">Dockerfile</a></li>
 <li><a class="reference internal" href="#building-and-pushing-to-the-container-registry">Building and Pushing to the Container Registry</a></li>
 <li><a class="reference internal" href="#using-your-docker-image-in-a-pipeline">Using Your Docker Image in a Pipeline</a><ul>
-<li><a class="reference internal" href="#couler">Couler</a></li>
 <li><a class="reference internal" href="#hera-workflows">Hera-Workflows</a></li>
+<li><a class="reference internal" href="#couler">Couler</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#useful-links">Useful Links</a></li>
 </ul>
 </li>
 </ul>

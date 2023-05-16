@@ -521,24 +521,24 @@ geospatial data viewing and analysis.</p>
 <li><p>You can also select the <strong>desktop image</strong> if you have an existing image from a previous session saved. (Otherwise, there will only be one option available)</p></li>
 </ul>
 <p>Now, let’s access the Remote Desktop VM by selecting the “Desktop Apps” tab from the main platform dashboard, which will lead to <a class="reference external" href="https://remotedesktop.eo4ph.geoanalytics.ca">https://remotedesktop.eo4ph.geoanalytics.ca</a>. From here, you get the options as mentioned above to customize your virtual machine. Select the presets depending on your own preference and click on the button <strong>“START MY DESKTOP”</strong>. This will send a request to Google for access to that Desktop.</p>
-<p><img alt="acdd212b05a04965b2bc0929e30338b8" src="../_images/04_creating-vm.gif"/></p>
+<p><img alt="f196d54f8dd6490790efb155441e3b1d" src="../_images/04_creating-vm.gif"/></p>
 <p>Note the three labels at the bottom: The <strong>Pod Name</strong> indicating the name of the virtual machine you are assigned, the <strong>Pod Status</strong> indicating whether the virtual machine is running or not, and the <strong>External IP address</strong> where the virtual machine is running. Before starting up your first desktop session, all these three will be empty.</p>
 <p><em>There are two ways to start up your Remote Desktop session, let’s take a look at both these methods.</em></p>
 </section>
 <section id="1.2-Login-to-Remote-Desktop-VM-through-Browser">
 <h3>1.2 Login to Remote Desktop VM through Browser<a class="headerlink" href="#1.2-Login-to-Remote-Desktop-VM-through-Browser" title="Permalink to this headline">#</a></h3>
 <p>The first way is to log in through the Brower by clicking on the <strong>“TAKE ME TO MY DESKTOP”</strong> button once the desktop server is running. This will open a new tab to Apache Guacamole which is a clientless remote desktop gateway. Enter in your GEOAnalytics Canada username and password to open the Desktop VM in a new browser.</p>
-<p><img alt="1237840166124e1bb3b1eda4326bb61d" src="../_images/04_login-apache.gif"/></p>
+<p><img alt="a39b9f96527545c7b49f7ce03868e93f" src="../_images/04_login-apache.gif"/></p>
 </section>
 <section id="1.3-Login-To-Remote-Desktop-VM-through-SSH">
 <h3>1.3 Login To Remote Desktop VM through SSH<a class="headerlink" href="#1.3-Login-To-Remote-Desktop-VM-through-SSH" title="Permalink to this headline">#</a></h3>
 <p>Another way to login is by the Secure Shell Protocol (SSH). You can SSH into the remote desktop directly from the terminal. SSH is useful because it does not load the entire Virtual machine interface, which is great for just executing codes and terminal commands and when it is not neccesary to launch applications.</p>
 <p>Any GEOAnalytics user can SSH into their remote server directly from the terminal window.</p>
 <p>Run the command <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">&lt;username&gt;@&lt;host&gt;</span></code> in your terminal, where the username represents your GEOAnalytics Canada username and the host refers to the computer you want to access which in our case is the External IP Address. After running the command, you will be required to input your GEOAnalytics Canada password. Below is an image capturing the connection to the remote desktop.</p>
-<p><img alt="8ecf4c14b2c947689c2b991e91242380" src="../_images/04_ssh.png"/></p>
+<p><img alt="51a07a637b564960aa2b99d6967808c2" src="../_images/04_ssh.png"/></p>
 <p>If you notice in the image above, a few commands are used to check which directory ssh connects us to and to change directory into the same path as the Browser version.</p>
 <p>The terminal opened in the Browser Desktop VM, the initial file path is <code class="docutils literal notranslate"><span class="pre">/home/abc</span></code>, so the path in the ssh connection was adjusted to the same path.</p>
-<p><img alt="6015005781444772aea5695a0076b989" src="../_images/04_vm-path.png"/></p>
+<p><img alt="a8c2a34259c34dc991d02466f4164d55" src="../_images/04_vm-path.png"/></p>
 <p><strong>Note: SSH and Browser both have access to root privileges.</strong></p>
 </section>
 <section id="1.4-Connect-to-Remote-Desktop-through-Clients">
@@ -553,7 +553,7 @@ geospatial data viewing and analysis.</p>
 <li><p>Step5: Make sure that the drop-down menu in the Session Type box is set to XFCE.</p></li>
 <li><p>Step6: Input your geoanalytics password when asked for it.</p></li>
 </ul>
-<p><img alt="6a3eb60a2545453683b3332a4b40ecca" src="../_images/04_X2Go_Connection.png"/></p>
+<p><img alt="2a7fb1f543914ce09956d24a54499b3d" src="../_images/04_X2Go_Connection.png"/></p>
 <p>Here are the links to a few RDP Clients you can use:</p>
 <ul class="simple">
 <li><p>Remmina: <a class="reference external" href="https://remmina.org">https://remmina.org</a></p></li>
@@ -574,7 +574,7 @@ geospatial data viewing and analysis.</p>
 <li><p><strong>geoanalytics_{username}</strong> - A user’s personal network file system where only the logged in user can read or write to their own personal storage directory.</p></li>
 </ul>
 <p>In the desktop environment, the first 4 folders can be accessed from the <em>File System</em> devices tab, while the user’s private folder can be found in the <strong>‘/home/abc’</strong> directory.</p>
-<p><img alt="bb7330acd8194988ab6f7d9b4649f026" src="../_images/04_folders-vm.gif"/></p>
+<p><img alt="6eab2e0f3d3d4ec7ae156275421d933a" src="../_images/04_folders-vm.gif"/></p>
 </section>
 <section id="2.2-Showing-information-about-GPUs">
 <h3>2.2 Showing information about GPUs<a class="headerlink" href="#2.2-Showing-information-about-GPUs" title="Permalink to this headline">#</a></h3>
@@ -590,7 +590,7 @@ geospatial data viewing and analysis.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">nvidia-smi</span> <span class="pre">-L</span></code>: To list all available NVIDIA devices.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">nvidia-smi</span> <span class="pre">-i</span> <span class="pre">0</span> <span class="pre">-q</span></code>: To list all available data on a particular GPU, specify the ID of the card with -i (ID is 0).</p></li>
 </ul>
-<p><img alt="e1a28293b82642188e7edd726b51d157" src="../_images/04_gpu-info.png"/></p>
+<p><img alt="a3c28f94878b430ca4f8687aa470dda7" src="../_images/04_gpu-info.png"/></p>
 <p>One thing to note is that the “export PATH” commands only enables the <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> commands temporarily, for the current terminal session. This means that once you close the terminal window and open a new terminal, you will need to run those commands again. To avoid this tedious task for everytime you open a new terminal session, we can append the two commands to the Bash Shell Script, <strong>.bashrc</strong> file by executing the two commands below in terminal and enable the <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> commands for
 the entire Desktop session:</p>
 <ul class="simple">
@@ -621,7 +621,7 @@ the entire Desktop session:</p>
 <h3>3.2 Installing Miniconda<a class="headerlink" href="#3.2-Installing-Miniconda" title="Permalink to this headline">#</a></h3>
 <p>Miniconda is an mini-installer, a smaller version of Anaconda containing only conda, its dependencies, and Python. Check by running <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">--version</span></code> to see if Miniconda is already available in your virtual machine. If it returns a conda version, then you don’t need to install it!</p>
 <p>Now since we are working with a Linux Operating System, use the Installation Guide for Linux provided by the Conda Documentation to properly install the environment manager. <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html">https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html</a></p>
-<p>Here is a quick screenshot capturing the steps to install within the Desktop server. <img alt="4d2fe8cd40654fc58c067a0bb8f13023" src="../_images/04_miniconda-install.png"/></p>
+<p>Here is a quick screenshot capturing the steps to install within the Desktop server. <img alt="d569d7123ad844009d6ccbd1f5b12c90" src="../_images/04_miniconda-install.png"/></p>
 </section>
 <section id="3.3-Setting-up-the-Python-Environment">
 <h3>3.3 Setting up the Python Environment<a class="headerlink" href="#3.3-Setting-up-the-Python-Environment" title="Permalink to this headline">#</a></h3>
@@ -642,7 +642,7 @@ the entire Desktop session:</p>
 <h3>3.4 Launching Dask Clusters<a class="headerlink" href="#3.4-Launching-Dask-Clusters" title="Permalink to this headline">#</a></h3>
 <p>Once you’re in the Conda environment created above, you can work on your projects on the Desktop with access to all the same packages as Jupyter. Let’s perform a small task of creating a Dask cluster within the environment, similar to the exercises from the Jupyter Notebook.</p>
 <p>First execute the command <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code> within terminal to launch a Python notebook where you can run you Dask clusters from. Now open the <code class="docutils literal notranslate"><span class="pre">04_1-dask-clusters.ipynb</span></code> jupyter notebook which contains code for creating a Dask cluster. Follow along with the notebook until the exercise points back to this section.</p>
-<p><img alt="a7368de959354ab6b92c0df92b16ead8" src="../_images/04_dask-vm.png"/></p>
+<p><img alt="44ac61a90363406382930b6911e4ce88" src="../_images/04_dask-vm.png"/></p>
 <p>For the next step, we will see if we can connect to the Dask cluster, created in the Desktop VM, in this notebook. First import the Dask Gateway.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -705,7 +705,7 @@ the entire Desktop session:</p>
 <section id="3.2-Using-Applications">
 <h3>3.2 Using Applications<a class="headerlink" href="#3.2-Using-Applications" title="Permalink to this headline">#</a></h3>
 <p>Applications can be opened and used for geospatial data analysis. As an exercise, launch the Quantum GIS (QGIS) application, initialize a new project, and load files from one of the folders we have previously explored.</p>
-<p><img alt="b9720bc36e774e1dbafa5973465ec4b2" src="../_images/04_qgis-vm.gif"/></p>
+<p><img alt="10e49d9e835b4284b10750456bd5d6b7" src="../_images/04_qgis-vm.gif"/></p>
 </section>
 </section>
 <section id="4.-Closing-the-Remote-Desktop-Session">
@@ -724,7 +724,7 @@ the entire Desktop session:</p>
 <li><p>Anything done during your current remote desktop session will not be saved, except for data written to your personal storage directory (/home/abc/geoanalytics_{username}) or to certain mount points (mounted object stores). Any applications installed will not be saved.</p></li>
 <li><p>Your desktop will be terminated.</p></li>
 </ul>
-<p><img alt="d89058a70e1343ff8545f8d038e19758" src="../_images/04_shutdown-vm.gif"/></p>
+<p><img alt="fe9ac401bf014089b74871b88f211321" src="../_images/04_shutdown-vm.gif"/></p>
 </section>
 </section>
 
