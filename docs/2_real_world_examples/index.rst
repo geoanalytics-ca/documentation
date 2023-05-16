@@ -6,10 +6,9 @@ This page will go through the single use-case examples. These examples will be u
 .. toctree:: 
     :maxdepth: 1
     
-    01-accessing-data
-    02-ndvi-s2-dask
-    03-ndsi-modis-dask
-    04-ndmi-landsat8-dask
-    05-change-detection
-    06-add-to-stac
+    01-ndvi-s2-dask
+    02-ndsi-modis-dask
+    03-ndmi-landsat8-dask
+    04-change-detection
+
 
