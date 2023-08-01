@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Docker &amp; Pipelines" href="11-docker-and-pipelines.html" /><link rel="prev" title="Pipelines" href="09-pipelines.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Real World Examples" href="../2_real_world_examples/index.html" /><link rel="prev" title="Pipelines" href="09-pipelines.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
         <title>Dask - GeoAnalytics Canada Documentation</title>
@@ -175,7 +175,6 @@
 <li class="toctree-l2"><a class="reference internal" href="08-container-registry.html"><strong>Container Registry</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="09-pipelines.html">Pipelines</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><strong>Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="11-docker-and-pipelines.html">Docker &amp; Pipelines</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -481,7 +480,7 @@ div.rendered_html tbody tr:hover {
 <p><strong>Why should we scale?</strong> Computations are much faster when data can be held in local memory. Most computers do not have massive memory storages to store big data, those that do are extremely expensive. An easier and cost effective method is to use the pool of memory from a collections of systems to store large datasets.</p>
 <p><strong>Dask Gateway</strong> The GeoAnalytics Canada Platform uses Dask Gateway to provide our users a secure multi-tenant server for managing Dask clusters. Our administrators manage the backend configuration of the clusters, so user’s can connect to the Dask Gateway without hassle.</p>
 <p>Here’s a diagram representing the Dask architecture, which consists of the Dask Clusters, a proxy for connecting the user’s client with the scheduler, and the main Gateway for authentication and cluster management.</p>
-<p><img alt="5c39bbb642a7448896c53a8974d6b9a4" src="../_images/02_dask-architecture.png"/></p>
+<p><img alt="edfd5a06000848c68569daa2a317e9d0" src="../_images/02_dask-architecture.png"/></p>
 </section>
 <section id="1.0-Connecting-to-Dask">
 <h2>1.0 Connecting to Dask<a class="headerlink" href="#1.0-Connecting-to-Dask" title="Permalink to this headline">#</a></h2>
@@ -707,12 +706,12 @@ libraries or dependencies you require.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="11-docker-and-pipelines.html">
+          <a class="next-page" href="../2_real_world_examples/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Docker &amp; Pipelines</div>
+                <div class="title">Real World Examples</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>

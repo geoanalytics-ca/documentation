@@ -175,7 +175,6 @@
 <li class="toctree-l2"><a class="reference internal" href="08-container-registry.html"><strong>Container Registry</strong></a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Pipelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="11-docker-and-pipelines.html">Docker &amp; Pipelines</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -522,7 +521,7 @@ div.rendered_html tbody tr:hover {
 <h2>Setting Up The Workflow<a class="headerlink" href="#Setting-Up-The-Workflow" title="Permalink to this headline">#</a></h2>
 <p>The next Cell implements a template of how a single-step Workflow would be implemented. This Workflow is created with a single Container which is then executed during the Steps procedure within the Workflow.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -557,7 +556,7 @@ div.rendered_html tbody tr:hover {
 <div class="line">Contact your GEOAnalytics Canada Administrator for more information about available resources.</div>
 </div>
 </div></blockquote>
-<p>Here is an alternative approach to writing Workflows - It is recommended to use a context-manager to ensure objects are properly gc’d. This example demonstrates how to use a Python function as an input to a Task instead of a Docker Image.</p>
+<p>Here is an alternative approach to writing Workflows - It is recommended to use a context-manager to ensure objects are properly gc’d. This example demonstrates how to use a Python function as an input to a Task instead of a Docker Image. However, you will need to provide a base Docker Image to act as the environment for your source code to run in.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
