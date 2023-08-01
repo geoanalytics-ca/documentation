@@ -492,7 +492,6 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Import the required libraries</span>
-
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">from</span> <span class="nn">hera.shared</span> <span class="kn">import</span> <span class="n">global_config</span>
@@ -531,20 +530,81 @@ div.rendered_html tbody tr:hover {
 <span class="n">global_config</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_HOST'</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">Workflow</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">'nameofworkflow'</span><span class="p">,</span> <span class="c1"># Must be lowercase</span>
-    <span class="n">namespace</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NS'</span><span class="p">),</span>
-    <span class="n">entrypoint</span><span class="o">=</span><span class="s1">'name-of-entry-task-step'</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'unique-name-of-workflow'</span><span class="p">,</span> <span class="c1"># Must be unique and lowercase</span>
+    <span class="n">namespace</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NS'</span><span class="p">),</span> <span class="c1"># Namespace to run workflow in &lt;- Preconfigured in GEOAnalytics Canada</span>
+    <span class="n">entrypoint</span><span class="o">=</span><span class="s1">'name-of-entry-task-step'</span><span class="p">,</span> <span class="c1"># The name of the entrypoint task/step</span>
     <span class="n">parallelism</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="c1"># Number of tasks to run in parallel</span>
 <span class="p">)</span> <span class="k">as</span> <span class="n">w</span><span class="p">:</span>
+
+    <span class="c1"># This section defines a template that can be used in multiple steps</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">Container</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s1">'unique-container-name'</span><span class="p">,</span>
     <span class="n">image</span><span class="o">=</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">IMG_TAG</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
     <span class="n">command</span><span class="o">=</span><span class="p">[</span><span class="s2">"sh"</span><span class="p">,</span> <span class="s2">"./entrypoint.sh"</span><span class="p">],</span> <span class="c1">#</span>
 <span class="p">)</span>
 
+    <span class="c1"># This section defines the entrypoint task/step</span>
+    <span class="c1"># Here you can organise the flow of your workflow</span>
     <span class="k">with</span> <span class="n">Steps</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"name-of-step-template"</span><span class="p">):</span>
         <span class="n">t</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"name-of-task-step"</span><span class="p">)</span>
 
+</pre></div>
+</div>
+</div>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><strong>Note</strong></div>
+<div class="line">Contact your GEOAnalytics Canada Administrator for more information about available resources.</div>
+</div>
+</div></blockquote>
+<p>Here is an alternative approach to writing Workflows - It is recommended to use a context-manager to ensure objects are properly gc’d. This example demonstrates how to use a Python function as an input to a Task instead of a Docker Image.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+
+<span></span><span class="kn">from</span> <span class="nn">hera.env</span> <span class="kn">import</span> <span class="n">Env</span>
+<span class="kn">from</span> <span class="nn">hera.workflow</span> <span class="kn">import</span> <span class="n">Workflow</span><span class="p">,</span> <span class="n">Task</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'unique-name-of-workflow'</span><span class="p">,</span>
+    <span class="n">namespace</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'WORKFLOW_NS'</span><span class="p">),</span>
+    <span class="n">entrypoint</span><span class="o">=</span><span class="s1">'source-task'</span><span class="p">,</span>
+    <span class="n">parallelism</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="c1"># Number of tasks to run in parallel</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">some_func</span><span class="p">():</span>
+  <span class="kn">import</span> <span class="nn">os</span>
+  <span class="c1">#do something</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'TASKSAY'</span><span class="p">))</span>
+
+<span class="c1"># Environment Variables for running source/container</span>
+<span class="n">env_list</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="n">Env</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'SOME_ENV'</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">'SOME_VAL'</span><span class="p">),</span>
+  <span class="n">Env</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'TASKSAY'</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">'Workflows Are Powerful!'</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Task using a function as input</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span>
+  <span class="n">name</span><span class="o">=</span><span class="s1">'source-task'</span><span class="p">,</span>
+  <span class="n">image</span><span class="o">=</span><span class="s1">'registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag'</span><span class="p">,</span>
+  <span class="n">source</span><span class="o">=</span><span class="n">some_func</span><span class="p">,</span>
+  <span class="n">env</span><span class="o">=</span><span class="n">env_list</span>
+<span class="p">)</span>
+
+<span class="c1"># Task using a prebuilt Docker Image running some Python application</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span>
+  <span class="n">name</span><span class="o">=</span><span class="s1">'container-task'</span><span class="p">,</span>
+  <span class="n">image</span><span class="o">=</span><span class="s1">'registry.eo4ph.geoanalytics.ca/project-name/image-name:image-tag'</span>
+  <span class="n">command</span><span class="o">=</span><span class="p">[</span><span class="s1">'/bin/bash'</span><span class="p">,</span> <span class="s1">'-c'</span><span class="p">,</span> <span class="s1">'python run.py'</span><span class="p">],</span>
+  <span class="n">env</span><span class="o">=</span><span class="n">env_list</span>
+<span class="p">)</span>
+
+<span class="n">w</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span> <span class="c1"># Add source-task to workflow</span>
+<span class="n">w</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span> <span class="c1"># Add container-task to workflow</span>
+<span class="n">t1</span> <span class="o">&gt;&gt;</span> <span class="n">t2</span> <span class="c1"># DAG - make t1 run before t2</span>
 </pre></div>
 </div>
 </div>
@@ -562,6 +622,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <section id="Workflow-Approaches">
 <h4>Workflow Approaches<a class="headerlink" href="#Workflow-Approaches" title="Permalink to this headline">#</a></h4>
+<p>There are different ways to organize your workflow. It will depend on the application/use-case and goal of your system that will dictate how it will end up flowing. You can leverage different mechanisms to control the flow/state and described below.</p>
 <ul class="simple">
 <li><p>Steps and Parallelism</p></li>
 <li><p>Artifact Passing</p></li>
@@ -630,10 +691,20 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<p>The above Workflow would result in a DAG that looks like this:</p>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>flowchart LR
+    A[Task A]
+    B[Task B]
+    C[Task C]
+    D[Finalised]
+    A --&gt; B &amp; C --&gt; D
+</pre></div>
+</div>
+<p>A preceedes B and C, which are run in parallel. An extra task, D, is included for verbosity and to show that the workflow is complete.</p>
 </section>
 <section id="Artifact-Passing">
 <h2>Artifact Passing<a class="headerlink" href="#Artifact-Passing" title="Permalink to this headline">#</a></h2>
-<p>It a lot of cases it’s necessary to pass an output to the next Step of a workflow. Artifacts solve this scenario. You can create an Artifact as an ourput from a previous Step to be consumed by a subsequent step. The Workflow below demonstrates an Artifact being created and then consumed in the next Step. An important thing to notice is that the output and input paths differ - this is to allow more flexible insertion of information in your Step implementations.</p>
+<p>It a lot of cases it’s necessary to pass an output to the next Step of a workflow. Artifacts solve this scenario. You can create an Artifact as an output from a previous Step to be consumed by a subsequent step. The Workflow below demonstrates an Artifact being created and then consumed in the next Step. An important thing to notice is that the output and input paths differ - this is to allow more flexible insertion of information in your Step implementations.</p>
 <blockquote>
 <div><div class="line-block">
 <div class="line"><strong>Note</strong></div>
@@ -693,6 +764,16 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<p>The above Workflow will generate a DAG that looks like this:</p>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>flowchart LR
+    A[Create File]
+    artifactStore[(artifact-store)]
+    B[Read File]
+    A --'write'--o artifactStore
+    artifactStore o--'read'--o B
+    A --&gt; B
+</pre></div>
+</div>
 </section>
 <section id="Accessing-the-Shared-Data-Bucket">
 <h2>Accessing the Shared Data Bucket<a class="headerlink" href="#Accessing-the-Shared-Data-Bucket" title="Permalink to this headline">#</a></h2>
@@ -739,6 +820,16 @@ div.rendered_html tbody tr:hover {
         <span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<p>The above Workflow is similar in concept to the Artifact store except that the Cloud storage is directly mounted to the Workflow Task Container for it to access via the filesystem. This is useful for large datasets that are too large to upload or manage with the Artifact store.</p>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>flowchart LR
+    SharedData[(shared-data)]
+    A[readit Task]
+    B[output]
+    SharedData --'mount'--&gt; A
+    A --'read file'--&gt; A
+    A --&gt; B
+</pre></div>
 </div>
 <p>You can inspect portions of your workflow by leveraging the <code class="docutils literal notranslate"><span class="pre">IPython.display.JSON</span></code> widget. Some parameters may be missing - there are some defaults that are intserted by the Workflow Controller that enable the workflow to execute in the GEOAnalytics Platform.</p>
 <div class="nbinput nblast docutils container">
