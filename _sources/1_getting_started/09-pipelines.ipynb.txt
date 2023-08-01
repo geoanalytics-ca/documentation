@@ -340,20 +340,31 @@
   },
   {
    "cell_type": "markdown",
+   "id": "32deb448",
+   "metadata": {},
+   "source": [
+    "The above Workflow would result in a DAG that looks like this:"
+   ]
+  },
+  {
+   "cell_type": "markdown",
    "id": "d7f5e6ad",
    "metadata": {},
    "source": [
-    "The above Workflow would result in a DAG that looks like this:\n",
-    "\n",
-    "```mermaid\n",
-    "flowchart LR\n",
-    "    A[Task A]\n",
-    "    B[Task B]\n",
-    "    C[Task C]\n",
-    "    D[Finalised]\n",
-    "    A --> B & C --> D\n",
-    "```\n",
-    "\n",
+    ".. mermaid::\n",
+    "    flowchart LR\n",
+    "        A[Task A]\n",
+    "        B[Task B]\n",
+    "        C[Task C]\n",
+    "        D[Finalised]\n",
+    "        A --> B & C --> D"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "fc8c7451",
+   "metadata": {},
+   "source": [
     "A preceedes B and C, which are run in parallel. \n",
     "An extra task, D, is included for verbosity and to show that the workflow is complete."
    ]
@@ -439,20 +450,25 @@
   },
   {
    "cell_type": "markdown",
+   "id": "b28b37af",
+   "metadata": {},
+   "source": [
+    "The above Workflow will generate a DAG that looks like this:"
+   ]
+  },
+  {
+   "cell_type": "markdown",
    "id": "ec1ec4ae",
    "metadata": {},
    "source": [
-    "The above Workflow will generate a DAG that looks like this:\n",
-    "\n",
-    "```mermaid\n",
-    "flowchart LR\n",
-    "    A[Create File]\n",
-    "    artifactStore[(artifact-store)]\n",
-    "    B[Read File]\n",
-    "    A --'write'--o artifactStore\n",
-    "    artifactStore o--'read'--o B\n",
-    "    A --> B\n",
-    "```"
+    ".. mermaid::\n",
+    "    flowchart LR\n",
+    "        A[Create File]\n",
+    "        artifactStore[(artifact-store)]\n",
+    "        B[Read File]\n",
+    "        A --'write'--o artifactStore\n",
+    "        artifactStore o--'read'--o B\n",
+    "        A --> B"
    ]
   },
   {
@@ -516,23 +532,30 @@
   },
   {
    "cell_type": "markdown",
-   "id": "db0034d8",
+   "id": "ed02ae70",
    "metadata": {},
    "source": [
     "The above Workflow is similar in concept to the Artifact store except that the Cloud storage is directly mounted to the \n",
     "Workflow Task Container for it to access via the filesystem. This is useful for large datasets that are too large to\n",
-    "upload or manage with the Artifact store.\n",
+    "upload or manage with the Artifact store."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "db0034d8",
+   "metadata": {},
+   "source": [
     "\n",
-    "```mermaid\n",
-    "flowchart LR\n",
-    "    SharedData[(shared-data)]\n",
-    "    A[readit Task]\n",
-    "    B[output]\n",
-    "    SharedData --'mount'--> A\n",
-    "    A --'read file'--> A\n",
-    "    A --> B\n",
     "\n",
-    "```"
+    ".. mermaid::\n",
+    "    flowchart LR\n",
+    "        SharedData[(shared-data)]\n",
+    "        A[readit Task]\n",
+    "        B[output]\n",
+    "        SharedData --'mount'--> A\n",
+    "        A --'read file'--> A\n",
+    "        A --> B\n",
+    "\n"
    ]
   },
   {

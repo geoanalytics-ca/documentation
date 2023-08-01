@@ -691,14 +691,6 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>The above Workflow would result in a DAG that looks like this:</p>
-<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>flowchart LR
-    A[Task A]
-    B[Task B]
-    C[Task C]
-    D[Finalised]
-    A --&gt; B &amp; C --&gt; D
-</pre></div>
-</div>
 <p>A preceedes B and C, which are run in parallel. An extra task, D, is included for verbosity and to show that the workflow is complete.</p>
 </section>
 <section id="Artifact-Passing">
@@ -764,15 +756,6 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>The above Workflow will generate a DAG that looks like this:</p>
-<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>flowchart LR
-    A[Create File]
-    artifactStore[(artifact-store)]
-    B[Read File]
-    A --'write'--o artifactStore
-    artifactStore o--'read'--o B
-    A --&gt; B
-</pre></div>
-</div>
 </section>
 <section id="Accessing-the-Shared-Data-Bucket">
 <h2>Accessing the Shared Data Bucket<a class="headerlink" href="#Accessing-the-Shared-Data-Bucket" title="Permalink to this headline">#</a></h2>
@@ -821,15 +804,6 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>The above Workflow is similar in concept to the Artifact store except that the Cloud storage is directly mounted to the Workflow Task Container for it to access via the filesystem. This is useful for large datasets that are too large to upload or manage with the Artifact store.</p>
-<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>flowchart LR
-    SharedData[(shared-data)]
-    A[readit Task]
-    B[output]
-    SharedData --'mount'--&gt; A
-    A --'read file'--&gt; A
-    A --&gt; B
-</pre></div>
-</div>
 <p>You can inspect portions of your workflow by leveraging the <code class="docutils literal notranslate"><span class="pre">IPython.display.JSON</span></code> widget. Some parameters may be missing - there are some defaults that are intserted by the Workflow Controller that enable the workflow to execute in the GEOAnalytics Platform.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
