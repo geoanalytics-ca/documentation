@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Remote Connection via VSCode" href="05b-remote-connect-vscode.html" /><link rel="prev" title="Desktop VM’s" href="05-desktop-vm.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.04.07"/>
-        <title>Set Up SSH Keys - GeoAnalytics Canada Documentation</title>
+        <title>Set Up SSH Keys to access Remote Desktop VM over SSH - GeoAnalytics Canada Documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=68f4518137b9aefe99b631505a2064c3c42c9852" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
@@ -168,13 +168,14 @@
 <li class="toctree-l2"><a class="reference internal" href="04-authentication.html"><strong>Authentication</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="03-jupyter-notebooks.html"><strong>Jupyter Notebooks</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="05-desktop-vm.html"><strong>Desktop VM’s</strong></a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Set Up SSH Keys</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Set Up SSH Keys to access Remote Desktop VM over SSH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05b-remote-connect-vscode.html">Remote Connection via VSCode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="06-file-browser.html"><strong>File Browser</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="07-stac.html"><strong>SpatioTemporal Asset Catalog (STAC)</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="08-container-registry.html"><strong>Container Registry</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="09-pipelines.html">Pipelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="10-dask.html"><strong>Dask</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="12-APIs.html">APIs</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_real_world_examples/index.html">Real World Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -472,16 +473,17 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<section id="Set-Up-SSH-Keys">
-<h1>Set Up SSH Keys<a class="headerlink" href="#Set-Up-SSH-Keys" title="Permalink to this headline">#</a></h1>
+<section id="Set-Up-SSH-Keys-to-access-Remote-Desktop-VM-over-SSH">
+<h1>Set Up SSH Keys to access Remote Desktop VM over SSH<a class="headerlink" href="#Set-Up-SSH-Keys-to-access-Remote-Desktop-VM-over-SSH" title="Permalink to this headline">#</a></h1>
+<p>To connect to your GEOAnalytics Canada Remote Desktop over SSH, you will need to generate an SSH key pair on your local machine and upload the public key to your remote desktop.</p>
 <ol class="arabic">
 <li><p>Open up a terminal or PowerShell</p></li>
 <li><p>run the command</p>
 <pre>sshkey-gen -t rsa</pre></li>
 <li><p>Then configure your key name saved under the “.ssh/” directory</p></li>
 <li><p>Copy the contents of the .pub version</p></li>
-<li><p>Connect to the Remote Desktop</p></li>
-<li><p>In a terminal run</p>
+<li><p>Connect to the <a class="reference external" href="https://docs.geoanalytics.ca/1_getting_started/05-desktop-vm.html">Remote Desktop</a></p></li>
+<li><p>In a terminal on the remote desktop, run</p>
 <pre>nano .ssh/authorized_keys</pre></li>
 <li><p>Paste the .pub contents at the end of the opened file on a new line</p></li>
 <li><p>Save the file in place and exit</p></li>
@@ -561,7 +563,7 @@ div.rendered_html tbody tr:hover {
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Set Up SSH Keys</a><ul>
+<li><a class="reference internal" href="#">Set Up SSH Keys to access Remote Desktop VM over SSH</a><ul>
 <li><a class="reference internal" href="#References:">References:</a></li>
 </ul>
 </li>

@@ -19,8 +19,7 @@
     "* A UI for managing and tracking pipelines and their execution.\n",
     "* An engine for scheduling a pipeline’s execution\n",
     "* An SDK for defining, building, and deploying pipelines in Python. \n",
-    "* The SDK we use is the \n",
-    "* [Hera python library](https://https://hera-workflows.readthedocs.io).\n",
+    "    * The SDK we use is the [Hera python library](https://https://hera-workflows.readthedocs.io).\n",
     "\n",
     "A pipeline is a representation of a workflow containing the parameters required \n",
     "to run the workflow and the inputs and outputs of each component. \n",
@@ -630,7 +629,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.11.2"
+   "version": "3.11.4"
   }
  },
  "nbformat": 4,
