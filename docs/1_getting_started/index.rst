@@ -1,7 +1,7 @@
 Getting Started
 ===============
 
-This page we'll go through the first steps of orienting you to the key parts of the GEOAnalytics Canada platform.
+Pages in this section introduce you to the key parts of the GEOAnalytics Canada platform.
 
 
 .. toctree::
@@ -20,4 +20,6 @@ This page we'll go through the first steps of orienting you to the key parts of 
     08-container-registry
     09-pipelines
     10-dask
+    12-APIs
     .. 11-docker-and-pipelines
+    
