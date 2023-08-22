@@ -1,15 +1,15 @@
 # APIs
 
-GeoAnalytics Canada provides a set of APIs for interacting with the platform. The APIs available are shown in the table below:
+GeoAnalytics Canada provides a set of APIs for programatically interacting with the platform. The APIs available are shown in the table below:
 
 
 | API Name | API Documentation URL |
 | --- | --- |
-| GroundTruth Data | https://eo4ph.geoanalytics.ca/ogc/openapi?f=html |
-| Map Tile Server | https://tiler.eo4ph.geoanalytics.ca/docs  |
-| STAC Server | https://stac.eo4ph.geoanalytics.ca/api.html |
-| Pipelines API | https://pipeline.eo4ph.geoanalytics.ca/apidocs |
-| Container Registry | https://registry.eo4ph.geoanalytics.ca/devcenter-api-2.0 |
+| GroundTruth Data | [https://eo4ph.geoanalytics.ca/ogc/openapi?f=html](https://eo4ph.geoanalytics.ca/ogc/openapi?f=html) |
+| Map Tile Server | [https://tiler.eo4ph.geoanalytics.ca/docs](https://tiler.eo4ph.geoanalytics.ca/docs)  |
+| STAC Server | [https://stac.eo4ph.geoanalytics.ca/api.html](https://stac.eo4ph.geoanalytics.ca/api.html) |
+| Pipelines API | [https://pipeline.eo4ph.geoanalytics.ca/apidocs](https://pipeline.eo4ph.geoanalytics.ca/apidocs) |
+| Container Registry | [https://registry.eo4ph.geoanalytics.ca/devcenter-api-2.0](https://registry.eo4ph.geoanalytics.ca/devcenter-api-2.0) |
 
 
 ## Authentication
