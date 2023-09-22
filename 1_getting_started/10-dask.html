@@ -187,7 +187,6 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../3_scientific_workflows/index.html">Scientific Workflows</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/01-daily-ndsi-pipeline.html"><strong>Daily NDSI Average Pipeline</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/02-kmeans-dask.html">K-Means Land Classification with Dask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/03-composite.html">Compositing Rasters with Dask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../3_scientific_workflows/04-add-to-stac.html"><strong>Adding data to the Geoanalytics STAC server</strong></a></li>
@@ -481,7 +480,7 @@ div.rendered_html tbody tr:hover {
 <p><strong>Why should we scale?</strong> Computations are much faster when data can be held in local memory. Most computers do not have massive memory storages to store big data, those that do are extremely expensive. An easier and cost effective method is to use the pool of memory from a collections of systems to store large datasets.</p>
 <p><strong>Dask Gateway</strong> The GeoAnalytics Canada Platform uses Dask Gateway to provide our users a secure multi-tenant server for managing Dask clusters. Our administrators manage the backend configuration of the clusters, so user’s can connect to the Dask Gateway without hassle.</p>
 <p>Here’s a diagram representing the Dask architecture, which consists of the Dask Clusters, a proxy for connecting the user’s client with the scheduler, and the main Gateway for authentication and cluster management.</p>
-<p><img alt="1f1dc034cedf46a5b4f4227c65a26363" src="../_images/02_dask-architecture.png"/></p>
+<p><img alt="04290daca80f4bd7ae750077a448067f" src="../_images/02_dask-architecture.png"/></p>
 </section>
 <section id="1.0-Connecting-to-Dask">
 <h2>1.0 Connecting to Dask<a class="headerlink" href="#1.0-Connecting-to-Dask" title="Permalink to this headline">#</a></h2>
