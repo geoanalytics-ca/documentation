@@ -30,6 +30,9 @@ jobs:
     #     branch: gh-pages
     - id: deployment
       uses: sphinx-notes/pages@v3
+      run : |
+        sudo apt install pandoc
+        python -m pip install --upgrade pip
       with:
         publish: true
         requirements_path: ./requirements.txt
