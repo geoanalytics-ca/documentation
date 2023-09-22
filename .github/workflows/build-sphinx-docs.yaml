@@ -28,7 +28,7 @@ jobs:
     #   with:
     #     github_token: ${{ secrets.GITHUB_TOKEN }}
     #     branch: gh-pages
-    - id: install pandoc
+    - id: install-pandoc
       run : |
         sudo apt install pandoc
         python -m pip install --upgrade pip
